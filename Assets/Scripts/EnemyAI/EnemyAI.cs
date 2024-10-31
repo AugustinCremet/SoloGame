@@ -9,19 +9,24 @@ public class EnemyAI : TreeOfNodes
     [SerializeField] GameObject target;
     [SerializeField] LayerMask layerMask;
     public static NavMeshAgent agent;
+    Enemy enemy;
 
-    new private void Start()
+    private void Awake()
     {
-        base.Start();
+        enemy = GetComponent<Enemy>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
     protected override Node SetupTree()
     {
-        Node root = new Sequence(new List<Node>
+        Node root = new Selector(new List<Node>
         {
-            new CheckPlayerInRange(transform, target.transform, layerMask),
+            new Sequence(new List<Node>
+            {
+                new CheckPlayerInRange(transform, target.transform, layerMask),
+                new TaskAttack(enemy),
+            }),
             new TaskGoToTarget(target.transform),
         });
 

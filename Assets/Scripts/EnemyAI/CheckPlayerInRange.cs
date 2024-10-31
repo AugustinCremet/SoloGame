@@ -8,11 +8,13 @@ public class CheckPlayerInRange : Node
     Transform transform;
     Transform playerTransform;
     LayerMask layerMask;
+    int test;
     public CheckPlayerInRange(Transform transform, Transform playerTransform, LayerMask layerMask)
     {
         this.transform = transform;
         this.playerTransform = playerTransform;
         this.layerMask = layerMask;
+        test = layerMask;
     }
     public override NodeState Evaluate()
     {
@@ -25,19 +27,19 @@ public class CheckPlayerInRange : Node
             {
                 Debug.DrawRay(transform.position, playerTransform.position - transform.position, Color.green);
                 EnemyAI.agent.isStopped = true;
-                state = NodeState.FAILURE;
+                state = NodeState.SUCCESS;
                 return state;
             }
             else
             {
                 Debug.DrawRay(transform.position, playerTransform.position - transform.position, Color.red);
                 EnemyAI.agent.isStopped = false;
-                state = NodeState.SUCCESS;
+                state = NodeState.FAILURE;
                 return state;
             }
         }
 
-        state = NodeState.FAILURE;
+        state = NodeState.RUNNING;
         return state;
     }
 }

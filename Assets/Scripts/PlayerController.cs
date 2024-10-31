@@ -4,18 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] GameObject bullet;
+    string tagSelf;
 
     Rigidbody2D rb;
     Vector2 horizontalMovement;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        tagSelf = gameObject.tag;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -32,7 +34,10 @@ public class Player : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        if(context.performed)
-            Instantiate(bullet, transform.position, Quaternion.identity);
+        if (context.performed)
+        {
+            GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            newBullet.GetComponent<Bullet>().tagToIgnore = tagSelf;
+        }
     }
 }

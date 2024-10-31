@@ -5,8 +5,15 @@ using UnityEngine;
 
 public class TaskAttack : Node
 {
+    Enemy enemy;
+    public TaskAttack(Enemy enemy)
+    {
+        this.enemy = enemy;
+    }
     public override NodeState Evaluate()
     {
-        return base.Evaluate();
+        enemy.Attack();   
+        state = NodeState.SUCCESS;
+        return state;
     }
 }

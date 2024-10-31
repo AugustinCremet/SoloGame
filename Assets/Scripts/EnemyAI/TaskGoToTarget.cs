@@ -15,6 +15,7 @@ public class TaskGoToTarget : Node
     public override NodeState Evaluate()
     {
         EnemyAI.agent.SetDestination(playerTransform.position);
+
         state = NodeState.SUCCESS;
         return state;
     }
