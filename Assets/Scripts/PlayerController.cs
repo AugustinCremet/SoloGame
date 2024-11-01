@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    Camera cam;
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] GameObject bullet;
     string tagSelf;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         tagSelf = gameObject.tag;
         rb = GetComponent<Rigidbody2D>();
+        cam = FindAnyObjectByType<Camera>();
     }
 
     // Update is called once per frame
@@ -37,7 +39,11 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            newBullet.GetComponent<Bullet>().tagToIgnore = tagSelf;
+            Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
+            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 direction = mousePos - transform.position;
+            newBullet.GetComponent<Bullet>().SetBulletDirection(direction);
         }
     }
 }

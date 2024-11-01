@@ -24,7 +24,7 @@ public class EnemyAI : TreeOfNodes
         {
             new Sequence(new List<Node>
             {
-                new CheckPlayerInRange(transform, target.transform, layerMask),
+                new TaskCheckPlayerInRange(transform, target.transform, layerMask),
                 new TaskAttack(enemy),
             }),
             new TaskGoToTarget(target.transform),

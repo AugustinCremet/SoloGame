@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
 
-public class CheckPlayerInRange : Node
+public class TaskCheckPlayerInRange : Node
 {
     Transform transform;
     Transform playerTransform;
     LayerMask layerMask;
     int test;
-    public CheckPlayerInRange(Transform transform, Transform playerTransform, LayerMask layerMask)
+    public TaskCheckPlayerInRange(Transform transform, Transform playerTransform, LayerMask layerMask)
     {
         this.transform = transform;
         this.playerTransform = playerTransform;

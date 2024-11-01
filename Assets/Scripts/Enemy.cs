@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] GameObject bullet;
     string tagSelf;
     float currentWaitingTime = 0f;
-    bool canAttack = false;
+    bool canAttack = true;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if(!canAttack)
         {
             currentWaitingTime += Time.deltaTime;
-            if (currentWaitingTime > 3f)
+            if (currentWaitingTime > 1f)
             {
                 canAttack = true;
                 currentWaitingTime = 0f;
@@ -43,8 +43,10 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             canAttack = false;
             GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            newBullet.GetComponent<Bullet>().tagToIgnore = tagSelf;
+            Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
+            Vector3 direction = GameObject.FindWithTag("Player").transform.position - transform.position;
+            newBullet.GetComponent<Bullet>().SetBulletDirection(direction);
         }
-            
     }
 }
