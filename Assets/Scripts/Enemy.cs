@@ -55,7 +55,6 @@ public class Enemy : MonoBehaviour, IDamageable
     public void Damage(Element element, int dmgAmount)
     {
         int damageAfterElement = (int)currentElement.CalculateDamageFrom(element, dmgAmount);
-        Debug.Log($"{dmgAmount} is now {damageAfterElement}");
         hp -= damageAfterElement;
 
         if(hp <= 0)
