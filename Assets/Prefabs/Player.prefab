@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6451601469392629864}
   - component: {fileID: 3491937402923921480}
   - component: {fileID: 265800985291799288}
+  - component: {fileID: 5590945984184800997}
+  - component: {fileID: 742176796982642723}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -226,3 +228,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   bullet: {fileID: 868283255772916614, guid: 5317d72584edd0340b7b9024893528ba, type: 3}
+--- !u!114 &5590945984184800997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508968744674227800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0e714630a5f064ea4ce8c5a9a4859f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  elementType: 0
+  currentElement: {fileID: 0}
+--- !u!114 &742176796982642723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508968744674227800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2e6b682ac74bb449b6bf1785b859b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowMotionFactor: 0.1
+  normalTimeScale: 1

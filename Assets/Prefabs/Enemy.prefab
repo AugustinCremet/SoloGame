@@ -176,7 +176,7 @@ MonoBehaviour:
   target: {fileID: 0}
   layerMask:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 768
 --- !u!114 &6642156143661211813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   bullet: {fileID: 868283255772916614, guid: 5317d72584edd0340b7b9024893528ba, type: 3}
+  elementType: 0
 --- !u!195 &3572448720146094222
 NavMeshAgent:
   m_ObjectHideFlags: 0

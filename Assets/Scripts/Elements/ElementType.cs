@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageable
+public enum ElementType
 {
-    void Damage(Element element, int dmgAmount);
+    Fire,
+    Water,
+    Grass,
 }

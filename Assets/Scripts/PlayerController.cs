@@ -6,11 +6,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    Camera cam;
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] GameObject bullet;
-    string tagSelf;
 
+    Player player;
+    Camera cam;
     Rigidbody2D rb;
     Vector2 horizontalMovement;
 
@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        tagSelf = gameObject.tag;
         rb = GetComponent<Rigidbody2D>();
         cam = FindAnyObjectByType<Camera>();
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -43,7 +43,8 @@ public class PlayerController : MonoBehaviour
 
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             Vector3 direction = mousePos - transform.position;
-            newBullet.GetComponent<Bullet>().SetBulletDirection(direction);
+
+            newBullet.GetComponent<Bullet>().InitializeBullet(direction, player.currentElement);
         }
     }
 }
