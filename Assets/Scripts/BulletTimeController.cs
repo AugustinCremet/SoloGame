@@ -4,35 +4,75 @@ using UnityEngine;
 
 public class BulletTimeController : MonoBehaviour
 {
-    [SerializeField] float slowMotionFactor = 0.5f; // Speed during bullet time
-    [SerializeField] float normalTimeScale = 1.0f; // Normal speed
-    private bool isBulletTimeActive = false;
+    [SerializeField] float _slowMotionFactor = 0.5f;
+    [SerializeField] float _normalTimeScale = 1.0f; 
+    bool _isBulletTimeActive = false;
 
+    float _maxBulletTime = 5f;
+    float _currentBulletTime = 0f;
+    bool _bulletTimeAvalaible = true;
+
+    private void Start()
+    {
+        _currentBulletTime = _maxBulletTime;
+        UIManager.Instance.ChangeCurrentBulletTime(_maxBulletTime);
+        UIManager.Instance.ChangeMaxBulletTime(_maxBulletTime);
+    }
     void Update()
     {
-        // Toggle bullet time on key press (e.g., left shift)
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if(_isBulletTimeActive && _currentBulletTime > 0)
         {
+            _currentBulletTime -= Time.deltaTime * 2f;
+        }
+
+        if(_currentBulletTime < _maxBulletTime)
+        {
+            _currentBulletTime += 0.25f * Time.deltaTime;
+        }
+
+        if (_currentBulletTime <= 0)
+        {
+            _bulletTimeAvalaible = false;
+            _isBulletTimeActive = true;
+            ToggleBulletTime();
+        }
+        else
+        {
+            _bulletTimeAvalaible = true;
+        }
+
+        UIManager.Instance.ChangeCurrentBulletTime(_currentBulletTime);
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _bulletTimeAvalaible)
+        {
+            _isBulletTimeActive = false;
+            ToggleBulletTime();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift) && _bulletTimeAvalaible)
+        {
+            _isBulletTimeActive = true;
             ToggleBulletTime();
         }
     }
 
     void ToggleBulletTime()
     {
-        if (isBulletTimeActive)
+        if (_isBulletTimeActive)
         {
-            Time.timeScale = normalTimeScale; // Reset to normal time scale
+            Time.timeScale = _normalTimeScale;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
         else
         {
-            Time.timeScale = slowMotionFactor; // Set to slow motion
+            Time.timeScale = _slowMotionFactor;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
-        isBulletTimeActive = !isBulletTimeActive;
+        _isBulletTimeActive = !_isBulletTimeActive;
     }
 
     private void OnApplicationQuit()
     {
         // Ensure time scale resets when quitting
-        Time.timeScale = normalTimeScale;
+        Time.timeScale = _normalTimeScale;
     }
 }

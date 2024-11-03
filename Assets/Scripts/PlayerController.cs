@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             Vector3 direction = mousePos - transform.position;
 
-            newBullet.GetComponent<Bullet>().InitializeBullet(direction, player.currentElement);
+            newBullet.GetComponent<Bullet>().InitializeBullet(direction, player.CurrentElement);
         }
     }
 }

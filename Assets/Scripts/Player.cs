@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageable
 {
-    [SerializeField] int hp = 100;
-    [SerializeField] ElementType elementType;
-    public Element currentElement;
+    [SerializeField] int _maxHealth = 100;
+    int _currentHealth = 0;
+    [SerializeField] ElementType _elementType;
+    public Element CurrentElement;
 
-    IDataService dataService = new JsonDataService();
+    IDataService _dataService = new JsonDataService();
 
+    private void Awake()
+    {
+        _currentHealth = _maxHealth;
+    }
     private void Start()
     {
-        currentElement = ElementManager.instance.GetElementByType(elementType);
+        CurrentElement = ElementManager.Instance.GetElementByType(_elementType);
+        UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+        UIManager.Instance.ChangeMaxHealth(_maxHealth);
+
         //Temp for prototype visual
-        switch (elementType)
+        switch (_elementType)
         {
             case ElementType.Fire:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.red;
@@ -35,35 +43,36 @@ public class Player : MonoBehaviour, IDamageable
         // TEMP for testing
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            currentElement = ElementManager.instance.GetElementByType(ElementType.Fire);
+            CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Fire);
             GetComponent<SpriteRenderer>().color = Color.red;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            currentElement = ElementManager.instance.GetElementByType(ElementType.Grass);
+            CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Grass);
             GetComponent<SpriteRenderer>().color = Color.green;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            currentElement = ElementManager.instance.GetElementByType(ElementType.Water);
+            CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Water);
             GetComponent<SpriteRenderer>().color = Color.blue;
         }
         else if(Input.GetKeyDown(KeyCode.F1))
         {
-            dataService.SaveData("/player-stats.json", ToPlayerData(), false);
+            _dataService.SaveData("/player-stats.json", ToPlayerData(), false);
         }
         else if (Input.GetKeyDown(KeyCode.F2))
         {        
-            FromPlayerData(dataService.LoadData<PlayerData>("/player-stats.json", false));
-            Debug.Log(hp);
+            FromPlayerData(_dataService.LoadData<PlayerData>("/player-stats.json", false));
+            Debug.Log(_maxHealth);
         }
     }
     public void Damage(Element element, int dmgAmount)
     {
-        int damageAfterElement = (int)currentElement.CalculateDamageFrom(element, dmgAmount);
-        hp -= damageAfterElement;
+        int damageAfterElement = (int)CurrentElement.CalculateDamageFrom(element, dmgAmount);
+        _maxHealth -= damageAfterElement;
+        UIManager.Instance.ChangeCurrentHealth(_maxHealth);
 
-        if (hp <= 0)
+        if (_maxHealth <= 0)
             Destroy(gameObject);
     }
 
@@ -71,12 +80,12 @@ public class Player : MonoBehaviour, IDamageable
     {
         return new PlayerData
         {
-            hp = hp,
+            hp = _maxHealth,
         };
     }
 
     public void FromPlayerData(PlayerData playerData)
     {
-        hp = playerData.hp;
+        _maxHealth = playerData.hp;
     }
 }

@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        currentElement = ElementManager.instance.GetElementByType(elementType);
+        currentElement = ElementManager.Instance.GetElementByType(elementType);
 
         //Temp for prototype visual
         switch(elementType)

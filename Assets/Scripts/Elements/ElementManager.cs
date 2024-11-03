@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class ElementManager : MonoBehaviour
 {
-    public static ElementManager instance { get; private set; }
+    public static ElementManager Instance { get; private set; }
 
     List<Element> elements;
 
     private void Awake()
     {
-        if(instance != null && instance != this)
+        if(Instance != null && Instance != this)
         {
             Destroy(this);
         }
         else
         {
-            instance = this;
+            Instance = this;
             LoadAllElements();
             DontDestroyOnLoad(gameObject);
         }
