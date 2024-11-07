@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] int hp = 100;
     [SerializeField] GameObject bullet;
-    [SerializeField] ElementType elementType;
-    Element currentElement;
+    //[SerializeField] ElementType elementType;
+    //Element currentElement;
     string tagSelf;
     float currentWaitingTime = 0f;
     bool canAttack = true;
@@ -21,23 +21,23 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        currentElement = ElementManager.Instance.GetElementByType(elementType);
+        //currentElement = ElementManager.Instance.GetElementByType(elementType);
 
         //Temp for prototype visual
-        switch(elementType)
-        {
-            case ElementType.Fire:
-                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-                break;
-            case ElementType.Grass:
-                gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-                break;
-            case ElementType.Water:
-                gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                break;
-            default:
-                break;
-        }
+        //switch(elementType)
+        //{
+        //    case ElementType.Fire:
+        //        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        //        break;
+        //    case ElementType.Grass:
+        //        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        //        break;
+        //    case ElementType.Water:
+        //        gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
     private void Update()
@@ -54,8 +54,8 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     public void Damage(Element element, int dmgAmount)
     {
-        int damageAfterElement = (int)currentElement.CalculateDamageFrom(element, dmgAmount);
-        hp -= damageAfterElement;
+        //int damageAfterElement = (int)currentElement.CalculateDamageFrom(element, dmgAmount);
+        //hp -= damageAfterElement;
 
         if(hp <= 0)
             Destroy(gameObject);
@@ -65,12 +65,17 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (canAttack)
         {
-            canAttack = false;
-            GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            //canAttack = false;
+            //GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            //Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
-            Vector3 direction = GameObject.FindWithTag("Player").transform.position - transform.position;
-            newBullet.GetComponent<Bullet>().InitializeBullet(direction, currentElement);
+            //Vector3 direction = GameObject.FindWithTag("Player").transform.position - transform.position;
+            //newBullet.GetComponent<Bullet>().InitializeBullet(direction, currentElement);
         }
+    }
+
+    public void WTF()
+    {
+        Debug.Log("I'M HIT");
     }
 }

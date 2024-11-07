@@ -6,8 +6,9 @@ public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] int _maxHealth = 100;
     int _currentHealth = 0;
-    [SerializeField] ElementType _elementType;
-    public Element CurrentElement;
+    [SerializeField] RainbowColor RainbowColor;
+    //[SerializeField] ElementType _elementType;
+    //public Element CurrentElement;
 
     IDataService _dataService = new JsonDataService();
 
@@ -17,25 +18,26 @@ public class Player : MonoBehaviour, IDamageable
     }
     private void Start()
     {
-        CurrentElement = ElementManager.Instance.GetElementByType(_elementType);
+        //CurrentElement = ElementManager.Instance.GetElementByType(_elementType);
+        GetComponent<SpriteRenderer>().color = RainbowColor.GetColor();
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
         UIManager.Instance.ChangeMaxHealth(_maxHealth);
 
         //Temp for prototype visual
-        switch (_elementType)
-        {
-            case ElementType.Fire:
-                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-                break;
-            case ElementType.Grass:
-                gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-                break;
-            case ElementType.Water:
-                gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                break;
-            default:
-                break;
-        }
+        //switch (_elementType)
+        //{
+        //    case ElementType.Fire:
+        //        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        //        break;
+        //    case ElementType.Grass:
+        //        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        //        break;
+        //    case ElementType.Water:
+        //        gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
     private void Update()
@@ -43,17 +45,17 @@ public class Player : MonoBehaviour, IDamageable
         // TEMP for testing
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Fire);
+            //CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Fire);
             GetComponent<SpriteRenderer>().color = Color.red;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Grass);
+            //CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Grass);
             GetComponent<SpriteRenderer>().color = Color.green;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Water);
+            //CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Water);
             GetComponent<SpriteRenderer>().color = Color.blue;
         }
         else if(Input.GetKeyDown(KeyCode.F1))
@@ -68,8 +70,8 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void Damage(Element element, int dmgAmount)
     {
-        int damageAfterElement = (int)CurrentElement.CalculateDamageFrom(element, dmgAmount);
-        _maxHealth -= damageAfterElement;
+        //int damageAfterElement = (int)CurrentElement.CalculateDamageFrom(element, dmgAmount);
+        //_maxHealth -= damageAfterElement;
         UIManager.Instance.ChangeCurrentHealth(_maxHealth);
 
         if (_maxHealth <= 0)
