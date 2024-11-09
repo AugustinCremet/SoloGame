@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.GetComponent<IDamageable>() != null)
         {
-            collision.gameObject.GetComponent<IDamageable>().Damage(element, dmg);
+            collision.gameObject.GetComponent<IDamageable>().Damage(dmg);
             Destroy(gameObject);
         }
         else

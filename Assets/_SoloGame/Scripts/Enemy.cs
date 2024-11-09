@@ -1,4 +1,5 @@
 using BehaviorTree;
+using BulletPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,17 +7,19 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    [SerializeField] int hp = 100;
-    [SerializeField] GameObject bullet;
+    [SerializeField] int _hp = 100;
+    [SerializeField] GameObject _bullet;
+    BulletEmitter _bulletEmitter;
     //[SerializeField] ElementType elementType;
     //Element currentElement;
-    string tagSelf;
-    float currentWaitingTime = 0f;
-    bool canAttack = true;
+    string _tagSelf;
+    float _currentWaitingTime = 0f;
+    bool _canAttack = true;
 
     private void Awake()
     {
-        tagSelf = gameObject.tag;
+        _tagSelf = gameObject.tag;
+        _bulletEmitter = GetComponent<BulletEmitter>();
     }
 
     private void Start()
@@ -42,28 +45,28 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        if(!canAttack)
+        if(!_canAttack)
         {
-            currentWaitingTime += Time.deltaTime;
-            if (currentWaitingTime > 0.3f)
+            _currentWaitingTime += Time.deltaTime;
+            if (_currentWaitingTime > 0.3f)
             {
-                canAttack = true;
-                currentWaitingTime = 0f;
+                _canAttack = true;
+                _currentWaitingTime = 0f;
             }
         }
     }
-    public void Damage(Element element, int dmgAmount)
+    public void Damage(int dmgAmount)
     {
         //int damageAfterElement = (int)currentElement.CalculateDamageFrom(element, dmgAmount);
         //hp -= damageAfterElement;
 
-        if(hp <= 0)
+        if(_hp <= 0)
             Destroy(gameObject);
     }
 
     public void Attack()
     {
-        if (canAttack)
+        if (_canAttack)
         {
             //canAttack = false;
             //GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
@@ -71,11 +74,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
             //Vector3 direction = GameObject.FindWithTag("Player").transform.position - transform.position;
             //newBullet.GetComponent<Bullet>().InitializeBullet(direction, currentElement);
+            //_bulletEmitter.Play();
         }
-    }
-
-    public void WTF()
-    {
-        Debug.Log("I'M HIT");
     }
 }

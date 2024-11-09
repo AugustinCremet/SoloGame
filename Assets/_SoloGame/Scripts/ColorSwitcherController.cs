@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ColorSwitcherController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Player _player;
+
+    private void Awake()
     {
-        
+        _player = GetComponent<Player>();
+    }
+    public void NextColor(InputAction.CallbackContext context)
+    {
+        Debug.Log("Next color");
+        if(context.performed)
+        {
+            int nextIndex = _player.AvailableRainbowColors.IndexOf(_player.CurrentRainbowColor) + 1;
+            SwitchColor(nextIndex);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SwitchColor(int nextIndex)
     {
-        
+        if (nextIndex > _player.AvailableRainbowColors.Count - 1)
+        {
+            _player.ChangeColor(_player.AvailableRainbowColors[0]);
+        }
+        else
+        {
+            _player.ChangeColor(_player.AvailableRainbowColors[nextIndex]);
+        }
     }
 }

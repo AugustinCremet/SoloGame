@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BulletPro;
+using Unity.VisualScripting;
+using UnityEditor;
 
 // This script is supported by the BulletPro package for Unity.
 // Template author : Simon Albou <albou.simon@gmail.com>
@@ -25,11 +27,16 @@ public class BulletWallCollision : BaseBulletBehaviour {
 	{
 		base.Update();
 
-		// Your code here
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.1f, transform.forward);
+        if(!hit) return;
+        if(1 << hit.collider.gameObject.layer == LayerMask.GetMask("Walls"))
+        {
+            bullet.Die();
+        }
 	}
 
-	// This gets called when the bullet dies
-	public override void OnBulletDeath()
+    // This gets called when the bullet dies
+    public override void OnBulletDeath()
 	{
 		base.OnBulletDeath();
 
@@ -75,10 +82,4 @@ public class BulletWallCollision : BaseBulletBehaviour {
 
 		// Your code here
 	}
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("Hit");
-        bullet.Die();
-    }
 }

@@ -1,64 +1,40 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] int _maxHealth = 100;
     int _currentHealth = 0;
-    [SerializeField] RainbowColor RainbowColor;
-    //[SerializeField] ElementType _elementType;
-    //public Element CurrentElement;
-
+    public RainbowColor CurrentRainbowColor {  get; private set; }
+    public List<RainbowColor> AvailableRainbowColors { get; private set; }
     IDataService _dataService = new JsonDataService();
+
+    public void ChangeColor(RainbowColor newColor)
+    {
+        CurrentRainbowColor = newColor;
+        GetComponent<SpriteRenderer>().color = CurrentRainbowColor.GetColor();
+    }
 
     private void Awake()
     {
+        AvailableRainbowColors = new List<RainbowColor>();
         _currentHealth = _maxHealth;
     }
     private void Start()
     {
-        //CurrentElement = ElementManager.Instance.GetElementByType(_elementType);
-        GetComponent<SpriteRenderer>().color = RainbowColor.GetColor();
+        AvailableRainbowColors.Add(RainbowColor.Red);
+        AvailableRainbowColors.Add(RainbowColor.Blue);
+        CurrentRainbowColor = AvailableRainbowColors[UnityEngine.Random.Range(0, AvailableRainbowColors.Count - 1)];
+        GetComponent<SpriteRenderer>().color = CurrentRainbowColor.GetColor();
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
         UIManager.Instance.ChangeMaxHealth(_maxHealth);
-
-        //Temp for prototype visual
-        //switch (_elementType)
-        //{
-        //    case ElementType.Fire:
-        //        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        //        break;
-        //    case ElementType.Grass:
-        //        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-        //        break;
-        //    case ElementType.Water:
-        //        gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-        //        break;
-        //    default:
-        //        break;
-        //}
     }
 
     private void Update()
     {
         // TEMP for testing
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            //CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Fire);
-            GetComponent<SpriteRenderer>().color = Color.red;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            //CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Grass);
-            GetComponent<SpriteRenderer>().color = Color.green;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            //CurrentElement = ElementManager.Instance.GetElementByType(ElementType.Water);
-            GetComponent<SpriteRenderer>().color = Color.blue;
-        }
-        else if(Input.GetKeyDown(KeyCode.F1))
+        if(Input.GetKeyDown(KeyCode.F1))
         {
             _dataService.SaveData("/player-stats.json", ToPlayerData(), false);
         }
@@ -68,14 +44,24 @@ public class Player : MonoBehaviour, IDamageable
             Debug.Log(_maxHealth);
         }
     }
-    public void Damage(Element element, int dmgAmount)
+    public void Damage(int dmgAmount)
     {
         //int damageAfterElement = (int)CurrentElement.CalculateDamageFrom(element, dmgAmount);
         //_maxHealth -= damageAfterElement;
+        _maxHealth = _maxHealth - dmgAmount;
         UIManager.Instance.ChangeCurrentHealth(_maxHealth);
 
         if (_maxHealth <= 0)
             Destroy(gameObject);
+    }
+
+    public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
+    {
+        if(bullet.GetComponent<SpriteRenderer>().color != CurrentRainbowColor.GetColor())
+        {
+            Damage(10);
+            bullet.Die();
+        }
     }
 
     public PlayerData ToPlayerData()

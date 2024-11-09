@@ -8,13 +8,11 @@ public class TaskCheckPlayerInRange : Node
     Transform transform;
     Transform playerTransform;
     LayerMask layerMask;
-    int test;
     public TaskCheckPlayerInRange(Transform transform, Transform playerTransform, LayerMask layerMask)
     {
         this.transform = transform;
         this.playerTransform = playerTransform;
         this.layerMask = layerMask;
-        test = layerMask;
     }
     public override NodeState Evaluate()
     {
