@@ -13,9 +13,9 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - Projectile
+  - Bullet
   - Player
-  - Walls
+  - Wall
   - 
   - 
   - 
@@ -41,4 +41,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 927242601
+    locked: 0
+  - name: Bullet
+    uniqueID: 1466357047
+    locked: 0
+  - name: Character
+    uniqueID: 1651602805
+    locked: 0
+  - name: Wall
+    uniqueID: 267905431
     locked: 0

@@ -29,7 +29,7 @@ public class BulletWallCollision : BaseBulletBehaviour {
 
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.1f, transform.forward);
         if(!hit) return;
-        if(1 << hit.collider.gameObject.layer == LayerMask.GetMask("Walls"))
+        if(1 << hit.collider.gameObject.layer == LayerMask.GetMask("Wall"))
         {
             bullet.Die();
         }

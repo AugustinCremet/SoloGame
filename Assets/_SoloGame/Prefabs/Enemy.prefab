@@ -77,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1651602805
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_Sprite: {fileID: 519837382, guid: 551c0726b296f404baf7b3584d5bdddb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,8 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8960c4721b0555d478c6bbfc8e854f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  bullet: {fileID: 868283255772916614, guid: 5317d72584edd0340b7b9024893528ba, type: 3}
+  _hp: 100
+  _bullet: {fileID: 0}
 --- !u!114 &207963093360244971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a676b285f069c3c4884c27e78d0fc696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emitterProfile: {fileID: 11400000, guid: 998f27a95b982d74dbc009d4c227def1, type: 2}
+  emitterProfile: {fileID: 11400000, guid: 54833226a2a5d0c4ba465c4655b1d844, type: 2}
   patternOrigin: {fileID: 0}
   playAtStart: 0
   useDefaultGizmoColor: 1
@@ -224,19 +224,7 @@ MonoBehaviour:
       m_Calls: []
   OnHitByBulletEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6642156143661211813}
-        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: WTF
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnHitByBulletStay:
     m_PersistentCalls:
       m_Calls: []
@@ -268,7 +256,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &844173609279603452

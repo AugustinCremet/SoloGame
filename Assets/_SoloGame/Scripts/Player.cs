@@ -59,7 +59,8 @@ public class Player : MonoBehaviour, IDamageable
     {
         if(bullet.GetComponent<SpriteRenderer>().color != CurrentRainbowColor.GetColor())
         {
-            Damage(10);
+            int damageAmount = bullet.moduleParameters.GetInt("Damage");
+            Damage(damageAmount);
             bullet.Die();
         }
     }

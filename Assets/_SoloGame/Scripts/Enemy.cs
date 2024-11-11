@@ -8,10 +8,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] int _hp = 100;
-    [SerializeField] GameObject _bullet;
     BulletEmitter _bulletEmitter;
-    //[SerializeField] ElementType elementType;
-    //Element currentElement;
     string _tagSelf;
     float _currentWaitingTime = 0f;
     bool _canAttack = true;
@@ -59,6 +56,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         //int damageAfterElement = (int)currentElement.CalculateDamageFrom(element, dmgAmount);
         //hp -= damageAfterElement;
+        _hp -= dmgAmount;
 
         if(_hp <= 0)
             Destroy(gameObject);
@@ -68,13 +66,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (_canAttack)
         {
-            //canAttack = false;
-            //GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            //Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
-            //Vector3 direction = GameObject.FindWithTag("Player").transform.position - transform.position;
-            //newBullet.GetComponent<Bullet>().InitializeBullet(direction, currentElement);
-            //_bulletEmitter.Play();
+            Debug.Log("Shot");
+            _bulletEmitter.Play();
         }
     }
 }

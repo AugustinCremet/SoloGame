@@ -7,6 +7,7 @@ public class BulletTimeController : MonoBehaviour
     [SerializeField] float _slowMotionFactor = 0.5f;
     [SerializeField] float _normalTimeScale = 1.0f; 
     bool _isBulletTimeActive = false;
+    bool _isBulletTimeBeingConsumed = false;
 
     float _maxBulletTime = 5f;
     float _currentBulletTime = 0f;
@@ -20,7 +21,7 @@ public class BulletTimeController : MonoBehaviour
     }
     void Update()
     {
-        if(_isBulletTimeActive && _currentBulletTime > 0)
+        if(_isBulletTimeBeingConsumed && _currentBulletTime > 0)
         {
             _currentBulletTime -= Time.deltaTime * 2f;
         }
@@ -45,12 +46,7 @@ public class BulletTimeController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && _bulletTimeAvalaible)
         {
-            _isBulletTimeActive = false;
-            ToggleBulletTime();
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift) && _bulletTimeAvalaible)
-        {
-            _isBulletTimeActive = true;
+            Debug.Log("BulletTime");
             ToggleBulletTime();
         }
     }
@@ -61,13 +57,16 @@ public class BulletTimeController : MonoBehaviour
         {
             Time.timeScale = _normalTimeScale;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            _isBulletTimeActive = false;
+            _isBulletTimeBeingConsumed = false;
         }
         else
         {
             Time.timeScale = _slowMotionFactor;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            _isBulletTimeActive = true;
+            _isBulletTimeBeingConsumed = true;
         }
-        _isBulletTimeActive = !_isBulletTimeActive;
     }
 
     private void OnApplicationQuit()
