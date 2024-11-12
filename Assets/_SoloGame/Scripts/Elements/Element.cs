@@ -5,24 +5,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewElement", menuName = "Elements/Element")]
 public class Element : ScriptableObject
 {
-    public ElementType elementType;
-    public List<ElementType> weaknesses;
-    public List<ElementType> resistances;
-    public List<ElementType> immunities;
+    public ElementType ElementType;
+    public List<ElementType> Weaknesses;
+    public List<ElementType> Resistances;
+    public List<ElementType> Immunities;
 
     public float CalculateDamageFrom(Element attacker, float baseDamage)
     {
         float multiplier = 1f;
 
-        if (attacker.weaknesses.Contains(elementType))
+        if (attacker.Weaknesses.Contains(ElementType))
         {
             multiplier *= 0.5f;
         }
-        else if (attacker.resistances.Contains(elementType))
+        else if (attacker.Resistances.Contains(ElementType))
         {
             multiplier *= 2f;
         }
-        else if(attacker.immunities.Contains(elementType))
+        else if(attacker.Immunities.Contains(ElementType))
         {
             multiplier = 0f;
         }

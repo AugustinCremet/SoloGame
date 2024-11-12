@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class TaskAttack : Node
 {
-    Enemy enemy;
+    Enemy _enemy;
     public TaskAttack(Enemy enemy)
     {
-        this.enemy = enemy;
+        this._enemy = enemy;
     }
     public override NodeState Evaluate()
     {
-        enemy.Attack();   
+        _enemy.Attack();   
         state = NodeState.SUCCESS;
         return state;
     }

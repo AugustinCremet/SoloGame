@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class TaskGoToTarget : Node
 {
-    Transform playerTransform;
+    Transform _playerTransform;
 
     public TaskGoToTarget(Transform playerTransform)
     {
-        this.playerTransform = playerTransform;
+        _playerTransform = playerTransform;
     }
 
     public override NodeState Evaluate()
     {
-        EnemyAI.agent.SetDestination(playerTransform.position);
+        EnemyAI.Agent.SetDestination(_playerTransform.position);
 
         state = NodeState.SUCCESS;
         return state;

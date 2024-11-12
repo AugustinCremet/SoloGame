@@ -6,7 +6,7 @@ public class ElementManager : MonoBehaviour
 {
     public static ElementManager Instance { get; private set; }
 
-    List<Element> elements;
+    List<Element> _elements;
 
     private void Awake()
     {
@@ -24,14 +24,14 @@ public class ElementManager : MonoBehaviour
 
     void LoadAllElements()
     {
-        elements = new List<Element>(Resources.LoadAll<Element>("Elements"));
+        _elements = new List<Element>(Resources.LoadAll<Element>("Elements"));
     }
 
     public Element GetElementByType(ElementType type)
     {
-        foreach (Element element in elements)
+        foreach (Element element in _elements)
         {
-            if (element.elementType == type)
+            if (element.ElementType == type)
                 return element;
         }
 

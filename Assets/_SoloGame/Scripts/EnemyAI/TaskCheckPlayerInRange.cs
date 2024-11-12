@@ -5,33 +5,33 @@ using BehaviorTree;
 
 public class TaskCheckPlayerInRange : Node
 {
-    Transform transform;
-    Transform playerTransform;
-    LayerMask layerMask;
+    Transform _transform;
+    Transform _playerTransform;
+    LayerMask _layerMask;
     public TaskCheckPlayerInRange(Transform transform, Transform playerTransform, LayerMask layerMask)
     {
-        this.transform = transform;
-        this.playerTransform = playerTransform;
-        this.layerMask = layerMask;
+        _transform = transform;
+        _playerTransform = playerTransform;
+        _layerMask = layerMask;
     }
     public override NodeState Evaluate()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, playerTransform.position - transform.position, Mathf.Infinity, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(_transform.position, _playerTransform.position - _transform.position, Mathf.Infinity, _layerMask);
 
         if (hit.collider != null)
         {
             bool hasLineOfSight = hit.collider.CompareTag("Player");
             if(hasLineOfSight)
             {
-                Debug.DrawRay(transform.position, playerTransform.position - transform.position, Color.green);
-                EnemyAI.agent.isStopped = true;
+                Debug.DrawRay(_transform.position, _playerTransform.position - _transform.position, Color.green);
+                EnemyAI.Agent.isStopped = true;
                 state = NodeState.SUCCESS;
                 return state;
             }
             else
             {
-                Debug.DrawRay(transform.position, playerTransform.position - transform.position, Color.red);
-                EnemyAI.agent.isStopped = false;
+                Debug.DrawRay(_transform.position, _playerTransform.position - _transform.position, Color.red);
+                EnemyAI.Agent.isStopped = false;
                 state = NodeState.FAILURE;
                 return state;
             }

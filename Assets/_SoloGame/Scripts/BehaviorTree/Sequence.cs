@@ -10,7 +10,7 @@ namespace BehaviorTree
         {
             bool anyChildIsRunning = false;
 
-            foreach(Node node in children)
+            foreach(Node node in _children)
             {
                 switch(node.Evaluate())
                 {

@@ -14,19 +14,19 @@ namespace BehaviorTree
     {
         protected NodeState state;
 
-        public Node parent;
-        protected List<Node> children = new List<Node>();
+        public Node Parent;
+        protected List<Node> _children = new List<Node>();
 
-        Dictionary<string, object>  dataContext = new Dictionary<string, object>();
+        Dictionary<string, object>  _dataContext = new Dictionary<string, object>();
 
         public Node()
         {
-            parent = null;
+            Parent = null;
         }
 
         public Node(List<Node> children)
         {
-            parent = null;
+            Parent = null;
             foreach (Node child in children)
             { 
                 Attach(child);
@@ -35,25 +35,25 @@ namespace BehaviorTree
 
         private void Attach(Node node)
         {
-            node.parent = this;
-            children.Add(node);
+            node.Parent = this;
+            _children.Add(node);
         }
 
         public virtual NodeState Evaluate() => NodeState.FAILURE;
 
         public void SetData(string key, object value)
         {
-            dataContext[key] = value;
+            _dataContext[key] = value;
         }
 
         public object GetData(string key)
         {
             object value = null;
 
-            if (dataContext.TryGetValue(key, out value))
+            if (_dataContext.TryGetValue(key, out value))
                 return value;
 
-            Node node = parent;
+            Node node = Parent;
 
             while (node != null)
             {
@@ -62,7 +62,7 @@ namespace BehaviorTree
                 if (value != null)
                     return value;
 
-                node = node.parent;
+                node = node.Parent;
             }
 
             return null;
@@ -70,13 +70,13 @@ namespace BehaviorTree
 
         public bool ClearData(string key)
         {
-            if (dataContext.ContainsKey(key))
+            if (_dataContext.ContainsKey(key))
             {
-                dataContext.Remove(key);
+                _dataContext.Remove(key);
                 return true;
             }
 
-            Node node = parent;
+            Node node = Parent;
 
             while (node != null)
             {
@@ -85,7 +85,7 @@ namespace BehaviorTree
                 if (cleared)
                     return true;
 
-                node = node.parent;
+                node = node.Parent;
             }
 
             return false;

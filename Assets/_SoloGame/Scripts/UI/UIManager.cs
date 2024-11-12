@@ -18,7 +18,8 @@ public class UIManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //TODO As been put on a parent object
+            //DontDestroyOnLoad(gameObject);
         }
     }
 

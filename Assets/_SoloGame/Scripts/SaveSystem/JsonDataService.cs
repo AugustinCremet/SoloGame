@@ -7,8 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public PlayerData playerData;
-    public EnemyData enemyData;
+    public PlayerData PlayerData;
+    public EnemyData EnemyData;
 }
 
 [System.Serializable]

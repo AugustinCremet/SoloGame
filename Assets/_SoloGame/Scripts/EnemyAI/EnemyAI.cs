@@ -3,20 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Android;
 
 public class EnemyAI : TreeOfNodes
 {
-    [SerializeField] GameObject target;
-    [SerializeField] LayerMask layerMask;
-    public static NavMeshAgent agent;
-    Enemy enemy;
+    [SerializeField] GameObject _target;
+    [SerializeField] LayerMask _layerMask;
+    public static NavMeshAgent Agent;
+    Enemy Enemy;
 
     private void Awake()
     {
-        enemy = GetComponent<Enemy>();
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        Enemy = GetComponent<Enemy>();
+        Agent = GetComponent<NavMeshAgent>();
+        Agent.updateRotation = false;
+        Agent.updateUpAxis = false;
     }
     protected override Node SetupTree()
     {
@@ -24,10 +25,11 @@ public class EnemyAI : TreeOfNodes
         {
             new Sequence(new List<Node>
             {
+                //TODO removed for testing
                 //new TaskCheckPlayerInRange(transform, target.transform, layerMask),
-                new TaskAttack(enemy),
+                new TaskAttack(Enemy),
             }),
-            new TaskGoToTarget(target.transform),
+            new TaskGoToTarget(_target.transform),
         });
 
         return root;
