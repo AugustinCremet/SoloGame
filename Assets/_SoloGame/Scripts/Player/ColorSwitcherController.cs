@@ -11,7 +11,6 @@ public class ColorSwitcherController : MonoBehaviour
     }
     public void NextColor(InputAction.CallbackContext context)
     {
-        Debug.Log("Next color");
         if(context.performed)
         {
             int nextIndex = _player.AvailableRainbowColors.IndexOf(_player.CurrentRainbowColor) + 1;
