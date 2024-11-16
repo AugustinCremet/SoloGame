@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _rainbowColorsPrefab: {fileID: 1051662680065001150, guid: f409f054c9dc31247ae8bf4970adb310, type: 3}
 --- !u!114 &742176796982642723
 MonoBehaviour:
   m_ObjectHideFlags: 0

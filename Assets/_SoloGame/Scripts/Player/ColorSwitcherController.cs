@@ -1,32 +1,24 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class ColorSwitcherController : MonoBehaviour
 {
-    Player _player;
+    public static event Action<bool> onNextColorSwitch;
 
-    private void Awake()
-    {
-        _player = GetComponent<Player>();
-    }
     public void NextColor(InputAction.CallbackContext context)
     {
         if(context.performed)
         {
-            int nextIndex = _player.AvailableRainbowColors.IndexOf(_player.CurrentRainbowColor) + 1;
-            SwitchColor(nextIndex);
+            onNextColorSwitch?.Invoke(true);
         }
     }
 
-    public void SwitchColor(int nextIndex)
+    public void PreviousColor(InputAction.CallbackContext context)
     {
-        if (nextIndex > _player.AvailableRainbowColors.Count - 1)
+        if (context.performed)
         {
-            _player.ChangeColor(_player.AvailableRainbowColors[0]);
-        }
-        else
-        {
-            _player.ChangeColor(_player.AvailableRainbowColors[nextIndex]);
+            onNextColorSwitch?.Invoke(false);
         }
     }
 }

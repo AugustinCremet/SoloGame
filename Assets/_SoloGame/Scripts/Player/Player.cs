@@ -7,6 +7,8 @@ public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] int _maxHealth = 100;
     int _currentHealth = 0;
+
+    [SerializeField] GameObject _rainbowColorsPrefab;
     public RainbowColor CurrentRainbowColor {  get; private set; }
     public List<RainbowColor> AvailableRainbowColors { get; private set; }
     IDataService _dataService = new JsonDataService();
@@ -17,6 +19,43 @@ public class Player : MonoBehaviour, IDamageable
         GetComponent<SpriteRenderer>().color = CurrentRainbowColor.GetColor();
     }
 
+    public void ChangeColorV(bool isNextColor)
+    {
+        int nextIndex = -1;
+        if (isNextColor)
+        {
+            nextIndex = AvailableRainbowColors.IndexOf(CurrentRainbowColor) + 1;
+        }
+        else
+        {
+            nextIndex = AvailableRainbowColors.IndexOf(CurrentRainbowColor) - 1;
+        }
+
+        if(nextIndex >= AvailableRainbowColors.Count)
+        {
+            CurrentRainbowColor = AvailableRainbowColors[0];
+        }
+        else if(nextIndex < 0)
+        {
+            CurrentRainbowColor = AvailableRainbowColors[AvailableRainbowColors.Count - 1];
+        }
+        else
+        {
+            CurrentRainbowColor = AvailableRainbowColors[nextIndex];
+        }
+        GetComponent<SpriteRenderer>().color = CurrentRainbowColor.GetColor();
+    }
+
+    private void OnEnable()
+    {
+        ColorSwitcherController.onNextColorSwitch += ChangeColorV;
+    }
+
+    private void OnDisable()
+    {
+        ColorSwitcherController.onNextColorSwitch -= ChangeColorV;
+    }
+
     private void Awake()
     {
         AvailableRainbowColors = new List<RainbowColor>();
@@ -24,9 +63,16 @@ public class Player : MonoBehaviour, IDamageable
     }
     private void Start()
     {
+        GameObject rainbowColorsPrefab = Instantiate(_rainbowColorsPrefab, transform.parent.transform);
         AvailableRainbowColors.Add(RainbowColor.Red);
+        AvailableRainbowColors.Add(RainbowColor.Orange);
+        AvailableRainbowColors.Add(RainbowColor.Yellow);
+        AvailableRainbowColors.Add(RainbowColor.Green);
         AvailableRainbowColors.Add(RainbowColor.Blue);
-        CurrentRainbowColor = AvailableRainbowColors[UnityEngine.Random.Range(0, AvailableRainbowColors.Count - 1)];
+        AvailableRainbowColors.Add(RainbowColor.Indigo);
+        AvailableRainbowColors.Add(RainbowColor.Violet);
+        rainbowColorsPrefab.GetComponent<RainbowColorsBehavior>().Initiate(AvailableRainbowColors, transform);
+        CurrentRainbowColor = RainbowColor.Red;
         GetComponent<SpriteRenderer>().color = CurrentRainbowColor.GetColor();
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
         UIManager.Instance.ChangeMaxHealth(_maxHealth);
@@ -34,7 +80,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        // TEMP for testing
+        // TODO for testing
         if(Input.GetKeyDown(KeyCode.F1))
         {
             _dataService.SaveData("/player-stats.json", ToPlayerData(), false);
@@ -58,6 +104,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
     {
+        Debug.Log(bullet.GetComponent<SpriteRenderer>().color);
         if(bullet.GetComponent<SpriteRenderer>().color != CurrentRainbowColor.GetColor())
         {
             int damageAmount = bullet.moduleParameters.GetInt("Damage");
