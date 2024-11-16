@@ -24,7 +24,6 @@ public class SceneDetails : MonoBehaviour
                 var previouslyLoadedScenes = GameManager.Instance.PreviousScene.connectedScenes;
                 foreach (SceneDetails scene in previouslyLoadedScenes)
                 {
-                    Debug.Log(scene.gameObject.name);
                     if(!connectedScenes.Contains(scene) && scene != this)
                     {
                         scene.UnloadScene();

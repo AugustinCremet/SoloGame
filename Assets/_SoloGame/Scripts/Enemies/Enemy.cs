@@ -19,27 +19,6 @@ public class Enemy : MonoBehaviour, IDamageable
         _bulletEmitter = GetComponent<BulletEmitter>();
     }
 
-    private void Start()
-    {
-        //currentElement = ElementManager.Instance.GetElementByType(elementType);
-
-        //Temp for prototype visual
-        //switch(elementType)
-        //{
-        //    case ElementType.Fire:
-        //        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        //        break;
-        //    case ElementType.Grass:
-        //        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-        //        break;
-        //    case ElementType.Water:
-        //        gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-        //        break;
-        //    default:
-        //        break;
-        //}
-    }
-
     private void Update()
     {
         if(!_canAttack)
@@ -52,11 +31,15 @@ public class Enemy : MonoBehaviour, IDamageable
             }
         }
     }
+
+    public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
+    {
+        Damage(bullet.moduleParameters.GetInt("Damage"));
+    }
     public void Damage(int dmgAmount)
     {
-        //int damageAfterElement = (int)currentElement.CalculateDamageFrom(element, dmgAmount);
-        //hp -= damageAfterElement;
         _hp -= dmgAmount;
+        Debug.Log($"{dmgAmount} on {_hp} left");
 
         if(_hp <= 0)
             Destroy(gameObject);

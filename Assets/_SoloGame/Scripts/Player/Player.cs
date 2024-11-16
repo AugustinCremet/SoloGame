@@ -104,7 +104,6 @@ public class Player : MonoBehaviour, IDamageable
 
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
     {
-        Debug.Log(bullet.GetComponent<SpriteRenderer>().color);
         if(bullet.GetComponent<SpriteRenderer>().color != CurrentRainbowColor.GetColor())
         {
             int damageAmount = bullet.moduleParameters.GetInt("Damage");

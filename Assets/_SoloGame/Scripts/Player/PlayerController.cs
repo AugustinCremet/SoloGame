@@ -42,13 +42,6 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            //GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            //Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
-            //Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            //Vector3 direction = mousePos - transform.position;
-
-            //newBullet.GetComponent<Bullet>().InitializeBullet(direction, player.CurrentElement);
             BulletEmitter bullet = GetComponent<BulletEmitter>();
             bullet.Play();
         }

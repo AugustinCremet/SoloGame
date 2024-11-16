@@ -7,8 +7,8 @@ using UnityEngine.Android;
 
 public class EnemyAI : TreeOfNodes
 {
-    [SerializeField] GameObject _target;
     [SerializeField] LayerMask _layerMask;
+    GameObject _target;
     public static NavMeshAgent Agent;
     Enemy Enemy;
 
@@ -21,15 +21,19 @@ public class EnemyAI : TreeOfNodes
     }
     protected override Node SetupTree()
     {
-        Node root = new Selector(new List<Node>
+        _target = GameObject.FindGameObjectWithTag("Player");
+        Node root = new Sequence(new List<Node>
         {
-            new Sequence(new List<Node>
+            new TaskCheckIfPlayerOnTheNav(_target.transform),
+            new Selector(new List<Node>
             {
-                //TODO removed for testing
-                //new TaskCheckPlayerInRange(transform, target.transform, layerMask),
-                new TaskAttack(Enemy),
+                new Sequence(new List<Node>
+                {
+                    new TaskCheckPlayerInRange(transform, _target.transform, _layerMask),
+                    new TaskAttack(Enemy),
+                }),
+                new TaskGoToTarget(_target.transform),
             }),
-            new TaskGoToTarget(_target.transform),
         });
 
         return root;
