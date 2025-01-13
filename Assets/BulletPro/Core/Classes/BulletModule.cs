@@ -8,7 +8,7 @@ using UnityEngine;
 namespace BulletPro
 {
 	// Base class for all seven modules that compose a bullet.
-	public class BulletModule : UnityEngine.Object
+	public class BulletModule
 	{
 		public bool isEnabled { get; protected set; }
 

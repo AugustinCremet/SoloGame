@@ -11,7 +11,6 @@ public class Portal : MonoBehaviour
     [SerializeField] DestinationIdentifier _destinationPortal;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         StartCoroutine(SwitchScene());
     }
 
@@ -21,8 +20,8 @@ public class Portal : MonoBehaviour
         yield return SceneManager.LoadSceneAsync(_sceneToLoad);
 
         var desinationPortal = FindObjectsOfType<Portal>().First(x => x != this && x._destinationPortal == _destinationPortal);
-        var player = FindObjectOfType<Player>(); ;
-        player.SetPosition(desinationPortal.transform);
-        Debug.Log(player);
+        var player = FindObjectOfType<Player>();
+        player.SetPosition(desinationPortal.transform.GetChild(0).transform);
+        Destroy(gameObject);
     }
 }

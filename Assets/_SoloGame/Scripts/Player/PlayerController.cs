@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
+            BulletProSceneSetup test = FindObjectOfType<BulletProSceneSetup>();
+            if ((test))
+            {
+                Debug.Log("I'M HERE");
+            }
             BulletEmitter bullet = GetComponent<BulletEmitter>();
             bullet.Play();
         }

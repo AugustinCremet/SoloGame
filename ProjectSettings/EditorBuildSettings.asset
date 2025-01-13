@@ -6,22 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMap/WorldMap.unity
+    path: Assets/_SoloGame/Scenes/WorldMapGym/WorldMap.unity
     guid: 54b3957dacd16364185324c738875c85
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/FirstDungeon.unity
+    path: Assets/_SoloGame/Scenes/WorldMapGym/FirstDungeon/FirstDungeon.unity
     guid: b41862c9c9d0b3c46b5e64c68afa7b82
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMap/MainMapProto.unity
+    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProto.unity
     guid: 6c9068e94d8464940b6b2465ee9e4434
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMap/MainMapProto2.unity
+    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProto2.unity
     guid: 6ccfe8e49b5fa084fbad356c785bab6a
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMap/MainMapProto3.unity
+    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProto3.unity
     guid: 216af1e711e95664088c0c7efd59d982
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/FirstDungeonFirstRoom.unity
+    path: Assets/_SoloGame/Scenes/WorldMapGym/FirstDungeon/FirstDungeonFirstRoom.unity
     guid: d1b8cac3abb5d964a8bc1a30cb9952ac
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b6d2a7b8e7864ba46b93f13e5729fed3, type: 2}
