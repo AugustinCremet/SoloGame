@@ -169,8 +169,12 @@ namespace BulletPro.EditorScripts
 			System.Type RecycledTextEditorType = Assembly.GetAssembly(editorGUIType).GetType("UnityEditor.EditorGUI+RecycledTextEditor");
 			System.Type[] argumentTypes = new System.Type[] { RecycledTextEditorType, typeof(Rect), typeof(Rect), typeof(int), typeof(float), typeof(string), typeof(GUIStyle), typeof(bool) };
 			doFloatFieldMethod = editorGUIType.GetMethod("DoFloatField", BindingFlags.NonPublic | BindingFlags.Static, null, argumentTypes, null);
-			FieldInfo fieldInfo = editorGUIType.GetField("s_RecycledEditor", BindingFlags.NonPublic | BindingFlags.Static);
-			recycledEditor = fieldInfo.GetValue(null);
+			#if UNITY_6000_0_OR_NEWER
+			PropertyInfo recycledEditorInfo = editorGUIType.GetProperty("s_RecycledEditor", BindingFlags.NonPublic | BindingFlags.Static);
+			#else
+			FieldInfo recycledEditorInfo = editorGUIType.GetField("s_RecycledEditor", BindingFlags.NonPublic | BindingFlags.Static);
+			#endif
+			recycledEditor = recycledEditorInfo.GetValue(null);
 
 			modOptions = new GUIContent[]
 			{

@@ -229,8 +229,20 @@ MonoBehaviour:
     m_ActionId: 19a564ae-6243-4816-b2bd-0d60f7f12df0
     m_ActionName: Player/NextColor[/Keyboard/e]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 808e10b1-0d99-4cab-881e-3d12dd36ebcf
+      m_Calls:
+      - m_Target: {fileID: 7860995233503923523}
+        m_TargetAssemblyTypeName: ColorSwitcherController, Assembly-CSharp
+        m_MethodName: PreviousColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 225a9280-1c2a-4941-af24-70d65f4d6673
     m_ActionName: Player/PreviousColor[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 

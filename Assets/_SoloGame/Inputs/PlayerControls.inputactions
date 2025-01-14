@@ -35,7 +35,7 @@
                 {
                     "name": "PreviousColor",
                     "type": "Button",
-                    "id": "808e10b1-0d99-4cab-881e-3d12dd36ebcf",
+                    "id": "225a9280-1c2a-4941-af24-70d65f4d6673",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -122,7 +122,7 @@
                 },
                 {
                     "name": "",
-                    "id": "55b67b87-764a-455f-851d-a21e2c73ca0b",
+                    "id": "35cd8543-7b61-42d3-9d89-087cb766c4bf",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",

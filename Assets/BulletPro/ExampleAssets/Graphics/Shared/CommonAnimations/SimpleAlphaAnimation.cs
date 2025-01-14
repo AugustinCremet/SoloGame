@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleAlphaAnimation : MonoBehaviour
+// This script is supported by the BulletPro package for Unity.
+// Template author : Simon Albou <albou.simon@gmail.com>
+
+namespace BulletPro.DemoScripts
 {
-	public AnimationCurve animCurve = AnimationCurve.Constant(0, 1, 1);
-	public float period = 2f;
-	public SpriteRenderer spriteRenderer;
-	float age;
-
-	void Update()
+	public class SimpleAlphaAnimation : MonoBehaviour
 	{
-		age += Time.deltaTime;
-		float ratio = (age % period)/period;
+		public AnimationCurve animCurve = AnimationCurve.Constant(0, 1, 1);
+		public float period = 2f;
+		public SpriteRenderer spriteRenderer;
+		float age;
 
-		spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, animCurve.Evaluate(ratio));
-	}	
+		void Update()
+		{
+			age += Time.deltaTime;
+			float ratio = (age % period)/period;
+
+			spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, animCurve.Evaluate(ratio));
+		}	
+	}
 }
