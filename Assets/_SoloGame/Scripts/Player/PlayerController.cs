@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] GameObject bullet;
 
-    Player player;
     Camera cam;
     Rigidbody2D rb;
     Vector2 horizontalMovement;
@@ -23,7 +22,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         cam = FindAnyObjectByType<Camera>();
-        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
