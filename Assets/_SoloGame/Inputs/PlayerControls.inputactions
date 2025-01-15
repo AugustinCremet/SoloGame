@@ -24,18 +24,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "NextColor",
+                    "name": "Dash",
                     "type": "Button",
-                    "id": "19a564ae-6243-4816-b2bd-0d60f7f12df0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "PreviousColor",
-                    "type": "Button",
-                    "id": "225a9280-1c2a-4941-af24-70d65f4d6673",
+                    "id": "abaac183-eed5-4164-ac6b-cfadf3a441d7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -111,23 +102,12 @@
                 },
                 {
                     "name": "",
-                    "id": "28201a04-8429-4fd5-8d4b-149efcd91d25",
-                    "path": "<Keyboard>/e",
+                    "id": "6ee8b896-6ad8-4c8c-9fb7-38d6bd426732",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "NextColor",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "35cd8543-7b61-42d3-9d89-087cb766c4bf",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PreviousColor",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
