@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     float _dashCurrentDuration;
     [SerializeField] float _dashCooldown = 1f;
     float _dashCurrentCooldown;
-    bool _isDashing;
+    public bool isDashing { get; private set; }
     Vector2 _dashDirection;
     [SerializeField] GameObject _bullet;
 
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         _cursor.transform.position = _cam.ScreenToWorldPoint(Input.mousePosition);
 
-        if(_isDashing)
+        if(isDashing || _dashCurrentCooldown != 0f)
         {
             StartDashTimers();
         }
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb.velocity = _horizontalMovement * _moveSpeed;
 
-        if(_isDashing)
+        if(isDashing)
         {
             DashMovement();
         }
@@ -69,9 +69,9 @@ public class PlayerController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (!_isDashing && context.performed)
+        if (!isDashing && context.performed && _dashCurrentCooldown == 0f)
         {
-            _isDashing = true;
+            isDashing = true;
             _dashDirection = _horizontalMovement;
         }
     }
@@ -85,7 +85,6 @@ public class PlayerController : MonoBehaviour
         {
             _dashCurrentCooldown = 0;
             _dashCurrentDuration = 0;
-            _isDashing = false;
             _rb.velocity = Vector2.zero;
         }
     }
@@ -95,6 +94,10 @@ public class PlayerController : MonoBehaviour
         if(_dashCurrentDuration <= _dashDuration)
         {
             _rb.AddForce(_dashDirection * _dashSpeed, ForceMode2D.Impulse);
+        }
+        else
+        {
+            isDashing = false;
         }
     }
 }
