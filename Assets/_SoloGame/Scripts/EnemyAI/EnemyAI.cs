@@ -32,7 +32,11 @@ public class EnemyAI : TreeOfNodes
                     new TaskCheckPlayerInRange(transform, _target.transform, _layerMask),
                     new TaskAttack(Enemy),
                 }),
-                new TaskGoToTarget(_target.transform),
+                new Sequence(new List<Node>
+                {
+                    new TaskStopAttack(Enemy),
+                    new TaskGoToTarget(_target.transform),
+                }),
             }),
         });
 

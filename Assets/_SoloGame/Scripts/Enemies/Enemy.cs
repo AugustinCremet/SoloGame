@@ -49,8 +49,12 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (_canAttack)
         {
-            Debug.Log("Shot");
             _bulletEmitter.Play();
         }
+    }
+
+    public void StopAttack()
+    {
+        _bulletEmitter?.Stop();
     }
 }
