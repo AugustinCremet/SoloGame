@@ -52,7 +52,7 @@ MonoBehaviour:
   syncCollisionTags: 1
   hitboxSize: 0.1
   hitboxOffset: {x: 0, y: 0}
-  killBulletOnCollision: 1
+  killBulletOnCollision: 0
   maxSimultaneousCollisionsPerFrame: 1
   collisionTags:
     tagList: 8
@@ -334,49 +334,9 @@ PrefabInstance:
       propertyPath: _cursor
       value: 
       objectReference: {fileID: 1194466681944497604}
-    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7860995233503923523, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PreviousColor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ColorSwitcherController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3547648823097942777, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: collisionTagsFoldout
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4508968744674227800, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5653686412428461558, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: m_SortingLayer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5653686412428461558, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8453446122992144777, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_LocalPosition.x

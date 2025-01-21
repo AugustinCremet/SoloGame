@@ -31,7 +31,6 @@ public class BulletWallCollision : BaseBulletBehaviour {
         if(!hit) return;
         if(1 << hit.collider.gameObject.layer == LayerMask.GetMask("Wall"))
         {
-			Debug.Log("Bullet should die");
             bullet.Die();
         }
 	}

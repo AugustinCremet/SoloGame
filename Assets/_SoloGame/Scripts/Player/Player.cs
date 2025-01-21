@@ -6,8 +6,12 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] int _maxHealth = 100;
-    int _currentHealth = 0;
-    IDataService _dataService = new JsonDataService();
+    private Color _currentColor = Color.blue;
+    private Color _redColor = new Color32(232, 20, 22, 255);
+    private Color _blueColor = new Color32(72, 125, 231, 255);
+    private int _currentHealth = 0;
+    private IDataService _dataService = new JsonDataService();
+    
 
     private void Awake()
     {
@@ -17,6 +21,16 @@ public class Player : MonoBehaviour, IDamageable
     {
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
         UIManager.Instance.ChangeMaxHealth(_maxHealth);
+    }
+
+    private void OnEnable()
+    {
+        PlayerController.ChangeColor += OnChangeColor;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.ChangeColor -= OnChangeColor;
     }
 
     private void Update()
@@ -44,7 +58,7 @@ public class Player : MonoBehaviour, IDamageable
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
     {
         //TODO Add color condition
-        //if(bullet.GetComponent<SpriteRenderer>().color !=)
+        if(bullet.GetComponent<SpriteRenderer>().color != _currentColor)
         {
             int damageAmount = bullet.moduleParameters.GetInt("Damage");
             Damage(damageAmount);
@@ -56,6 +70,19 @@ public class Player : MonoBehaviour, IDamageable
     {
         Debug.Log("SetPosition");
         gameObject.transform.position = newTransform.position;
+    }
+
+    private void OnChangeColor()
+    {
+        if(_currentColor == _redColor)
+        {
+            _currentColor = _blueColor;
+        }
+        else
+        {
+            _currentColor = _redColor;
+        }
+        GetComponent<SpriteRenderer>().color = _currentColor;
     }
 
     public PlayerData ToPlayerData()

@@ -29,7 +29,7 @@ MonoBehaviour:
   foldoutExport: 0
   foldoutEmptyBin: 0
   foldoutCompactMode: 0
-  currentParamsSelected: {fileID: 114184213563873034}
+  currentParamsSelected: {fileID: 114455728593515822}
   numberOfSubAssets: 4
 --- !u!114 &114043142638459942
 MonoBehaviour:
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: Shot
   m_EditorClassIdentifier: 
   parameterType: 1
-  uniqueIndex: 14079612
+  uniqueIndex: 6687062
   profile: {fileID: 11400000}
   parent: {fileID: 114184213563873034}
   children:
@@ -2462,7 +2462,7 @@ MonoBehaviour:
   m_Name: Pattern
   m_EditorClassIdentifier: 
   parameterType: 2
-  uniqueIndex: 517098
+  uniqueIndex: 8052585
   profile: {fileID: 11400000}
   parent: {fileID: 114334976902514986}
   children:
@@ -26845,7 +26845,7 @@ MonoBehaviour:
   m_Name: Root Emitter
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 12602585
+  uniqueIndex: 6011798
   profile: {fileID: 11400000}
   parent: {fileID: 0}
   children:
@@ -33961,7 +33961,7 @@ MonoBehaviour:
   m_Name: Bullet
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 4035402
+  uniqueIndex: 12546926
   profile: {fileID: 11400000}
   parent: {fileID: 114043142638459942}
   children: []
@@ -35981,7 +35981,7 @@ MonoBehaviour:
         weight: 1
         headerTitle: 'Color : Value 0'
         blendColor: {r: 0.17799112, g: 0.8546555, b: 0.31093037, a: 1}
-        parameterType: 0
+        parameterType: 1
         relativeTo: 0
         parameterName: Red
       defaultValue: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
@@ -36074,9 +36074,9 @@ MonoBehaviour:
         weight: 1
         headerTitle: 'Color : Value 1'
         blendColor: {r: 0.64450014, g: 0.41441593, b: 0.8976706, a: 1}
-        parameterType: 0
+        parameterType: 1
         relativeTo: 0
-        parameterName: Green
+        parameterName: Blue
       defaultValue: {r: 1, g: 1, b: 1, a: 1}
       gradientValue:
         serializedVersion: 2
@@ -37343,7 +37343,7 @@ MonoBehaviour:
   foldoutVFX: 1
   hideSpriteList: 0
   vfxOpened: 0
-  currentlyDisplayedModule: 7
+  currentlyDisplayedModule: 8
   canMove: 1
   canCollide: 1
   isVisible: 1
