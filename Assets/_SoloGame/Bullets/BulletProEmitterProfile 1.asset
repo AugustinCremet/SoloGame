@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da8a7c80eab4c474da1e90eb12356b89, type: 3}
-  m_Name: BulletProEmitterProfile
+  m_Name: BulletProEmitterProfile 1
   m_EditorClassIdentifier: 
   rootBullet: {fileID: 114671512830859702}
   subAssets:
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: Bullet
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 10397097
+  uniqueIndex: 11506813
   profile: {fileID: 11400000}
   parent: {fileID: 114201774248674550}
   children: []
@@ -956,12 +956,12 @@ MonoBehaviour:
         indexOfTo: 0
         indexOfBlendedChildren: 
         weight: 0
-        headerTitle: Sorting Layer Name
+        headerTitle: 
         blendColor: {r: 0, g: 0, b: 0, a: 0}
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: Bullet
+      defaultValue: 
   color:
     valueTree:
     - settings:
@@ -2553,7 +2553,7 @@ MonoBehaviour:
   foldoutVFX: 1
   hideSpriteList: 0
   vfxOpened: 0
-  currentlyDisplayedModule: 2
+  currentlyDisplayedModule: 3
   canMove: 1
   canCollide: 1
   isVisible: 1
@@ -2668,7 +2668,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 5
+      defaultValue: 2
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -3013,7 +3013,7 @@ MonoBehaviour:
   animationMovementSpace: 0
   animationTexture: {fileID: 0}
   collisionTags:
-    tagList: 6
+    tagList: 70
   colliders:
   - colliderType: 0
     size: 1.71
@@ -8453,7 +8453,7 @@ MonoBehaviour:
   m_Name: Shot
   m_EditorClassIdentifier: 
   parameterType: 1
-  uniqueIndex: 3738273
+  uniqueIndex: 11685861
   profile: {fileID: 11400000}
   parent: {fileID: 114917193883442684}
   children:
@@ -8741,7 +8741,7 @@ MonoBehaviour:
   m_Name: Root Emitter
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 6822958
+  uniqueIndex: 12133475
   profile: {fileID: 11400000}
   parent: {fileID: 0}
   children:
@@ -16424,7 +16424,7 @@ MonoBehaviour:
   m_Name: Pattern
   m_EditorClassIdentifier: 
   parameterType: 2
-  uniqueIndex: 1388393
+  uniqueIndex: 12988024
   profile: {fileID: 11400000}
   parent: {fileID: 114671512830859702}
   children:

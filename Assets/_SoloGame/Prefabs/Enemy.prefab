@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1651602805
-  m_SortingLayer: 3
-  m_SortingOrder: 5
+  m_SortingLayer: 4
+  m_SortingOrder: 0
   m_Sprite: {fileID: 519837382, guid: 551c0726b296f404baf7b3584d5bdddb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a676b285f069c3c4884c27e78d0fc696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emitterProfile: {fileID: 0}
+  emitterProfile: {fileID: 11400000, guid: df02b2f84f50c5249a491b503a5be816, type: 2}
   patternOrigin: {fileID: 0}
   playAtStart: 0
   useDefaultGizmoColor: 1
@@ -284,4 +284,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768

@@ -9,36 +9,44 @@ public class EnemyAI : TreeOfNodes
 {
     [SerializeField] LayerMask _layerMask;
     GameObject _target;
-    public static NavMeshAgent Agent;
-    Enemy Enemy;
+    NavMeshAgent _agent;
+    Enemy _enemy;
 
     private void Awake()
     {
-        Enemy = GetComponent<Enemy>();
-        Agent = GetComponent<NavMeshAgent>();
-        Agent.updateRotation = false;
-        Agent.updateUpAxis = false;
+        _enemy = GetComponent<Enemy>();
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
     }
     protected override Node SetupTree()
     {
         _target = GameObject.FindGameObjectWithTag("Player");
         Node root = new Sequence(new List<Node>
         {
-            new TaskCheckIfPlayerOnTheNav(_target.transform),
+            new TaskCheckIfPlayerOnTheNav(),
             new Selector(new List<Node>
             {
                 new Sequence(new List<Node>
                 {
-                    new TaskCheckPlayerInRange(transform, _target.transform, _layerMask),
-                    new TaskAttack(Enemy),
+                    new TaskCheckPlayerInRange(),
+                    new TaskAttack(),
                 }),
                 new Sequence(new List<Node>
                 {
-                    new TaskStopAttack(Enemy),
-                    new TaskGoToTarget(_target.transform),
+                    new TaskStopAttack(),
+                    new TaskGoToTarget(),
                 }),
             }),
         });
+        //Node root = new Sequence(new List<Node>
+        //{
+        //    new TaskMoveBetween(),
+        //    new TaskAttack(),
+        //    //new TaskStopAttack(_enemy)
+        //});
+        var context = new BehaviorTreeContext(_enemy, transform, _target.transform, _agent);
+        root.SetContext(context);
 
         return root;
     }

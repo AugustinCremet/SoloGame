@@ -7,24 +7,21 @@ using UnityEngine.AI;
 
 public class TaskCheckIfPlayerOnTheNav : Node
 {
-    Transform _target;
-
-    public TaskCheckIfPlayerOnTheNav(Transform target)
+    public TaskCheckIfPlayerOnTheNav()
     {
-        _target = target;
     }
     public override NodeState Evaluate()
     {
         NavMeshHit hit;
-        if(NavMesh.SamplePosition(_target.position, out hit, 1f, NavMesh.AllAreas))
+        if(NavMesh.SamplePosition(_context.PlayerTransform.position, out hit, 1f, NavMesh.AllAreas))
         {
-            state = NodeState.SUCCESS;
-            return state;
+            _state = NodeState.SUCCESS;
+            return _state;
         }
         else
         {
-            state = NodeState.FAILURE;
-            return state;
+            _state = NodeState.FAILURE;
+            return _state;
         }
     }
 }

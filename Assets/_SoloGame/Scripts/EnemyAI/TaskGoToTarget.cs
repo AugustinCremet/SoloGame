@@ -2,21 +2,19 @@ using BehaviorTree;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TaskGoToTarget : Node
 {
-    Transform _playerTransform;
-
-    public TaskGoToTarget(Transform playerTransform)
+    public TaskGoToTarget()
     {
-        _playerTransform = playerTransform;
     }
 
     public override NodeState Evaluate()
     {
-        EnemyAI.Agent.SetDestination(_playerTransform.position);
+        _context.NavAgent.SetDestination(_context.PlayerTransform.position);
 
-        state = NodeState.SUCCESS;
-        return state;
+        _state = NodeState.SUCCESS;
+        return _state;
     }
 }

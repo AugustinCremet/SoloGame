@@ -49,12 +49,13 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (_canAttack)
         {
+            Debug.Log("Enemy is attacking");
             _bulletEmitter.Play();
         }
     }
 
     public void StopAttack()
     {
-        _bulletEmitter?.Stop();
+        _bulletEmitter?.Stop(PlayOptions.RootOnly);
     }
 }

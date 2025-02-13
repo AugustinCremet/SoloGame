@@ -2,16 +2,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UIElements;
+using BulletPro;
 
+public enum PlayerAbilities
+{
+    None           = 0,
+    Dash           = 1 << 0,
+    ColorSwitch    = 1 << 1,
+    BulletTime     = 1 << 2,
+    BouncingBullet = 1 << 3,
+}
 public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] int _maxHealth = 100;
+    private int _currentHealth = 0;
     private Color _currentColor = Color.blue;
     private Color _redColor = new Color32(232, 20, 22, 255);
     private Color _blueColor = new Color32(72, 125, 231, 255);
-    private int _currentHealth = 0;
+    private BulletEmitter _bulletEmitter;
+    [SerializeField] EmitterProfile _normalProfile;
+    [SerializeField] EmitterProfile _bouncingProfile;
+    public PlayerAbilities Abilities { get; private set; }
     private IDataService _dataService = new JsonDataService();
-    
+
 
     private void Awake()
     {
@@ -21,6 +34,11 @@ public class Player : MonoBehaviour, IDamageable
     {
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
         UIManager.Instance.ChangeMaxHealth(_maxHealth);
+
+        // TODO remove
+        _bulletEmitter = GetComponent<BulletEmitter>();
+        _bulletEmitter.SwitchProfile(_normalProfile);
+        //GrantAbility(PlayerAbilities.BouncingBullet);
     }
 
     private void OnEnable()
@@ -38,20 +56,40 @@ public class Player : MonoBehaviour, IDamageable
         // TODO for testing
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            _dataService.SaveData("/player-stats.json", ToPlayerData(), false);
+            _dataService.SaveData("/player-stats.json", ToPlayerData(), true);
         }
         else if (Input.GetKeyDown(KeyCode.F2))
         {        
-            FromPlayerData(_dataService.LoadData<PlayerData>("/player-stats.json", false));
-            Debug.Log(_maxHealth);
+            FromPlayerData(_dataService.LoadData<PlayerData>("/player-stats.json", true));
+            Debug.Log(_currentHealth);
         }
+    }
+
+    public void GrantAbility(PlayerAbilities ability)
+    {
+        Abilities |= ability;
+
+        if(ability == PlayerAbilities.BouncingBullet)
+        {
+            _bulletEmitter.SwitchProfile(_bouncingProfile);
+        }
+    }
+
+    public void RemoveAbility(PlayerAbilities ability)
+    {
+        Abilities &= ~ability;
+    }
+
+    public bool HasAbility(PlayerAbilities ability)
+    {
+        return (Abilities & ability) == ability;
     }
     public void Damage(int dmgAmount)
     {
-        _maxHealth = _maxHealth - dmgAmount;
-        UIManager.Instance.ChangeCurrentHealth(_maxHealth);
+        _currentHealth = _currentHealth - dmgAmount;
+        UIManager.Instance.ChangeCurrentHealth(_currentHealth);
 
-        if (_maxHealth <= 0)
+        if (_currentHealth <= 0)
             Destroy(gameObject);
     }
 
@@ -89,12 +127,12 @@ public class Player : MonoBehaviour, IDamageable
     {
         return new PlayerData
         {
-            hp = _maxHealth,
+            hp = _currentHealth,
         };
     }
 
     public void FromPlayerData(PlayerData playerData)
     {
-        _maxHealth = playerData.hp;
+        _currentHealth = playerData.hp;
     }
 }

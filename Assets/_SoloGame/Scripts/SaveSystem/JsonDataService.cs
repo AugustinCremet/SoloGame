@@ -1,6 +1,9 @@
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [System.Serializable]
@@ -23,7 +26,9 @@ public class EnemyData
 }
 public class JsonDataService : IDataService
 {
-    public bool SaveData<T>(string relativePath, T Data, bool encrypted)
+    private const string KEY = "tCuxCQXcs21087l0ea6U1+PBt0Y9THhqXU/jK8itkio=";
+    private const string IV = "Zss6z5NIbM2ffihdurqLbA==";
+    public bool SaveData<T>(string relativePath, T data, bool encrypted)
     {
         string path = Application.persistentDataPath + relativePath;
 
@@ -39,8 +44,15 @@ public class JsonDataService : IDataService
                 Debug.Log("Creating file for the first time!");
             }
             using FileStream stream = File.Create(path);
-            stream.Close();
-            File.WriteAllText(path, JsonConvert.SerializeObject(Data));
+            if (encrypted)
+            {
+                WriteEncryptedDate(data, stream);
+            }
+            else
+            {
+                stream.Close();
+                File.WriteAllText(path, JsonConvert.SerializeObject(data));
+            }
             return true;
         }
         catch(Exception e)
@@ -50,7 +62,25 @@ public class JsonDataService : IDataService
         }
 
     }
-    public T LoadData<T>(string relativePath, bool Encrypted)
+
+    private void WriteEncryptedDate<T>(T data, FileStream Stream)
+    {
+        using Aes aesProvider = Aes.Create();
+        aesProvider.Key = Convert.FromBase64String(KEY);
+        aesProvider.IV = Convert.FromBase64String(IV);
+        using ICryptoTransform cryptoTransform = aesProvider.CreateEncryptor();
+        using CryptoStream cryptoStream = new CryptoStream(
+            Stream,
+            cryptoTransform,
+            CryptoStreamMode.Write 
+        );
+
+        //To generate KEY and IV
+        //Debug.Log($"IV: {Convert.ToBase64String(aesProvider.IV)}");
+        //Debug.Log($"KEY: {Convert.ToBase64String(aesProvider.Key)}");
+        cryptoStream.Write(Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(data)));
+    }
+    public T LoadData<T>(string relativePath, bool encrypted)
     {
         string path = Application.persistentDataPath + relativePath;
 
@@ -62,7 +92,15 @@ public class JsonDataService : IDataService
 
         try
         {
-            T data = JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
+            T data;
+            if(encrypted)
+            {
+                data = ReadEncryptedData<T>(path);
+            }
+            else
+            {
+                data = JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
+            }
             return data;
         }
         catch (Exception e)
@@ -70,5 +108,31 @@ public class JsonDataService : IDataService
             Debug.LogError($"Failed to load data due to: {e.Message} {e.StackTrace}");
             throw e;
         }
+    }
+
+    private T ReadEncryptedData<T>(string path)
+    {
+        byte[] fileBytes = File.ReadAllBytes(path);
+        using Aes aesProvider = Aes.Create();
+
+        aesProvider.Key = Convert.FromBase64String(KEY);
+        aesProvider.IV = Convert.FromBase64String(IV);
+
+        using ICryptoTransform cryptoTransform = aesProvider.CreateDecryptor(
+            aesProvider.Key,
+            aesProvider.IV
+        );
+        using MemoryStream decryptionStream = new MemoryStream(fileBytes);
+        using CryptoStream cryptoStream = new CryptoStream(
+            decryptionStream,
+            cryptoTransform,
+            CryptoStreamMode.Read
+        );
+        using StreamReader reader = new StreamReader(cryptoStream);
+
+        string result = reader.ReadToEnd();
+
+        Debug.Log($"Decrypted result (if the following is not legible, probalby wong key or iv) : {result}");
+        return JsonConvert.DeserializeObject<T>(result);
     }
 }

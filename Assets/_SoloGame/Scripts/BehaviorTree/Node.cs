@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 namespace BehaviorTree
 {
@@ -12,12 +14,14 @@ namespace BehaviorTree
     }
     public class Node
     {
-        protected NodeState state;
+        private const int test = 19;
+        protected NodeState _state;
+        protected BehaviorTreeContext _context;
 
         public Node Parent;
         protected List<Node> _children = new List<Node>();
 
-        Dictionary<string, object>  _dataContext = new Dictionary<string, object>();
+        private Dictionary<string, object>  _dataContext = new Dictionary<string, object>();
 
         public Node()
         {
@@ -32,6 +36,18 @@ namespace BehaviorTree
                 Attach(child);
             }
         }
+
+        public void SetContext(BehaviorTreeContext context)
+        {
+            _context = context;
+            //OnContextSet();
+            foreach (var child in _children)
+            {
+                child.SetContext(context);
+            }
+        }
+
+        protected virtual void OnContextSet() { }
 
         private void Attach(Node node)
         {
