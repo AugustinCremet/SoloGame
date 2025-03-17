@@ -22,28 +22,37 @@ public class EnemyAI : TreeOfNodes
     protected override Node SetupTree()
     {
         _target = GameObject.FindGameObjectWithTag("Player");
-        Node root = new Sequence(new List<Node>
-        {
-            new TaskCheckIfPlayerOnTheNav(),
-            new Selector(new List<Node>
-            {
-                new Sequence(new List<Node>
-                {
-                    new TaskCheckPlayerInRange(),
-                    new TaskAttack(),
-                }),
-                new Sequence(new List<Node>
-                {
-                    new TaskStopAttack(),
-                    new TaskGoToTarget(),
-                }),
-            }),
-        });
         //Node root = new Sequence(new List<Node>
         //{
-        //    new TaskMoveBetween(),
+        //    new TaskCheckIfPlayerOnTheNav(),
+        //    new Selector(new List<Node>
+        //    {
+        //        new Sequence(new List<Node>
+        //        {
+        //            new TaskCheckPlayerInRange(),
+        //            new TaskAttack(),
+        //        }),
+        //        new Sequence(new List<Node>
+        //        {
+        //            new TaskStopAttack(),
+        //            new TaskGoToTarget(),
+        //        }),
+        //    }),
+        //});
+
+        Node root = new Sequence(new List<Node>
+        {
+            new TaskTeleport(true),
+            new TaskWait(3f),
+        });
+
+        // Basic enemy
+        //Node root = new Sequence(new List<Node>
+        //{
+        //    new TaskMoveBetween(0.15f, 0.25f, 5f),
         //    new TaskAttack(),
-        //    //new TaskStopAttack(_enemy)
+        //    new TaskWait(1f),
+        //    new TaskStopAttack(),
         //});
         var context = new BehaviorTreeContext(_enemy, transform, _target.transform, _agent);
         root.SetContext(context);

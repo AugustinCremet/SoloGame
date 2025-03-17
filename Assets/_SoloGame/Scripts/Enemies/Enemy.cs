@@ -45,17 +45,22 @@ public class Enemy : MonoBehaviour, IDamageable
             Destroy(gameObject);
     }
 
-    public void Attack()
+    public bool Attack()
     {
-        if (_canAttack)
+        if (_bulletEmitter.isPlaying == false)
         {
-            Debug.Log("Enemy is attacking");
             _bulletEmitter.Play();
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 
     public void StopAttack()
     {
         _bulletEmitter?.Stop(PlayOptions.RootOnly);
+        Debug.Log("Stop Attack");
     }
 }
