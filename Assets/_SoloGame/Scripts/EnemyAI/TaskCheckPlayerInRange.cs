@@ -18,6 +18,7 @@ public class TaskCheckPlayerInRange : Node
         {
             _layerMask = 1 << _context.PlayerTransform.gameObject.layer;
             _layerMask |= 1 << 9;
+            _doOnce = true;
         }
 
         RaycastHit2D hit = Physics2D.Raycast(_context.EnemyTransform.position, _context.PlayerTransform.position - _context.EnemyTransform.position, Mathf.Infinity, _layerMask);

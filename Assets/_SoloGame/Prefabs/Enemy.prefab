@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 100
+  _laserSight: {fileID: 4610367313683202467, guid: f088bca84eefb0f4da8fe2e8db4fd061, type: 3}
 --- !u!114 &207963093360244971
 MonoBehaviour:
   m_ObjectHideFlags: 0
