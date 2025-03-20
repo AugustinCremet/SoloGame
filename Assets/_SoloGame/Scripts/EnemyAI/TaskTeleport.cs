@@ -43,7 +43,7 @@ public class TaskTeleport : Node
                 {
                     Debug.DrawLine(_context.NavAgent.transform.position, newLocation, Color.green, 1f);
                     _context.NavAgent.Warp(newLocation);
-                    _state = _withinPlayerSight ? IsPlayerInSight(hit) : _state = NodeState.SUCCESS;
+                    _state = _withinPlayerSight ? UtilityFunctions.IsPlayerInSight(hit.position, _context.PlayerTransform) ? NodeState.SUCCESS : NodeState.RUNNING : NodeState.SUCCESS;
                 }
                 else
                 {
@@ -56,37 +56,6 @@ public class TaskTeleport : Node
         {
             Debug.DrawLine(_context.NavAgent.transform.position, newLocation, Color.red, 1f);
             _state = NodeState.RUNNING;
-        }
-
-        return _state;
-    }
-
-    NodeState IsPlayerInSight(NavMeshHit hitPosition)
-    {
-        if (!_doOnce)
-        {
-            _layerMask = 1 << _context.PlayerTransform.gameObject.layer;
-            _layerMask |= 1 << 9;
-            _doOnce = true;
-        }
-
-        RaycastHit2D hit = Physics2D.Raycast(hitPosition.position, _context.PlayerTransform.position - _context.EnemyTransform.position, Mathf.Infinity, _layerMask);
-
-        if (hit.collider != null)
-        {
-            bool hasLineOfSight = hit.collider.CompareTag("Player");
-            if (hasLineOfSight)
-            {
-                Debug.DrawRay(_context.EnemyTransform.position, _context.PlayerTransform.position - _context.EnemyTransform.position, Color.blue, 1f);
-                _context.NavAgent.isStopped = true;
-                _state = NodeState.SUCCESS;
-            }
-            else
-            {
-                Debug.DrawRay(_context.EnemyTransform.position, _context.PlayerTransform.position - _context.EnemyTransform.position, Color.magenta, 1f);
-                _context.NavAgent.isStopped = false;
-                _state = NodeState.RUNNING;
-            }
         }
 
         return _state;

@@ -45,6 +45,7 @@ public class EnemyAI : TreeOfNodes
             new TaskTeleport(false, 5f),
             new TaskAttack(),
             new TaskWait(3f),
+            new TaskStopAttack(),
         });
 
         // Basic enemy

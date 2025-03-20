@@ -1,25 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using BehaviorTree;
 using UnityEngine;
 
 public class LaserSight : MonoBehaviour
 {
     Transform _playerTransform;
-    SpriteRenderer _spriteRenderer;
+    LineRenderer _lineRenderer;
+    private bool _doOnce;
+    private int _layerMask;
+
     // Start is called before the first frame update
     void Start()
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        Vector3 direction = (_playerTransform.position - transform.position).normalized;
-        transform.up = direction; // Rotates the laser to face the player
-
-        float laserLength = Vector2.Distance(_playerTransform.position, transform.position);
-        _spriteRenderer.size = new Vector2(_spriteRenderer.size.x, laserLength);
+{
+        if (UtilityFunctions.IsPlayerInSight(transform.position, _playerTransform))
+        {
+            _lineRenderer.SetPosition(0, transform.position);
+            _lineRenderer.SetPosition(1, _playerTransform.position);
+        }
+        else
+        {
+            _lineRenderer.SetPosition(0, transform.position);
+            _lineRenderer.SetPosition(1, transform.position);
+        }
     }
 }

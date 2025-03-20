@@ -5,21 +5,28 @@ using UnityEngine;
 
 public class TaskAttack : Node
 {
-    bool isCurrentlyPlaying = false;
+    private bool _hasStartedAttack = false;
     public TaskAttack()
     {
     }
     public override NodeState Evaluate()
     {
-        if (!isCurrentlyPlaying)
+        if (!_hasStartedAttack)
         {
-            isCurrentlyPlaying = _context.Enemy.Attack();
-            _state = NodeState.SUCCESS;
+            _context.Enemy.StartAttack();
+            _hasStartedAttack = true;
+            _state = NodeState.RUNNING;
+        }
+        else if(_context.Enemy.IsAttacking)
+        {
+            _state = NodeState.RUNNING;
         }
         else
         {
+            _hasStartedAttack = false;
             _state = NodeState.SUCCESS;
         }
+
         return _state;
     }
 }

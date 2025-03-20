@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da8a7c80eab4c474da1e90eb12356b89, type: 3}
-  m_Name: AimedShot
+  m_Name: SniperShot
   m_EditorClassIdentifier: 
   rootBullet: {fileID: 114334976902514986}
   subAssets:
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: Shot
   m_EditorClassIdentifier: 
   parameterType: 1
-  uniqueIndex: 295484
+  uniqueIndex: 9294037
   profile: {fileID: 11400000}
   parent: {fileID: 114184213563873034}
   children:
@@ -2462,7 +2462,7 @@ MonoBehaviour:
   m_Name: Pattern
   m_EditorClassIdentifier: 
   parameterType: 2
-  uniqueIndex: 2759690
+  uniqueIndex: 15805241
   profile: {fileID: 11400000}
   parent: {fileID: 114334976902514986}
   children:
@@ -8539,7 +8539,7 @@ MonoBehaviour:
             parameterType: 0
             relativeTo: 0
             parameterName: 
-          defaultValue: {fileID: 8300000, guid: 80c40a76ab132ac48be6531e7a1fb042, type: 3}
+          defaultValue: {fileID: 8300000, guid: 172b966f0e6f81f45b65f79ff51184f2, type: 3}
         narrowType: 1
         requireComponent: 0
         typeName: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
@@ -22005,7 +22005,7 @@ MonoBehaviour:
   advancedFoldout: 0
   hasBeenSerializedOnce: 1
   focusedInstruction: -1
-  safetyForPlaymode: 45
+  safetyForPlaymode: 57
 --- !u!114 &114334976902514986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -22019,7 +22019,7 @@ MonoBehaviour:
   m_Name: Root Emitter
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 5286177
+  uniqueIndex: 2545420
   profile: {fileID: 11400000}
   parent: {fileID: 0}
   children:
@@ -29135,7 +29135,7 @@ MonoBehaviour:
   m_Name: Bullet
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 14830937
+  uniqueIndex: 7957448
   profile: {fileID: 11400000}
   parent: {fileID: 114043142638459942}
   children: []
@@ -29252,7 +29252,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: {fileID: 21300000, guid: b4cbd21f66a7b1249a56bebeab57e2e0, type: 3}
+      defaultValue: {fileID: 21300000, guid: 090acba3c4a4c5e41a2915f114912874, type: 3}
     - settings:
         valueType: 0
         interpolationValue:
@@ -32517,7 +32517,7 @@ MonoBehaviour:
   foldoutVFX: 1
   hideSpriteList: 0
   vfxOpened: 0
-  currentlyDisplayedModule: 0
+  currentlyDisplayedModule: 4
   canMove: 1
   canCollide: 1
   isVisible: 1
@@ -32632,7 +32632,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 5
+      defaultValue: 50
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -32983,12 +32983,12 @@ MonoBehaviour:
     size: 0.8
     offset: {x: 0, y: 0, z: 0}
     lineStart: {x: 0, y: 1.6}
-    lineEnd: {x: -1.5, y: -1.88}
+    lineEnd: {x: -0.5, y: -1.88}
   - colliderType: 1
     size: 0.8
     offset: {x: 0, y: 0, z: 0}
     lineStart: {x: 0, y: 1.6}
-    lineEnd: {x: 1.5, y: -1.88}
+    lineEnd: {x: 0.5, y: -1.88}
   - colliderType: 1
     size: 0.8
     offset: {x: 0, y: 0, z: 0}
@@ -33339,7 +33339,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 0
+      defaultValue: 200
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -33683,7 +33683,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 0
+      defaultValue: 5
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -36325,7 +36325,7 @@ MonoBehaviour:
           m_RotationOrder: 4
       forceZeroToOne: 1
   homingOverLifetime:
-    enabled: 0
+    enabled: 1
     wrapMode:
       valueTree:
       - settings:
@@ -36663,7 +36663,7 @@ MonoBehaviour:
           parameterType: 0
           relativeTo: 0
           parameterName: 
-        defaultValue: 1
+        defaultValue: 0.2
       useSlider: 0
       sliderMin: 0
       sliderMax: 0
@@ -36786,22 +36786,22 @@ MonoBehaviour:
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 1
             value: 1
             inSlope: 0
             outSlope: 0
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0.00000021606684
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
@@ -39370,5 +39370,5 @@ MonoBehaviour:
       requiredComponentName: 
   preview:
     collidersTex: {fileID: 0}
-    sprite: {fileID: 21300000, guid: b4cbd21f66a7b1249a56bebeab57e2e0, type: 3}
+    sprite: {fileID: 21300000, guid: 090acba3c4a4c5e41a2915f114912874, type: 3}
     gizmoColor: {r: 0, g: 0, b: 0.5, a: 1}

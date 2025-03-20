@@ -5,32 +5,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 {
     [SerializeField] int _hp = 100;
     [SerializeField] GameObject _laserSight;
+    [SerializeField] AudioClip _soundClip;
     private BulletEmitter _bulletEmitter;
     private string _tagSelf;
     private float _currentWaitingTime = 0f;
     private bool _canAttack = true;
 
+    public bool IsAttacking { get; private set; } = false;
+
     private void Awake()
     {
         _tagSelf = gameObject.tag;
         _bulletEmitter = GetComponent<BulletEmitter>();
+        Instantiate(_laserSight, transform);
     }
 
     private void Update()
     {
-        if(!_canAttack)
-        {
-            _currentWaitingTime += Time.deltaTime;
-            if (_currentWaitingTime > 0.3f)
-            {
-                _canAttack = true;
-                _currentWaitingTime = 0f;
-            }
-        }
+        //if(!_canAttack)
+        //{
+        //    _currentWaitingTime += Time.deltaTime;
+        //    if (_currentWaitingTime > 0.3f)
+        //    {
+        //        _canAttack = true;
+        //        _currentWaitingTime = 0f;
+        //    }
+        //}
     }
 
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
@@ -48,22 +52,31 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public bool Attack()
     {
-        if (_bulletEmitter.isPlaying == false)
-        {
-            _bulletEmitter.Play();
-            //TODO temp for laserSight
-            Instantiate(_laserSight, transform);
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return true;
     }
 
     public void StopAttack()
     {
         _bulletEmitter?.Stop(PlayOptions.RootOnly);
         Debug.Log("Stop Attack");
+    }
+
+    IEnumerator AttackRoutine()
+    {
+        IsAttacking = true;
+        AudioSource.PlayClipAtPoint(_soundClip, transform.position);
+
+        yield return new WaitForSeconds(_soundClip.length);
+
+        _bulletEmitter.Play();
+        IsAttacking = false;
+    }
+
+    public void StartAttack()
+    {
+        if(!IsAttacking)
+        {
+            StartCoroutine(AttackRoutine());
+        }
     }
 }
