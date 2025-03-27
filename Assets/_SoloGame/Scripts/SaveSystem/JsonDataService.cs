@@ -6,24 +6,6 @@ using System.Text;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-[System.Serializable]
-public class GameData
-{
-    public PlayerData PlayerData;
-    public EnemyData EnemyData;
-}
-
-[System.Serializable]
-public class PlayerData
-{
-    public int hp;
-}
-
-[System.Serializable]
-public class EnemyData
-{
-    public int hp;
-}
 public class JsonDataService : IDataService
 {
     private const string KEY = "tCuxCQXcs21087l0ea6U1+PBt0Y9THhqXU/jK8itkio=";

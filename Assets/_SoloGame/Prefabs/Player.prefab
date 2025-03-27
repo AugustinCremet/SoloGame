@@ -356,6 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _normalProfile: {fileID: 11400000, guid: e6bca111e311baf469c5eb2037228f3a, type: 2}
   _bouncingProfile: {fileID: 11400000, guid: 930eea4b6c4c50842a84bd712e6307f0, type: 2}
 --- !u!114 &742176796982642723
 MonoBehaviour:

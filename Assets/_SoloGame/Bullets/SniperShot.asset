@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: Shot
   m_EditorClassIdentifier: 
   parameterType: 1
-  uniqueIndex: 9294037
+  uniqueIndex: 8125020
   profile: {fileID: 11400000}
   parent: {fileID: 114184213563873034}
   children:
@@ -2462,7 +2462,7 @@ MonoBehaviour:
   m_Name: Pattern
   m_EditorClassIdentifier: 
   parameterType: 2
-  uniqueIndex: 15805241
+  uniqueIndex: 399169
   profile: {fileID: 11400000}
   parent: {fileID: 114334976902514986}
   children:
@@ -22019,7 +22019,7 @@ MonoBehaviour:
   m_Name: Root Emitter
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 2545420
+  uniqueIndex: 8771706
   profile: {fileID: 11400000}
   parent: {fileID: 0}
   children:
@@ -29135,7 +29135,7 @@ MonoBehaviour:
   m_Name: Bullet
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 7957448
+  uniqueIndex: 12025009
   profile: {fileID: 11400000}
   parent: {fileID: 114043142638459942}
   children: []
@@ -32517,7 +32517,7 @@ MonoBehaviour:
   foldoutVFX: 1
   hideSpriteList: 0
   vfxOpened: 0
-  currentlyDisplayedModule: 4
+  currentlyDisplayedModule: 2
   canMove: 1
   canCollide: 1
   isVisible: 1
@@ -32632,7 +32632,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 50
+      defaultValue: 125
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -32858,7 +32858,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 0.12
+      defaultValue: 0.3
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -33339,7 +33339,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 200
+      defaultValue: 0
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -33683,7 +33683,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 5
+      defaultValue: 0
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -34879,7 +34879,7 @@ MonoBehaviour:
           m_RotationOrder: 4
       forceZeroToOne: 1
   scaleOverLifetime:
-    enabled: 1
+    enabled: 0
     wrapMode:
       valueTree:
       - settings:
@@ -36325,7 +36325,7 @@ MonoBehaviour:
           m_RotationOrder: 4
       forceZeroToOne: 1
   homingOverLifetime:
-    enabled: 1
+    enabled: 0
     wrapMode:
       valueTree:
       - settings:

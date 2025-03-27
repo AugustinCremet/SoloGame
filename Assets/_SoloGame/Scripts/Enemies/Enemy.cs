@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
         _tagSelf = gameObject.tag;
         _bulletEmitter = GetComponent<BulletEmitter>();
         Instantiate(_laserSight, transform);
+        StartAttack();
     }
 
     private void Update()
@@ -64,10 +65,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     IEnumerator AttackRoutine()
     {
         IsAttacking = true;
-        AudioSource.PlayClipAtPoint(_soundClip, transform.position);
+        //AudioSource.PlayClipAtPoint(_soundClip, transform.position);
 
-        yield return new WaitForSeconds(_soundClip.length);
-
+        //yield return new WaitForSeconds(_soundClip.length);
+        yield return null;
         _bulletEmitter.Play();
         IsAttacking = false;
     }

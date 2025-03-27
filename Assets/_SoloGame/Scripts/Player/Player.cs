@@ -44,25 +44,29 @@ public class Player : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         PlayerController.ChangeColor += OnChangeColor;
+        GameManager.OnSave += SavePlayerData;
+        GameManager.OnLoad += LoadPlayerData;
     }
 
     private void OnDisable()
     {
         PlayerController.ChangeColor -= OnChangeColor;
+        GameManager.OnSave -= SavePlayerData;
+        GameManager.OnLoad -= LoadPlayerData;
     }
 
     private void Update()
     {
         // TODO for testing
-        if(Input.GetKeyDown(KeyCode.F1))
-        {
-            _dataService.SaveData("/player-stats.json", ToPlayerData(), true);
-        }
-        else if (Input.GetKeyDown(KeyCode.F2))
-        {        
-            FromPlayerData(_dataService.LoadData<PlayerData>("/player-stats.json", true));
-            Debug.Log(_currentHealth);
-        }
+        //if (Input.GetKeyDown(KeyCode.F1))
+        //{
+        //    _dataService.SaveData("/player-stats.json", ToPlayerData(), true);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.F2))
+        //{
+        //    FromPlayerData(_dataService.LoadData<PlayerData>("/player-stats.json", true));
+        //    Debug.Log(_currentHealth);
+        //}
     }
 
     public void GrantAbility(PlayerAbilities ability)
@@ -100,6 +104,8 @@ public class Player : MonoBehaviour, IDamageable
         {
             int damageAmount = bullet.moduleParameters.GetInt("Damage");
             Damage(damageAmount);
+
+            //TODO Need to create a IFrame
             bullet.Die();
         }
     }
@@ -123,16 +129,21 @@ public class Player : MonoBehaviour, IDamageable
         GetComponent<SpriteRenderer>().color = _currentColor;
     }
 
-    public PlayerData ToPlayerData()
+    public SaveData SavePlayerData()
     {
-        return new PlayerData
+        SaveData data = new SaveData
         {
-            hp = _currentHealth,
+            PlayerData = new PlayerData
+            {
+                hp = _currentHealth,
+            }
         };
+        return data;
     }
 
-    public void FromPlayerData(PlayerData playerData)
+    public void LoadPlayerData(SaveData saveData)
     {
-        _currentHealth = playerData.hp;
+        _currentHealth = saveData.PlayerData.hp;
+        UIManager.Instance.ChangeCurrentHealth(_currentHealth);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,11 @@ public class GameManager : MonoBehaviour
     SceneDetails _currentScene;
     public SceneDetails PreviousScene { get; private set; }
     [SerializeField] GameObject _essentialPrefab;
+
+    private string _savePath = "/Game1.json";
+    private IDataService _dataService = new JsonDataService();
+    public static event Func<SaveData> OnSave;
+    public static event Action<SaveData> OnLoad;
 
     private void Awake()
     {
@@ -29,10 +35,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Update()
     {
-        //if(SceneManager.GetActiveScene().name != "WorldMap")
-        //    SceneManager.LoadSceneAsync("WorldMap");
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            SaveGame();
+        }
+        else if (Input.GetKeyDown(KeyCode.F2))
+        {
+            LoadGame();
+        }
+    }
+
+    public void SaveGame()
+    {
+        SaveData fullSaveData = new SaveData();
+
+        if(OnSave != null)
+        {
+            foreach(Func<SaveData> saveFunction in OnSave.GetInvocationList())
+            {
+                SaveData partialData = saveFunction.Invoke();
+                SaveDataMerger.Merge(fullSaveData, partialData);
+            }
+        }
+
+        _dataService.SaveData(_savePath, fullSaveData, false);
+    }
+
+    public void LoadGame()
+    {
+        OnLoad?.Invoke(_dataService.LoadData<SaveData>(_savePath, false));
     }
 
     public void SetCurrentScene(SceneDetails scene)

@@ -48,12 +48,13 @@ public class PlayerController : MonoBehaviour
         }
         if(_isShooting && Time.realtimeSinceStartup - _lastShotTime > 1)
         {
+            Debug.Log("Player shot");
             _bullet.Play();
             _lastShotTime = Time.realtimeSinceStartup;
         }
         else
         {
-            _bullet.Stop();
+            //_bullet.Stop();
         }
     }
 

@@ -42,9 +42,10 @@ public class EnemyAI : TreeOfNodes
 
         Node root = new Sequence(new List<Node>
         {
-            new TaskTeleport(false, 5f),
-            new TaskAttack(),
-            new TaskWait(3f),
+            //new TaskTeleport(false, 5f),
+            //new TaskAttack(),
+            new TaskMoveBetween(0.15f, 0.25f, 5f),
+            new TaskWait(5f),
             new TaskStopAttack(),
         });
 

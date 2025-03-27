@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 100
   _laserSight: {fileID: 4610367313683202467, guid: f088bca84eefb0f4da8fe2e8db4fd061, type: 3}
+  _soundClip: {fileID: 8300000, guid: f8c664540ab6f4e839dc1f638d51f391, type: 3}
 --- !u!114 &207963093360244971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a676b285f069c3c4884c27e78d0fc696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emitterProfile: {fileID: 11400000, guid: df02b2f84f50c5249a491b503a5be816, type: 2}
+  emitterProfile: {fileID: 11400000, guid: d1dd30dd669040645913a6e5380e6d21, type: 2}
   patternOrigin: {fileID: 0}
   playAtStart: 0
   useDefaultGizmoColor: 1
