@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_SoloGame/Scenes/WorldMapGym/FirstDungeon/FirstDungeonFirstRoom.unity
     guid: d1b8cac3abb5d964a8bc1a30cb9952ac
+  - enabled: 1
+    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProtoBattleArea.unity
+    guid: b4e6c35a9cee1c2458ffe743ee64c589
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b6d2a7b8e7864ba46b93f13e5729fed3, type: 2}

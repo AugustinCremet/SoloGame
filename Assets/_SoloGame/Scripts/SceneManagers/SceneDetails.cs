@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class SceneDetails : MonoBehaviour
@@ -13,6 +14,7 @@ public class SceneDetails : MonoBehaviour
         {
             LoadScene();
             GameManager.Instance.SetCurrentScene(this);
+            UpdateNavAgents(SceneManager.GetSceneByName(gameObject.name));
 
             foreach (SceneDetails scene in connectedScenes)
             {
@@ -48,6 +50,32 @@ public class SceneDetails : MonoBehaviour
         {
             SceneManager.UnloadSceneAsync(gameObject.name);
             IsLoaded = false;
+        }
+    }
+
+    public void UpdateNavAgents(Scene currentPlayerScene)
+    {
+        int sceneCount = SceneManager.sceneCount;
+
+        for (int i = 0; i < sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+
+            if (!scene.isLoaded)
+                continue;
+
+            bool isCurrentScene = scene == currentPlayerScene;
+
+            // Loop through root GameObjects in this scene
+            foreach (GameObject rootObj in scene.GetRootGameObjects())
+            {
+                NavMeshAgent[] agents = rootObj.GetComponentsInChildren<NavMeshAgent>(true);
+
+                foreach (NavMeshAgent agent in agents)
+                {
+                    agent.enabled = isCurrentScene;
+                }
+            }
         }
     }
 }

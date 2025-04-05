@@ -45,7 +45,8 @@ public class EnemyAI : TreeOfNodes
             //new TaskTeleport(false, 5f),
             //new TaskAttack(),
             new TaskMoveBetween(0.15f, 0.25f, 5f),
-            new TaskWait(5f),
+            //new TaskGoToTarget(),
+            new TaskWait(1f),
             new TaskStopAttack(),
         });
 
