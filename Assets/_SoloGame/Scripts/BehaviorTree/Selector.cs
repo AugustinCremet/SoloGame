@@ -10,7 +10,7 @@ namespace BehaviorTree
         {
             foreach (Node node in _children)
             {
-                switch (node.Evaluate())
+                switch (node.PreEvaluate())
                 {
                     case NodeState.FAILURE:
                         continue;

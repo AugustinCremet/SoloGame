@@ -55,6 +55,14 @@ namespace BehaviorTree
             _children.Add(node);
         }
 
+        public NodeState PreEvaluate()
+        {
+            if (!_context.Enemy.IsAIActive)
+                return NodeState.FAILURE;
+
+            return Evaluate();
+        }
+
         public virtual NodeState Evaluate() => NodeState.FAILURE;
 
         public void SetData(string key, object value)

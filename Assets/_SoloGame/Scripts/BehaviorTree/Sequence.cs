@@ -37,7 +37,7 @@ namespace BehaviorTree
             // Start from where it left off
             for (int i = _currentChildIndex; i < _children.Count; i++)
             {
-                NodeState childState = _children[i].Evaluate();
+                NodeState childState = _children[i].PreEvaluate();
 
                 switch (childState)
                 {

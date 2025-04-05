@@ -47,7 +47,8 @@ public class WaveSpawner : MonoBehaviour
             foreach(var enemy in wave.enemies)
             {
                 Debug.Log("Spawn enemy");
-                Instantiate(enemy.prefab, enemy.position);
+                var instance = Instantiate(enemy.prefab, enemy.position);
+                instance.GetComponent<Enemy>().SetAI(true);
             }
         }
     }

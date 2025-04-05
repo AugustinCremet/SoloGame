@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    SceneDetails _currentScene;
+    private SceneDetails _currentScene;
     public SceneDetails PreviousScene { get; private set; }
     [SerializeField] GameObject _essentialPrefab;
 

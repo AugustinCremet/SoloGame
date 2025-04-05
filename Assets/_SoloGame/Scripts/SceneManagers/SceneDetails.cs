@@ -14,7 +14,6 @@ public class SceneDetails : MonoBehaviour
         {
             LoadScene();
             GameManager.Instance.SetCurrentScene(this);
-            UpdateNavAgents(SceneManager.GetSceneByName(gameObject.name));
 
             foreach (SceneDetails scene in connectedScenes)
             {
@@ -32,6 +31,7 @@ public class SceneDetails : MonoBehaviour
                     }
                 }
             }
+            UpdateAI(SceneManager.GetSceneByName(gameObject.name));
         }
     }
 
@@ -39,7 +39,7 @@ public class SceneDetails : MonoBehaviour
     {
         if (!IsLoaded)
         {
-            SceneManager.LoadSceneAsync(gameObject.name, LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync(gameObject.name, LoadSceneMode.Additive);        
             IsLoaded = true;
         }
     }
@@ -53,8 +53,9 @@ public class SceneDetails : MonoBehaviour
         }
     }
 
-    public void UpdateNavAgents(Scene currentPlayerScene)
+    public void UpdateAI(Scene currentPlayerScene)
     {
+        Debug.Log("Update AI");
         int sceneCount = SceneManager.sceneCount;
 
         for (int i = 0; i < sceneCount; i++)
@@ -69,13 +70,18 @@ public class SceneDetails : MonoBehaviour
             // Loop through root GameObjects in this scene
             foreach (GameObject rootObj in scene.GetRootGameObjects())
             {
-                NavMeshAgent[] agents = rootObj.GetComponentsInChildren<NavMeshAgent>(true);
+                Enemy[] agents = rootObj.GetComponentsInChildren<Enemy>(true);
 
-                foreach (NavMeshAgent agent in agents)
+                foreach (Enemy enemy in agents)
                 {
-                    agent.enabled = isCurrentScene;
+                    enemy.SetAI(isCurrentScene);
                 }
             }
         }
+    }
+
+    private void Start()
+    {
+        Debug.Log("Scene start");
     }
 }

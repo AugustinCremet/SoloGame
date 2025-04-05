@@ -16,13 +16,21 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     private bool _canAttack = true;
 
     public bool IsAttacking { get; private set; } = false;
+    public bool IsAIActive { get; private set; } = false;
 
     private void Awake()
     {
+        Debug.Log("Enemy awale");
         _tagSelf = gameObject.tag;
         _bulletEmitter = GetComponent<BulletEmitter>();
         Instantiate(_laserSight, transform);
         StartAttack();
+    }
+
+    public void SetAI(bool isActive)
+    {
+        Debug.Log(gameObject.name + "has been set to " +  isActive);
+        IsAIActive = isActive;
     }
 
     private void Update()
