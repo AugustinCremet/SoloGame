@@ -56,9 +56,9 @@ public class FallInHole : MonoBehaviour
         }
 
         _currentPullStrength = Mathf.Min(_currentPullStrength + _pullIncreaseRate * Time.fixedDeltaTime, _maxPullStrength);
-        Vector2 newVelocity = _playerRb.velocity + (Vector2)(pullDirection * _currentPullStrength);
+        Vector2 newVelocity = _playerRb.linearVelocity + (Vector2)(pullDirection * _currentPullStrength);
         ApplyEscapeResistance(ref newVelocity, pullDirection);
-        _playerRb.velocity = newVelocity;
+        _playerRb.linearVelocity = newVelocity;
     }
 
     // Find the nearest hole tile around the player

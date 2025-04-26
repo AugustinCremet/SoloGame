@@ -1,5 +1,4 @@
 using BulletPro;
-using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb.velocity = _horizontalMovement * _moveSpeed;
+        _rb.linearVelocity = _horizontalMovement * _moveSpeed;
 
         if(isDashing)
         {
@@ -110,7 +109,7 @@ public class PlayerController : MonoBehaviour
         {
             _dashCurrentCooldown = 0;
             _dashCurrentDuration = 0;
-            _rb.velocity = Vector2.zero;
+            _rb.linearVelocity = Vector2.zero;
         }
     }
 

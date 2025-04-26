@@ -13,7 +13,7 @@ public class SceneDetails : MonoBehaviour
         if(collision.tag == "Player")
         {
             var test = gameObject.GetComponentInChildren<PolygonCollider2D>();
-            FindObjectOfType<CameraConfinerSwitcher>().ChangeBoundary(test);
+            FindFirstObjectByType<CameraConfinerSwitcher>().ChangeBoundary(test);
             LoadScene();
             GameManager.Instance.SetCurrentScene(this);
 

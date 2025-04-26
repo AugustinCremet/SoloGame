@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class CameraConfinerSwitcher : MonoBehaviour
@@ -14,7 +14,7 @@ public class CameraConfinerSwitcher : MonoBehaviour
 
     public void ChangeBoundary(Collider2D newBoundary)
     {
-        _confiner.m_BoundingShape2D = newBoundary;
-        _confiner.InvalidateCache();
+        _confiner.BoundingShape2D = newBoundary;
+        _confiner.InvalidateBoundingShapeCache();
     }
 }
