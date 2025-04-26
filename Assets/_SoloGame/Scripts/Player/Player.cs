@@ -55,20 +55,6 @@ public class Player : MonoBehaviour, IDamageable
         GameManager.OnLoad -= LoadPlayerData;
     }
 
-    private void Update()
-    {
-        // TODO for testing
-        //if (Input.GetKeyDown(KeyCode.F1))
-        //{
-        //    _dataService.SaveData("/player-stats.json", ToPlayerData(), true);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.F2))
-        //{
-        //    FromPlayerData(_dataService.LoadData<PlayerData>("/player-stats.json", true));
-        //    Debug.Log(_currentHealth);
-        //}
-    }
-
     public void GrantAbility(PlayerAbilities ability)
     {
         Abilities |= ability;

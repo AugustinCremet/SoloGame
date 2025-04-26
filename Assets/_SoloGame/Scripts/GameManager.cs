@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public static event Func<SaveData> OnSave;
     public static event Action<SaveData> OnLoad;
 
+    private List<string> _tempClearedWaveIDs = new List<string>();
+
     private void Awake()
     {
         if (FindAnyObjectByType<EssentialObjects>() == null)
@@ -45,6 +47,19 @@ public class GameManager : MonoBehaviour
         {
             LoadGame();
         }
+    }
+
+    public void MarkWaveCleared(string uniqueID)
+    {
+        if(!_tempClearedWaveIDs.Contains(uniqueID))
+        {
+            _tempClearedWaveIDs.Add(uniqueID);
+        }
+    }
+
+    public bool IsWaveCleared(string uniqueID)
+    {
+        return _tempClearedWaveIDs.Contains(uniqueID);
     }
 
     public void SaveGame()

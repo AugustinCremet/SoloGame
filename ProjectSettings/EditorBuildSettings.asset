@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProtoSafeZone.unity
     guid: 983ff7bb0c6f26748a2fce3d4e688521
   - enabled: 1
+    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProto4.unity
+    guid: f1017f3de3614f049b74fea2b5ee5ebe
+  - enabled: 1
     path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProtoBattleArea.unity
     guid: b4e6c35a9cee1c2458ffe743ee64c589
   m_configObjects:

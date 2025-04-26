@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BehaviorTreeContext : MonoBehaviour
+public class BehaviorTreeContext
 {
     public Enemy Enemy;
     public Transform EnemyTransform;

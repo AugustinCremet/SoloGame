@@ -1,5 +1,6 @@
 using BehaviorTree;
 using BulletPro;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,9 +19,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     public bool IsAttacking { get; private set; } = false;
     public bool IsAIActive { get; private set; } = false;
 
+    public static event Action<Enemy> OnEnemyDeath;
+
     private void Awake()
     {
-        Debug.Log("Enemy awale");
         _tagSelf = gameObject.tag;
         _bulletEmitter = GetComponent<BulletEmitter>();
         Instantiate(_laserSight, transform);
@@ -29,7 +31,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
     public void SetAI(bool isActive)
     {
-        Debug.Log(gameObject.name + "has been set to " +  isActive);
         IsAIActive = isActive;
     }
 
@@ -53,10 +54,17 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     public void Damage(int dmgAmount)
     {
         _hp -= dmgAmount;
-        Debug.Log($"{dmgAmount} on {_hp} left");
 
         if(_hp <= 0)
+        {
+
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        OnEnemyDeath?.Invoke(this);
     }
 
     public bool Attack()
@@ -67,7 +75,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     public void StopAttack()
     {
         _bulletEmitter?.Stop(PlayOptions.RootOnly);
-        Debug.Log("Stop Attack");
     }
 
     IEnumerator AttackRoutine()

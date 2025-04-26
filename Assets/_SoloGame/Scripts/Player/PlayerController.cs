@@ -46,9 +46,8 @@ public class PlayerController : MonoBehaviour
         {
             StartDashTimers();
         }
-        if(_isShooting && Time.realtimeSinceStartup - _lastShotTime > 1)
+        if(_isShooting/* && Time.realtimeSinceStartup - _lastShotTime > 1*/)
         {
-            Debug.Log("Player shot");
             _bullet.Play();
             _lastShotTime = Time.realtimeSinceStartup;
         }

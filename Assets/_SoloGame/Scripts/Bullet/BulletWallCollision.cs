@@ -27,10 +27,13 @@ public class BulletWallCollision : BaseBulletBehaviour {
 	{
 		base.Update();
 
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.1f, transform.forward);
-        if(!hit) return;
+		RaycastHit hit;
+		
+		Debug.DrawLine(transform.position - new Vector3(-0.5f, 0, 0), transform.position - new Vector3(0.5f, 0, 0), Color.black);
+        if(!Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit)) return;
         if(1 << hit.collider.gameObject.layer == LayerMask.GetMask("Wall"))
         {
+			Debug.Log("Special script fired");
             bullet.Die();
         }
 	}
@@ -82,4 +85,9 @@ public class BulletWallCollision : BaseBulletBehaviour {
 
 		// Your code here
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+		Debug.Log("HIT");
+    }
 }

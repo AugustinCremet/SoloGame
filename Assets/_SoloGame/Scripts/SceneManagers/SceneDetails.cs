@@ -12,6 +12,8 @@ public class SceneDetails : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            var test = gameObject.GetComponentInChildren<PolygonCollider2D>();
+            FindObjectOfType<CameraConfinerSwitcher>().ChangeBoundary(test);
             LoadScene();
             GameManager.Instance.SetCurrentScene(this);
 
@@ -55,7 +57,6 @@ public class SceneDetails : MonoBehaviour
 
     public void UpdateAI(Scene currentPlayerScene)
     {
-        Debug.Log("Update AI");
         int sceneCount = SceneManager.sceneCount;
 
         for (int i = 0; i < sceneCount; i++)
@@ -78,10 +79,5 @@ public class SceneDetails : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void Start()
-    {
-        Debug.Log("Scene start");
     }
 }
