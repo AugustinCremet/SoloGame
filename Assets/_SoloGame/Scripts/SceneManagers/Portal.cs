@@ -21,7 +21,7 @@ public class Portal : MonoBehaviour
         yield return SceneManager.LoadSceneAsync(_sceneToLoad);
 
         var desinationPortal = FindObjectsOfType<Portal>().First(x => x != this && x._destinationPortal == _destinationPortal);
-        var player = FindObjectOfType<Player>();
+        var player = FindFirstObjectByType<Player>();
         player.SetPosition(desinationPortal.transform.GetChild(0).transform);
         Destroy(gameObject);
     }

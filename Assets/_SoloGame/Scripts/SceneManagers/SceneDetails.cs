@@ -8,12 +8,14 @@ public class SceneDetails : MonoBehaviour
 {
     [SerializeField] List<SceneDetails> connectedScenes = new List<SceneDetails>();
     public bool IsLoaded {  get; private set; }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            var test = gameObject.GetComponentInChildren<PolygonCollider2D>();
-            FindFirstObjectByType<CameraConfinerSwitcher>().ChangeBoundary(test);
+            var newBoundary = gameObject.GetComponentInChildren<PolygonCollider2D>();
+            FindFirstObjectByType<CameraConfinerSwitcher>().ChangeBoundary(newBoundary);
+
             LoadScene();
             GameManager.Instance.SetCurrentScene(this);
 

@@ -13,8 +13,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     [SerializeField] AudioClip _soundClip;
     private BulletEmitter _bulletEmitter;
     private string _tagSelf;
-    private float _currentWaitingTime = 0f;
-    private bool _canAttack = true;
 
     public bool IsAttacking { get; private set; } = false;
     public bool IsAIActive { get; private set; } = false;

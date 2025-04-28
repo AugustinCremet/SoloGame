@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     private SceneDetails _currentScene;
     public SceneDetails PreviousScene { get; private set; }
+    private PolygonCollider2D _currentBoundary;
+    public PolygonCollider2D PreviousBoundary { get; private set; }
     [SerializeField] GameObject _essentialPrefab;
 
     private string _savePath = "/Game1.json";
@@ -87,6 +89,11 @@ public class GameManager : MonoBehaviour
     {
         PreviousScene = _currentScene;
         _currentScene = scene;
+    }
+
+    public void SetSaveSlot(int slot)
+    {
+        _savePath = $"/Game{slot}.json";
     }
 
     public SceneDetails GetPreviousScene()
