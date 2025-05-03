@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -9,10 +10,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     private SceneDetails _currentScene;
+    private string _currentSceneParentName;
     public SceneDetails PreviousScene { get; private set; }
-    private PolygonCollider2D _currentBoundary;
-    public PolygonCollider2D PreviousBoundary { get; private set; }
     [SerializeField] GameObject _essentialPrefab;
+    private GameObject _essential;
 
     private string _savePath = "/Game1.json";
     private IDataService _dataService = new JsonDataService();
@@ -23,19 +24,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (FindAnyObjectByType<EssentialObjects>() == null)
-        {
-            var essential = Instantiate(_essentialPrefab);
-            transform.SetParent(essential.transform);
-        }
 
         if (Instance != null && Instance != this)
         {
+            Destroy(gameObject);
             Destroy(this);
         }
         else
         {
             Instance = this;
+        }
+
+        if (FindAnyObjectByType<EssentialObjects>() == null)
+        {
+            _essential = Instantiate(_essentialPrefab);
+            DontDestroyOnLoad(this);
+            //transform.SetParent(essential.transform);
         }
     }
 
@@ -66,11 +70,18 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        SaveData fullSaveData = new SaveData();
-
-        if(OnSave != null)
+        SaveData fullSaveData = new SaveData
         {
-            foreach(Func<SaveData> saveFunction in OnSave.GetInvocationList())
+            LocationData = new LocationData
+            {
+                WorldName = _currentSceneParentName,
+                AreaName = _currentScene.gameObject.name
+            }
+        };
+
+        if (OnSave != null)
+        {
+            foreach (Func<SaveData> saveFunction in OnSave.GetInvocationList())
             {
                 SaveData partialData = saveFunction.Invoke();
                 SaveDataMerger.Merge(fullSaveData, partialData);
@@ -82,13 +93,28 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame()
     {
+        StartCoroutine(LoadSceneAsync());
         OnLoad?.Invoke(_dataService.LoadData<SaveData>(_savePath, false));
+    }
+
+    private IEnumerator LoadSceneAsync()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_dataService.LoadData<SaveData>(_savePath, false).LocationData.WorldName, LoadSceneMode.Single);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        GameObject areaGameObject = GameObject.Find(_dataService.LoadData<SaveData>(_savePath, false).LocationData.AreaName);
+        areaGameObject.GetComponent<SceneDetails>().FirstLoad(_essential);
     }
 
     public void SetCurrentScene(SceneDetails scene)
     {
         PreviousScene = _currentScene;
         _currentScene = scene;
+        _currentSceneParentName = SceneManager.GetActiveScene().name;
     }
 
     public void SetSaveSlot(int slot)

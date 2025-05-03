@@ -98,7 +98,6 @@ public class Player : MonoBehaviour, IDamageable
 
     public void SetPosition(Transform newTransform)
     {
-        Debug.Log("SetPosition");
         gameObject.transform.position = newTransform.position;
     }
 

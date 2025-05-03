@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     private bool _isShooting;
     private float _lastShotTime = 0f;
 
+    public static event Action OnInteract;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -39,7 +41,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _cursor.transform.position = _cam.ScreenToWorldPoint(Input.mousePosition);
+        if (_cam != null)
+        {
+            _cursor.transform.position = _cam.ScreenToWorldPoint(Input.mousePosition);
+        }
 
         if(isDashing || _dashCurrentCooldown != 0f)
         {
@@ -97,6 +102,14 @@ public class PlayerController : MonoBehaviour
         {
             isDashing = true;
             _dashDirection = _horizontalMovement;
+        }
+    }
+
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            OnInteract?.Invoke();
         }
     }
 
