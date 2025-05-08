@@ -3,17 +3,23 @@ using UnityEngine;
 public class SkillStateMachine : BaseStateMachine
 {
     public IdleSkillState IdleState;
-    public UndergroundState UndergroundState;
+    public GooState UndergroundState;
 
-    private void Awake()
+    public SkillStateMachine(PlayerController playerController, Animator animator) : base(playerController, animator)
     {
+        IdleState = new IdleSkillState(playerController, animator);
+        UndergroundState = new GooState(playerController, animator);
+    }
+
+    public override void Start()
+    {
+        base.Start();
         SkillStateMachine = this;
-        IdleState = new IdleSkillState();
-        UndergroundState = new UndergroundState();
     }
 
     protected override BaseState GetInitialState()
     {
+        Debug.Log("Set initial state");
         return IdleState;
     }
 

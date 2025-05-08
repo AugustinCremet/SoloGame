@@ -40,7 +40,7 @@ public class FallInHole : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_player == null || _playerRb == null || !_isPlayerNear || _playerController.IsDashing) return;
+        if (_player == null || _playerRb == null || !_isPlayerNear || _playerController.IsGoo) return;
 
         Vector3Int playerTilePos = _holeTilemap.WorldToCell(_player.position);
         Vector3Int nearestHoleTilePos = FindNearestHoleTile(playerTilePos);

@@ -1,33 +1,35 @@
 using UnityEngine;
 
-public class BaseStateMachine : MonoBehaviour
+public class BaseStateMachine
 {
     protected BaseState _currentState;
 
     [HideInInspector]
     public SkillStateMachine SkillStateMachine;
-    [HideInInspector]
-    public PlayerController PlayerController {  get; private set; }
 
-    private void Awake()
+    protected BaseStateMachine(PlayerController playerController, Animator animator)
     {
-        Debug.Log("Awake");
+
     }
-    private void Start()
+    public virtual void Start()
     {
-        PlayerController = GetComponent<PlayerController>();
         _currentState = GetInitialState();
-        _currentState.EnterState(this);
+        _currentState?.EnterState(this);
     }
 
-    private void Update()
+    public void Update()
     {
-        _currentState.UpdateState(this);
+        _currentState?.UpdateState(this);
+    }
+
+    public void FixedUpdate()
+    {
+        _currentState?.FixedUpdateState(this);
     }
 
     public virtual void SwitchState(BaseState state)
     {
-        _currentState.ExitState(this);
+        _currentState?.ExitState(this);
         _currentState = state;
         state.EnterState(this);
     }

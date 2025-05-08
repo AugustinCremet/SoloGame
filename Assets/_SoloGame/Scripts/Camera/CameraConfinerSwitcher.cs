@@ -19,6 +19,7 @@ public class CameraConfinerSwitcher : MonoBehaviour
 
     public void ChangeBoundary(PolygonCollider2D newBoundary, float cameraSize)
     {
+        Debug.Log("Change boundary");
         // Precaution
         _confiner.BoundingShape2D = null;
         _confiner.InvalidateBoundingShapeCache();

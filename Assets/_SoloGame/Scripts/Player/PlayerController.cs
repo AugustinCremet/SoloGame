@@ -1,21 +1,24 @@
 using BulletPro;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     public static Action ChangeColor;
+    [Header("Goo Settings")]
+    [SerializeField] GameObject _gooPrefab;
+    [SerializeField] float _gooCD;
+    float _gooCurrentCD = 0f;
+    [Space(10)]
+
     [SerializeField] float _moveSpeed = 5f;
     [SerializeField] float _dashSpeed = 20f;
     [SerializeField] float _dashDuration = 0.2f;
     float _dashCurrentDuration;
     [SerializeField] float _dashCooldown = 1f;
     float _dashCurrentCooldown;
-    public bool IsDashing { get; private set; }
+    public bool IsGoo { get; private set; }
     Vector2 _dashDirection;
 
     Camera _cam;
@@ -25,7 +28,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject _cursor;
     private BulletEmitter _bullet = null;
     private bool _isShooting;
-    private float _lastShotTime = 0f;
 
     public static event Action OnInteract;
 
@@ -46,14 +48,13 @@ public class PlayerController : MonoBehaviour
             _cursor.transform.position = _cam.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        if(IsDashing || _dashCurrentCooldown != 0f)
+        if(IsGoo || _dashCurrentCooldown != 0f)
         {
             StartDashTimers();
         }
         if(_isShooting/* && Time.realtimeSinceStartup - _lastShotTime > 1*/)
         {
             _bullet.Play();
-            _lastShotTime = Time.realtimeSinceStartup;
         }
         else
         {
@@ -64,27 +65,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         _rb.linearVelocity = _horizontalMovement * _moveSpeed;
-
-        if(IsDashing)
-        {
-            DashMovement();
-        }
     }
 
-    public void SwitchColor(InputAction.CallbackContext context)
-    {
-        if(context.performed)
-        {
-            ChangeColor?.Invoke();
-        }
-    }
-
-    public void Move(InputAction.CallbackContext context)
+    public void MoveInput(InputAction.CallbackContext context)
     {
         _horizontalMovement = context.ReadValue<Vector2>();
     }
 
-    public void Fire(InputAction.CallbackContext context)
+    public void FireInput(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -96,25 +84,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Dash(InputAction.CallbackContext context)
+    public void DashInput(InputAction.CallbackContext context)
     {
-        if (!IsDashing && context.performed && _dashCurrentCooldown == 0f)
+        if (context.performed && _dashCurrentCooldown == 0f)
         {
-            IsDashing = true;
-            _dashDirection = _horizontalMovement;
+            IsGoo = true;
         }
     }
 
-    public void GooShape(InputAction.CallbackContext context)
+    public void HandleGoo()
     {
-        if(context.performed)
+        //GetComponentInChildren<ParticleSystem>().Play();
+        if(_gooCurrentCD <= 0)
         {
-            IsDashing = true;
-            GetComponentInChildren<ParticleSystem>().Play();
+            GameObject instance = Instantiate(_gooPrefab, transform.position, Quaternion.identity);
+            _gooCurrentCD = _gooCD;
+            Destroy(instance, .8f);
+        }
+        else
+        {
+            _gooCurrentCD -= Time.deltaTime;
         }
     }
 
-    public void Interact(InputAction.CallbackContext context)
+    public void InteractInput(InputAction.CallbackContext context)
     {
         if(context.performed)
         {
@@ -143,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            IsDashing = false;
+            IsGoo = false;
         }
     }
 }

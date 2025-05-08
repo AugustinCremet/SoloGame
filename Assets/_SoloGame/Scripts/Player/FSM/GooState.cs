@@ -1,14 +1,17 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class IdleSkillState : BaseState
+public class GooState : BaseState
 {
-    public IdleSkillState(PlayerController playerController, Animator animator) : base(playerController, animator)
+    [SerializeField] float _timeBetweenSpawns;
+    [SerializeField] float _startTimeBetweenSpawns;
+
+    public GooState(PlayerController playerController, Animator animator) : base(playerController, animator)
     {
     }
 
     public override void EnterState(BaseStateMachine stateMachine)
     {
-        
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
@@ -18,10 +21,7 @@ public class IdleSkillState : BaseState
 
     public override void UpdateState(BaseStateMachine stateMachine)
     {
-        if(_playerController.IsGoo)
-        {
-            stateMachine.SwitchState(stateMachine.SkillStateMachine.UndergroundState);
-        }
+        _playerController.HandleGoo();
     }
 
     public override void FixedUpdateState(BaseStateMachine stateMachine)

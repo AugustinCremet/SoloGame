@@ -16,22 +16,29 @@ public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] int _maxHealth = 100;
     private int _currentHealth = 0;
-    private Color _currentColor = Color.blue;
-    private Color _redColor = new Color32(232, 20, 22, 255);
-    private Color _blueColor = new Color32(72, 125, 231, 255);
     private BulletEmitter _bulletEmitter;
+    private PlayerController _playerController;
+    private Animator _animator;
     [SerializeField] EmitterProfile _normalProfile;
     [SerializeField] EmitterProfile _bouncingProfile;
     public PlayerAbilities Abilities { get; private set; }
     private IDataService _dataService = new JsonDataService();
 
+    private SkillStateMachine _skillStateMachine;
+    private MovementStateMachine _movementStateMachine;
+
 
     private void Awake()
     {
+        _playerController = GetComponent<PlayerController>();
         _currentHealth = _maxHealth;
+
+        //State machines
+        _skillStateMachine = new SkillStateMachine(_playerController, _animator);
     }
     private void Start()
     {
+
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
         UIManager.Instance.ChangeMaxHealth(_maxHealth);
 
@@ -39,18 +46,31 @@ public class Player : MonoBehaviour, IDamageable
         _bulletEmitter = GetComponent<BulletEmitter>();
         _bulletEmitter.SwitchProfile(_normalProfile);
         //GrantAbility(PlayerAbilities.BouncingBullet);
+
+        //_movementStateMachine?.Start();
+        _skillStateMachine?.Start();
+    }
+
+    private void Update()
+    {
+        //_movementStateMachine?.Update();
+        _skillStateMachine?.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        //_movementStateMachine?.FixedUpdate();
+        _skillStateMachine?.FixedUpdate();
     }
 
     private void OnEnable()
     {
-        PlayerController.ChangeColor += OnChangeColor;
         GameManager.OnSave += SavePlayerData;
         GameManager.OnLoad += LoadPlayerData;
     }
 
     private void OnDisable()
     {
-        PlayerController.ChangeColor -= OnChangeColor;
         GameManager.OnSave -= SavePlayerData;
         GameManager.OnLoad -= LoadPlayerData;
     }
@@ -85,33 +105,16 @@ public class Player : MonoBehaviour, IDamageable
 
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
     {
-        //TODO Add color condition
-        if(bullet.GetComponent<SpriteRenderer>().color != _currentColor)
-        {
-            int damageAmount = bullet.moduleParameters.GetInt("Damage");
-            Damage(damageAmount);
+        int damageAmount = bullet.moduleParameters.GetInt("Damage");
+        Damage(damageAmount);
 
-            //TODO Need to create a IFrame
-            bullet.Die();
-        }
+        //TODO Need to create a IFrame
+        bullet.Die();
     }
 
     public void SetPosition(Transform newTransform)
     {
         gameObject.transform.position = newTransform.position;
-    }
-
-    private void OnChangeColor()
-    {
-        if(_currentColor == _redColor)
-        {
-            _currentColor = _blueColor;
-        }
-        else
-        {
-            _currentColor = _redColor;
-        }
-        GetComponent<SpriteRenderer>().color = _currentColor;
     }
 
     public SaveData SavePlayerData()
