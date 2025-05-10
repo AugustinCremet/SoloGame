@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -108,6 +109,12 @@ public class GameManager : MonoBehaviour
 
         GameObject areaGameObject = GameObject.Find(_dataService.LoadData<SaveData>(_savePath, false).LocationData.AreaName);
         areaGameObject.GetComponent<SceneDetails>().FirstLoad(_essential);
+    }
+
+    public void SwitchScene(string sceneName)
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().enabled = false;
+        GameObject.FindAnyObjectByType<SceneTransition>().StartTransition(sceneName);
     }
 
     public void SetCurrentScene(SceneDetails scene)

@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             GameObject instance = Instantiate(_gooPrefab, transform.position, Quaternion.identity);
             _gooCurrentCD = _gooCD;
-            Destroy(instance, .8f);
+            Destroy(instance, 3f);
         }
         else
         {

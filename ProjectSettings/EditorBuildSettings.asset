@@ -6,35 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMapGym/WorldMap.unity
-    guid: 54b3957dacd16364185324c738875c85
-  - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMapGym/FirstDungeon/FirstDungeon.unity
-    guid: b41862c9c9d0b3c46b5e64c68afa7b82
-  - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProto.unity
-    guid: 6c9068e94d8464940b6b2465ee9e4434
-  - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProto2.unity
-    guid: 6ccfe8e49b5fa084fbad356c785bab6a
-  - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProto3.unity
-    guid: 216af1e711e95664088c0c7efd59d982
-  - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMapGym/FirstDungeon/FirstDungeonFirstRoom.unity
-    guid: d1b8cac3abb5d964a8bc1a30cb9952ac
-  - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProtoSafeZone.unity
-    guid: 983ff7bb0c6f26748a2fce3d4e688521
-  - enabled: 1
-    path: Assets/_SoloGame/Scenes/Gym/Area1.unity
-    guid: 3dbea3d4a98f9ef429093b4548ce849a
-  - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProto4.unity
-    guid: f1017f3de3614f049b74fea2b5ee5ebe
+    path: Assets/_SoloGame/Scenes/MainMenu.unity
+    guid: bd2b335f6edfe464aadf6cd025099cc0
   - enabled: 1
     path: Assets/_SoloGame/Scenes/Gym/MainArea.unity
     guid: ed75e986c2e1cdd428c6cbaf972c3f8b
+  - enabled: 1
+    path: Assets/_SoloGame/Scenes/Gym/Area1.unity
+    guid: 3dbea3d4a98f9ef429093b4548ce849a
   - enabled: 1
     path: Assets/_SoloGame/Scenes/Gym/Area2.unity
     guid: 268c2a7718e74824eabfa91545e4d890
@@ -42,8 +21,8 @@ EditorBuildSettings:
     path: Assets/_SoloGame/Scenes/Gym/Area3.unity
     guid: ad8adc2d770a6cb4cbc196d81dff28c8
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/WorldMapGym/MainMapProtoBattleArea.unity
-    guid: b4e6c35a9cee1c2458ffe743ee64c589
+    path: Assets/_SoloGame/Scenes/HamiltonianPuzzles/TestPuzzle.unity
+    guid: b2accb3e9413bb0408b2266577493835
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b6d2a7b8e7864ba46b93f13e5729fed3, type: 2}
   m_UseUCBPForAssetBundles: 0
