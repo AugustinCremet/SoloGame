@@ -3,55 +3,79 @@ using UnityEngine.Tilemaps;
 
 public class HamiltonianPuzzle : MonoBehaviour
 {
-    [SerializeField] Tilemap _tilemap;
+    [SerializeField] Tilemap _puzzleTilemap;
+    [SerializeField] Tilemap _startTilemap;
+    [SerializeField] Tilemap _endTilemap;
     private GameObject _player;
     [SerializeField] Color _highlightColor;
+    [SerializeField] TileBase _filledTile;
+    [SerializeField] TileBase _emptyTile;
+    [SerializeField] AnimatedTile _failTile;
 
     private Vector3Int lastCell;
-
+    private int _tileAmount;
 
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("PlayerGoo");
+        BoundsInt bounds = _puzzleTilemap.cellBounds;
+
+        foreach (Vector3Int pos in bounds.allPositionsWithin)
+        {
+            if (_puzzleTilemap.HasTile(pos))
+            {
+                _puzzleTilemap.SetTileFlags(pos, TileFlags.None);
+                _tileAmount++;
+            }
+        }
     }
     void Update()
     {
         int playerX = Mathf.FloorToInt(_player.transform.position.x);
         int playerY = Mathf.FloorToInt( _player.transform.position.y);
         Vector3Int playerWorldPos = new Vector3Int(playerX, playerY, 0);
-        Vector3Int cellPos = _tilemap.WorldToCell(playerWorldPos);
+        Vector3Int cellPos = _puzzleTilemap.WorldToCell(playerWorldPos);
 
-        if (cellPos != lastCell)
+        // Verify if the current tile is part of the puzzle
+        if (cellPos != lastCell && _puzzleTilemap.HasTile(cellPos))
         {
-            if(_tilemap.GetColor(cellPos) == _highlightColor)
+            // Verify if the tile should be changed
+            if(_puzzleTilemap.GetTile(cellPos) == _filledTile)
             {
                 Debug.Log("restart");
+                _puzzleTilemap.SetTile(cellPos, _failTile);
+                _puzzleTilemap.RefreshTile(cellPos);
             }
-            _tilemap.SetTileFlags(cellPos, TileFlags.None);
-            _tilemap.SetColor(cellPos, _highlightColor);
-            lastCell = cellPos;
+            else
+            {
+                Debug.Log(_puzzleTilemap.GetTile(cellPos));
+                _puzzleTilemap.SetTile(cellPos, _filledTile);
+                lastCell = cellPos;
+                float scaleRatio = 1f / _tileAmount / 2f;
+                _player.transform.localScale = _player.transform.localScale - new Vector3(scaleRatio, scaleRatio, scaleRatio);
+            }
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("PlayerGoo"))
+        if(_startTilemap.HasTile(cellPos))
         {
-            CheckIfWon();
+            Debug.Log("Starting tile");
+        }
+        if(_endTilemap.HasTile(cellPos))
+        {
+            Debug.Log("Ending tile");
         }
     }
 
     private bool CheckIfWon()
     {
-        BoundsInt bounds = _tilemap.cellBounds;
+        BoundsInt bounds = _puzzleTilemap.cellBounds;
         bool isWon = true;
 
         foreach(var pos in bounds.allPositionsWithin)
         {
-            TileBase tile = _tilemap.GetTile(pos);
+            TileBase tile = _puzzleTilemap.GetTile(pos);
             if (tile != null)
             {
-                Color color = _tilemap.GetColor(pos);
+                Color color = _puzzleTilemap.GetColor(pos);
                 if(color != _highlightColor)
                 {
                     Debug.Log("Restart");

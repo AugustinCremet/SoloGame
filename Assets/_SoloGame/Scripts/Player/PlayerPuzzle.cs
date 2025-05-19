@@ -21,7 +21,7 @@ public class PlayerPuzzle : MonoBehaviour
     {
         if (_horizontalMovement.x != 0f || _horizontalMovement.y != 0f)
         {
-            HandleGoo();
+            //HandleGoo();
         }
     }
 
@@ -33,6 +33,28 @@ public class PlayerPuzzle : MonoBehaviour
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         _horizontalMovement = context.ReadValue<Vector2>();
+        if (_horizontalMovement.x != 0f)
+        {
+            if (_horizontalMovement.x > 0f)
+            {
+                transform.eulerAngles = new Vector3(0f, 0f, -90f);
+            }
+            else
+            {
+                transform.eulerAngles = new Vector3(0f, 0f, 90f);
+            }
+        }
+        else if (_horizontalMovement.y != 0f)
+        {
+            if (_horizontalMovement.y > 0f)
+            {
+                transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            }
+            else
+            {
+                transform.eulerAngles = new Vector3(0f, 0f, 180f);
+            }
+        }
     }
 
     public void HandleGoo()
