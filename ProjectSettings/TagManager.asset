@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - PlayerGoo
+  - PuzzleCamera
   layers:
   - Default
   - TransparentFX

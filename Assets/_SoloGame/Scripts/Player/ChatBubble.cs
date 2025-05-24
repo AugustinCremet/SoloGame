@@ -18,6 +18,12 @@ public class ChatBubble : MonoBehaviour
         _textMeshPro.enabled = true;
         SetText("Oh no! I must retry.");
     }
+
+    public void DeactivateText()
+    {
+        _bubbleSpriteRenderer.enabled = false;
+        _textMeshPro.enabled = false;
+    }
     public void SetText(string text)
     {
         _textMeshPro.SetText(text);

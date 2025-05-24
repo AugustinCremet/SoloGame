@@ -111,10 +111,16 @@ public class GameManager : MonoBehaviour
         areaGameObject.GetComponent<SceneDetails>().FirstLoad(_essential);
     }
 
-    public void SwitchScene(string sceneName)
+    public void StartPuzzle(string sceneName)
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().enabled = false;
-        GameObject.FindAnyObjectByType<SceneTransition>().StartTransition(sceneName);
+        GameObject.FindAnyObjectByType<SceneTransition>().StartTransition(sceneName, true);
+    }
+
+    public void EndPuzzle(string sceneName)
+    {
+        GameObject.FindAnyObjectByType<SceneTransition>().StartTransition(sceneName, false);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().enabled = true;
     }
 
     public void SetCurrentScene(SceneDetails scene)

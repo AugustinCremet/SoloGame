@@ -17630,7 +17630,7 @@ GameObject:
   - component: {fileID: 1066768410}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: PuzzleCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18367,7 +18367,7 @@ MonoBehaviour:
   _highlightColor: {r: 0.6, g: 0.8980392, b: 0.3137255, a: 1}
   _filledTile: {fileID: 11400000, guid: 1bc31a1b4b990cb43a6ff76886c252ac, type: 2}
   _emptyTile: {fileID: 11400000, guid: e6c8d4ab3cbc9f84595f50dc1d535690, type: 2}
-  _failTile: {fileID: 11400000, guid: f935980f94e233b41859cac63bc203e0, type: 2}
+  _flashingTile: {fileID: 11400000, guid: f935980f94e233b41859cac63bc203e0, type: 2}
 --- !u!61 &1746463016
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class HamiltonianPuzzle : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class HamiltonianPuzzle : MonoBehaviour
     [SerializeField] Color _highlightColor;
     [SerializeField] TileBase _filledTile;
     [SerializeField] TileBase _emptyTile;
-    [SerializeField] AnimatedTile _failTile;
+    [SerializeField] AnimatedTile _flashingTile;
 
     private Vector3Int _lastCell;
     private int _tileAmount = 0;
@@ -46,17 +47,9 @@ public class HamiltonianPuzzle : MonoBehaviour
         {
             StartTileLogic();
         }
-        if (_endTilemap.HasTile(cellPos))
+        if (_endTilemap.HasTile(cellPos) && !_isPuzzleFailed)
         {
-            BoundsInt bounds = _puzzleTilemap.cellBounds;
-
-            foreach (Vector3Int pos in bounds.allPositionsWithin)
-            {
-                if (_puzzleTilemap.HasTile(pos))
-                {
-                    _puzzleTilemap.SetTile(pos, _failTile);
-                }
-            }
+            EndTileLogic();
         }
     }
 
@@ -71,6 +64,7 @@ public class HamiltonianPuzzle : MonoBehaviour
                 _puzzleTilemap.SetTile(pos, _emptyTile);
             }
         }
+        FindAnyObjectByType<ChatBubble>().DeactivateText();
         _isPuzzleFailed = false;
         _lastCell = Vector3Int.zero;
         _player.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -81,14 +75,13 @@ public class HamiltonianPuzzle : MonoBehaviour
         // Verify if the tile should be changed
         if (_puzzleTilemap.GetTile(cellPos) == _filledTile)
         {
-            _puzzleTilemap.SetTile(cellPos, _failTile);
+            _puzzleTilemap.SetTile(cellPos, _flashingTile);
             _puzzleTilemap.RefreshTile(cellPos);
             _isPuzzleFailed = true;
             FindAnyObjectByType<ChatBubble>().SetFailPuzzle();
         }
         else
         {
-            Debug.Log(_puzzleTilemap.GetTile(cellPos));
             _puzzleTilemap.SetTile(cellPos, _filledTile);
             float scaleRatio = 1f / _tileAmount / 2f;
             _player.transform.localScale = _player.transform.localScale - new Vector3(scaleRatio, scaleRatio, scaleRatio);
@@ -96,7 +89,7 @@ public class HamiltonianPuzzle : MonoBehaviour
         _lastCell = cellPos;
     }
 
-    private bool CheckIfWon()
+    private void EndTileLogic()
     {
         BoundsInt bounds = _puzzleTilemap.cellBounds;
         bool isWon = true;
@@ -106,15 +99,24 @@ public class HamiltonianPuzzle : MonoBehaviour
             TileBase tile = _puzzleTilemap.GetTile(pos);
             if (tile != null)
             {
-                Color color = _puzzleTilemap.GetColor(pos);
-                if(color != _highlightColor)
+                if(tile == _filledTile)
                 {
-                    Debug.Log("Restart");
+                    continue;
+                }
+                else
+                {
+                    FindAnyObjectByType<ChatBubble>().SetFailPuzzle();
                     isWon = false;
+                    break;
                 }
             }
         }
 
-        return isWon;
+        if(isWon)
+        {
+            _isPuzzleFailed = true;
+            Debug.Log(transform.gameObject.scene.name);
+            GameManager.Instance.EndPuzzle(transform.gameObject.scene.name);
+        }
     }
 }

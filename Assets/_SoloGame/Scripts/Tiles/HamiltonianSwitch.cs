@@ -22,7 +22,6 @@ public class HamiltonianSwitch : MonoBehaviour
 
     private void Interact()
     {
-        Debug.Log("Player interact (Start Hamiltonian puzzle)");
-        GameManager.Instance.SwitchScene(_puzzleName);
+        GameManager.Instance.StartPuzzle(_puzzleName);
     }
 }

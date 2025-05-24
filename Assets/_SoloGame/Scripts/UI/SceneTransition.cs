@@ -22,30 +22,13 @@ public class SceneTransition : MonoBehaviour
         _originalSize = _holeImage.sizeDelta;
     }
 
-    public void StartTransition(string sceneName)
+    public void StartTransition(string sceneName, bool isSceneAdded)
     {
-        //_targetPosition = Camera.main.WorldToScreenPoint(playerWorldPosition);
-        GameObject player = GameObject.FindWithTag("Player");
-        _targetPosition = Camera.main.WorldToScreenPoint(player.transform.position);
-        _holeImage.position = _targetPosition;
-        _isShrinking = true;
-        StartCoroutine(StartAnimation(sceneName));
+        ChangeAnimationPosition(isSceneAdded);
+        StartCoroutine(StartAnimation(sceneName, isSceneAdded));
     }
 
-    void EndTransition()
-    {
-        GameObject player = GameObject.FindWithTag("Player");
-
-        if (player != null)
-        {
-            _targetPosition = Camera.main.WorldToScreenPoint(player.transform.position);
-            _holeImage.position = _targetPosition;
-        }
-
-        _isExpanding = true;
-    }
-
-    public IEnumerator StartAnimation(string sceneName)
+    public IEnumerator StartAnimation(string sceneName, bool isSceneAdded)
     {
         float elapsedTime = 0f;
         Vector2 endSize = new Vector2(0f, 0f);
@@ -61,12 +44,22 @@ public class SceneTransition : MonoBehaviour
             yield return null;
         }
 
-        AsyncOperation async = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        AsyncOperation async = null;
+        if(isSceneAdded)
+        {
+            async = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        }
+        else
+        {
+            async = SceneManager.UnloadSceneAsync(sceneName);
+        }
+
         while(!async.isDone)
         {
             yield return null;
         }
 
+        ChangeAnimationPosition(!isSceneAdded);
         StartCoroutine(EndAnimation(sceneName));
     }
 
@@ -87,24 +80,23 @@ public class SceneTransition : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void ChangeAnimationPosition(bool isMainPlayer)
     {
-        if (_isShrinking)
-        {
-            //_holeImage.sizeDelta = Vector2.MoveTowards(_holeImage.sizeDelta, Vector2.zero, _shrinkSpeed * Time.deltaTime);
+        GameObject player = null;
+        Camera camera = null;
 
-            if (_holeImage.sizeDelta.magnitude <= 0.1f)
-            {
-                _isShrinking = false;
-                EndTransition();
-            }
+        if (isMainPlayer)
+        {
+            player = GameObject.FindWithTag("Player");
+            camera = Camera.main;
         }
-        else if (_isExpanding)
-        {      
-            if (Vector2.Distance(_holeImage.sizeDelta, _originalSize) <= 0.1f)
-            {
-                _isExpanding = false;
-            }
+        else
+        {
+            player = GameObject.FindWithTag("PlayerGoo");
+            camera = GameObject.FindWithTag("PuzzleCamera").GetComponent<Camera>();
         }
+
+        _targetPosition = camera.WorldToScreenPoint(player.transform.position);
+        _holeImage.position = _targetPosition;
     }
 }
