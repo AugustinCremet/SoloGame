@@ -12,8 +12,9 @@ public class HamiltonianPuzzle : MonoBehaviour
     [SerializeField] TileBase _emptyTile;
     [SerializeField] AnimatedTile _failTile;
 
-    private Vector3Int lastCell;
-    private int _tileAmount;
+    private Vector3Int _lastCell;
+    private int _tileAmount = 0;
+    private bool _isPuzzleFailed = false;
 
     private void Awake()
     {
@@ -37,32 +38,62 @@ public class HamiltonianPuzzle : MonoBehaviour
         Vector3Int cellPos = _puzzleTilemap.WorldToCell(playerWorldPos);
 
         // Verify if the current tile is part of the puzzle
-        if (cellPos != lastCell && _puzzleTilemap.HasTile(cellPos))
+        if (cellPos != _lastCell && _puzzleTilemap.HasTile(cellPos) && !_isPuzzleFailed)
         {
-            // Verify if the tile should be changed
-            if(_puzzleTilemap.GetTile(cellPos) == _filledTile)
+            PuzzleTileLogic(cellPos);
+        }
+        if (_startTilemap.HasTile(cellPos) && _isPuzzleFailed)
+        {
+            StartTileLogic();
+        }
+        if (_endTilemap.HasTile(cellPos))
+        {
+            BoundsInt bounds = _puzzleTilemap.cellBounds;
+
+            foreach (Vector3Int pos in bounds.allPositionsWithin)
             {
-                Debug.Log("restart");
-                _puzzleTilemap.SetTile(cellPos, _failTile);
-                _puzzleTilemap.RefreshTile(cellPos);
+                if (_puzzleTilemap.HasTile(pos))
+                {
+                    _puzzleTilemap.SetTile(pos, _failTile);
+                }
             }
-            else
+        }
+    }
+
+    private void StartTileLogic()
+    {
+        BoundsInt bounds = _puzzleTilemap.cellBounds;
+
+        foreach (Vector3Int pos in bounds.allPositionsWithin)
+        {
+            if (_puzzleTilemap.HasTile(pos))
             {
-                Debug.Log(_puzzleTilemap.GetTile(cellPos));
-                _puzzleTilemap.SetTile(cellPos, _filledTile);
-                lastCell = cellPos;
-                float scaleRatio = 1f / _tileAmount / 2f;
-                _player.transform.localScale = _player.transform.localScale - new Vector3(scaleRatio, scaleRatio, scaleRatio);
+                _puzzleTilemap.SetTile(pos, _emptyTile);
             }
         }
-        if(_startTilemap.HasTile(cellPos))
+        _isPuzzleFailed = false;
+        _lastCell = Vector3Int.zero;
+        _player.transform.localScale = new Vector3(1f, 1f, 1f);
+    }
+
+    private void PuzzleTileLogic(Vector3Int cellPos)
+    {
+        // Verify if the tile should be changed
+        if (_puzzleTilemap.GetTile(cellPos) == _filledTile)
         {
-            Debug.Log("Starting tile");
+            _puzzleTilemap.SetTile(cellPos, _failTile);
+            _puzzleTilemap.RefreshTile(cellPos);
+            _isPuzzleFailed = true;
+            FindAnyObjectByType<ChatBubble>().SetFailPuzzle();
         }
-        if(_endTilemap.HasTile(cellPos))
+        else
         {
-            Debug.Log("Ending tile");
+            Debug.Log(_puzzleTilemap.GetTile(cellPos));
+            _puzzleTilemap.SetTile(cellPos, _filledTile);
+            float scaleRatio = 1f / _tileAmount / 2f;
+            _player.transform.localScale = _player.transform.localScale - new Vector3(scaleRatio, scaleRatio, scaleRatio);
         }
+        _lastCell = cellPos;
     }
 
     private bool CheckIfWon()
