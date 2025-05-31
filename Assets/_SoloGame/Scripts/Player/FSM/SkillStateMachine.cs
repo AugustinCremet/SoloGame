@@ -3,12 +3,12 @@ using UnityEngine;
 public class SkillStateMachine : BaseStateMachine
 {
     public IdleSkillState IdleState;
-    public GooState UndergroundState;
+    public GooState GooState;
 
     public SkillStateMachine(PlayerController playerController, Animator animator) : base(playerController, animator)
     {
         IdleState = new IdleSkillState(playerController, animator);
-        UndergroundState = new GooState(playerController, animator);
+        GooState = new GooState(playerController, animator);
     }
 
     public override void Start()

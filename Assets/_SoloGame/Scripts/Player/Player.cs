@@ -24,17 +24,24 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerAbilities Abilities { get; private set; }
     private IDataService _dataService = new JsonDataService();
 
-    private SkillStateMachine _skillStateMachine;
-    private MovementStateMachine _movementStateMachine;
+    public SkillStateMachine SkillStateMachine;
+
+    public MovementStateMachine MovementStateMachine;
+    public IdleMovementState IdleMovementState;
+    public MovingState MovingState;
 
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _playerController = GetComponent<PlayerController>();
         _currentHealth = _maxHealth;
 
         //State machines
-        _skillStateMachine = new SkillStateMachine(_playerController, _animator);
+        SkillStateMachine = new SkillStateMachine(_playerController, _animator);
+        MovementStateMachine = new MovementStateMachine(_playerController, _animator);
+        IdleMovementState = new IdleMovementState(_playerController, _animator);
+        MovingState = new MovingState(_playerController, _animator);
     }
     private void Start()
     {
@@ -48,19 +55,19 @@ public class Player : MonoBehaviour, IDamageable
         //GrantAbility(PlayerAbilities.BouncingBullet);
 
         //_movementStateMachine?.Start();
-        _skillStateMachine?.Start();
+        SkillStateMachine?.Start();
     }
 
     private void Update()
     {
         //_movementStateMachine?.Update();
-        _skillStateMachine?.Update();
+        SkillStateMachine?.Update();
     }
 
     private void FixedUpdate()
     {
         //_movementStateMachine?.FixedUpdate();
-        _skillStateMachine?.FixedUpdate();
+        SkillStateMachine?.FixedUpdate();
     }
 
     private void OnEnable()

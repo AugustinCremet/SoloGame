@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     Camera _cam;
     Rigidbody2D _rb;
     Vector2 _horizontalMovement;
+    Player _player;
 
     [SerializeField] GameObject _cursor;
     private BulletEmitter _bullet = null;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _cam = FindAnyObjectByType<Camera>();
         _bullet = GetComponent<BulletEmitter>();
+        _player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -70,6 +72,17 @@ public class PlayerController : MonoBehaviour
     public void MoveInput(InputAction.CallbackContext context)
     {
         _horizontalMovement = context.ReadValue<Vector2>();
+        if (_horizontalMovement.x < 0f ||
+           _horizontalMovement.x > 0f ||
+           _horizontalMovement.y < 0f ||
+           _horizontalMovement.y > 0f)
+        {
+            _player.MovementStateMachine.SwitchState(_player.MovingState);
+        }
+        else
+        {
+            _player.MovementStateMachine.SwitchState(_player.IdleMovementState);
+        }
     }
 
     public void FireInput(InputAction.CallbackContext context)
@@ -88,7 +101,8 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && _dashCurrentCooldown == 0f)
         {
-            IsGoo = true;
+            _player.SkillStateMachine.SwitchState(_player.SkillStateMachine.GooState);
+            //IsGoo = true;
         }
     }
 

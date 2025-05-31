@@ -6,6 +6,8 @@ public class BaseStateMachine
 
     [HideInInspector]
     public SkillStateMachine SkillStateMachine;
+    [HideInInspector]
+    public MovementStateMachine MovementStateMachine;
 
     protected BaseStateMachine(PlayerController playerController, Animator animator)
     {

@@ -20,7 +20,7 @@ public class IdleSkillState : BaseState
     {
         if(_playerController.IsGoo)
         {
-            stateMachine.SwitchState(stateMachine.SkillStateMachine.UndergroundState);
+            stateMachine.SwitchState(stateMachine.SkillStateMachine.GooState);
         }
     }
 

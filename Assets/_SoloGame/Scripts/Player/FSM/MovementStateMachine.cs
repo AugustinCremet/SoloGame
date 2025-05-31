@@ -1,16 +1,30 @@
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public class MovementStateMachine : MonoBehaviour
+public class MovementStateMachine : BaseStateMachine
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public IdleMovementState IdleState;
+    public MovingState MovingState;
+    public MovementStateMachine(PlayerController playerController, Animator animator) : base(playerController, animator)
     {
-        
+        IdleState = new IdleMovementState(playerController, animator);
+        MovingState = new MovingState(playerController, animator);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Start()
     {
-        
+        base.Start();
+        MovementStateMachine = this;
+    }
+
+    protected override BaseState GetInitialState()
+    {
+        Debug.Log("Set initial state");
+        return IdleState;
+    }
+
+    public override void SwitchState(BaseState state)
+    {
+        base.SwitchState(state);
     }
 }
