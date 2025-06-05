@@ -20,6 +20,7 @@ public class BulletWallCollision : BaseBulletBehaviour {
 		base.OnBulletBirth();
 
 		// Your code here
+		Debug.Log("Birth");
 	}
 	
 	// Update is (still) called once per frame
@@ -27,15 +28,15 @@ public class BulletWallCollision : BaseBulletBehaviour {
 	{
 		base.Update();
 
-		RaycastHit hit;
+		//RaycastHit hit;
 		
-		Debug.DrawLine(transform.position - new Vector3(-0.5f, 0, 0), transform.position - new Vector3(0.5f, 0, 0), Color.black);
-        if(!Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit)) return;
-        if(1 << hit.collider.gameObject.layer == LayerMask.GetMask("Wall"))
-        {
-			Debug.Log("Special script fired");
-            bullet.Die();
-        }
+		//Debug.DrawLine(transform.position - new Vector3(-0.5f, 0, 0), transform.position - new Vector3(0.5f, 0, 0), Color.black);
+  //      if(!Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit)) return;
+  //      if(1 << hit.collider.gameObject.layer == LayerMask.GetMask("Wall"))
+  //      {
+		//	Debug.Log("Special script fired");
+  //          bullet.Die();
+  //      }
 	}
 
     // This gets called when the bullet dies
@@ -88,6 +89,12 @@ public class BulletWallCollision : BaseBulletBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-		Debug.Log("HIT");
+		Debug.Log("Trigger enter");
+		bullet.Die();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+		Debug.Log("Collision enter");
     }
 }

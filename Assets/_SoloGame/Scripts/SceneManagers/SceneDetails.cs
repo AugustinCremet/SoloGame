@@ -17,7 +17,7 @@ public class SceneDetails : MonoBehaviour
         {
             //StartCoroutine(FirstTimeLoad());
             var newBoundary = gameObject.GetComponentInChildren<PolygonCollider2D>();
-            FindFirstObjectByType<CameraConfinerSwitcher>().ChangeBoundary(newBoundary, 5f);
+            FindFirstObjectByType<CameraConfinerSwitcher>().ChangeBoundary(newBoundary, _cameraSize);
             GameManager.Instance.SetCurrentScene(this);
             LoadScene();
 

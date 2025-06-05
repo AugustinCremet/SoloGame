@@ -266,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 746733070742999375, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 3483027921292442078}
+      objectReference: {fileID: 8640885975978373658}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_ClearFlags
       value: 2
@@ -305,11 +305,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5030752603120647901, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.11899533
+      value: 1.1018536
       objectReference: {fileID: 0}
     - target: {fileID: 5030752603120647901, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0013915524
+      value: 0.01913786
       objectReference: {fileID: 0}
     - target: {fileID: 5030752603120647901, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.z
@@ -317,11 +317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7464067865052785932, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.11899533
+      value: 1.1018536
       objectReference: {fileID: 0}
     - target: {fileID: 7464067865052785932, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0013915524
+      value: 0.01913786
       objectReference: {fileID: 0}
     - target: {fileID: 7464067865052785932, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.z
@@ -382,8 +382,8 @@ MonoBehaviour:
   Composition:
     ScreenPosition: {x: -0.061979264, y: 0.0019137859}
     DeadZone:
-      Enabled: 0
-      Size: {x: 0.2, y: 0.2}
+      Enabled: 1
+      Size: {x: 0.05, y: 0.05}
     HardLimits:
       Enabled: 0
       Size: {x: 0.8, y: 0.8}
@@ -729,5 +729,10 @@ PrefabInstance:
 --- !u!4 &3483027921292442078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8453446122992144777, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+  m_PrefabInstance: {fileID: 4973837683101968471}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8640885975978373658 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3669315521593399885, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
   m_PrefabInstance: {fileID: 4973837683101968471}
   m_PrefabAsset: {fileID: 0}
