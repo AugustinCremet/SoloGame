@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/_SoloGame/Scenes/Gym/Area3.unity
     guid: ad8adc2d770a6cb4cbc196d81dff28c8
   - enabled: 1
+    path: Assets/_SoloGame/Scenes/Gym/Area4.unity
+    guid: 722936be911b96242b9b11367e637d09
+  - enabled: 1
     path: Assets/_SoloGame/Scenes/HamiltonianPuzzles/TestPuzzle.unity
     guid: b2accb3e9413bb0408b2266577493835
   m_configObjects:

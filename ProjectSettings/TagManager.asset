@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - PlayerGoo
   - PuzzleCamera
+  - AimSight
   layers:
   - Default
   - TransparentFX

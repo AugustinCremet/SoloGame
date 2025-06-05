@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5389532597068610231}
   m_Layer: 0
   m_Name: cursor
-  m_TagString: Untagged
+  m_TagString: AimSight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,11 +305,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5030752603120647901, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.11899533
       objectReference: {fileID: 0}
     - target: {fileID: 5030752603120647901, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.0013915524
       objectReference: {fileID: 0}
     - target: {fileID: 5030752603120647901, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.z
@@ -317,11 +317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7464067865052785932, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.11899533
       objectReference: {fileID: 0}
     - target: {fileID: 7464067865052785932, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.0013915524
       objectReference: {fileID: 0}
     - target: {fileID: 7464067865052785932, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.z
@@ -380,7 +380,7 @@ MonoBehaviour:
   CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0, y: 0}
+    ScreenPosition: {x: -0.061979264, y: 0.0019137859}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}

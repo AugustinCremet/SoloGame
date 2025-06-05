@@ -9,7 +9,7 @@ public class TaskMoveBetween : Node
 {
     private float _minMovementRangeFactor = 0.0f;
     private float _maxMovementRangeFactor = 0.5f;
-    private float _maxPerpendicularDistance = 2f;
+    private float _maxPerpendicularDistance = 10f;
     private Vector3 _currentDestination = Vector3.zero;
 
     public TaskMoveBetween(float minMovementRangeFactor, float maxMovementRangeFactor, float maxPerpendicularDistance)

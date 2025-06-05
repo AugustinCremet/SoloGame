@@ -54,19 +54,11 @@ public class PlayerController : MonoBehaviour
         {
             StartDashTimers();
         }
-        if(_isShooting/* && Time.realtimeSinceStartup - _lastShotTime > 1*/)
-        {
-            _bullet.Play();
-        }
-        else
-        {
-            //_bullet.Stop();
-        }
     }
 
     void FixedUpdate()
     {
-        _rb.linearVelocity = _horizontalMovement * _moveSpeed;
+        //_rb.linearVelocity = _horizontalMovement * _moveSpeed;
     }
 
     public void MoveInput(InputAction.CallbackContext context)
@@ -77,11 +69,29 @@ public class PlayerController : MonoBehaviour
            _horizontalMovement.y < 0f ||
            _horizontalMovement.y > 0f)
         {
-            _player.MovementStateMachine.SwitchState(_player.MovingState);
+            _player.MovementStateMachine.TryChangeState(_player.MovingState);
         }
         else
         {
-            _player.MovementStateMachine.SwitchState(_player.IdleMovementState);
+            _player.MovementStateMachine.TryChangeState(_player.IdleMovementState);
+        }
+    }
+
+    public void StopMovement()
+    {
+        _rb.linearVelocity = Vector2.zero;
+    }
+
+    public void HandleMovement()
+    {
+        _rb.linearVelocity = _horizontalMovement * _moveSpeed;
+        if(_horizontalMovement.x > 0f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }    
+        else if(_horizontalMovement.x < 0f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
     }
 
@@ -89,19 +99,32 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            _isShooting = true;
+            if(GameObject.FindWithTag("AimSight").transform.position.x > transform.position.x)
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
+            _player.SkillStateMachine.TryChangeState(_player.ShootingState);
         }
         else if (context.canceled)
         {
-            _isShooting = false;
+            _player.SkillStateMachine.TryChangeState(_player.IdleSkillState);
         }
+    }
+
+    public void HandleShooting()
+    {
+        _bullet.Play();
     }
 
     public void DashInput(InputAction.CallbackContext context)
     {
         if (context.performed && _dashCurrentCooldown == 0f)
         {
-            _player.SkillStateMachine.SwitchState(_player.SkillStateMachine.GooState);
+            _player.SkillStateMachine.TryChangeState(_player.GooState);
             //IsGoo = true;
         }
     }

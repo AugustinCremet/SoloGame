@@ -8,7 +8,7 @@ public class IdleSkillState : BaseState
 
     public override void EnterState(BaseStateMachine stateMachine)
     {
-        
+        Debug.Log("Enter Idle Skill State");
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
@@ -18,10 +18,7 @@ public class IdleSkillState : BaseState
 
     public override void UpdateState(BaseStateMachine stateMachine)
     {
-        if(_playerController.IsGoo)
-        {
-            stateMachine.SwitchState(stateMachine.SkillStateMachine.GooState);
-        }
+        
     }
 
     public override void FixedUpdateState(BaseStateMachine stateMachine)
