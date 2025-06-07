@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     Camera _cam;
     Rigidbody2D _rb;
-    Vector2 _horizontalMovement;
+    public Vector2 MovementVector { get; private set; }
     Player _player;
 
     [SerializeField] GameObject _cursor;
@@ -63,11 +63,11 @@ public class PlayerController : MonoBehaviour
 
     public void MoveInput(InputAction.CallbackContext context)
     {
-        _horizontalMovement = context.ReadValue<Vector2>();
-        if (_horizontalMovement.x < 0f ||
-           _horizontalMovement.x > 0f ||
-           _horizontalMovement.y < 0f ||
-           _horizontalMovement.y > 0f)
+        MovementVector = context.ReadValue<Vector2>();
+        if (MovementVector.x < 0f ||
+           MovementVector.x > 0f ||
+           MovementVector.y < 0f ||
+           MovementVector.y > 0f)
         {
             _player.MovementStateMachine.TryChangeState(_player.MovingState);
         }
@@ -84,15 +84,15 @@ public class PlayerController : MonoBehaviour
 
     public void HandleMovement()
     {
-        _rb.linearVelocity = _horizontalMovement * _moveSpeed;
-        if(_horizontalMovement.x > 0f)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }    
-        else if(_horizontalMovement.x < 0f)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
+        _rb.linearVelocity = MovementVector * _moveSpeed;
+        //if(_horizontalMovement.x > 0f)
+        //{
+        //    transform.localScale = new Vector3(1f, 1f, 1f);
+        //}    
+        //else if(_horizontalMovement.x < 0f)
+        //{
+        //    transform.localScale = new Vector3(-1f, 1f, 1f);
+        //}
     }
 
     public void FireInput(InputAction.CallbackContext context)

@@ -24,6 +24,7 @@ public class MovingState : BaseState
 
     public override void UpdateState(BaseStateMachine stateMachine)
     {
-        
+        _animator.SetFloat("Horizontal", _playerController.MovementVector.x);
+        _animator.SetFloat("Vertical", _playerController.MovementVector.y);
     }
 }
