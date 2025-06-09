@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovingState : BaseState
 {
-    public MovingState(PlayerController playerController, Animator animator) : base(playerController, animator)
+    public MovingState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
     }
 

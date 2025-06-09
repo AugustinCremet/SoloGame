@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     Camera _cam;
     Rigidbody2D _rb;
     public Vector2 MovementVector { get; private set; }
+    private Vector2 _cachedMovementVector;
+    private bool _movementWasBlockedLastFrame = false;
     Player _player;
 
     [SerializeField] GameObject _cursor;
@@ -54,6 +56,20 @@ public class PlayerController : MonoBehaviour
         {
             StartDashTimers();
         }
+
+        if(_movementWasBlockedLastFrame && !_player.SkillStateMachine.CurrentState.BlockMovement)
+        {
+            if (_cachedMovementVector.sqrMagnitude > 0.01f)
+            {
+                MovementVector = _cachedMovementVector;
+                _player.SkillStateMachine.TryChangeState(_player.MovingState);
+            }
+            else
+            {
+                MovementVector = Vector2.zero;
+                _player.SkillStateMachine.TryChangeState(_player.IdleState);
+            }
+        }
     }
 
     void FixedUpdate()
@@ -63,17 +79,27 @@ public class PlayerController : MonoBehaviour
 
     public void MoveInput(InputAction.CallbackContext context)
     {
-        MovementVector = context.ReadValue<Vector2>();
-        if (MovementVector.x < 0f ||
-           MovementVector.x > 0f ||
-           MovementVector.y < 0f ||
-           MovementVector.y > 0f)
+        _cachedMovementVector = context.ReadValue<Vector2>();
+
+        bool movementBlocked = _player.SkillStateMachine.CurrentState.BlockMovement;
+        if (!movementBlocked)
         {
-            _player.MovementStateMachine.TryChangeState(_player.MovingState);
+            MovementVector = context.ReadValue<Vector2>();
+            if (MovementVector.sqrMagnitude > 0.01f)
+            {
+                //Make sure to stop the bullet
+                _bullet.Stop();
+                _player.SkillStateMachine.TryChangeState(_player.MovingState);
+            }
+            else
+            {
+                _player.SkillStateMachine.TryChangeState(_player.IdleState);
+            }       
         }
         else
         {
-            _player.MovementStateMachine.TryChangeState(_player.IdleMovementState);
+            _movementWasBlockedLastFrame = true;
+            MovementVector = Vector2.zero;
         }
     }
 
@@ -99,25 +125,30 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if(GameObject.FindWithTag("AimSight").transform.position.x > transform.position.x)
-            {
-                transform.localScale = new Vector3(1f, 1f, 1f);
-            }
-            else
-            {
-                transform.localScale = new Vector3(-1f, 1f, 1f);
-            }
             _player.SkillStateMachine.TryChangeState(_player.ShootingState);
+            _isShooting = true;
         }
         else if (context.canceled)
         {
-            _player.SkillStateMachine.TryChangeState(_player.IdleSkillState);
+            _isShooting = false;
+            if (MovementVector.magnitude <= 0f)
+            {
+                _player.SkillStateMachine.TryChangeState(_player.IdleState);
+            }
+            else
+            {
+                _player.SkillStateMachine.TryChangeState(_player.MovingState);
+            }
         }
     }
 
     public void HandleShooting()
     {
         _bullet.Play();
+    }
+    public void StopShooting()
+    {
+        _bullet.Stop();
     }
 
     public void DashInput(InputAction.CallbackContext context)

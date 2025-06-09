@@ -89,12 +89,6 @@ public class BulletWallCollision : BaseBulletBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-		Debug.Log("Trigger enter");
 		bullet.Die();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-		Debug.Log("Collision enter");
     }
 }

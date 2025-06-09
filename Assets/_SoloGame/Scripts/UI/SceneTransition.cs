@@ -10,9 +10,6 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] RectTransform _holeImage;
     [SerializeField] CutoutMaskUI _bgImage;
 
-
-    private bool _isShrinking = false;
-    private bool _isExpanding = false;
     private Vector2 _originalSize;
     private Vector2 _targetPosition;
     private float _animationDuration = 2f;

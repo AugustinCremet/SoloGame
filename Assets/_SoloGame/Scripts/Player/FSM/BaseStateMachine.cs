@@ -4,32 +4,32 @@ using UnityEngine;
 
 public class BaseStateMachine
 {
-    protected BaseState _currentState;
+    public BaseState CurrentState { get; private set; }
     protected Dictionary<Type, List<Type>> _transitionMap = new Dictionary<Type, List<Type>>();
 
-    protected BaseStateMachine(PlayerController playerController, Animator animator)
+    protected BaseStateMachine()
     {
 
     }
     public virtual void SetInitialState(BaseState state)
     {
-        _currentState = state;
-        _currentState?.EnterState(this);
+        CurrentState = state;
+        CurrentState?.EnterState(this);
     }
 
     public void Update()
     {
-        _currentState?.UpdateState(this);
+        CurrentState?.UpdateState(this);
     }
 
     public void FixedUpdate()
     {
-        _currentState?.FixedUpdateState(this);
+        CurrentState?.FixedUpdateState(this);
     }
 
     public virtual void TryChangeState(BaseState state)
     {
-        var currentType = _currentState.GetType();
+        var currentType = CurrentState.GetType();
         var nextType = state.GetType();
 
         if (_transitionMap.TryGetValue(currentType, out var allowedStates) &&
@@ -41,8 +41,8 @@ public class BaseStateMachine
 
     private void SwitchState(BaseState state)
     {
-        _currentState?.ExitState(this);
-        _currentState = state;
+        CurrentState?.ExitState(this);
+        CurrentState = state;
         state.EnterState(this);
     }
 

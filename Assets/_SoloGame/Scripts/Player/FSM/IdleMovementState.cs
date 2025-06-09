@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IdleMovementState : BaseState
 {
-    public IdleMovementState(PlayerController playerController, Animator animator) : base(playerController, animator)
+    public IdleMovementState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
     }
 

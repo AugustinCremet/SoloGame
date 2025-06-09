@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IdleSkillState : BaseState
 {
-    public IdleSkillState(PlayerController playerController, Animator animator) : base(playerController, animator)
+    public IdleSkillState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
     }
 

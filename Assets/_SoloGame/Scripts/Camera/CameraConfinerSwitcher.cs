@@ -9,7 +9,6 @@ public class CameraConfinerSwitcher : MonoBehaviour
 {
     private CinemachineConfiner2D _confiner;
     private CinemachineCamera _vcam;
-    private float _transitionDuration = 2f;
 
     void Awake()
     {

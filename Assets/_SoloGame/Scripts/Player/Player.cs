@@ -25,12 +25,9 @@ public class Player : MonoBehaviour, IDamageable
     private IDataService _dataService = new JsonDataService();
 
     public SkillStateMachine SkillStateMachine;
-    public IdleSkillState IdleSkillState;
+    public IdleSkillState IdleState;
     public GooState GooState;
     public ShootingState ShootingState;
-
-    public MovementStateMachine MovementStateMachine;
-    public IdleMovementState IdleMovementState;
     public MovingState MovingState;
 
 
@@ -40,16 +37,12 @@ public class Player : MonoBehaviour, IDamageable
         _playerController = GetComponent<PlayerController>();
         _currentHealth = _maxHealth;
 
-        //Skill state machine with states
-        SkillStateMachine = new SkillStateMachine(_playerController, _animator);
-        IdleSkillState = new IdleSkillState(_playerController, _animator);
-        GooState = new GooState(_playerController, _animator);
-        ShootingState = new ShootingState(_playerController, _animator);
-
-        //Movement state machine with states
-        MovementStateMachine = new MovementStateMachine(_playerController, _animator);
-        IdleMovementState = new IdleMovementState(_playerController, _animator);
-        MovingState = new MovingState(_playerController, _animator);
+        //State machine with states
+        SkillStateMachine = new SkillStateMachine();
+        IdleState = new IdleSkillState(_playerController, this, _animator);
+        GooState = new GooState(_playerController, this, _animator);
+        ShootingState = new ShootingState(_playerController, this, _animator);
+        MovingState = new MovingState(_playerController, this, _animator);
     }
     private void Start()
     {
@@ -62,20 +55,17 @@ public class Player : MonoBehaviour, IDamageable
         _bulletEmitter.SwitchProfile(_normalProfile);
         //GrantAbility(PlayerAbilities.BouncingBullet);
 
-        SkillStateMachine?.SetInitialState(IdleSkillState);
-        MovementStateMachine?.SetInitialState(IdleMovementState);
+        SkillStateMachine?.SetInitialState(IdleState);
     }
 
     private void Update()
     {
         SkillStateMachine?.Update();
-        MovementStateMachine?.Update();
     }
 
     private void FixedUpdate()
     {
         SkillStateMachine?.FixedUpdate();
-        MovementStateMachine?.FixedUpdate();
     }
 
     private void OnEnable()

@@ -6,7 +6,7 @@ public class GooState : BaseState
     [SerializeField] float _timeBetweenSpawns;
     [SerializeField] float _startTimeBetweenSpawns;
 
-    public GooState(PlayerController playerController, Animator animator) : base(playerController, animator)
+    public GooState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
     }
 
