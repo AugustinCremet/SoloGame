@@ -15,7 +15,9 @@ public enum PlayerAbilities
 public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] int _maxHealth = 100;
+    public int MaxHealth { get { return _maxHealth; } }
     private int _currentHealth = 0;
+    public int CurrentHealth { get { return _currentHealth; } }
     private BulletEmitter _bulletEmitter;
     private PlayerController _playerController;
     private Animator _animator;
@@ -106,15 +108,6 @@ public class Player : MonoBehaviour, IDamageable
 
         if (_currentHealth <= 0)
             Destroy(gameObject);
-    }
-
-    public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
-    {
-        int damageAmount = bullet.moduleParameters.GetInt("Damage");
-        Damage(damageAmount);
-
-        //TODO Need to create a IFrame
-        bullet.Die();
     }
 
     public void SetPosition(Transform newTransform)

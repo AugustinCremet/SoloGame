@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [Header("Goo Settings")]
     [SerializeField] GameObject _gooPrefab;
     [SerializeField] float _gooCD;
-    float _gooCurrentCD = 0f;
+    private float _gooCurrentCD = 0f;
     [Space(10)]
 
     [SerializeField] float _moveSpeed = 5f;
@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
     public Vector2 MovementVector { get; private set; }
     private Vector2 _cachedMovementVector;
     private bool _movementWasBlockedLastFrame = false;
-    Player _player;
+    private Player _player;
+    private Material _material;
+    private SpriteRenderer _spriteRenderer;
 
     [SerializeField] GameObject _cursor;
     private BulletEmitter _bullet = null;
@@ -42,11 +44,18 @@ public class PlayerController : MonoBehaviour
         _cam = FindAnyObjectByType<Camera>();
         _bullet = GetComponent<BulletEmitter>();
         _player = GetComponent<Player>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _material = _spriteRenderer.material;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.F9))
+        {
+            AdjustPlayerColor(1);
+        }
+
         if (_cam != null)
         {
             _cursor.transform.position = _cam.ScreenToWorldPoint(Input.mousePosition);
@@ -111,14 +120,6 @@ public class PlayerController : MonoBehaviour
     public void HandleMovement()
     {
         _rb.linearVelocity = MovementVector * _moveSpeed;
-        //if(_horizontalMovement.x > 0f)
-        //{
-        //    transform.localScale = new Vector3(1f, 1f, 1f);
-        //}    
-        //else if(_horizontalMovement.x < 0f)
-        //{
-        //    transform.localScale = new Vector3(-1f, 1f, 1f);
-        //}
     }
 
     public void FireInput(InputAction.CallbackContext context)
@@ -194,6 +195,33 @@ public class PlayerController : MonoBehaviour
             _dashCurrentDuration = 0;
             _rb.linearVelocity = Vector2.zero;
         }
+    }
+
+    public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
+    {
+        int damageAmount = bullet.moduleParameters.GetInt("Damage");
+        AdjustPlayerColor(damageAmount);
+        _player.Damage(damageAmount);
+
+        //TODO Need to create a IFrame
+        bullet.Die();
+    }
+
+    public void AdjustPlayerColor(int amount)
+    {
+        const int COLOR_MAX_VARIATION = 510; // Green + Red values
+        int healthVariation = _player.MaxHealth - 1;
+        int currentHealthLost = _player.MaxHealth - _player.CurrentHealth;
+        int colorVariation = COLOR_MAX_VARIATION / healthVariation;
+        int variationAmount = amount * colorVariation + currentHealthLost * colorVariation;
+
+        int redAmount = Mathf.Min(variationAmount, 255);
+        int greenAmount = variationAmount <= 255 ? 255 : Mathf.Max(255 + (255 - variationAmount), 0);
+
+        Debug.Log($"{redAmount}, {greenAmount}");
+
+        _material.SetColor("_Color", new Color32((byte)redAmount, (byte)greenAmount, 0, 255));
+        _player.Damage(1);
     }
 
     void DashMovement()
