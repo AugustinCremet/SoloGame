@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private Material _material;
     private SpriteRenderer _spriteRenderer;
 
-    [SerializeField] GameObject _cursor;
+    [SerializeField] GameObject _crosshair;
     private BulletEmitter _bullet = null;
     private bool _isShooting;
 
@@ -48,6 +48,12 @@ public class PlayerController : MonoBehaviour
         _material = _spriteRenderer.material;
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -58,7 +64,12 @@ public class PlayerController : MonoBehaviour
 
         if (_cam != null)
         {
-            _cursor.transform.position = _cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 crosshairMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            _crosshair.transform.localPosition += new Vector3(crosshairMovement.x, crosshairMovement.y, 0f) * 0.5f;
+            if(_crosshair.transform.localPosition.magnitude > 6f)
+            {
+                _crosshair.transform.localPosition = _crosshair.transform.localPosition.normalized * 6f;
+            }
         }
 
         if(IsGoo || _dashCurrentCooldown != 0f)

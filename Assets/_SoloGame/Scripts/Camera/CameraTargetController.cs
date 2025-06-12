@@ -9,10 +9,12 @@ public class CameraTargetController : MonoBehaviour
     private bool _useMouse = true;
     private CinemachineTargetGroup.Target _cameraTarget;
     private float _originalWeight;
+    private Transform _crosshairPos;
 
     private void Awake()
     {
         _player = transform.parent;
+        _crosshairPos = GameObject.FindGameObjectWithTag("AimSight").transform;
 
         CinemachineTargetGroup targetGroup = FindAnyObjectByType<CinemachineTargetGroup>();
         foreach (var target in targetGroup.Targets)
@@ -31,7 +33,7 @@ public class CameraTargetController : MonoBehaviour
 
         if (_useMouse)
         {
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseWorldPos = _crosshairPos.position;
             mouseWorldPos.z = 0f;
             Vector3 dir = mouseWorldPos - _player.position;
             float t = Mathf.InverseLerp(_minOffsetDistance, _maxOffsetDistance, dir.magnitude);
