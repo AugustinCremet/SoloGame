@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField] GameObject _crosshair;
+    private Vector2 _screenSize;
+
     private BulletEmitter _bullet = null;
     private bool _isShooting;
 
@@ -52,32 +54,25 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+        _screenSize = new Vector2(Screen.width, Screen.height);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F9))
+        if (Input.GetKeyDown(KeyCode.F9))
         {
             AdjustPlayerColor(1);
         }
 
-        if (_cam != null)
-        {
-            Vector2 crosshairMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-            _crosshair.transform.localPosition += new Vector3(crosshairMovement.x, crosshairMovement.y, 0f) * 0.5f;
-            if(_crosshair.transform.localPosition.magnitude > 6f)
-            {
-                _crosshair.transform.localPosition = _crosshair.transform.localPosition.normalized * 6f;
-            }
-        }
+        AdjustCrosshair();
 
-        if(IsGoo || _dashCurrentCooldown != 0f)
+        if (IsGoo || _dashCurrentCooldown != 0f)
         {
             StartDashTimers();
         }
 
-        if(_movementWasBlockedLastFrame && !_player.SkillStateMachine.CurrentState.BlockMovement)
+        if (_movementWasBlockedLastFrame && !_player.SkillStateMachine.CurrentState.BlockMovement)
         {
             if (_cachedMovementVector.sqrMagnitude > 0.01f)
             {
@@ -90,6 +85,23 @@ public class PlayerController : MonoBehaviour
                 _player.SkillStateMachine.TryChangeState(_player.IdleState);
             }
         }
+    }
+
+    private void AdjustCrosshair()
+    {
+        Vector2 crosshairMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        _crosshair.transform.localPosition += new Vector3(crosshairMovement.x, crosshairMovement.y, 0f) * 0.5f;
+
+        Vector3 crosshairScreenPos = _cam.WorldToScreenPoint(_crosshair.transform.localPosition);
+        crosshairScreenPos.x = Mathf.Clamp(crosshairScreenPos.x, 0f, Screen.width);
+        crosshairScreenPos.y = Mathf.Clamp(crosshairScreenPos.y, 0f, Screen.height);
+        
+        Debug.Log(crosshairScreenPos);
+
+        Vector3 clampedWorldPos = _cam.ScreenToWorldPoint(crosshairScreenPos);
+        clampedWorldPos.z = 0f;
+
+        _crosshair.transform.localPosition = clampedWorldPos;
     }
 
     void FixedUpdate()
