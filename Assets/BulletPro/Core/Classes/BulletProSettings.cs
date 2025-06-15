@@ -50,7 +50,7 @@ namespace BulletPro
 		[Tooltip("How many receivers can be processed at once in the same single frame?")]
 		public int maxAmountOfReceivers = 200;
 
-		public static int buildNumber = 14;
+		public static int buildNumber = 15;
 	}
 
 	[System.Serializable]

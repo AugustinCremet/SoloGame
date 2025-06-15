@@ -17,7 +17,12 @@ namespace BulletPro
 		void Awake()
 		{
 			if (instance == null) instance = this;
-			else Debug.LogWarning("Beware : there is more than one instance of BulletBehaviourManager in the scene!");
+			else
+			{
+				Debug.LogWarning("BulletPro Warning: there is more than one instance of BulletBehaviourManager in the scene!");
+				return;
+				// BulletProSceneSetup.cs will call the Destroy() method
+			}
 		}
 
 		public static BaseBulletBehaviour GetFreeBehaviour(GameObject behaviourPrefab)

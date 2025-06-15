@@ -1482,6 +1482,7 @@ namespace BulletPro.EditorScripts
 
 			bool hasLS = hasLifespan.boolValue;
 			EditorGUILayout.PropertyField(curve.FindPropertyRelative("wrapMode"));
+			EditorGUILayout.PropertyField(curve.FindPropertyRelative("measurementMode"));
 			SerializedProperty periodIsLifespan = curve.FindPropertyRelative("periodIsLifespan");
 			EditorGUILayout.PropertyField(periodIsLifespan);
 			if (!periodIsLifespan.boolValue)
@@ -1910,7 +1911,8 @@ namespace BulletPro.EditorScripts
 
 			bool hasLS = hasLifespan.boolValue;
 			spIterator.NextVisible(false); // wrapmode
-
+			EditorGUILayout.PropertyField(spIterator);
+			spIterator.NextVisible(false); // measurement mode
 			EditorGUILayout.PropertyField(spIterator);
 			spIterator.NextVisible(false); // period is lifespan
 			EditorGUILayout.PropertyField(spIterator);
@@ -1956,6 +1958,7 @@ namespace BulletPro.EditorScripts
 
 			bool hasLS = hasLifespan.boolValue;
 			EditorGUILayout.PropertyField(curve.FindPropertyRelative("wrapMode"));
+			EditorGUILayout.PropertyField(curve.FindPropertyRelative("measurementMode"));
 			SerializedProperty periodIsLifespan = curve.FindPropertyRelative("periodIsLifespan");
 			EditorGUILayout.PropertyField(periodIsLifespan);
 			if (!DynamicParameterUtility.GetBool(periodIsLifespan, false, false))

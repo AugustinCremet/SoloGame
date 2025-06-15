@@ -877,11 +877,37 @@ namespace BulletPro.EditorScripts
                     EditorUtility.SetDirty(pp);
                 }
             }
-            // to be continued (when V15 comes out)
-
-            // from V14 to V15 :
-            /* *
+            
+            // from V14 to V15 : bullet curves can now be "over distance" rather than "over time"
             if (profile.buildNumber == 14)
+            {
+                profile.buildNumber++;
+                for (int i = 0; i < profile.subAssets.Length; i++)
+                {
+                    if (!(profile.subAssets[i] is BulletParams)) continue;
+                    BulletParams bp = profile.subAssets[i] as BulletParams;
+                    
+                    bp.speedOverLifetime.measurementMode = new DynamicEnum((int)BulletCurveMeasurementMode.Time);
+                    bp.angularSpeedOverLifetime.measurementMode = new DynamicEnum((int)BulletCurveMeasurementMode.Time);
+                    bp.scaleOverLifetime.measurementMode = new DynamicEnum((int)BulletCurveMeasurementMode.Time);
+                    bp.homingOverLifetime.measurementMode = new DynamicEnum((int)BulletCurveMeasurementMode.Time);
+                    bp.colorOverLifetime.measurementMode = new DynamicEnum((int)BulletCurveMeasurementMode.Time);
+                    bp.alphaOverLifetime.measurementMode = new DynamicEnum((int)BulletCurveMeasurementMode.Time);
+
+                    Debug.Log("enum types");
+                    bp.speedOverLifetime.measurementMode.SetEnumType(typeof(BulletCurveMeasurementMode));
+			        bp.angularSpeedOverLifetime.measurementMode.SetEnumType(typeof(BulletCurveMeasurementMode));
+			        bp.scaleOverLifetime.measurementMode.SetEnumType(typeof(BulletCurveMeasurementMode));
+			        bp.homingOverLifetime.measurementMode.SetEnumType(typeof(BulletCurveMeasurementMode));
+			        bp.colorOverLifetime.measurementMode.SetEnumType(typeof(BulletCurveMeasurementMode));
+			        bp.alphaOverLifetime.measurementMode.SetEnumType(typeof(BulletCurveMeasurementMode));
+                }
+            }
+            // to be continued (when V16 comes out)
+
+            // from V15 to V16 :
+            /* *
+            if (profile.buildNumber == 15)
             {
                 profile.buildNumber++;
                 for (int i = 0; i < profile.subAssets.Length; i++)
@@ -890,7 +916,7 @@ namespace BulletPro.EditorScripts
                 }
             }
             /* */
-            // to be continued (when V16 comes out)
+            // to be continued (when V17 comes out)
 
             // in the end, validate everything
             EditorUtility.SetDirty(profile);

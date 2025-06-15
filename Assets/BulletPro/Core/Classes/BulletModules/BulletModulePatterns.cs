@@ -94,7 +94,9 @@ namespace BulletPro
 			isEnabled = bp.hasPatterns;
 			if (!isEnabled)
 			{
-				patternsShot = new PatternParams[0];	
+				patternsShot = new PatternParams[0];
+				patternRuntimeInfo = new PatternRuntimeInfo[0];
+				solvedPatternInfo = new SolvedPatternParams[0];
 				return;
 			}
 
@@ -115,7 +117,7 @@ namespace BulletPro
 		{
 			if (emittedBullets == null)
 				emittedBullets = new List<Bullet>();
-			else
+			else if (emittedBullets.Count > 0)
 			{
 				emittedBullets.Clear();
 				emittedBullets.TrimExcess();
@@ -123,6 +125,8 @@ namespace BulletPro
 
 			ResetEmissionCount();
 			isReady = true;
+
+			if (!isEnabled) return;
 
 			// Loads PatternParams into runtime structs; then play them
 			ResetPattern();
@@ -134,16 +138,25 @@ namespace BulletPro
 		public void Die()
 		{
 			Stop();
+
 			isReady = false;
+
 			if (bullet.emitter) bullet.emitter.subEmitters.Remove(bullet);
-			if (emittedBullets != null)
-				if (emittedBullets.Count > 0)
-					for (int i = 0; i < emittedBullets.Count; i++)
-						emittedBullets[i].subEmitter = null;
-			if (patternRuntimeInfo != null)
-				if (patternRuntimeInfo.Length > 0)
-					for (int i = 0; i < patternRuntimeInfo.Length; i++)
-						patternRuntimeInfo[i].OnEmitterDeath();
+
+			// reset bullet list
+			if (emittedBullets != null && emittedBullets.Count > 0)
+			{
+				for (int i = 0; i < emittedBullets.Count; i++)
+					emittedBullets[i].subEmitter = null;
+
+				emittedBullets.Clear();
+				emittedBullets.TrimExcess();
+			}
+
+			// reset all arrays
+			patternsShot = new PatternParams[0];
+			patternRuntimeInfo = new PatternRuntimeInfo[0];
+			solvedPatternInfo = new SolvedPatternParams[0];
 		}
 
 		#region bullet production pipeline : pattern > shoot > bullet 
@@ -163,6 +176,15 @@ namespace BulletPro
 			BulletParams bpToUse = null;
 
 			int bulletsAtOnce = solver.SolveDynamicInt(sp.simultaneousBulletsPerFrame, 488895, ParameterOwner.Shot);
+
+			// Don't bother recalculating layout if the shot emits zero bullets
+			if (bulletsAtOnce == 0)
+			{
+				#if UNITY_EDITOR
+				Debug.LogWarning(bullet.emitter.name + ": ShotParams have zero bullet to shoot.");
+				#endif
+				return 0;
+			}
 
 			// If there are modifiers, use their BulletSpawn locations instead of the raw one stored in ShotParams
 			bool useMod = true;

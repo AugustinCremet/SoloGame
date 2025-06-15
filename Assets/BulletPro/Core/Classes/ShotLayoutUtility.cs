@@ -80,13 +80,10 @@ namespace BulletPro
 		{
 			if (bs != null)
 				if (bs.Length > 0)
-				{
 					for (int j = 0; j < bs.Length; j++)
 						bs[j].index = j;
-					return bs;
-				}
 
-			return null;
+			return bs;
 		}
 
 		// Recalculates bullet spawns in one modifier, based on previous spawn locations and dynamic solver.

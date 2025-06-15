@@ -213,7 +213,7 @@ namespace BulletPro
 		public void SyncCollisionTags()
 		{
 			if (children == null) return;
-			if (children.Count > 0) return;
+			if (children.Count == 0) return;
 			for (int i = 0; i < children.Count; i++)
 				if (children[i] != null)
 					children[i].collisionTags = collisionTags;

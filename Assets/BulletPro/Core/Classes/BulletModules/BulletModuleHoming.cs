@@ -74,10 +74,11 @@ namespace BulletPro
 
 			// Either way, in the end we just slowly turn to aimed point
 			Vector3 diff = currentTarget.position - self.position;
-			if (Vector3.Angle(self.up, diff) > homingAngleThreshold)
+			Vector3 selfUp = self.up;
+			if (Vector3.Angle(selfUp, diff) > homingAngleThreshold)
 			{
-				Vector3 cross = Vector3.Cross(self.up, diff);
-				cross = bulletCanvas.InverseTransformVector(cross);
+				Vector3 cross = Vector3.Cross(selfUp, diff);
+				cross = bulletCanvas.GetBulletCanvas().InverseTransformVector(cross);
 				moduleMovement.Rotate(currentHomingSpeed * Mathf.Sign(cross.z) * Time.deltaTime);
 			}
 		}
@@ -119,7 +120,7 @@ namespace BulletPro
 			currentHomingSpeed = homingAngularSpeed;
 
 			homingOverLifetime = solver.SolveDynamicBulletCurve(bp.homingOverLifetime, 26372642, ParameterOwner.Bullet);
-			homingOverLifetime.UpdateInternalValues();
+			homingOverLifetime.UpdateInternalValues(bullet);
 			if (homingOverLifetime.enabled)
 			{
 				homingOverLifetime.Boot();

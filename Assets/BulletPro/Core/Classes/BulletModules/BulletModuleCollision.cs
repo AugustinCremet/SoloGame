@@ -289,9 +289,11 @@ namespace BulletPro
 			float rad = Mathf.Abs(br.hitboxSize) * (Mathf.Abs(tr.lossyScale.x) + Mathf.Abs(tr.lossyScale.y)) * 0.5f;
 			float rad2 = rad * rad;
 
+			Vector3 selfUp = self.up;
+
 			float laserLengthBrowsed = 0;
 			Vector3 curPoint = new Vector3(self.position.x, self.position.y, self.position.z);
-			curPoint += scale * (self.right * col.lineStart.x + self.up * col.lineStart.y);
+			curPoint += scale * (self.right * col.lineStart.x + selfUp * col.lineStart.y);
 
 			// Calculating laser length, squared
 			float xDelta = col.lineEnd.x - col.lineStart.x;
@@ -300,7 +302,7 @@ namespace BulletPro
 			float laserLength = Mathf.Sqrt(laserLength2);
 
 			float realLaserLength = laserLength * scale;
-			Vector3 laserDirection = (self.position + self.right * (col.lineEnd.x - col.lineStart.x) + self.up * (col.lineEnd.y - col.lineStart.y)).normalized;
+			Vector3 laserDirection = (self.position + self.right * (col.lineEnd.x - col.lineStart.x) + selfUp * (col.lineEnd.y - col.lineStart.y)).normalized;
 			while (true)
 			{
 				float x = (brPos.x - curPoint.x);
@@ -335,9 +337,10 @@ namespace BulletPro
 
 			float lineLengthBrowsed = 0;
 			Transform tr = br.self;
+			Vector3 brUp = tr.up;
 			Vector3 brPos = tr.position;
 			if (br.hitboxOffset.x != 0) brPos += tr.lossyScale.x * br.hitboxOffset.x * tr.right;
-			if (br.hitboxOffset.y != 0) brPos += tr.lossyScale.y * br.hitboxOffset.y * tr.up;
+			if (br.hitboxOffset.y != 0) brPos += tr.lossyScale.y * br.hitboxOffset.y * brUp;
 			Vector3 curPoint = new Vector3(brPos.x, brPos.y, brPos.z);
 			//float brScale = tr.localScale.x * 0.5f + tr.localScale.y * 0.5f;
 			// ^ commented out: there's no point in taking scale.x into account
@@ -365,9 +368,9 @@ namespace BulletPro
 
 				lineLengthBrowsed += rad;
 				if (lineLengthBrowsed > realLineLength) lineLengthBrowsed = realLineLength;
-				curPoint.x = brPos.x + tr.up.x * lineLengthBrowsed;
-				curPoint.y = brPos.y + tr.up.y * lineLengthBrowsed;
-				curPoint.z = brPos.z + tr.up.z * lineLengthBrowsed;
+				curPoint.x = brPos.x + brUp.x * lineLengthBrowsed;
+				curPoint.y = brPos.y + brUp.y * lineLengthBrowsed;
+				curPoint.z = brPos.z + brUp.z * lineLengthBrowsed;
 			}
 
 			return result;
@@ -387,21 +390,23 @@ namespace BulletPro
 
 			Vector3 colStart, colEnd, brStart, brEnd;
 
-			colStart = self.position + scale * (self.right * col.lineStart.x + self.up * col.lineStart.y);
-			colEnd = self.position + scale * (self.right * col.lineEnd.x + self.up * col.lineEnd.y);
+			Vector3 selfUp = self.up;
+			colStart = self.position + scale * (self.right * col.lineStart.x + selfUp * col.lineStart.y);
+			colEnd = self.position + scale * (self.right * col.lineEnd.x + selfUp * col.lineEnd.y);
 
 			Transform brtr = br.self;
 			brStart = brtr.position;
+			Vector3 brTrUp = brtr.up;
 			if (br.hitboxOffset.x != 0) brStart += brtr.lossyScale.x * br.hitboxOffset.x * brtr.right;
-			if (br.hitboxOffset.y != 0) brStart += brtr.lossyScale.y * br.hitboxOffset.y * brtr.up;
+			if (br.hitboxOffset.y != 0) brStart += brtr.lossyScale.y * br.hitboxOffset.y * brTrUp;
 			//float brScale = brtr.lossyScale.x * 0.5f + brtr.lossyScale.y * 0.5f;
 			// there's no point in taking scale.x into account
 			float brScale = brtr.lossyScale.y;
-			brEnd = brStart + brtr.up * br.hitboxSize * brScale;
+			brEnd = brStart + brTrUp * br.hitboxSize * brScale;
 
 			Vector3 intersect = Vector3.one * 3000;
 
-			if (!LineLineIntersection(out intersect, colStart, (colEnd-colStart).normalized, brStart, brtr.up))
+			if (!LineLineIntersection(out intersect, colStart, (colEnd-colStart).normalized, brStart, brTrUp))
 			{
 				result.happened = false;
 				result.hitPoint = intersect;

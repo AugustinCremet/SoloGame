@@ -27,6 +27,11 @@ public class BaseStateMachine
         CurrentState?.FixedUpdateState(this);
     }
 
+    public void ResetStates(IdleSkillState state)
+    {
+        SwitchState(state);
+    }
+
     public virtual void TryChangeState(BaseState state)
     {
         var currentType = CurrentState.GetType();

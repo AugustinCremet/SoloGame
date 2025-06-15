@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/_SoloGame/Scenes/MainMenu.unity
     guid: bd2b335f6edfe464aadf6cd025099cc0
   - enabled: 1
+    path: Assets/_SoloGame/Scenes/LoadingScreen.unity
+    guid: 56b35b33e31cd8d4ba65e33c9d0a62fa
+  - enabled: 1
     path: Assets/_SoloGame/Scenes/Gym/MainArea.unity
     guid: ed75e986c2e1cdd428c6cbaf972c3f8b
   - enabled: 1

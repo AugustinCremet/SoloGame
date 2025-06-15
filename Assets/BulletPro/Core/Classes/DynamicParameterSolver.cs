@@ -1128,6 +1128,7 @@ namespace BulletPro
             BulletCurve result = new BulletCurve();
             result.enabled = dynCurve.enabled;
             result.wrapMode = (WrapMode)SolveDynamicEnum(dynCurve.wrapMode, 19526852 ^ operationID, owner);
+            result.measurementMode = (BulletCurveMeasurementMode)SolveDynamicEnum(dynCurve.measurementMode, 14374108 ^ operationID, owner);
             result.periodIsLifespan = SolveDynamicBool(dynCurve.periodIsLifespan, 12566916 ^ operationID, owner);
             result.period = SolveDynamicFloat(dynCurve.period, 26726495 ^ operationID, owner);
             result.curve = SolveDynamicAnimationCurve(dynCurve.curve, 18208695 ^ operationID, owner);

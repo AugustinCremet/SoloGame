@@ -1,9 +1,12 @@
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class ShootingState : BaseState
 {
     public override bool BlockMovement => true;
+    private GameObject _aimSight;
+    private Vector2 _aimSightDirection;
     public ShootingState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
     }
@@ -11,26 +14,22 @@ public class ShootingState : BaseState
     public override void EnterState(BaseStateMachine stateMachine)
     {
         Debug.Log("Enter Shooting State");
-        var aimSight = GameObject.FindWithTag("AimSight");
-        if (aimSight.transform.position.x > _playerController.transform.position.x)
-        {
-            _animator.SetFloat("HorizontalAim", 1f);
-        }
-        else if(aimSight.transform.position.x < _playerController.transform.position.x)
-        {
-            _animator.SetFloat("HorizontalAim", -1f);
-        }
+        _aimSight = GameObject.FindWithTag("AimSight");
 
-        if(aimSight.transform.position.y > _playerController.transform.position.y)
-        {
-            _animator.SetFloat("VerticalAim", 1f);
-        }
-        else if(aimSight.transform.position.y < _playerController.transform.position.y)
-        {
-            _animator.SetFloat("VerticalAim", -1f);
-        }
+        _aimSightDirection = AimDirection();
+        _animator.SetFloat("HorizontalAim", _aimSightDirection.x);
+        _animator.SetFloat("VerticalAim", _aimSightDirection.y);
 
         _animator.SetBool("IsShooting", true);
+    }
+
+    private Vector2 AimDirection()
+    {
+        Vector2 aimDirection = (_aimSight.transform.position - _player.transform.position).normalized;
+        float horizontal = Mathf.Abs(aimDirection.x) > 0.1f ? Mathf.Sign(aimDirection.x) : 0f;
+        float vertical = Mathf.Abs(aimDirection.y) > 0.1f ? Mathf.Sign(aimDirection.y) : 0f;
+
+        return new Vector2(horizontal, vertical);
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
@@ -47,6 +46,15 @@ public class ShootingState : BaseState
 
     public override void UpdateState(BaseStateMachine stateMachine)
     {
-        
+        Vector2 newAimDirection = AimDirection();
+
+        if (newAimDirection != _aimSightDirection)
+        {
+            _aimSightDirection = newAimDirection;
+            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+            float currentTime = stateInfo.normalizedTime % 1f;
+            _animator.SetFloat("HorizontalAim", _aimSightDirection.x);
+            _animator.SetFloat("VerticalAim", _aimSightDirection.y);
+        }
     }
 }

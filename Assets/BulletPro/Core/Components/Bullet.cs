@@ -59,6 +59,8 @@ namespace BulletPro
 
 		// Manager singleton references, assigned at frame 2
 		[System.NonSerialized]
+		public BulletProSceneSetup sceneSetup;
+		[System.NonSerialized]
 		public BulletCollisionManager collisionManager;
 		[System.NonSerialized]
 		public BulletGlobalParamManager globalParamManager;
@@ -185,6 +187,7 @@ namespace BulletPro
 		// Called at start, caches any manager singleton reference into the bullet and its modules.
 		void GetManagers()
 		{
+			sceneSetup = BulletProSceneSetup.instance;
 			poolManager = BulletPoolManager.instance;
 			collisionManager = BulletCollisionManager.instance;
 			audioManager = BulletAudioManager.instance;
@@ -275,9 +278,8 @@ namespace BulletPro
 			if (renderMode == BulletRenderMode.Mesh)
 				meshRenderer.enabled = moduleRenderer.isEnabled;
 
-			// Initialize shot pattern if needed
-			if (modulePatterns.isEnabled)
-				modulePatterns.Prepare();
+			// Initialize shot pattern, and flush its previous data
+			modulePatterns.Prepare();
 
 			// start counting bullet lifetime
 			timeSinceAlive = 0;
@@ -443,7 +445,7 @@ namespace BulletPro
 				moduleRenderer.ApplyBulletParams(bp);
 
 			if ((bpm & BulletParamMask.Parameters) == BulletParamMask.Parameters)
-				moduleRenderer.ApplyBulletParams(bp);
+				moduleParameters.ApplyBulletParams(bp);
 
 			if ((bpm & BulletParamMask.VFX) == BulletParamMask.VFX)
 				moduleVFX.ApplyBulletParams(bp);

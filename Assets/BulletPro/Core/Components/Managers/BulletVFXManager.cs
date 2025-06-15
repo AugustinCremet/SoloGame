@@ -21,7 +21,12 @@ namespace BulletPro
 		void Awake()
 		{
 			if (instance == null) instance = this;
-			else Debug.LogWarning("Beware : there is more than one instance of BulletVFXManager in the scene!");
+			else
+			{
+				Debug.LogWarning("Beware : there is more than one instance of BulletVFXManager in the scene!");
+				return;
+				// BulletProSceneSetup.cs will call the Destroy() method
+			}
 
 			self = transform;
 		}

@@ -69,7 +69,12 @@ namespace BulletPro
 		{
 			// Setting up singleton instance
 			if (!instance) instance = this;
-			else Debug.LogWarning("BulletPro Warning: there is more than one instance of BulletGlobalParamManager in the scene.");
+			else
+            {
+                Debug.LogWarning("BulletPro Warning: there is more than one instance of BulletGlobalParamManager in the scene.");
+				return;
+                // BulletProSceneSetup.cs will call the Destroy() method
+            }
 
             if (parameters == null) parameters = new List<CustomParameter>();
 		}

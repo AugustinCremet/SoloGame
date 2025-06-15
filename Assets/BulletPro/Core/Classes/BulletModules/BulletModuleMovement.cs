@@ -308,10 +308,11 @@ namespace BulletPro
 		{
 			if (target == self.position) return 0;
 
-			Vector2 diff = bulletCanvas.InverseTransformVector(target - self.position);
+			Vector2 diff = bulletCanvas.GetBulletCanvas().InverseTransformVector(target - self.position);
 			diff *= Mathf.Sign(ratio);
-			float angle = Vector2.Angle(self.up, diff);
-			Vector3 cross = Vector3.Cross(self.up, target - self.position);
+			Vector3 selfUp = self.up;
+			float angle = Vector2.Angle(selfUp, diff);
+			Vector3 cross = Vector3.Cross(selfUp, target - self.position);
 			if (cross.z < 0) angle *= -1;
 			if (bulletCanvas.forward.z < 0) angle += 180;
 
@@ -388,11 +389,12 @@ namespace BulletPro
 			}
 
 			// apply actual bounce
-			Vector3 rotationAxis = Vector3.Cross(self.up, wallDirection);
+			Vector3 selfUp = self.up;
+			Vector3 rotationAxis = Vector3.Cross(selfUp, wallDirection);
 			Vector3 wallNormal = Quaternion.AngleAxis(90, rotationAxis) * wallDirection;
-			Vector3 newUp = Vector3.Reflect(self.up, wallNormal);
+			Vector3 newUp = Vector3.Reflect(selfUp, wallNormal);
 			// Can't use Quaternions, because when the two vectors are collinear (ie. U-turn) it uses the wrong axis to rotate.
-			//self.Rotate(Quaternion.FromToRotation(self.up, newUp).eulerAngles);
+			//self.Rotate(Quaternion.FromToRotation(selfUp, newUp).eulerAngles);
 			self.up = newUp;
 
 			// update timestamps in wanted channels

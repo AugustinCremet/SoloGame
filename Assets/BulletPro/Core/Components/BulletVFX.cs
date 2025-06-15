@@ -793,6 +793,9 @@ namespace BulletPro
 
 			m.enabled = true;
 
+			for (int i = 0; i < m2.spriteCount; i++)
+				m.AddSprite(m2.GetSprite(i));
+
 			m.animation = m2.animation;
 			m.cycleCount = m2.cycleCount;
 			#if UNITY_2018_3_OR_NEWER

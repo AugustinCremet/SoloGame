@@ -3,6 +3,8 @@ using UnityEngine;
 using System;
 using UnityEngine.UIElements;
 using BulletPro;
+using System.Collections;
+using Unity.VisualScripting;
 
 public enum PlayerAbilities
 {
@@ -74,6 +76,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         GameManager.OnSave += SavePlayerData;
         GameManager.OnLoad += LoadPlayerData;
+        ResetPlayer();
     }
 
     private void OnDisable()
@@ -107,7 +110,33 @@ public class Player : MonoBehaviour, IDamageable
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
 
         if (_currentHealth <= 0)
-            Destroy(gameObject);
+        {
+            Time.timeScale = 0f;
+            StartCoroutine(HandleDeath());
+        }
+    }
+
+    public IEnumerator HandleDeath()
+    {
+        _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        _animator.Play("Death");
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        Time.timeScale = 1f;
+        GameManager.Instance.ResetScenes();
+        //GameManager.Instance.LoadGame();
+    }
+
+    public void ResetPlayer()
+    {
+        _currentHealth = _maxHealth;
+        //UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+        _animator.Rebind();
+        _playerController.ResetPlayerColor();
+        SkillStateMachine.ResetStates(IdleState);
+
+        _playerController.StopShooting();
     }
 
     public void SetPosition(Transform newTransform)
@@ -121,7 +150,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             PlayerData = new PlayerData
             {
-                hp = _currentHealth,
+                hp = _maxHealth,
             }
         };
         return data;
@@ -129,7 +158,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public void LoadPlayerData(SaveData saveData)
     {
-        _currentHealth = saveData.PlayerData.hp;
-        UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+        ResetPlayer();
+        //_currentHealth = saveData.PlayerData.hp;
+        //UIManager.Instance.ChangeCurrentHealth(_currentHealth);
     }
 }

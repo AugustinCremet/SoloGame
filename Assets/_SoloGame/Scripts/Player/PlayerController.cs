@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField] GameObject _crosshair;
-    private Vector2 _screenSize;
+    private const float CROSSHAIR_NORMAL_SPEED = 0.5f;
+    private const float CROSSHAIR_AIMING_SPEED = 0.05f;
 
     private BulletEmitter _bullet = null;
     private bool _isShooting;
@@ -54,7 +55,6 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
-        _screenSize = new Vector2(Screen.width, Screen.height);
     }
 
     // Update is called once per frame
@@ -90,18 +90,16 @@ public class PlayerController : MonoBehaviour
     private void AdjustCrosshair()
     {
         Vector2 crosshairMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        _crosshair.transform.localPosition += new Vector3(crosshairMovement.x, crosshairMovement.y, 0f) * 0.5f;
+        _crosshair.transform.position += new Vector3(crosshairMovement.x, crosshairMovement.y, 0f) * CROSSHAIR_NORMAL_SPEED;
 
-        Vector3 crosshairScreenPos = _cam.WorldToScreenPoint(_crosshair.transform.localPosition);
+        Vector3 crosshairScreenPos = _cam.WorldToScreenPoint(_crosshair.transform.position);
         crosshairScreenPos.x = Mathf.Clamp(crosshairScreenPos.x, 0f, Screen.width);
         crosshairScreenPos.y = Mathf.Clamp(crosshairScreenPos.y, 0f, Screen.height);
-        
-        Debug.Log(crosshairScreenPos);
 
         Vector3 clampedWorldPos = _cam.ScreenToWorldPoint(crosshairScreenPos);
         clampedWorldPos.z = 0f;
 
-        _crosshair.transform.localPosition = clampedWorldPos;
+        _crosshair.transform.position = clampedWorldPos;
     }
 
     void FixedUpdate()
@@ -168,6 +166,8 @@ public class PlayerController : MonoBehaviour
 
     public void HandleShooting()
     {
+
+        Debug.Log(_bullet);
         _bullet.Play();
     }
     public void StopShooting()
@@ -241,10 +241,13 @@ public class PlayerController : MonoBehaviour
         int redAmount = Mathf.Min(variationAmount, 255);
         int greenAmount = variationAmount <= 255 ? 255 : Mathf.Max(255 + (255 - variationAmount), 0);
 
-        Debug.Log($"{redAmount}, {greenAmount}");
-
         _material.SetColor("_Color", new Color32((byte)redAmount, (byte)greenAmount, 0, 255));
         _player.Damage(1);
+    }
+
+    public void ResetPlayerColor()
+    {
+        _material.SetColor("_Color", new Color32(0, 255, 0, 255));
     }
 
     void DashMovement()

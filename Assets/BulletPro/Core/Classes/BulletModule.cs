@@ -26,13 +26,13 @@ namespace BulletPro
 		protected DynamicParameterSolver solver;
 
 		// managers
+		protected BulletProSceneSetup bulletCanvas;
 		protected BulletCollisionManager collisionManager;
 		protected BulletGlobalParamManager globalParamManager;
 		protected BulletPoolManager poolManager;
 		protected BulletAudioManager audioManager;
 		protected BulletVFXManager vfxManager;
 		protected BulletBehaviourManager behaviourManager;
-		protected Transform bulletCanvas;
 
 		// components
 		protected Transform self;
@@ -61,14 +61,14 @@ namespace BulletPro
 
 		public void GetManagers()
 		{
+			bulletCanvas = bullet.sceneSetup;
+
 			poolManager = bullet.poolManager;
 			collisionManager = bullet.collisionManager;
 			globalParamManager = bullet.globalParamManager;
 			audioManager = bullet.audioManager;
 			vfxManager = bullet.vfxManager;
 			behaviourManager = bullet.behaviourManager;
-
-			bulletCanvas = bullet.poolManager.mainTransform;
 
 			solver = bullet.dynamicSolver;
 		}

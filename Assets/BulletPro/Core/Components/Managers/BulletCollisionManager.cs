@@ -53,7 +53,12 @@ namespace BulletPro
 		{
 			// Setting up singleton instance
 			if (!instance) instance = this;
-			else Debug.LogWarning("BulletPro Warning: there is more than one instance of BulletCollisionManager in the scene.");
+			else
+			{
+				Debug.LogWarning("BulletPro Warning: there is more than one instance of BulletCollisionManager in the scene.");
+				return;
+				// BulletProSceneSetup.cs will call the Destroy() method
+			}
 			allBulletReceivers = new List<BulletReceiver>();
 			allBullets = new List<Bullet>();
 

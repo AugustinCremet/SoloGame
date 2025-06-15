@@ -23,20 +23,34 @@ namespace BulletPro
 			set
 			{
 				_lifespan = value;
-				moduleHoming.homingOverLifetime.UpdateInternalValues(bullet);
-				moduleRenderer.alphaOverLifetime.UpdateInternalValues(bullet);
-				moduleRenderer.colorOverLifetime.UpdateInternalValues(bullet);
-				moduleMovement.speedOverLifetime.UpdateInternalValues(bullet);
-				moduleMovement.angularSpeedOverLifetime.UpdateInternalValues(bullet);
-				moduleMovement.scaleOverLifetime.UpdateInternalValues(bullet);
-				moduleMovement.moveXFromAnim.UpdateInternalValues(bullet);
-				moduleMovement.moveYFromAnim.UpdateInternalValues(bullet);
-				moduleMovement.rotateFromAnim.UpdateInternalValues(bullet);
-				moduleMovement.scaleFromAnim.UpdateInternalValues(bullet);
+				UpdateAllCurves();
 			}
 		}
 
-		public float maxTravellableDistance;
+		private float _maxTravellableDistance;
+		public float maxTravellableDistance
+		{
+			get { return _maxTravellableDistance; }
+			set
+			{
+				_maxTravellableDistance = value;
+				UpdateAllCurves();
+			}
+		}
+
+		void UpdateAllCurves()
+		{
+			moduleHoming.homingOverLifetime.UpdateInternalValues(bullet);
+			moduleRenderer.alphaOverLifetime.UpdateInternalValues(bullet);
+			moduleRenderer.colorOverLifetime.UpdateInternalValues(bullet);
+			moduleMovement.speedOverLifetime.UpdateInternalValues(bullet);
+			moduleMovement.angularSpeedOverLifetime.UpdateInternalValues(bullet);
+			moduleMovement.scaleOverLifetime.UpdateInternalValues(bullet);
+			moduleMovement.moveXFromAnim.UpdateInternalValues(bullet);
+			moduleMovement.moveYFromAnim.UpdateInternalValues(bullet);
+			moduleMovement.rotateFromAnim.UpdateInternalValues(bullet);
+			moduleMovement.scaleFromAnim.UpdateInternalValues(bullet);
+		}
 
 		public override void Enable() { base.Enable(); }
 		public override void Disable() { base.Disable(); }

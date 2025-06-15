@@ -91,6 +91,7 @@ namespace BulletPro.EditorScripts
 			if (property.FindPropertyRelative("enabled").boolValue)
 			{
 				lines++; // wrapmode
+				lines++; // measurement mode
 				lines++; // curve
 				if (!GoesFromZeroToOne(property))
 				{
@@ -138,6 +139,11 @@ namespace BulletPro.EditorScripts
 			{
 				SerializedProperty wrapMode = property.FindPropertyRelative("wrapMode");
 				EditorGUI.PropertyField(rects[line++], wrapMode);
+
+				SerializedProperty measurementMode = property.FindPropertyRelative("measurementMode");
+				//string[] measureNames = new string[]{ "Time", "Distance" };
+				//measurementMode.enumValueIndex = EditorGUI.Popup(rects[line++], "Measurement Mode", measurementMode.enumValueIndex, measureNames);
+				EditorGUI.PropertyField(rects[line++], measurementMode);
 
 				SerializedProperty curve = property.FindPropertyRelative("curve");
 				EditorGUI.PropertyField(rects[line++], curve);

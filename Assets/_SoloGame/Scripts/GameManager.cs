@@ -94,21 +94,80 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame()
     {
+        StartCoroutine(LoadingScreen());
+    }
+
+    public IEnumerator LoadingScreen()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("LoadingScreen");
+        while (!asyncLoad.isDone && asyncLoad != null)
+        {
+            yield return null;
+        }
         StartCoroutine(LoadSceneAsync());
         OnLoad?.Invoke(_dataService.LoadData<SaveData>(_savePath, false));
     }
 
     private IEnumerator LoadSceneAsync()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_dataService.LoadData<SaveData>(_savePath, false).LocationData.WorldName, LoadSceneMode.Single);
+        string sceneName = _dataService.LoadData<SaveData>(_savePath, false).LocationData.WorldName;
 
-        while (!asyncLoad.isDone)
+        AsyncOperation asyncLoad = null;
+        asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+
+        while (!asyncLoad.isDone && asyncLoad != null)
         {
             yield return null;
         }
 
         GameObject areaGameObject = GameObject.Find(_dataService.LoadData<SaveData>(_savePath, false).LocationData.AreaName);
         areaGameObject.GetComponent<SceneDetails>().FirstLoad(_essential);
+    }
+
+    public static bool IsSceneLoaded(string sceneName)
+    {
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene.name == sceneName)
+            {
+                return scene.isLoaded;
+            }
+        }
+        return false;
+    }
+
+    public void ResetScenes()
+    {
+        StartCoroutine(UnloadAllScenesExcept("MainArea"));
+    }
+
+    private IEnumerator UnloadAllScenesExcept(string sceneToKeep)
+    {
+        _essential.SetActive(false);
+
+        List<Scene> scenesToUnload = new List<Scene>();
+
+        // Collect all scenes to unload first
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene.isLoaded && scene.name != sceneToKeep)
+            {
+                scenesToUnload.Add(scene);
+            }
+        }
+
+        // Now unload them safely
+        foreach (Scene scene in scenesToUnload)
+        {
+            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scene);
+            while (!unloadOp.isDone)
+                yield return null;
+        }
+
+        Debug.Log("Unload is done");
+        LoadGame();
     }
 
     public void StartPuzzle(string sceneName)

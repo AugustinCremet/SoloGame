@@ -19,7 +19,12 @@ namespace BulletPro
 		public void Awake()
 		{
 			if (!instance) instance = this;
-			else Debug.LogWarning("Beware : there is more than one instance of BulletAudioManager in the scene!");
+			else
+			{
+				Debug.LogWarning("BulletPro Warning: there is more than one instance of BulletAudioManager in the scene!");
+				return;
+				// BulletProSceneSetup.cs will call the Destroy() method
+			}
 		}
 
 		public void PlayLocal(AudioClip clip)
