@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
     public void HandleShooting()
     {
 
-        Debug.Log(_bullet);
+        Debug.Log("Shoot");
         _bullet.Play();
     }
     public void StopShooting()

@@ -33,6 +33,7 @@ public class Player : MonoBehaviour, IDamageable
     public GooState GooState;
     public ShootingState ShootingState;
     public MovingState MovingState;
+    public DeadState DeadState;
 
 
     private void Awake()
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour, IDamageable
         GooState = new GooState(_playerController, this, _animator);
         ShootingState = new ShootingState(_playerController, this, _animator);
         MovingState = new MovingState(_playerController, this, _animator);
+        DeadState = new DeadState(_playerController, this, _animator);
     }
     private void Start()
     {
@@ -56,7 +58,7 @@ public class Player : MonoBehaviour, IDamageable
 
         // TODO remove
         _bulletEmitter = GetComponent<BulletEmitter>();
-        _bulletEmitter.SwitchProfile(_normalProfile);
+        //_bulletEmitter.SwitchProfile(_normalProfile);
         //GrantAbility(PlayerAbilities.BouncingBullet);
 
         SkillStateMachine?.SetInitialState(IdleState);
@@ -111,21 +113,26 @@ public class Player : MonoBehaviour, IDamageable
 
         if (_currentHealth <= 0)
         {
-            Time.timeScale = 0f;
-            StartCoroutine(HandleDeath());
+            SkillStateMachine.TryChangeState(DeadState);
         }
     }
 
-    public IEnumerator HandleDeath()
+    public void HandleDeath()
     {
-        _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
-        _animator.Play("Death");
+        StartCoroutine(HandleDeathCR());
+    }
 
+    public IEnumerator HandleDeathCR()
+    {
         yield return new WaitForSecondsRealtime(2f);
+        SceneTransition sceneTransition = FindAnyObjectByType<SceneTransition>();
+        yield return StartCoroutine(sceneTransition.FadeIn());
+        HandleDeathAfterFadeIn();
+    }
 
-        Time.timeScale = 1f;
-        GameManager.Instance.ResetScenes();
-        //GameManager.Instance.LoadGame();
+    public void HandleDeathAfterFadeIn()
+    {
+        GameManager.Instance.LoadGame();
     }
 
     public void ResetPlayer()
@@ -135,8 +142,6 @@ public class Player : MonoBehaviour, IDamageable
         _animator.Rebind();
         _playerController.ResetPlayerColor();
         SkillStateMachine.ResetStates(IdleState);
-
-        _playerController.StopShooting();
     }
 
     public void SetPosition(Transform newTransform)

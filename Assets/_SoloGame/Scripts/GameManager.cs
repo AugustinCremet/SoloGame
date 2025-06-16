@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BulletPro;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
@@ -94,7 +95,22 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame()
     {
+        DestroyBullets();
+        _essential.SetActive(false);
         StartCoroutine(LoadingScreen());
+    }
+
+    public void DestroyBullets()
+    {
+        var bulletEmitters = FindObjectsByType<BulletEmitter>(FindObjectsSortMode.None);
+        foreach(var bulletEmitter in bulletEmitters)
+        {
+            foreach(var bullet in bulletEmitter.bullets)
+            {
+                bullet.moduleRenderer.Disable();
+            }
+            bulletEmitter.Kill();
+        }
     }
 
     public IEnumerator LoadingScreen()
@@ -135,39 +151,6 @@ public class GameManager : MonoBehaviour
             }
         }
         return false;
-    }
-
-    public void ResetScenes()
-    {
-        StartCoroutine(UnloadAllScenesExcept("MainArea"));
-    }
-
-    private IEnumerator UnloadAllScenesExcept(string sceneToKeep)
-    {
-        _essential.SetActive(false);
-
-        List<Scene> scenesToUnload = new List<Scene>();
-
-        // Collect all scenes to unload first
-        for (int i = 0; i < SceneManager.sceneCount; i++)
-        {
-            Scene scene = SceneManager.GetSceneAt(i);
-            if (scene.isLoaded && scene.name != sceneToKeep)
-            {
-                scenesToUnload.Add(scene);
-            }
-        }
-
-        // Now unload them safely
-        foreach (Scene scene in scenesToUnload)
-        {
-            AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(scene);
-            while (!unloadOp.isDone)
-                yield return null;
-        }
-
-        Debug.Log("Unload is done");
-        LoadGame();
     }
 
     public void StartPuzzle(string sceneName)

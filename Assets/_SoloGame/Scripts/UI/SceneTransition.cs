@@ -1,9 +1,8 @@
+using System;
 using System.Collections;
-using Mono.Cecil.Cil;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Splines.Interpolators;
 
 public class SceneTransition : MonoBehaviour
 {
@@ -14,10 +13,17 @@ public class SceneTransition : MonoBehaviour
     private Vector2 _targetPosition;
     private float _animationDuration = 2f;
 
-    private void Start()
+    private void Awake()
     {
         _originalSize = _holeImage.sizeDelta;
+        Debug.Log("Awake " + _originalSize);
     }
+
+    //public IEnumerator StartFadeIn(Action onComplete)
+    //{
+    //    Debug.Log("StartFadeIn");
+    //    StartCoroutine(FadeIn(onComplete));
+    //}
 
     public void StartTransition(string sceneName, bool isSceneAdded)
     {
@@ -27,22 +33,10 @@ public class SceneTransition : MonoBehaviour
 
     public IEnumerator StartAnimation(string sceneName, bool isSceneAdded)
     {
-        float elapsedTime = 0f;
-        Vector2 endSize = new Vector2(0f, 0f);
-        Vector2 startingSize = _holeImage.sizeDelta;
+        yield return StartCoroutine(FadeIn());
 
-        while (elapsedTime < _animationDuration)
-        {
-            elapsedTime += Time.deltaTime;
-
-            Vector2 newSize = Vector2.Lerp(startingSize, endSize, elapsedTime / _animationDuration);
-            _holeImage.sizeDelta = newSize;
-
-            yield return null;
-        }
-
-        AsyncOperation async = null;
-        if(isSceneAdded)
+        AsyncOperation async;
+        if (isSceneAdded)
         {
             async = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         }
@@ -51,17 +45,39 @@ public class SceneTransition : MonoBehaviour
             async = SceneManager.UnloadSceneAsync(sceneName);
         }
 
-        while(!async.isDone)
+        while (!async.isDone)
         {
             yield return null;
         }
 
         ChangeAnimationPosition(!isSceneAdded);
-        StartCoroutine(EndAnimation(sceneName));
+        StartCoroutine(FadeOut(false));
     }
 
-    public IEnumerator EndAnimation(string sceneName)
+    public IEnumerator FadeIn(Action onComplete = null)
     {
+        ChangeAnimationPosition(true);
+        float elapsedTime = 0f;
+        Vector2 endSize = new Vector2(0f, 0f);
+        Vector2 startingSize = _holeImage.sizeDelta;
+
+        while (elapsedTime < _animationDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            Debug.Log(elapsedTime);
+
+            Vector2 newSize = Vector2.Lerp(startingSize, endSize, elapsedTime / _animationDuration);
+            _holeImage.sizeDelta = newSize;
+
+            yield return null;
+        }
+
+        onComplete?.Invoke();
+    }
+
+    public IEnumerator FadeOut(bool focusOnMainPlayer)
+    {
+        ChangeAnimationPosition(focusOnMainPlayer);
         float elapsedTime = 0f;
         Vector2 endSize = _originalSize;
         Vector2 startingSize = _holeImage.sizeDelta;
@@ -75,6 +91,12 @@ public class SceneTransition : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void ResetTransition()
+    {
+        Debug.Log("ResetTransition " + _originalSize);
+        _holeImage.sizeDelta = _originalSize;
     }
 
     private void ChangeAnimationPosition(bool isMainPlayer)

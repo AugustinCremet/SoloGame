@@ -57,9 +57,13 @@ public class SceneDetails : MonoBehaviour
 
         IsLoaded = true;
         essential.SetActive(true);
-        FindFirstObjectByType<Player>().SetPosition(gameObject.transform);
+        GameObject savePoint = GameObject.FindGameObjectWithTag("SavePoint");
+        //FindAnyObjectByType<SceneTransition>().ResetTransition();
+        SceneTransition sceneTransition = FindAnyObjectByType<SceneTransition>();
+        FindFirstObjectByType<Player>().SetPosition(savePoint.transform);
         var newBoundary = gameObject.GetComponentInChildren<PolygonCollider2D>();
         FindFirstObjectByType<CameraConfinerSwitcher>().ChangeBoundary(newBoundary, _cameraSize);
+        yield return sceneTransition.FadeOut(true);
     }
 
     private void LoadScene()
