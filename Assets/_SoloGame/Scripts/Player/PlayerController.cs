@@ -1,4 +1,5 @@
 using BulletPro;
+using Newtonsoft.Json.Serialization;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -76,14 +77,17 @@ public class PlayerController : MonoBehaviour
         {
             if (_cachedMovementVector.sqrMagnitude > 0.01f)
             {
+                Debug.Log("Redo movement");
                 MovementVector = _cachedMovementVector;
                 _player.SkillStateMachine.TryChangeState(_player.MovingState);
             }
             else
             {
+                Debug.Log("Set to 0");
                 MovementVector = Vector2.zero;
                 _player.SkillStateMachine.TryChangeState(_player.IdleState);
             }
+            _movementWasBlockedLastFrame = false;   
         }
     }
 
@@ -105,6 +109,23 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         //_rb.linearVelocity = _horizontalMovement * _moveSpeed;
+    }
+
+    public void ReevaluateState()
+    {
+        if (MovementVector.magnitude <= 0f)
+        {
+            _player.SkillStateMachine.TryChangeState(_player.IdleState);
+        }
+        else
+        {
+            _player.SkillStateMachine.TryChangeState(_player.MovingState);
+        }
+
+        if(_isShooting)
+        {
+            _player.SkillStateMachine.TryChangeState(_player.ShootingState);
+        }
     }
 
     public void MoveInput(InputAction.CallbackContext context)

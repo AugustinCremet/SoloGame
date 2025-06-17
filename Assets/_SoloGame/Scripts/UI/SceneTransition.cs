@@ -16,7 +16,6 @@ public class SceneTransition : MonoBehaviour
     private void Awake()
     {
         _originalSize = _holeImage.sizeDelta;
-        Debug.Log("Awake " + _originalSize);
     }
 
     //public IEnumerator StartFadeIn(Action onComplete)

@@ -11,7 +11,6 @@ public class ShootingState : BaseState
 
     public override void EnterState(BaseStateMachine stateMachine)
     {
-        Debug.Log("Enter Shooting State");
         _aimSight = GameObject.FindWithTag("AimSight");
 
         _aimSightDirection = AimDirection();

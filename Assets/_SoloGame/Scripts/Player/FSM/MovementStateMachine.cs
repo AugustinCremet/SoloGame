@@ -11,8 +11,8 @@ public class MovementStateMachine : BaseStateMachine
         _transitionMap.Add(typeof(MovingState), new List<Type> { typeof(IdleMovementState) });
     }
 
-    public override void TryChangeState(BaseState state)
+    public override bool TryChangeState(BaseState state)
     {
-        base.TryChangeState(state);
+        return base.TryChangeState(state);
     }
 }

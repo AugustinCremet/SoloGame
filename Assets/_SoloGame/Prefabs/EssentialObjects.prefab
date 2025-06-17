@@ -820,9 +820,17 @@ PrefabInstance:
       propertyPath: _crosshair
       value: 
       objectReference: {fileID: 1194466681944497604}
+    - target: {fileID: 3547648823097942777, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: collisionTagsFoldout
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4508968744674227800, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590945984184800997, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: _invinsibilityDuration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8453446122992144777, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_LocalPosition.x

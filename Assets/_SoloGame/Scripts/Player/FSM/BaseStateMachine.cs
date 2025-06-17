@@ -32,8 +32,11 @@ public class BaseStateMachine
         SwitchState(state);
     }
 
-    public virtual void TryChangeState(BaseState state)
+    public virtual bool TryChangeState(BaseState state)
     {
+        if (CurrentState != null && !CurrentState.CanExit)
+            return false;
+
         var currentType = CurrentState.GetType();
         var nextType = state.GetType();
 
@@ -41,7 +44,9 @@ public class BaseStateMachine
             allowedStates.Contains(nextType))
         {
             SwitchState(state);
+            return true;
         }
+        return false;
     }
 
     private void SwitchState(BaseState state)

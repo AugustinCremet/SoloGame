@@ -26,6 +26,7 @@ public class CameraConfinerSwitcher : MonoBehaviour
         _confiner.BoundingShape2D = newBoundary;
         _confiner.InvalidateBoundingShapeCache();
 
-        _vcam.Lens.OrthographicSize = cameraSize;
+        GetComponent<CinemachineGroupFraming>().OrthoSizeRange = new Vector2(cameraSize, cameraSize);
+        //_vcam.Lens.OrthographicSize = cameraSize;
     }
 }

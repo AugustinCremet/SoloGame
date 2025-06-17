@@ -19,10 +19,13 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] int _maxHealth = 100;
     public int MaxHealth { get { return _maxHealth; } }
     private int _currentHealth = 0;
+    private bool _isInvinsible = false;
+    [SerializeField] float _invinsibilityDuration = 10f;
     public int CurrentHealth { get { return _currentHealth; } }
     private BulletEmitter _bulletEmitter;
     private PlayerController _playerController;
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
     [SerializeField] EmitterProfile _normalProfile;
     [SerializeField] EmitterProfile _bouncingProfile;
     public PlayerAbilities Abilities { get; private set; }
@@ -34,12 +37,14 @@ public class Player : MonoBehaviour, IDamageable
     public ShootingState ShootingState;
     public MovingState MovingState;
     public DeadState DeadState;
+    public HitState HitState;
 
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _playerController = GetComponent<PlayerController>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _currentHealth = _maxHealth;
 
         //State machine with states
@@ -49,6 +54,7 @@ public class Player : MonoBehaviour, IDamageable
         ShootingState = new ShootingState(_playerController, this, _animator);
         MovingState = new MovingState(_playerController, this, _animator);
         DeadState = new DeadState(_playerController, this, _animator);
+        HitState = new HitState(_playerController, this, _animator);
     }
     private void Start()
     {
@@ -108,13 +114,38 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void Damage(int dmgAmount)
     {
+        if (SkillStateMachine.CurrentState == HitState || _isInvinsible)
+            return;
+
         _currentHealth = _currentHealth - dmgAmount;
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
-
         if (_currentHealth <= 0)
         {
             SkillStateMachine.TryChangeState(DeadState);
         }
+
+        SkillStateMachine.TryChangeState(HitState);
+
+    }
+
+    public void StartInvincibility()
+    {
+        _isInvinsible = true;
+        StartCoroutine(InvinsibilityCR());
+    }
+
+    private IEnumerator InvinsibilityCR()
+    {
+        float timer = 0f;
+        while(timer < _invinsibilityDuration)
+        {
+            _spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            _spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+            timer += 0.2f;
+        }
+        _isInvinsible = false;
     }
 
     public void HandleDeath()

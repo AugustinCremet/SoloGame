@@ -1,3 +1,4 @@
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public abstract class BaseState
@@ -7,6 +8,7 @@ public abstract class BaseState
     protected Animator _animator;
 
     public virtual bool BlockMovement => false;
+    public virtual bool CanExit => true;
 
     protected BaseState(PlayerController playerController, Player player, Animator animator)
     {

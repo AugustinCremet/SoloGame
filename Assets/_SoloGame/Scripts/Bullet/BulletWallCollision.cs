@@ -20,7 +20,6 @@ public class BulletWallCollision : BaseBulletBehaviour {
 		base.OnBulletBirth();
 
 		// Your code here
-		Debug.Log("Birth");
 	}
 	
 	// Update is (still) called once per frame

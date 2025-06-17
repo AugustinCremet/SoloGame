@@ -234,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectedScenes:
   - {fileID: 1334917241}
-  _cameraSize: 3
+  _cameraSize: 2
 --- !u!61 &699371333
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -497,7 +497,7 @@ MonoBehaviour:
   - {fileID: 1744907848}
   - {fileID: 699371332}
   - {fileID: 2045726875}
-  _cameraSize: 7
+  _cameraSize: 6
 --- !u!61 &1334917242
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectedScenes:
   - {fileID: 1334917241}
-  _cameraSize: 7
+  _cameraSize: 6
 --- !u!4 &2045726876
 Transform:
   m_ObjectHideFlags: 0
