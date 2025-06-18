@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public static event Action<SaveData> OnLoad;
 
     private List<string> _tempClearedWaveIDs = new List<string>();
+    private List<string> _tempClearedEnemies = new List<string>();
 
     private void Awake()
     {
@@ -55,6 +56,19 @@ public class GameManager : MonoBehaviour
         {
             LoadGame();
         }
+    }
+
+    public void MarkEnemyTempDead(string uniqueID)
+    {
+        if(!_tempClearedEnemies.Contains(uniqueID))
+        {
+            _tempClearedEnemies.Add(uniqueID);
+        }
+    }
+
+    public bool IsEnemyTempDead(string _uniqueID)
+    {
+        return _tempClearedEnemies.Contains(_uniqueID);
     }
 
     public void MarkWaveCleared(string uniqueID)

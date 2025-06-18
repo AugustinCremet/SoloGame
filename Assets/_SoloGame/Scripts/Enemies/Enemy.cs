@@ -3,6 +3,8 @@ using BulletPro;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +15,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     [SerializeField] AudioClip _soundClip;
     private BulletEmitter _bulletEmitter;
     private string _tagSelf;
+    [SerializeField] string _uniqueID;
 
     public bool IsAttacking { get; private set; } = false;
     public bool IsAIActive { get; private set; } = false;
@@ -24,7 +27,30 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
         _tagSelf = gameObject.tag;
         _bulletEmitter = GetComponent<BulletEmitter>();
         Instantiate(_laserSight, transform);
-        StartAttack();
+    }
+
+    private void Start()
+    {
+        if (GameManager.Instance.IsEnemyTempDead(_uniqueID))
+            Destroy(gameObject);
+    }
+
+    [ContextMenu("Assign Unique ID")]
+    private void AssignUniqueIDInEditor()
+    {
+#if UNITY_EDITOR
+        if (string.IsNullOrEmpty(_uniqueID))
+        {
+            Undo.RecordObject(this, "Assign Unique ID");
+            _uniqueID = Guid.NewGuid().ToString();
+            EditorUtility.SetDirty(this); // Mark the object as changed so Unity saves it
+            Debug.Log($"Assigned new ID: {_uniqueID}", this);
+        }
+        else
+        {
+            Debug.LogWarning($"ID already assigned: {_uniqueID}", this);
+        }
+#endif
     }
 
     public void SetAI(bool isActive)
@@ -55,7 +81,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
         if(_hp <= 0)
         {
-
+            GameManager.Instance.MarkEnemyTempDead(_uniqueID);
             Destroy(gameObject);
         }
     }
