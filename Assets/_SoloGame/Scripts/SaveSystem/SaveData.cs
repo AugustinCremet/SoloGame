@@ -26,5 +26,5 @@ public class PlayerData
 [System.Serializable]
 public class EnemyData
 {
-    public int hp;
+    public List<string> DeadEnemiesID;
 }

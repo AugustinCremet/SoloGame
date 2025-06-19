@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     private BulletEmitter _bulletEmitter;
     private string _tagSelf;
     [SerializeField] string _uniqueID;
+    protected virtual bool _canBePermaDead => false;
 
     public bool IsAttacking { get; private set; } = false;
     public bool IsAIActive { get; private set; } = false;
@@ -81,7 +82,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
         if(_hp <= 0)
         {
-            GameManager.Instance.MarkEnemyTempDead(_uniqueID);
+            GameManager.Instance.MarkEnemyTempDead(_uniqueID, false);
             Destroy(gameObject);
         }
     }

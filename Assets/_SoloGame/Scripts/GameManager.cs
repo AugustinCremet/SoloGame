@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     public static event Action<SaveData> OnLoad;
 
     private List<string> _tempClearedWaveIDs = new List<string>();
-    private List<string> _tempClearedEnemies = new List<string>();
+    private Dictionary<string, bool> _tempClearedEnemies = new Dictionary<string, bool>();
+    private List<string> _permaClearedEnemies = new List<string>();
 
     private void Awake()
     {
@@ -58,17 +59,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void MarkEnemyTempDead(string uniqueID)
+    public void MarkEnemyTempDead(string uniqueID, bool canBePerma)
     {
-        if(!_tempClearedEnemies.Contains(uniqueID))
+        if(!_tempClearedEnemies.ContainsKey(uniqueID))
         {
-            _tempClearedEnemies.Add(uniqueID);
+            _tempClearedEnemies.Add(uniqueID, canBePerma);
         }
     }
 
     public bool IsEnemyTempDead(string _uniqueID)
     {
-        return _tempClearedEnemies.Contains(_uniqueID);
+        return _tempClearedEnemies.ContainsKey(_uniqueID);
+    }
+
+    private void HandleTempData()
+    {
+        List<string> keysToRemove = new List<string>();
+
+        foreach(var pair in _tempClearedEnemies)
+        {
+            if(pair.Value)
+            {
+                _permaClearedEnemies.Add(pair.Key);
+            }
+            else
+            {
+                keysToRemove.Add(pair.Key);
+            }
+        }
+        foreach(var key in keysToRemove)
+        {
+            _tempClearedEnemies.Remove(key);
+        }
     }
 
     public void MarkWaveCleared(string uniqueID)
@@ -86,14 +108,21 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
+        HandleTempData();
+
         SaveData fullSaveData = new SaveData
         {
             LocationData = new LocationData
             {
                 WorldName = _currentSceneParentName,
                 AreaName = _currentScene.gameObject.name
+            },
+            EnemyData = new EnemyData
+            {
+                DeadEnemiesID = _permaClearedEnemies
             }
         };
+
 
         if (OnSave != null)
         {
