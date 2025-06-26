@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ChangeCurrentHealth(float currentHealth)
+    public void ChangeCurrentHealth(int currentHealth)
     {
         _healthBar.ChangeCurrentHealth(currentHealth);
     }
@@ -33,11 +33,11 @@ public class UIManager : MonoBehaviour
 
     public void ChangeCurrentBulletTime(float currentBulletTime)
     {
-        _bulletTimeBar.ChangeCurrentBulletTime(currentBulletTime);
+        //_bulletTimeBar.ChangeCurrentBulletTime(currentBulletTime);
     }
 
     public void ChangeMaxBulletTime(float maxBulletTime)
     {
-        _bulletTimeBar.ChangeMaxBulletTime(maxBulletTime);
+        //_bulletTimeBar.ChangeMaxBulletTime(maxBulletTime);
     }
 }

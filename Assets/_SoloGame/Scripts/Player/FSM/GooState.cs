@@ -12,6 +12,7 @@ public class GooState : BaseState
 
     public override void EnterState(BaseStateMachine stateMachine)
     {
+        _animator.Play("ChangeToGoo");
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
@@ -21,7 +22,10 @@ public class GooState : BaseState
 
     public override void UpdateState(BaseStateMachine stateMachine)
     {
-        _playerController.HandleGoo();
+        _animator.SetFloat("Horizontal", _playerController.MovementVector.x);
+        _animator.SetFloat("Vertical", _playerController.MovementVector.y);
+        //_playerController.HandleGoo();
+        _playerController.HandleMovement();
     }
 
     public override void FixedUpdateState(BaseStateMachine stateMachine)

@@ -59,8 +59,8 @@ public class Player : MonoBehaviour, IDamageable
     private void Start()
     {
 
-        UIManager.Instance.ChangeCurrentHealth(_currentHealth);
         UIManager.Instance.ChangeMaxHealth(_maxHealth);
+        UIManager.Instance.ChangeCurrentHealth(_currentHealth);
 
         // TODO remove
         _bulletEmitter = GetComponent<BulletEmitter>();

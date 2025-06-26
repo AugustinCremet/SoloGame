@@ -19,8 +19,8 @@ public class BulletTimeBar : MonoBehaviour
         _slider.value = fillAmount;
     }
 
-    public void ChangeMaxBulletTime(float maxHealth)
+    public void ChangeMaxBulletTime(float maxBulletTime)
     {
-        _maxBulletTime = maxHealth;
+        _maxBulletTime = maxBulletTime;
     }
 }

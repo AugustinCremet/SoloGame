@@ -5,20 +5,36 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    Slider _slider;
+    [SerializeField] GameObject _HPOdd;
+    [SerializeField] GameObject _HPEven;
     float _maxHealth = 100f;
-    float _currentHealth;
+    int _currentHealth;
 
     private void Awake()
     {
-        _slider = GetComponent<Slider>();
-        _currentHealth = _maxHealth;
-        ChangeCurrentHealth(_currentHealth);
+        _currentHealth = 10;
     }
-    public void ChangeCurrentHealth(float currentHealth)
+    public void ChangeCurrentHealth(int currentHealth)
     {
-        float fillAmount = currentHealth / _maxHealth;
-        _slider.value = fillAmount;
+        int healthToRemove = _currentHealth - currentHealth;
+        Debug.Log(healthToRemove);
+        
+        if(healthToRemove > 0)
+        {
+            for(int i = 0;  i < healthToRemove; i++)
+            {
+                if(_currentHealth % 2 == 0)
+                {
+                    _HPEven.transform.GetChild(_currentHealth / 2 - 1).GetComponent<Image>().enabled = false;
+                }
+                else
+                {
+                    _HPOdd.transform.GetChild(_currentHealth / 2).GetComponent<Image>().enabled = false;
+                }
+                _currentHealth--;
+            }
+        }
+        
     }
 
     public void ChangeMaxHealth(float maxHealth)
