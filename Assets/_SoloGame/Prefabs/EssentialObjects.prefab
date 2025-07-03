@@ -404,7 +404,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 3221229559
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.112500004
+      objectReference: {fileID: 0}
+    - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0.057407405
+      objectReference: {fileID: 0}
+    - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2880393775667964626, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_Name
@@ -456,18 +472,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4371159116507200784, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
+    - {fileID: 8414709144059750553, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7107932413374053794, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8150648105662889272}
+    - targetCorrespondingSourceObject: {fileID: 7107932413374053794, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 987177120694531352}
     - targetCorrespondingSourceObject: {fileID: 3256195373857169513, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4825601242926979213}
     - targetCorrespondingSourceObject: {fileID: 3256195373857169513, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1571864890831812242}
+    - targetCorrespondingSourceObject: {fileID: 3256195373857169513, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5464800475808246857}
   m_SourcePrefab: {fileID: 100100000, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
 --- !u!4 &307367763975242615 stripped
 Transform:
@@ -531,6 +554,18 @@ MonoBehaviour:
   FovRange: {x: 1, y: 100}
   DollyRange: {x: -100, y: 100}
   OrthoSizeRange: {x: 7, y: 7}
+--- !u!114 &5464800475808246857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896976091843688598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7466975629746349405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7107932413374053794, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
@@ -580,6 +615,30 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &987177120694531352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7466975629746349405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_AssetsPPU: 16
+  m_RefResolutionX: 480
+  m_RefResolutionY: 270
+  m_CropFrame: 3
+  m_GridSnapping: 0
+  m_FilterMode: 0
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1001 &1171516895292275386
 PrefabInstance:
   m_ObjectHideFlags: 0

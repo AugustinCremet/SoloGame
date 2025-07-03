@@ -19,9 +19,9 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] int _maxHealth = 100;
     public int MaxHealth { get { return _maxHealth; } }
     private int _currentHealth = 0;
+    public int CurrentHealth { get { return _currentHealth; } }
     private bool _isInvinsible = false;
     [SerializeField] float _invinsibilityDuration = 10f;
-    public int CurrentHealth { get { return _currentHealth; } }
     private BulletEmitter _bulletEmitter;
     private PlayerController _playerController;
     private Animator _animator;
@@ -125,7 +125,21 @@ public class Player : MonoBehaviour, IDamageable
         }
 
         SkillStateMachine.TryChangeState(HitState);
+    }
 
+    public void LoseSlimeBall(int amount)
+    {
+        _currentHealth -= amount;
+        UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+    }
+
+    public void Heal(int healAmount)
+    {
+        if(_currentHealth < _maxHealth)
+        {
+            _currentHealth += healAmount;
+            UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+        }
     }
 
     public void StartInvincibility()
@@ -197,5 +211,14 @@ public class Player : MonoBehaviour, IDamageable
         ResetPlayer();
         //_currentHealth = saveData.PlayerData.hp;
         //UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ICollectable collectable = collision.gameObject.GetComponent<ICollectable>();
+        if (collectable != null)
+        {
+            collectable.OnCollect(gameObject);
+        }
     }
 }

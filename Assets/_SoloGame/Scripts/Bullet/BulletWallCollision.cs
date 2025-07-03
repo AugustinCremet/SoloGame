@@ -26,24 +26,12 @@ public class BulletWallCollision : BaseBulletBehaviour {
 	public override void Update ()
 	{
 		base.Update();
-
-		//RaycastHit hit;
-		
-		//Debug.DrawLine(transform.position - new Vector3(-0.5f, 0, 0), transform.position - new Vector3(0.5f, 0, 0), Color.black);
-  //      if(!Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit)) return;
-  //      if(1 << hit.collider.gameObject.layer == LayerMask.GetMask("Wall"))
-  //      {
-		//	Debug.Log("Special script fired");
-  //          bullet.Die();
-  //      }
 	}
 
     // This gets called when the bullet dies
     public override void OnBulletDeath()
 	{
 		base.OnBulletDeath();
-
-		// Your code here
 	}
 
 	// This gets called after the bullet has died, it can be delayed.

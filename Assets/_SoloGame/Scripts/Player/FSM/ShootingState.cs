@@ -5,6 +5,7 @@ public class ShootingState : BaseState
     public override bool BlockMovement => true;
     private GameObject _aimSight;
     private Vector2 _aimSightDirection;
+    private bool _hasShot = false;
     public ShootingState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
     }
@@ -48,8 +49,6 @@ public class ShootingState : BaseState
         if (newAimDirection != _aimSightDirection)
         {
             _aimSightDirection = newAimDirection;
-            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-            float currentTime = stateInfo.normalizedTime % 1f;
             _animator.SetFloat("HorizontalAim", _aimSightDirection.x);
             _animator.SetFloat("VerticalAim", _aimSightDirection.y);
         }

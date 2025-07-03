@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private bool _isShooting;
 
     public static event Action OnInteract;
+    private Animator animator;
 
 
     // Start is called before the first frame update
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
         _bullet = GetComponent<BulletEmitter>();
         _player = GetComponent<Player>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();    
         _material = _spriteRenderer.material;
     }
 
@@ -77,13 +79,11 @@ public class PlayerController : MonoBehaviour
         {
             if (_cachedMovementVector.sqrMagnitude > 0.01f)
             {
-                Debug.Log("Redo movement");
                 MovementVector = _cachedMovementVector;
                 _player.SkillStateMachine.TryChangeState(_player.MovingState);
             }
             else
             {
-                Debug.Log("Set to 0");
                 MovementVector = Vector2.zero;
                 _player.SkillStateMachine.TryChangeState(_player.IdleState);
             }
@@ -173,6 +173,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (context.canceled)
         {
+            StopShooting();
             _isShooting = false;
             if (MovementVector.magnitude <= 0f)
             {
@@ -187,9 +188,12 @@ public class PlayerController : MonoBehaviour
 
     public void HandleShooting()
     {
-
-        Debug.Log("Shoot");
-        _bullet.Play();
+        if(_player.CurrentHealth > 1)
+        {
+            Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+            _bullet.Play();
+            _player.LoseSlimeBall(1);
+        }
     }
     public void StopShooting()
     {

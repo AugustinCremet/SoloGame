@@ -17,7 +17,6 @@ public class HealthBar : MonoBehaviour
     public void ChangeCurrentHealth(int currentHealth)
     {
         int healthToRemove = _currentHealth - currentHealth;
-        Debug.Log(healthToRemove);
         
         if(healthToRemove > 0)
         {
@@ -32,6 +31,22 @@ public class HealthBar : MonoBehaviour
                     _HPOdd.transform.GetChild(_currentHealth / 2).GetComponent<Image>().enabled = false;
                 }
                 _currentHealth--;
+            }
+        }
+        else
+        {
+            healthToRemove *= -1;
+            for (int i = 0; i < healthToRemove; i++)
+            {
+                if (_currentHealth % 2 != 0)
+                {
+                    _HPEven.transform.GetChild(_currentHealth / 2).GetComponent<Image>().enabled = true;
+                }
+                else
+                {
+                    _HPOdd.transform.GetChild(_currentHealth / 2).GetComponent<Image>().enabled = true;
+                }
+                _currentHealth++;
             }
         }
         

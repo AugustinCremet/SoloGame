@@ -24,6 +24,7 @@ TagManager:
   - PlayerFeet
   - Goo
   - PlayerGoo
+  - Collectable
   - 
   - 
   - 
@@ -40,8 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - SecondNav
-  - MainNav
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
