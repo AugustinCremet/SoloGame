@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private bool _isShooting;
 
     public static event Action OnInteract;
-    private Animator animator;
+    private Animator _animator;
 
 
     // Start is called before the first frame update
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         _bullet = GetComponent<BulletEmitter>();
         _player = GetComponent<Player>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();    
+        _animator = GetComponent<Animator>();    
         _material = _spriteRenderer.material;
     }
 
@@ -186,11 +186,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private int _lastShootFrame = -1;
     public void HandleShooting()
     {
-        if(_player.CurrentHealth > 1)
+        int currentFrame = Time.frameCount;
+        if (_lastShootFrame == currentFrame)
         {
-            Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+            Debug.LogWarning("HandleShooting event has tried to be called twice in one frame");
+            return;
+        }
+        _lastShootFrame = currentFrame;
+
+        AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
+        if (_player.CurrentHealth > 1)
+        {
             _bullet.Play();
             _player.LoseSlimeBall(1);
         }
@@ -198,6 +207,7 @@ public class PlayerController : MonoBehaviour
     public void StopShooting()
     {
         _bullet.Stop();
+        //ReevaluateState();
     }
 
     public void DashInput(InputAction.CallbackContext context)
