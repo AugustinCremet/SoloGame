@@ -8,28 +8,35 @@ public class GooState : BaseState
 
     public GooState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
+        BlockMovement = true;
     }
 
     public override void EnterState(BaseStateMachine stateMachine)
     {
+        _animator.SetBool("IsGoo", true);
         _animator.Play("ChangeToGoo");
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
     {
-        
+        _animator.SetBool("IsGoo", false);
     }
 
     public override void UpdateState(BaseStateMachine stateMachine)
     {
         _animator.SetFloat("Horizontal", _playerController.MovementVector.x);
-        _animator.SetFloat("Vertical", _playerController.MovementVector.y);
-        //_playerController.HandleGoo();
-        _playerController.HandleMovement();
+        _animator.SetFloat("Vertical", _playerController.MovementVector.y);       
     }
 
     public override void FixedUpdateState(BaseStateMachine stateMachine)
     {
-        
+        if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "ChangeToGoo")
+        {
+            return;
+        }
+
+        BlockMovement = false;
+        _playerController.HandleMovement();
+        _playerController.HandleGoo();
     }
 }

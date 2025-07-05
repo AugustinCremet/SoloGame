@@ -21,6 +21,11 @@ public class Player : MonoBehaviour, IDamageable
     private int _currentHealth = 0;
     public int CurrentHealth { get { return _currentHealth; } }
     private bool _isInvinsible = false;
+    [SerializeField] float _maxGoo = 10f;
+    public float MaxGoo { get { return _maxGoo; } }
+    private float _currentGoo;
+    private float _gooRecoveryRate = 0.25f;
+    public float CurrentGoo { get { return _currentGoo; } }
     [SerializeField] float _invinsibilityDuration = 10f;
     private BulletEmitter _bulletEmitter;
     private PlayerController _playerController;
@@ -46,6 +51,7 @@ public class Player : MonoBehaviour, IDamageable
         _playerController = GetComponent<PlayerController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _currentHealth = _maxHealth;
+        _currentGoo = _maxGoo;
 
         //State machine with states
         SkillStateMachine = new SkillStateMachine();
@@ -61,6 +67,8 @@ public class Player : MonoBehaviour, IDamageable
 
         UIManager.Instance.ChangeMaxHealth(_maxHealth);
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+        UIManager.Instance.ChangeMaxGoo(_maxGoo);
+        UIManager.Instance.ChangeCurrentGoo(_currentGoo);
 
         // TODO remove
         _bulletEmitter = GetComponent<BulletEmitter>();
@@ -73,6 +81,7 @@ public class Player : MonoBehaviour, IDamageable
     private void Update()
     {
         SkillStateMachine?.Update();
+        RecoverGooOverTime(_gooRecoveryRate);
     }
 
     private void FixedUpdate()
@@ -139,6 +148,40 @@ public class Player : MonoBehaviour, IDamageable
         {
             _currentHealth += healAmount;
             UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+        }
+    }
+
+    public bool LoseGooOverTime(float amountPerSec)
+    {
+        _currentGoo -= amountPerSec * Time.deltaTime;
+        UIManager.Instance.ChangeCurrentGoo(_currentGoo);
+
+        if (_currentGoo <= 0f)
+        {
+            _currentGoo = 0f;
+            return false;
+        }
+
+        return true;
+    }
+
+    public void LoseGoo(float amount)
+    {
+
+    }
+
+    public void RecoverGooOverTime(float amountPerSec)
+    {
+        if (_currentGoo >= _maxGoo || _playerController.IsUsingGoo)
+            return;
+
+        Debug.Log("Recovering");
+        _currentGoo += amountPerSec * Time.deltaTime;
+        UIManager.Instance.ChangeCurrentGoo((_currentGoo));
+
+        if(_currentGoo >= _maxGoo)
+        {
+            _currentGoo = _maxGoo;
         }
     }
 

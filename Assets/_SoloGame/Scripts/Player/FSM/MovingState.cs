@@ -8,6 +8,7 @@ public class MovingState : BaseState
 
     public override void EnterState(BaseStateMachine stateMachine)
     {
+        _animator.Play("Movement");
         _animator.SetBool("IsMoving", true);
     }
 

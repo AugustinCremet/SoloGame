@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     [SerializeField] HealthBar _healthBar;
-    [SerializeField] BulletTimeBar _bulletTimeBar;
+    [SerializeField] GooBar _gooBar;
 
     private void Awake()
     {
@@ -31,13 +31,13 @@ public class UIManager : MonoBehaviour
         _healthBar.ChangeMaxHealth(maxHealth);
     }
 
-    public void ChangeCurrentBulletTime(float currentBulletTime)
+    public void ChangeCurrentGoo(float currentGoo)
     {
-        //_bulletTimeBar.ChangeCurrentBulletTime(currentBulletTime);
+        _gooBar.ChangeCurrentGoo(currentGoo);
     }
 
-    public void ChangeMaxBulletTime(float maxBulletTime)
+    public void ChangeMaxGoo(float maxGoo)
     {
-        //_bulletTimeBar.ChangeMaxBulletTime(maxBulletTime);
+        _gooBar.ChangeMaxGoo(maxGoo);
     }
 }

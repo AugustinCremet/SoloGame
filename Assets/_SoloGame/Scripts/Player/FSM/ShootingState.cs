@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class ShootingState : BaseState
 {
-    public override bool BlockMovement => true;
     private GameObject _aimSight;
     private Vector2 _aimSightDirection;
-    private bool _hasShot = false;
     public ShootingState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
+        BlockMovement = true;
     }
 
     public override void EnterState(BaseStateMachine stateMachine)

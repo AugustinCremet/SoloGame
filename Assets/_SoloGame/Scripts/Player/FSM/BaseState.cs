@@ -7,7 +7,7 @@ public abstract class BaseState
     protected Player _player;
     protected Animator _animator;
 
-    public virtual bool BlockMovement => false;
+    public bool BlockMovement { get; protected set; }
     public virtual bool CanExit => true;
 
     protected BaseState(PlayerController playerController, Player player, Animator animator)

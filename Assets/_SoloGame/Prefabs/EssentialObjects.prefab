@@ -408,11 +408,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.112500004
+      value: 0.09375001
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.057407405
+      value: 0.05648148
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
@@ -915,7 +915,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 742176796982642723, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8453446122992144777, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
