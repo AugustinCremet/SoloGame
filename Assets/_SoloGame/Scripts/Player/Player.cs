@@ -30,6 +30,7 @@ public class Player : MonoBehaviour, IDamageable
     private BulletEmitter _bulletEmitter;
     private PlayerController _playerController;
     private Animator _animator;
+    [SerializeField] GameObject _eyeAnimator;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] EmitterProfile _normalProfile;
     [SerializeField] EmitterProfile _bouncingProfile;
@@ -56,7 +57,7 @@ public class Player : MonoBehaviour, IDamageable
         //State machine with states
         SkillStateMachine = new SkillStateMachine();
         IdleState = new IdleSkillState(_playerController, this, _animator);
-        GooState = new GooState(_playerController, this, _animator);
+        GooState = new GooState(_playerController, this, _animator, _eyeAnimator);
         ShootingState = new ShootingState(_playerController, this, _animator);
         MovingState = new MovingState(_playerController, this, _animator);
         DeadState = new DeadState(_playerController, this, _animator);
