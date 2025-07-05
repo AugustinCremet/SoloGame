@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da8a7c80eab4c474da1e90eb12356b89, type: 3}
-  m_Name: PlayerFirstShot
+  m_Name: PlayerSecondShot
   m_EditorClassIdentifier: 
   rootBullet: {fileID: 114671512830859702}
   subAssets:
@@ -29,7 +29,7 @@ MonoBehaviour:
   foldoutExport: 0
   foldoutEmptyBin: 1
   foldoutCompactMode: 0
-  currentParamsSelected: {fileID: 114027673760526898}
+  currentParamsSelected: {fileID: 114917193883442684}
   numberOfSubAssets: 4
 --- !u!114 &114027673760526898
 MonoBehaviour:
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: Bullet
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 16585772
+  uniqueIndex: 14263866
   profile: {fileID: 11400000}
   parent: {fileID: 114201774248674550}
   children: []
@@ -161,7 +161,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: {fileID: -122127772707186243, guid: ae1180dedf1e8884eab9b21f6acdfc59, type: 3}
+      defaultValue: {fileID: 21300000, guid: 06e5d8f7ba9c17144b1ace83b073da17, type: 3}
     narrowType: 1
     requireComponent: 0
     typeName: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
@@ -497,7 +497,7 @@ MonoBehaviour:
         indexOfTo: 0
         indexOfBlendedChildren: 
         weight: 0
-        headerTitle: Material
+        headerTitle: 
         blendColor: {r: 0, g: 0, b: 0, a: 0}
         parameterType: 0
         relativeTo: 0
@@ -956,12 +956,12 @@ MonoBehaviour:
         indexOfTo: 0
         indexOfBlendedChildren: 
         weight: 0
-        headerTitle: Sorting Layer Name
+        headerTitle: 
         blendColor: {r: 0, g: 0, b: 0, a: 0}
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: Bullet
+      defaultValue: 
   color:
     valueTree:
     - settings:
@@ -1101,7 +1101,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: {r: 1, g: 1, b: 1, a: 1}
+      defaultValue: {r: 0, g: 0.4705882, b: 1, a: 1}
       gradientValue:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1751,8 +1751,8 @@ MonoBehaviour:
     onBulletDeath:
       enabled: 1
       behaviour: 0
-      unless: 1
-      canceller: 1
+      unless: 0
+      canceller: 0
     replaceColorWithBulletColor: 1
     replaceSizeWithNumber: 1
     sizeNewValue:
@@ -2668,7 +2668,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 5
+      defaultValue: 2
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -2894,7 +2894,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 1
+      defaultValue: 0.2
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -3013,13 +3013,13 @@ MonoBehaviour:
   animationMovementSpace: 0
   animationTexture: {fileID: 0}
   collisionTags:
-    tagList: 6
+    tagList: 70
   colliders:
   - colliderType: 0
-    size: 0.1
+    size: 1.71
     offset: {x: 0, y: 0, z: 0}
     lineStart: {x: 0, y: 0}
-    lineEnd: {x: 0.09, y: 0}
+    lineEnd: {x: 0, y: 0}
   dieOnCollision: 1
   deathTiming: 0
   maxSimultaneousCollisionsPerFrame: 1
@@ -7590,237 +7590,7 @@ MonoBehaviour:
     _period: 0
   patternsShot: []
   dieWhenAllPatternsAreDone: 0
-  behaviourPrefabs:
-  - valueTree:
-    - settings:
-        valueType: 0
-        interpolationValue:
-          interpolationFactor: 0
-          repartitionCurve:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          shareValueBetweenInstances: 0
-          rerollFrequency: 0
-          interpolationFactorFromShot: 0
-          interpolationFactorFromPattern: 0
-          interpolationFactorFromBullet: 0
-          relativeTo: 0
-          parameterName: 
-          loopDepth: 0
-          useComplexRerollSequence: 0
-          checkEveryNLoops: 0
-          loopSequence: 0
-          period: 0
-          wrapMode: 0
-          sortMode: 0
-          sortDirection: 0
-          repartitionTexture: {fileID: 0}
-          centerX: 0
-          centerY: 0
-          radius: 0
-          wrapPoint: 0
-          countClockwise: 0
-          differentValuesPerShot: 0
-        combinedInterpolationFactors: 0
-        index: 0
-        indexOfParent: 0
-        indexOfFrom: 0
-        indexOfTo: 0
-        indexOfBlendedChildren: 
-        weight: 0
-        headerTitle: 
-        blendColor: {r: 0, g: 0, b: 0, a: 0}
-        parameterType: 0
-        relativeTo: 0
-        parameterName: 
-      defaultValue: {fileID: 0}
-    - settings:
-        valueType: 0
-        interpolationValue:
-          interpolationFactor: 0
-          repartitionCurve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 0
-              outSlope: 1
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          shareValueBetweenInstances: 0
-          rerollFrequency: 0
-          interpolationFactorFromShot: 0
-          interpolationFactorFromPattern: 0
-          interpolationFactorFromBullet: 0
-          relativeTo: 0
-          parameterName: 
-          loopDepth: 0
-          useComplexRerollSequence: 0
-          checkEveryNLoops: 0
-          loopSequence: 0
-          period: 0
-          wrapMode: 0
-          sortMode: 0
-          sortDirection: 0
-          repartitionTexture: {fileID: 0}
-          centerX: 0
-          centerY: 0
-          radius: 0
-          wrapPoint: 0
-          countClockwise: 0
-          differentValuesPerShot: 0
-        combinedInterpolationFactors: 0
-        index: 1
-        indexOfParent: 0
-        indexOfFrom: 0
-        indexOfTo: 0
-        indexOfBlendedChildren: 
-        weight: 0
-        headerTitle: Element 0
-        blendColor: {r: 0, g: 0, b: 0, a: 0}
-        parameterType: 0
-        relativeTo: 0
-        parameterName: 
-      defaultValue: {fileID: 6704594946750790696, guid: f11ea26512ba2914c91f4d5570bc62cd, type: 3}
-    narrowType: 1
-    requireComponent: 1
-    typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    requiredComponentName: BulletPro.BaseBulletBehaviour, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  - valueTree:
-    - settings:
-        valueType: 0
-        interpolationValue:
-          interpolationFactor: 0
-          repartitionCurve:
-            serializedVersion: 2
-            m_Curve: []
-            m_PreInfinity: 0
-            m_PostInfinity: 0
-            m_RotationOrder: 0
-          shareValueBetweenInstances: 0
-          rerollFrequency: 0
-          interpolationFactorFromShot: 0
-          interpolationFactorFromPattern: 0
-          interpolationFactorFromBullet: 0
-          relativeTo: 0
-          parameterName: 
-          loopDepth: 0
-          useComplexRerollSequence: 0
-          checkEveryNLoops: 0
-          loopSequence: 0
-          period: 0
-          wrapMode: 0
-          sortMode: 0
-          sortDirection: 0
-          repartitionTexture: {fileID: 0}
-          centerX: 0
-          centerY: 0
-          radius: 0
-          wrapPoint: 0
-          countClockwise: 0
-          differentValuesPerShot: 0
-        combinedInterpolationFactors: 0
-        index: 0
-        indexOfParent: 0
-        indexOfFrom: 0
-        indexOfTo: 0
-        indexOfBlendedChildren: 
-        weight: 0
-        headerTitle: 
-        blendColor: {r: 0, g: 0, b: 0, a: 0}
-        parameterType: 0
-        relativeTo: 0
-        parameterName: 
-      defaultValue: {fileID: 0}
-    - settings:
-        valueType: 0
-        interpolationValue:
-          interpolationFactor: 0
-          repartitionCurve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 0
-              outSlope: 1
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 1
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          shareValueBetweenInstances: 0
-          rerollFrequency: 0
-          interpolationFactorFromShot: 0
-          interpolationFactorFromPattern: 0
-          interpolationFactorFromBullet: 0
-          relativeTo: 0
-          parameterName: 
-          loopDepth: 0
-          useComplexRerollSequence: 0
-          checkEveryNLoops: 0
-          loopSequence: 0
-          period: 0
-          wrapMode: 0
-          sortMode: 0
-          sortDirection: 0
-          repartitionTexture: {fileID: 0}
-          centerX: 0
-          centerY: 0
-          radius: 0
-          wrapPoint: 0
-          countClockwise: 0
-          differentValuesPerShot: 0
-        combinedInterpolationFactors: 0
-        index: 1
-        indexOfParent: 0
-        indexOfFrom: 0
-        indexOfTo: 0
-        indexOfBlendedChildren: 
-        weight: 0
-        headerTitle: Element 0
-        blendColor: {r: 0, g: 0, b: 0, a: 0}
-        parameterType: 0
-        relativeTo: 0
-        parameterName: 
-      defaultValue: {fileID: 8425940935336168948, guid: 4dcec6fadf376a043b68d42b5711af7e, type: 3}
-    narrowType: 1
-    requireComponent: 1
-    typeName: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    requiredComponentName: BulletPro.BaseBulletBehaviour, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  behaviourPrefabs: []
   delaySpawn: 0
   timeBeforeSpawn:
     valueTree:
@@ -8760,7 +8530,7 @@ MonoBehaviour:
           parameterType: 0
           relativeTo: 0
           parameterName: 
-        defaultValue: 100
+        defaultValue: 10
       useSlider: 0
       sliderMin: 0
       sliderMax: 0
@@ -9247,7 +9017,7 @@ MonoBehaviour:
       requiredComponentName: 
   preview:
     collidersTex: {fileID: 0}
-    sprite: {fileID: -122127772707186243, guid: ae1180dedf1e8884eab9b21f6acdfc59, type: 3}
+    sprite: {fileID: 21300000, guid: 06e5d8f7ba9c17144b1ace83b073da17, type: 3}
     gizmoColor: {r: 0, g: 0, b: 0.5, a: 1}
 --- !u!114 &114201774248674550
 MonoBehaviour:
@@ -9262,7 +9032,7 @@ MonoBehaviour:
   m_Name: Shot
   m_EditorClassIdentifier: 
   parameterType: 1
-  uniqueIndex: 11820519
+  uniqueIndex: 15344479
   profile: {fileID: 11400000}
   parent: {fileID: 114917193883442684}
   children:
@@ -9550,7 +9320,7 @@ MonoBehaviour:
   m_Name: Root Emitter
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 14101686
+  uniqueIndex: 3776368
   profile: {fileID: 11400000}
   parent: {fileID: 0}
   children:
@@ -11874,7 +11644,7 @@ MonoBehaviour:
   foldoutVFX: 0
   hideSpriteList: 0
   vfxOpened: 0
-  currentlyDisplayedModule: 1
+  currentlyDisplayedModule: 3
   canMove: 0
   canCollide: 0
   isVisible: 0
@@ -17927,7 +17697,7 @@ MonoBehaviour:
   m_Name: Pattern
   m_EditorClassIdentifier: 
   parameterType: 2
-  uniqueIndex: 13472964
+  uniqueIndex: 14180910
   profile: {fileID: 11400000}
   parent: {fileID: 114671512830859702}
   children:
@@ -37467,7 +37237,7 @@ MonoBehaviour:
         m_Center: {x: 0, y: 0, z: 0}
         m_Extent: {x: 0, y: 0, z: 0}
       displayName: Play Audio
-    - enabled: 0
+    - enabled: 1
       instructionType: 0
       waitTime:
         valueTree:
@@ -37578,7 +37348,7 @@ MonoBehaviour:
             parameterType: 0
             relativeTo: 0
             parameterName: 
-          defaultValue: 5
+          defaultValue: 0.5
         useSlider: 0
         sliderMin: 0
         sliderMax: 0
@@ -47122,4 +46892,4 @@ MonoBehaviour:
   advancedFoldout: 1
   hasBeenSerializedOnce: 1
   focusedInstruction: -1
-  safetyForPlaymode: 89
+  safetyForPlaymode: 60

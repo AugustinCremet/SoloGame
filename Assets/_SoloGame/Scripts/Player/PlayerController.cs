@@ -186,11 +186,14 @@ public class PlayerController : MonoBehaviour
         }
         _lastShootFrame = currentFrame;
 
-        AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
         if (_player.CurrentHealth > 1)
         {
             _bullet.Play();
             _player.LoseSlimeBall(1);
+        }
+        else if(_player.CurrentHealth == 1)
+        {
+            _bullet.Play();
         }
     }
 

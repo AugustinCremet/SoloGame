@@ -33,6 +33,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] GameObject _eyeAnimator;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] EmitterProfile _normalProfile;
+    [SerializeField] EmitterProfile _emergencyShot;
     [SerializeField] EmitterProfile _bouncingProfile;
     public PlayerAbilities Abilities { get; private set; }
     private IDataService _dataService = new JsonDataService();
@@ -127,8 +128,7 @@ public class Player : MonoBehaviour, IDamageable
         if (SkillStateMachine.CurrentState == HitState || _isInvinsible)
             return;
 
-        _currentHealth = _currentHealth - dmgAmount;
-        UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+        LoseSlimeBall(dmgAmount);
         if (_currentHealth <= 0)
         {
             SkillStateMachine.TryChangeState(DeadState);
@@ -140,7 +140,19 @@ public class Player : MonoBehaviour, IDamageable
     public void LoseSlimeBall(int amount)
     {
         _currentHealth -= amount;
+        if (_currentHealth == 1)
+        {
+            StartCoroutine(SwitchProfileNextFrame(_emergencyShot));
+            _animator.SetFloat("ShootingSpeed", 0.5f);
+        }
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+    }
+
+    // Wait one frame before switching profile so if a bullet was fire during the same frame, it is not affected by the switch
+    private IEnumerator SwitchProfileNextFrame(EmitterProfile newProfile)
+    {
+        yield return null;
+        _bulletEmitter.SwitchProfile(newProfile);
     }
 
     public void Heal(int healAmount)
@@ -149,6 +161,13 @@ public class Player : MonoBehaviour, IDamageable
         {
             _currentHealth += healAmount;
             UIManager.Instance.ChangeCurrentHealth(_currentHealth);
+        }
+
+        if(_currentHealth > 1 && _bulletEmitter.emitterProfile != _normalProfile)
+        {
+            Debug.Log("Back to normal profile");
+            StartCoroutine(SwitchProfileNextFrame(_normalProfile));
+            _animator.SetFloat("ShootingSpeed", 1f);
         }
     }
 
