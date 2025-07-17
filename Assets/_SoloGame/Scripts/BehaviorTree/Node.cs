@@ -11,9 +11,9 @@ namespace BehaviorTree
     }
     public class Node
     {
-        private const int test = 19;
         protected NodeState _state;
         protected BehaviorTreeContext _context;
+        protected Blackboard _blackboard;
 
         public Node Parent;
         protected List<Node> _children = new List<Node>();
@@ -37,10 +37,18 @@ namespace BehaviorTree
         public void SetContext(BehaviorTreeContext context)
         {
             _context = context;
-            //OnContextSet();
             foreach (var child in _children)
             {
                 child.SetContext(context);
+            }
+        }
+
+        public void SetBlackboard(Blackboard bb)
+        {
+            _blackboard = bb;
+            foreach (var child in _children)
+            {
+                child.SetBlackboard(bb);
             }
         }
 

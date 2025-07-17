@@ -21,6 +21,25 @@ public class TaskMoveBetween : Node
 
     public override NodeState Evaluate()
     {
+        if(_context.NavAgent.remainingDistance <= _context.NavAgent.stoppingDistance && _currentDestination != Vector3.zero)
+        {
+            _currentDestination = Vector3.zero;
+            _state = NodeState.SUCCESS;
+            return _state;
+        }
+
+        if (_currentDestination == Vector3.zero)
+        {
+            PickNewDestination();
+        }
+
+
+        _state = NodeState.RUNNING;
+        return _state;
+    }
+
+    private void PickNewDestination()
+    {
         Vector2 directionToPlayer = (_context.PlayerTransform.position - _context.EnemyTransform.position).normalized;
         float distanceToPlayer = Vector3.Distance(_context.EnemyTransform.position, _context.PlayerTransform.position);
 
@@ -35,19 +54,11 @@ public class TaskMoveBetween : Node
         float perpendicularOffset = Random.Range(-_maxPerpendicularDistance, _maxPerpendicularDistance);
         Vector2 finalPosition = alongPlayer + perpendicularDir * perpendicularOffset;
 
-        if(_context.NavAgent.remainingDistance <= _context.NavAgent.stoppingDistance && _currentDestination != Vector3.zero)
-        {
-            _currentDestination = Vector3.zero;
-            _state = NodeState.SUCCESS;
-            return _state;
-        }
-
         // Ensure the position is on the NavMesh
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(finalPosition, out hit, 1.0f, NavMesh.AllAreas) && _currentDestination == Vector3.zero)
+        if (NavMesh.SamplePosition(finalPosition, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
         {
             float movingDistance = Vector2.Distance(_context.EnemyTransform.position, finalPosition);
-            if(movingDistance > _context.NavAgent.stoppingDistance)
+            if (movingDistance > _context.NavAgent.stoppingDistance)
             {
                 _currentDestination = finalPosition;
                 _context.NavAgent.SetDestination(hit.position);
@@ -55,10 +66,6 @@ public class TaskMoveBetween : Node
             DrawRectangle(perpendicularDir, directionToPlayer, distanceToPlayer);
             Debug.DrawLine(_context.NavAgent.transform.position, finalPosition, Color.red, 1f);
         }
-
-
-        _state = NodeState.RUNNING;
-        return _state;
     }
 
     // For debugging

@@ -39,15 +39,30 @@ public class EnemyAI : TreeOfNodes
         //        }),
         //    }),
         //});
+        BehaviorTreeContext context = new BehaviorTreeContext(_enemy, transform, _target.transform, _agent);
+        Blackboard bb = new Blackboard();
+        bb.Set("ShootTimer", 0f);
 
-        Node root = new Sequence(new List<Node>
+        Node root = new Selector(new List<Node>
         {
-            //new TaskTeleport(false, 5f),
-            new TaskAttack(),
-            //new TaskMoveBetween(0.15f, 0.25f, 5f),
-            //new TaskGoToTarget(),
-            new TaskWait(0.3f),
-            new TaskStopAttack(),
+            new Sequence(new List<Node>
+            {
+                new TaskIsPlayerInRange(),
+                new TaskAttack(),
+                new TaskResetTimer("ShootTimer"),
+            }),
+            new Sequence(new List<Node>
+            {
+                new TaskHasTimerExceeded("ShootTimer", 2f),
+                new TaskAttack(),
+                new TaskResetTimer("ShootTimer"),
+            }),
+            new Sequence(new List<Node>
+            {
+                new TaskStopAttack(),
+                new TaskIncrementTimer("ShootTimer"),
+                new TaskGoToTarget(),
+            }),
         });
 
         // Basic enemy
@@ -58,8 +73,8 @@ public class EnemyAI : TreeOfNodes
         //    new TaskWait(1f),
         //    new TaskStopAttack(),
         //});
-        var context = new BehaviorTreeContext(_enemy, transform, _target.transform, _agent);
         root.SetContext(context);
+        root.SetBlackboard(bb);
 
         return root;
     }

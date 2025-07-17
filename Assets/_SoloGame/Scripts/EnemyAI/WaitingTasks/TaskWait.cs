@@ -25,6 +25,7 @@ public class TaskWait : Node
         }
         else
         {
+            Debug.Log("Waiting");
             _state = NodeState.RUNNING;
         }
 
