@@ -15,9 +15,11 @@ namespace BehaviorTree
                     case NodeState.FAILURE:
                         continue;
                     case NodeState.SUCCESS:
+                        ResetOtherChildren(node);
                         _state = NodeState.SUCCESS;
                         return _state;
                     case NodeState.RUNNING:
+                        ResetOtherChildren(node);
                         _state = NodeState.RUNNING;
                         return _state;
                     default:
@@ -27,6 +29,17 @@ namespace BehaviorTree
 
             _state = NodeState.FAILURE;
             return _state;
+        }
+
+        private void ResetOtherChildren(Node activeChild)
+        {
+            foreach(Node node in _children)
+            {
+                if(node != activeChild)
+                {
+                    node.Reset();
+                }
+            }
         }
     }
 }

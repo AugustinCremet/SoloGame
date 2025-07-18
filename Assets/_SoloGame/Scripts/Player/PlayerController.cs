@@ -1,6 +1,7 @@
 using BulletPro;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -48,6 +49,10 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+
+        // Make sure the emitter will be active **Weird fix but okay**
+        _bullet.Play();
+        _bullet.Stop();
     }
 
     // Update is called once per frame
@@ -189,17 +194,32 @@ public class PlayerController : MonoBehaviour
         if (_player.CurrentHealth > 1)
         {
             _bullet.Play();
+            Debug.Log("Player shoot");
             _player.LoseSlimeBall(1);
         }
         else if(_player.CurrentHealth == 1)
         {
-            _bullet.Play();
+            //_bullet.Play();
         }
     }
 
     public void StopShooting()
     {
         _bullet.Stop();
+        //StartCoroutine(StopShootingCR());
+    }
+
+    public IEnumerator StopShootingCR()
+    {
+        yield return new WaitForSeconds(1);
+        Debug.Log("Player STOP shoot");
+        _bullet.Stop();
+    }
+
+    public IEnumerator ShootCR()
+    {
+        yield return new WaitForSeconds(1);
+        _bullet.Play();
     }
 
     public void DashInput(InputAction.CallbackContext context)

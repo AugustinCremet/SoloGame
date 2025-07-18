@@ -36,6 +36,16 @@ namespace BehaviorTree
             _state = NodeState.SUCCESS;
             return _state;
         }
+
+        public override void Reset()
+        {
+            _currentChildIndex = 0;
+
+            foreach (Node child in _children)
+            {
+                child.Reset();
+            }
+        }
     }
 }
 

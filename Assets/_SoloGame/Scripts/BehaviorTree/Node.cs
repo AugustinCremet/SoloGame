@@ -119,6 +119,11 @@ namespace BehaviorTree
 
             return false;
         }
+
+        public virtual void Reset()
+        {
+
+        }
     }
 
 }
