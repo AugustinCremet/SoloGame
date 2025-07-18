@@ -11,22 +11,24 @@ public class TaskAttack : Node
     }
     public override NodeState Evaluate()
     {
-        if (!_hasStartedAttack)
-        {
-            _context.Enemy.StartAttack();
-            _hasStartedAttack = true;
-            _state = NodeState.RUNNING;
-        }
-        else if(_context.Enemy.IsAttacking)
-        {
-            _state = NodeState.RUNNING;
-        }
-        else
-        {
-            _hasStartedAttack = false;
-            _state = NodeState.SUCCESS;
-        }
+        //if (!_hasStartedAttack)
+        //{
+        //    _context.Enemy.StartAttack();
+        //    _hasStartedAttack = true;
+        //    _state = NodeState.RUNNING;
+        //}
+        //else if(_context.Enemy.IsAttacking)
+        //{
+        //    _state = NodeState.RUNNING;
+        //}
+        //else
+        //{
+        //    _hasStartedAttack = false;
+        //    _state = NodeState.SUCCESS;
+        //}
 
+        _context.Enemy.StartAttack();
+        _state = NodeState.SUCCESS;
         return _state;
     }
 }

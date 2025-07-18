@@ -23,7 +23,6 @@ public class TaskGoToTarget : Node
             return _state;
         }
 
-        Debug.Log("Set new destination task");
         _state = NodeState.RUNNING;
         return _state;
     }

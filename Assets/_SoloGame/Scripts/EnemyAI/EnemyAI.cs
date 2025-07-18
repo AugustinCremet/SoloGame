@@ -40,8 +40,6 @@ public class EnemyAI : TreeOfNodes
         //    }),
         //});
         BehaviorTreeContext context = new BehaviorTreeContext(_enemy, transform, _target.transform, _agent);
-        Blackboard bb = new Blackboard();
-        bb.Set("ShootTimer", 0f);
 
         Node root = new Selector(new List<Node>
         {
@@ -49,18 +47,16 @@ public class EnemyAI : TreeOfNodes
             {
                 new TaskIsPlayerInRange(),
                 new TaskAttack(),
-                new TaskResetTimer("ShootTimer"),
             }),
             new Sequence(new List<Node>
             {
-                new TaskHasTimerExceeded("ShootTimer", 2f),
+                new TaskHasTimerExceeded(5f),
                 new TaskAttack(),
-                new TaskResetTimer("ShootTimer"),
             }),
             new Sequence(new List<Node>
             {
                 new TaskStopAttack(),
-                new TaskIncrementTimer("ShootTimer"),
+                new TaskStartAttackTimer(),
                 new TaskGoToTarget(),
             }),
         });
@@ -74,7 +70,6 @@ public class EnemyAI : TreeOfNodes
         //    new TaskStopAttack(),
         //});
         root.SetContext(context);
-        root.SetBlackboard(bb);
 
         return root;
     }

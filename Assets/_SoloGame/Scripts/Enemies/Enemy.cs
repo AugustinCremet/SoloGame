@@ -14,8 +14,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     [SerializeField] GameObject _laserSight;
     [SerializeField] AudioClip _soundClip;
     private BulletEmitter _bulletEmitter;
-    private string _tagSelf;
     [SerializeField] string _uniqueID;
+    private float _shootingCurrentTime;
+    private bool _isShootingTimerActive;
     protected virtual bool _canBePermaDead => false;
 
     public bool IsAttacking { get; private set; } = false;
@@ -25,7 +26,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
     private void Awake()
     {
-        _tagSelf = gameObject.tag;
         _bulletEmitter = GetComponent<BulletEmitter>();
         Instantiate(_laserSight, transform);
     }
@@ -61,15 +61,39 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
     private void Update()
     {
-        //if(!_canAttack)
-        //{
-        //    _currentWaitingTime += Time.deltaTime;
-        //    if (_currentWaitingTime > 0.3f)
-        //    {
-        //        _canAttack = true;
-        //        _currentWaitingTime = 0f;
-        //    }
-        //}
+        if (_isShootingTimerActive)
+        {
+            ShootingTimer();
+        }
+    }
+
+    public void StartShootingTimerActive()
+    {
+        _isShootingTimerActive = true;
+    }
+
+    private void ShootingTimer()
+    {
+        _shootingCurrentTime += Time.deltaTime;
+    }
+
+    public bool IsShootingTimeDone(float shootingThreshold)
+    {
+        bool isShootingTimeDone = false;
+
+        if(_shootingCurrentTime >= shootingThreshold)
+        {
+            isShootingTimeDone = true;
+            _isShootingTimerActive = false;
+            _shootingCurrentTime = 0f;
+        }
+        else
+        {
+            isShootingTimeDone = false;
+        }
+        
+
+        return isShootingTimeDone;
     }
 
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
@@ -115,9 +139,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
     public void StartAttack()
     {
-        if(!IsAttacking)
-        {
-            StartCoroutine(AttackRoutine());
-        }
+        _bulletEmitter.Play();
+        //if(!IsAttacking)
+        //{
+        //    StartCoroutine(AttackRoutine());
+        //}
     }
 }
