@@ -73,7 +73,7 @@ crashlytics-build.properties
 **.wem
 
 # Ignore user settings
-[Uu]serSettings/
+/[Uu]serSettings/
 
 #
 # Wwise Project
