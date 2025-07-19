@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<WwiseSettings>
+    <WwiseProjectPath>../../SoloGame/SoloGame_WwiseProject/SoloGame_WwiseProject.wproj</WwiseProjectPath>
+    <SoundbankPath>Audio/GeneratedSoundBanks</SoundbankPath>
+    <CreateWwiseGlobal>true</CreateWwiseGlobal>
+    <CreateWwiseListener>true</CreateWwiseListener>
+    <WwiseInstallationPathWindows>E:\Wwise\Wwise2024.1.6.8842</WwiseInstallationPathWindows>
+    <WwiseInstallationPathMac></WwiseInstallationPathMac>
+</WwiseSettings>
