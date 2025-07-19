@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}" SchemaVersion="123">
+	<Conversions>
+		<WorkUnit Name="Default Work Unit" ID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}" PersistMode="Standalone">
+			<ChildrenList>
+				<Conversion Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}">
+					<PropertyList>
+						<Property Name="Channels" Type="int32">
+							<ValueList>
+								<Value Platform="Mac">4</Value>
+								<Value Platform="Switch">4</Value>
+								<Value Platform="Windows">4</Value>
+								<Value Platform="switch2">4</Value>
+							</ValueList>
+						</Property>
+						<Property Name="LRMix" Type="Real64">
+							<ValueList>
+								<Value Platform="Mac">0</Value>
+								<Value Platform="Switch">0</Value>
+								<Value Platform="Windows">0</Value>
+								<Value Platform="switch2">0</Value>
+							</ValueList>
+						</Property>
+						<Property Name="MaxSampleRate" Type="int32">
+							<ValueList>
+								<Value Platform="Mac">48000</Value>
+								<Value Platform="Switch">48000</Value>
+								<Value Platform="Windows">48000</Value>
+								<Value Platform="switch2">48000</Value>
+							</ValueList>
+						</Property>
+						<Property Name="MinSampleRate" Type="int32">
+							<ValueList>
+								<Value Platform="Mac">0</Value>
+								<Value Platform="Switch">0</Value>
+								<Value Platform="Windows">0</Value>
+								<Value Platform="switch2">0</Value>
+							</ValueList>
+						</Property>
+						<Property Name="SampleRate" Type="int32">
+							<ValueList>
+								<Value Platform="Mac">0</Value>
+								<Value Platform="Switch">0</Value>
+								<Value Platform="Windows">0</Value>
+								<Value Platform="switch2">0</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ConversionPluginInfoList>
+						<ConversionPluginInfo Platform="Mac">
+							<ConversionPlugin Name="" ID="{ADEB8E7C-3804-4E3B-BCBF-1618CE0BADDB}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+						</ConversionPluginInfo>
+						<ConversionPluginInfo Platform="Switch">
+							<ConversionPlugin Name="" ID="{72CCF8CC-8B6C-431D-B0C7-6C8E647FE3D8}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+						</ConversionPluginInfo>
+						<ConversionPluginInfo Platform="Windows">
+							<ConversionPlugin Name="" ID="{AE189DAC-73CC-46E1-89F4-9B2163758E88}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+						</ConversionPluginInfo>
+						<ConversionPluginInfo Platform="switch2">
+							<ConversionPlugin Name="" ID="{DFF70EA4-B12C-4C17-8C99-EDF542A54FDC}" PluginName="PCM" CompanyID="0" PluginID="1"/>
+						</ConversionPluginInfo>
+					</ConversionPluginInfoList>
+				</Conversion>
+			</ChildrenList>
+		</WorkUnit>
+	</Conversions>
+</WwiseDocument>

@@ -1,0 +1,19 @@
+{
+ "PluginInfo": {
+  "Platform": "switch2",
+  "BasePlatform": "Switch2",
+  "PluginLibs": [
+   {
+    "LibName": "System",
+    "LibId": "11403271",
+    "Type": "AudioDevice"
+   },
+   {
+    "LibName": "No Output",
+    "LibId": "11862023",
+    "Type": "AudioDevice"
+   }
+  ],
+  "FileHash": "{E2135F9A-918C-99BA-28A2-39764FB408D7}"
+ }
+}
