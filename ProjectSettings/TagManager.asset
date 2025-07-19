@@ -9,6 +9,7 @@ TagManager:
   - PuzzleCamera
   - AimSight
   - SavePoint
+  - Canvas
   layers:
   - Default
   - TransparentFX

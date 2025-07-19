@@ -518,7 +518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.069270834
+      value: 0.090625
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -952,6 +952,10 @@ PrefabInstance:
     - target: {fileID: 7191226862733969975, guid: e0bf03395dcd91a47ba749d9c35eafe6, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191226862733969975, guid: e0bf03395dcd91a47ba749d9c35eafe6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7267788243367007329, guid: e0bf03395dcd91a47ba749d9c35eafe6, type: 3}
       propertyPath: m_AnchorMax.y
