@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1118412999528241045}
   - component: {fileID: 6459032575253105780}
   - component: {fileID: 4915421863036011208}
+  - component: {fileID: 6800741286071430192}
   m_Layer: 14
   m_Name: SlimeBall
   m_TagString: Untagged
@@ -166,6 +167,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4151066520c4e50448bd58c1e41f2dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attactionRange: 5
+--- !u!195 &6800741286071430192
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2956408207329972005}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.1875
+  m_Speed: 1
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.375
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7857256887082806405
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +204,7 @@ GameObject:
   - component: {fileID: 615130619784380353}
   - component: {fileID: 3679530349517573053}
   m_Layer: 14
-  m_Name: Collision
+  m_Name: PhysicCollision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

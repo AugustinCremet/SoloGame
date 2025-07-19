@@ -18,6 +18,7 @@ public class EnemyAI : TreeOfNodes
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
+        _agent.radius = 0.5f;
     }
     protected override Node SetupTree()
     {
