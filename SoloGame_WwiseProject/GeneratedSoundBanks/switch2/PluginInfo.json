@@ -4,6 +4,13 @@
   "BasePlatform": "Switch2",
   "PluginLibs": [
    {
+    "LibName": "Wwise RoomVerb",
+    "LibId": "7733251",
+    "Type": "Effect",
+    "DLL": "AkRoomVerb",
+    "StaticLib": "AkRoomVerbFX"
+   },
+   {
     "LibName": "System",
     "LibId": "11403271",
     "Type": "AudioDevice"
@@ -14,6 +21,6 @@
     "Type": "AudioDevice"
    }
   ],
-  "FileHash": "{E2135F9A-918C-99BA-28A2-39764FB408D7}"
+  "FileHash": "{8AF2978E-08D4-EC65-A530-BCF973BD53FA}"
  }
 }

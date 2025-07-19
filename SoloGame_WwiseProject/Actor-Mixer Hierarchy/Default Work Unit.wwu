@@ -1,6 +1,491 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{259A53CE-3EA5-4A73-A292-5969D178A6A2}" SchemaVersion="123">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{259A53CE-3EA5-4A73-A292-5969D178A6A2}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{259A53CE-3EA5-4A73-A292-5969D178A6A2}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="SFX" ID="{C6D22686-5783-4956-9B4C-90686789C676}" ShortID="950320169">
+					<ChildrenList>
+						<ActorMixer Name="AM_Enemy" ID="{029B57C1-E6CD-4503-A778-40FD3894EA62}" ShortID="990287729">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Bus_Enemy" ID="{6362918A-FCED-44EB-8A44-C5E71392933F}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<ActorMixer Name="AM_Enemy_Skeleton" ID="{BA91858E-E443-4EDD-8E8D-DE310F4B6DAF}" ShortID="755097763">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<BlendContainer Name="BD_Enemy_Skeleton_FS" ID="{8CF5BF89-392F-4DFC-BF33-46BEB9D2D4FD}" ShortID="724210244">
+											<PropertyList>
+												<Property Name="BlendBehavior" Type="int16" Value="1"/>
+												<Property Name="OverrideOutput" Type="bool" Value="True"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Bus_Enemy_FS" ID="{D0C8BEDD-DAD4-45E5-BF40-99269E9E4BD2}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<RandomSequenceContainer Name="RND_Enemy_Skeleton_FS_Foot" ID="{0A3F19AC-4E4B-4791-A623-5C64AD8AEE22}" ShortID="495329282">
+													<PropertyList>
+														<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+														<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="Footsteps, Human, Asphalt, Male Sneakers, Running SND11520" ID="{9FE8427D-1595-48A4-877B-C7DA9548D312}" ShortID="816780075">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{77932AC2-50AC-4E26-A3BE-68805B3DFA3F}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Max" Type="Real64" Value="200"/>
+																					<Property Name="Min" Type="Real64" Value="-200"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="Footsteps, Human, Asphalt, Male Sneakers, Running SND11520" ID="{3A38C596-9383-417F-8A1E-ABA861418BC8}">
+																	<PropertyList>
+																		<Property Name="LoopBegin" Type="Real64" Value="0.012508083875247"/>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.012508083875247"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>Footsteps, Human, Asphalt, Male Sneakers, Running SND11520.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="386485098"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="Footsteps, Human, Asphalt, Male Sneakers, Running SND11520" ID="{3A38C596-9383-417F-8A1E-ABA861418BC8}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+												<RandomSequenceContainer Name="RND_Enemy_Skeleton_FS_Bones" ID="{FCCBBDC9-F374-4C1C-81E1-A6F3A9E1FD73}" ShortID="621423819">
+													<PropertyList>
+														<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+														<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+														<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+														<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="2"/>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<Sound Name="GOREBone_Bone Breaks Celery 01_JSE_GMP" ID="{F271EC3D-529E-4ADB-8D1C-18B84A5E0FF4}" ShortID="666822279">
+															<PropertyList>
+																<Property Name="Pitch" Type="int32">
+																	<ModifierList>
+																		<ModifierInfo>
+																			<Modifier Name="" ID="{FE7DC9AB-9737-4D15-AED0-5AE3000C2353}">
+																				<PropertyList>
+																					<Property Name="Enabled" Type="bool" Value="True"/>
+																					<Property Name="Max" Type="Real64" Value="200"/>
+																					<Property Name="Min" Type="Real64" Value="-200"/>
+																				</PropertyList>
+																			</Modifier>
+																		</ModifierInfo>
+																	</ModifierList>
+																</Property>
+																<Property Name="Weight" Type="Real64">
+																	<ValueList>
+																		<Value>80</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<AudioFileSource Name="GOREBone_Bone Breaks Celery 01_JSE_GMP" ID="{5BB40CCD-34C0-4E22-894F-3D83B2FFF5EA}">
+																	<PropertyList>
+																		<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																		<Property Name="TrimBegin" Type="Real64" Value="0.00855914839434699"/>
+																		<Property Name="TrimEnd" Type="Real64" Value="0.431761478835727"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																	<AudioFile>GOREBone_Bone Breaks Celery 01_JSE_GMP.wav</AudioFile>
+																	<MediaIDList>
+																		<MediaID ID="247330740"/>
+																	</MediaIDList>
+																</AudioFileSource>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="GOREBone_Bone Breaks Celery 01_JSE_GMP" ID="{5BB40CCD-34C0-4E22-894F-3D83B2FFF5EA}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+														<Sound Name="AM_Enemy_Skeleton_FS_Bones_Silence" ID="{E402793F-E06E-4116-993F-85AE6F4E5A0A}" ShortID="856627027">
+															<PropertyList>
+																<Property Name="Inclusion" Type="bool">
+																	<ValueList>
+																		<Value>False</Value>
+																	</ValueList>
+																</Property>
+																<Property Name="Weight" Type="Real64">
+																	<ValueList>
+																		<Value>20.001</Value>
+																	</ValueList>
+																</Property>
+															</PropertyList>
+															<ReferenceList>
+																<Reference Name="Conversion">
+																	<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+																</Reference>
+																<Reference Name="OutputBus">
+																	<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+																</Reference>
+															</ReferenceList>
+															<ChildrenList>
+																<SourcePlugin Name="Silence" ID="{A60FBF57-BD04-4030-AEDC-96F21B9B26F7}" ShortID="769416330" PluginName="Wwise Silence" CompanyID="0" PluginID="101">
+																	<PropertyList>
+																		<Property Name="Length" Type="Real32" Value="0.5"/>
+																	</PropertyList>
+																	<Language>SFX</Language>
+																</SourcePlugin>
+															</ChildrenList>
+															<ActiveSourceList>
+																<ActiveSource Name="Silence" ID="{A60FBF57-BD04-4030-AEDC-96F21B9B26F7}" Platform="Linked"/>
+															</ActiveSourceList>
+														</Sound>
+													</ChildrenList>
+												</RandomSequenceContainer>
+											</ChildrenList>
+										</BlendContainer>
+										<RandomSequenceContainer Name="RND_Enemy_Skeleton_Hurt" ID="{6E25FDAA-8A01-4860-9472-0602957CEB5F}" ShortID="249292401">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Bus_Enemy" ID="{6362918A-FCED-44EB-8A44-C5E71392933F}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="GOREBone_Bone Breaks Celery 01_JSE_GMP 2" ID="{6A128D2A-12E7-4203-96BE-94BC823622EE}" ShortID="112219706">
+													<PropertyList>
+														<Property Name="Pitch" Type="int32">
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{5D6BAD00-F6A4-40DA-8A7D-56393AAA15D3}">
+																		<PropertyList>
+																			<Property Name="Enabled" Type="bool" Value="True"/>
+																			<Property Name="Max" Type="Real64" Value="200"/>
+																			<Property Name="Min" Type="Real64" Value="-200"/>
+																		</PropertyList>
+																	</Modifier>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="GOREBone_Bone Breaks Celery 01_JSE_GMP 2" ID="{81F257B6-6859-4271-AB93-BA22AE2A625A}">
+															<Language>SFX</Language>
+															<AudioFile>GOREBone_Bone Breaks Celery 01_JSE_GMP 2.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="571853295"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="GOREBone_Bone Breaks Celery 01_JSE_GMP 2" ID="{81F257B6-6859-4271-AB93-BA22AE2A625A}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<BlendContainer Name="BD_Enemy_Skeleton_Death" ID="{8902A557-3E6B-4172-9885-EC58353313A6}" ShortID="515888835">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="GOREBone_Bone Breaks Celery 01_JSE_GMP 1" ID="{B6ED2274-FFC3-4828-B9EF-0226559562A1}" ShortID="653929738">
+													<PropertyList>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>-450</Value>
+															</ValueList>
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{270DFCB8-F0DF-456D-82D8-A564A8724AEF}">
+																		<PropertyList>
+																			<Property Name="Enabled" Type="bool" Value="True"/>
+																			<Property Name="Max" Type="Real64" Value="200"/>
+																			<Property Name="Min" Type="Real64" Value="-200"/>
+																		</PropertyList>
+																	</Modifier>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Bus_Enemy" ID="{6362918A-FCED-44EB-8A44-C5E71392933F}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="GOREBone_Bone Breaks Celery 01_JSE_GMP 1" ID="{82D614A6-3101-4BD8-9E28-ECF6B2EC1B98}">
+															<PropertyList>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimBegin" Type="Real64" Value="0.018029431846741"/>
+																<Property Name="TrimEnd" Type="Real64" Value="0.478552630934429"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>GOREBone_Bone Breaks Celery 01_JSE_GMP 1.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="134097114"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="GOREBone_Bone Breaks Celery 01_JSE_GMP 1" ID="{82D614A6-3101-4BD8-9E28-ECF6B2EC1B98}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="MACK Voice Whisper Male Exhale Gasp - Non Legal" ID="{3FC1A166-AA1B-4671-A60B-C94D7F2F5120}" ShortID="872600013">
+													<PropertyList>
+														<Property Name="Lowpass" Type="int16">
+															<ValueList>
+																<Value>32</Value>
+															</ValueList>
+														</Property>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>230</Value>
+															</ValueList>
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{1FBB5EBB-264E-4936-99B5-1AFAB0199EF8}">
+																		<PropertyList>
+																			<Property Name="Enabled" Type="bool" Value="True"/>
+																			<Property Name="Max" Type="Real64" Value="200"/>
+																			<Property Name="Min" Type="Real64" Value="-200"/>
+																		</PropertyList>
+																	</Modifier>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-9</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Bus_Enemy" ID="{6362918A-FCED-44EB-8A44-C5E71392933F}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="MACK Voice Whisper Male Exhale Gasp - Non Legal" ID="{BDF0ADDF-A7B3-4BF1-B0A6-767F0281FDA1}">
+															<PropertyList>
+																<Property Name="FadeOutDuration" Type="Real64" Value="0.87909446981051"/>
+																<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+																<Property Name="TrimEnd" Type="Real64" Value="0.978668185517863"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>MACK Voice Whisper Male Exhale Gasp - Non Legal.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="298001888"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="MACK Voice Whisper Male Exhale Gasp - Non Legal" ID="{BDF0ADDF-A7B3-4BF1-B0A6-767F0281FDA1}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</BlendContainer>
+										<RandomSequenceContainer Name="RND_Enemy_Skeleton_Attack" ID="{B1EE3E19-668D-4669-9A06-46B10119F145}" ShortID="826765908">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="attack! - Paid - Pitch 200" ID="{C5D6F319-9FE5-4647-9CE0-6940F52B6C34}" ShortID="630715810">
+													<PropertyList>
+														<Property Name="Pitch" Type="int32">
+															<ValueList>
+																<Value>380</Value>
+															</ValueList>
+															<ModifierList>
+																<ModifierInfo>
+																	<Modifier Name="" ID="{BAEE3404-18D8-4DCD-8EB4-5CEA5C1A230B}">
+																		<PropertyList>
+																			<Property Name="Enabled" Type="bool" Value="True"/>
+																			<Property Name="Max" Type="Real64" Value="200"/>
+																			<Property Name="Min" Type="Real64" Value="-200"/>
+																		</PropertyList>
+																	</Modifier>
+																</ModifierInfo>
+															</ModifierList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="attack! - Paid - Pitch 200" ID="{F2949169-A71D-43BB-AA96-2285508BD72F}">
+															<Language>SFX</Language>
+															<AudioFile>attack! - Paid - Pitch 200.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="476281503"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="attack! - Paid - Pitch 200" ID="{F2949169-A71D-43BB-AA96-2285508BD72F}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+									</ChildrenList>
+								</ActorMixer>
+							</ChildrenList>
+						</ActorMixer>
+						<ActorMixer Name="AM_Player" ID="{B5BB38F4-2792-4751-999E-8CC63B596CD0}" ShortID="874197145">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Bus_Player" ID="{12337A94-0F5D-4F86-9707-D2E760A456CE}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+								</Reference>
+							</ReferenceList>
+						</ActorMixer>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Amb" ID="{0033CD0E-8D5F-4BE2-AA9C-2616C5DCAC4A}" ShortID="133097876">
+					<ChildrenList>
+						<ActorMixer Name="AM_Amb_Dungeon_01" ID="{A0D6C2A9-5EF2-4B4C-AE37-1C732A0FB3F9}" ShortID="949243563">
+							<PropertyList>
+								<Property Name="ListenerRelativeRouting" Type="bool" Value="False"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Bus_Amb" ID="{3BDA4D1F-A32E-46F8-A3CA-15B16269A75A}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="ATMO EERIE Cave, Water Drips, Emptyness, Howling Interior Wind, Oppressive, LOOP - Legal" ID="{EB5736BA-E79F-48E3-AAE5-5CAD3A885C67}" ShortID="1038946365">
+									<PropertyList>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>22</Value>
+											</ValueList>
+										</Property>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="Lowpass" Type="int16">
+											<ValueList>
+												<Value>59</Value>
+											</ValueList>
+										</Property>
+										<Property Name="MakeUpGain" Type="Real64">
+											<ValueList>
+												<Value>-2</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="ATMO EERIE Cave, Water Drips, Emptyness, Howling Interior Wind, Oppressive, LOOP - Legal" ID="{9B4883D6-EE2B-411E-9464-410C013BDF90}">
+											<Language>SFX</Language>
+											<AudioFile>ATMO EERIE Cave, Water Drips, Emptyness, Howling Interior Wind, Oppressive, LOOP - Legal.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="292823464"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="ATMO EERIE Cave, Water Drips, Emptyness, Howling Interior Wind, Oppressive, LOOP - Legal" ID="{9B4883D6-EE2B-411E-9464-410C013BDF90}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</ActorMixer>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

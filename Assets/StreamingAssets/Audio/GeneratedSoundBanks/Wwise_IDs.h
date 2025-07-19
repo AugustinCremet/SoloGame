@@ -19,8 +19,17 @@ namespace AK
 
     namespace BUSSES
     {
+        static const AkUniqueID BUS_AMB = 17439960U;
+        static const AkUniqueID BUS_ENEMY = 3284372884U;
+        static const AkUniqueID BUS_ENEMY_FS = 1348798494U;
+        static const AkUniqueID BUS_PLAYER = 2597388375U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
     } // namespace BUSSES
+
+    namespace AUX_BUSSES
+    {
+        static const AkUniqueID VERB = 3657263530U;
+    } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
     {
