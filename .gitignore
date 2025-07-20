@@ -73,7 +73,7 @@ crashlytics-build.properties
 **.wem
 
 # Ignore user settings
-/[Uu]serSettings/
+/UserSettings/
 
 #
 # Wwise Project
@@ -144,3 +144,6 @@ crashlytics-build.properties
 !/Unity/Assets/Wwise/API/Runtime/WwiseObjects/WwiseTypes/*.cs.meta
 !/Unity/Assets/Wwise/MonoBehaviour/Runtime/*.cs.meta
 !/Unity/Assets/Wwise/Timeline/Runtime/*.cs.meta
+
+# Additional ignore
+Assets/Wwise/Editor/ProjectData/*
