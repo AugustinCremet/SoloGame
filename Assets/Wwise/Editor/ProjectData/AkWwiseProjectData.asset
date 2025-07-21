@@ -38,8 +38,79 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: b61c50dd4cfd744eb1d958e59b0e3c85
     GuidInternal: 
-    m_lastTime: -8584486597693518712
+    m_lastTime: -8584486407925219088
     List:
+    - name: Bus_Amb
+      guid: 1f4dda3b2ea3f846a3ca15b16269a75a
+      id: 17439960
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: b61c50dd4cfd744eb1d958e59b0e3c85
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Bus_Amb
+        ObjectType: 2
+        guid: 1f4dda3b2ea3f846a3ca15b16269a75a
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Bus_Amb
+    - name: Bus_Enemy
+      guid: 8a916263edfceb448a44c5e71392933f
+      id: 3284372884
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: b61c50dd4cfd744eb1d958e59b0e3c85
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Bus_Enemy
+        ObjectType: 2
+        guid: 8a916263edfceb448a44c5e71392933f
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Bus_Enemy
+    - name: Bus_Enemy_FS
+      guid: ddbec8d0d4dae545bf4099269e9e4bd2
+      id: 1348798494
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: b61c50dd4cfd744eb1d958e59b0e3c85
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Bus_Enemy
+        ObjectType: 2
+        guid: 8a916263edfceb448a44c5e71392933f
+      - ElementName: Bus_Enemy_FS
+        ObjectType: 2
+        guid: ddbec8d0d4dae545bf4099269e9e4bd2
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Bus_Enemy\Bus_Enemy_FS
+    - name: Bus_Player
+      guid: 947a33125d0f864f9707d2e760a456ce
+      id: 2597388375
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: b61c50dd4cfd744eb1d958e59b0e3c85
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Bus_Player
+        ObjectType: 2
+        guid: 947a33125d0f864f9707d2e760a456ce
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Bus_Player
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
       id: 3803692087
@@ -54,6 +125,23 @@ MonoBehaviour:
         ObjectType: 2
         guid: d8a41415a61d2a41a17e75ca0c2149f3
       Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus
+    - name: Verb
+      guid: 0a0ac45114e3e6488fe0c7dcc7551ac4
+      id: 3657263530
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: b61c50dd4cfd744eb1d958e59b0e3c85
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Verb
+        ObjectType: 1
+        guid: 0a0ac45114e3e6488fe0c7dcc7551ac4
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Verb
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     PathAndIcons:
@@ -94,8 +182,178 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 8e2223be3e58f54195f7f3165ee577b3
     GuidInternal: 
-    m_lastTime: -8584486597693959254
-    List: []
+    m_lastTime: -8584486402236542633
+    List:
+    - name: Play_Amb_Dungeon_01
+      guid: febfa289a2b8a6458321efe173032faf
+      id: 4286429649
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Play_Amb_Dungeon_01
+        ObjectType: 3
+        guid: febfa289a2b8a6458321efe173032faf
+      Path: Events\Default Work Unit\Play_Amb_Dungeon_01
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Enemy_Skeleton_Attack
+      guid: b1e70c566130f34580eff62f3706801f
+      id: 3538955231
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Play_Enemy_Skeleton_Attack
+        ObjectType: 3
+        guid: b1e70c566130f34580eff62f3706801f
+      Path: Events\Default Work Unit\Play_Enemy_Skeleton_Attack
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Enemy_Skeleton_Death
+      guid: 084f8237e6ca9441a67adcfe92cb5823
+      id: 1908900687
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Play_Enemy_Skeleton_Death
+        ObjectType: 3
+        guid: 084f8237e6ca9441a67adcfe92cb5823
+      Path: Events\Default Work Unit\Play_Enemy_Skeleton_Death
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Enemy_Skeleton_FS
+      guid: 71489d805c74eb4da7a21fede3c5fa6b
+      id: 2964135930
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Play_Enemy_Skeleton_FS
+        ObjectType: 3
+        guid: 71489d805c74eb4da7a21fede3c5fa6b
+      Path: Events\Default Work Unit\Play_Enemy_Skeleton_FS
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Enemy_Skeleton_Hurt
+      guid: cabb3ef436483441a3a1fc502d315ca7
+      id: 4058662392
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Play_Enemy_Skeleton_Hurt
+        ObjectType: 3
+        guid: cabb3ef436483441a3a1fc502d315ca7
+      Path: Events\Default Work Unit\Play_Enemy_Skeleton_Hurt
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Stop_Amb_Dungeon_01
+      guid: c60b4652427c024aa43457e73f1a0baf
+      id: 3378248715
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Stop_Amb_Dungeon_01
+        ObjectType: 3
+        guid: c60b4652427c024aa43457e73f1a0baf
+      Path: Events\Default Work Unit\Stop_Amb_Dungeon_01
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Stop_Enemy_Skeleton_Attack
+      guid: 92cce423f0f9754087302863a4d164c3
+      id: 613938397
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Stop_Enemy_Skeleton_Attack
+        ObjectType: 3
+        guid: 92cce423f0f9754087302863a4d164c3
+      Path: Events\Default Work Unit\Stop_Enemy_Skeleton_Attack
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Stop_Enemy_Skeleton_Death
+      guid: 208a2e76bcda934184d4d87e400cb5a1
+      id: 2044374753
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Stop_Enemy_Skeleton_Death
+        ObjectType: 3
+        guid: 208a2e76bcda934184d4d87e400cb5a1
+      Path: Events\Default Work Unit\Stop_Enemy_Skeleton_Death
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Stop_Enemy_Skeleton_FS
+      guid: c6499f56b65dda438829a3aaa1553de7
+      id: 1978646872
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Stop_Enemy_Skeleton_FS
+        ObjectType: 3
+        guid: c6499f56b65dda438829a3aaa1553de7
+      Path: Events\Default Work Unit\Stop_Enemy_Skeleton_FS
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Stop_Enemy_Skeleton_Hurt
+      guid: b29f131bde1b4d478543a7485402c8e7
+      id: 3170251762
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8e2223be3e58f54195f7f3165ee577b3
+      - ElementName: Stop_Enemy_Skeleton_Hurt
+        ObjectType: 3
+        guid: b29f131bde1b4d478543a7485402c8e7
+      Path: Events\Default Work Unit\Stop_Enemy_Skeleton_Hurt
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:

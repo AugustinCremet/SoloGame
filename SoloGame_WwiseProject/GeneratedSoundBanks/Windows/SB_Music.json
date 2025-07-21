@@ -1,0 +1,57 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "779753582",
+    "Type": "User",
+    "GUID": "{C5E0DB93-FD8C-44EA-84CB-02B797858C05}",
+    "Language": "SFX",
+    "Hash": "{02E7D87D-91D4-BB78-E230-E39E3DB4C605}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\SB_Music",
+    "ShortName": "SB_Music",
+    "Path": "SB_Music.bnk",
+    "Media": [
+     {
+      "Id": "597372973",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Quiet Theme #5_v2 (Looped) - Paid.wav",
+      "CachePath": "6B/{6B5FBE0A-6046-91E0-F945-5FF7ED0AFB0B}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3226858860",
+      "Name": "Play_PH_Music_Menu",
+      "ObjectPath": "\\Events\\Default Work Unit\\BGM\\Play_PH_Music_Menu",
+      "GUID": "{0155CC38-6AB2-47D6-A284-BE948BBBFAAE}",
+      "DurationType": "OneShot",
+      "DurationMin": "1680",
+      "DurationMax": "1680",
+      "MediaRefs": [
+       {
+        "Id": "597372973"
+       }
+      ]
+     },
+     {
+      "Id": "444624938",
+      "Name": "Stop_PH_Music_Menu",
+      "ObjectPath": "\\Events\\Default Work Unit\\BGM\\Stop_PH_Music_Menu",
+      "GUID": "{47AA889A-69EA-4382-984F-D0DC5CB525D5}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{E28B3B56-67EC-B7A1-43CA-3344DC3D6328}"
+ }
+}

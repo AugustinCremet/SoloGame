@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{701ECBBD-9C7B-4030-8CDB-749EE5D1C7B9}",
     "Language": "SFX",
-    "Hash": "{6186AD3F-3838-0D26-00B3-9EBB8E7D3DBA}",
+    "Hash": "{A19667FF-8287-CECC-B257-9A7E2A29A969}",
     "ObjectPath": "Init",
     "ShortName": "Init",
     "Path": "Init.bnk",
@@ -48,28 +48,44 @@
      {
       "Id": "17439960",
       "Name": "Bus_Amb",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_Amb",
-      "GUID": "{3BDA4D1F-A32E-46F8-A3CA-15B16269A75A}",
-      "AuxBusRefs": [
-       {
-        "Id": "3657263530",
-        "Name": "Verb",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Verb",
-        "GUID": "{51C40A0A-E314-48E6-8FE0-C7DCC7551AC4}"
-       }
-      ]
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_3D\\Bus_Amb",
+      "GUID": "{3BDA4D1F-A32E-46F8-A3CA-15B16269A75A}"
+     },
+     {
+      "Id": "1162281553",
+      "Name": "Bus_Music",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_2D\\Bus_Music",
+      "GUID": "{D01815B0-DAB4-4071-A11B-1C12D4DE3C59}"
      },
      {
       "Id": "1348798494",
       "Name": "Bus_Enemy_FS",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_Enemy\\Bus_Enemy_FS",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_3D\\Bus_Enemy\\Bus_Enemy_FS",
       "GUID": "{D0C8BEDD-DAD4-45E5-BF40-99269E9E4BD2}"
+     },
+     {
+      "Id": "1746463750",
+      "Name": "Bus_UI",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_2D\\Bus_UI",
+      "GUID": "{A10CC4D3-7F8E-424B-9365-E86DF511F3BC}"
      },
      {
       "Id": "2597388375",
       "Name": "Bus_Player",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_Player",
-      "GUID": "{12337A94-0F5D-4F86-9707-D2E760A456CE}",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_3D\\Bus_Player",
+      "GUID": "{12337A94-0F5D-4F86-9707-D2E760A456CE}"
+     },
+     {
+      "Id": "2769898514",
+      "Name": "Bus_2D",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_2D",
+      "GUID": "{EB0E5F3B-9BAD-48AE-92BC-186C8CB90E4F}"
+     },
+     {
+      "Id": "2786676333",
+      "Name": "Bus_3D",
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_3D",
+      "GUID": "{8A814B95-8396-4F7E-8993-2BF31D75AF8B}",
       "AuxBusRefs": [
        {
         "Id": "3657263530",
@@ -82,16 +98,8 @@
      {
       "Id": "3284372884",
       "Name": "Bus_Enemy",
-      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_Enemy",
-      "GUID": "{6362918A-FCED-44EB-8A44-C5E71392933F}",
-      "AuxBusRefs": [
-       {
-        "Id": "3657263530",
-        "Name": "Verb",
-        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Verb",
-        "GUID": "{51C40A0A-E314-48E6-8FE0-C7DCC7551AC4}"
-       }
-      ]
+      "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Bus_3D\\Bus_Enemy",
+      "GUID": "{6362918A-FCED-44EB-8A44-C5E71392933F}"
      },
      {
       "Id": "3803692087",
@@ -117,6 +125,6 @@
     ]
    }
   ],
-  "FileHash": "{725396B5-07E3-9C6F-42FA-6FDC9775DA71}"
+  "FileHash": "{8F04F336-1C51-180F-37E2-DAB9D3C45990}"
  }
 }
