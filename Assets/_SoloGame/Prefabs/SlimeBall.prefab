@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4915421863036011208}
   - component: {fileID: 6800741286071430192}
   - component: {fileID: 9041060300205190266}
+  - component: {fileID: 7449915212536978752}
   m_Layer: 14
   m_Name: SlimeBall
   m_TagString: Untagged
@@ -173,6 +174,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   _attractionRange: 5
+  _attractionSpeed: 3
 --- !u!195 &6800741286071430192
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -208,8 +210,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _indicator: {fileID: 4488064287889038421}
-  screenEdgeBuffer: 50
-  zDistanceFromCamera: 5
+--- !u!114 &7449915212536978752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2956408207329972005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c23a21129cf9d46a6103d40631569d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteShadow: {fileID: -3194876315706810419, guid: 1d5650973318d944ca25bdfaadc04160, type: 3}
+  _travelSpeed: 1
+  _maxHeight: 3
+  _minScale: 1
+  _maxScale: 3
 --- !u!1 &4488064287889038421
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +362,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 18688
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

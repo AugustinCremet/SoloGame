@@ -1,23 +1,33 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(LobEffect))]
 public class SlimeBall : MonoBehaviour, ICollectable
 {
+    private LobEffect _lobEffect;
+
     private Rigidbody2D _rb;
-    private NavMeshAgent _agent;
     private Transform _playerTransform;
     [SerializeField] LayerMask _obstacleLayer;
     [SerializeField] float _attractionRange = 5f;
+    [SerializeField] float _attractionSpeed = 3f;
     private float _raycastCurrentTime = 0f;
     private float _raycastTime = 0.2f;
-    
+
+    private void OnEnable()
+    {
+        PlayerController.OnSuction += OnSuction;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnSuction -= OnSuction;
+    }
     private void Awake()
     {
+        _lobEffect = GetComponent<LobEffect>();
         _rb = GetComponent<Rigidbody2D>();
-        _agent = GetComponent<NavMeshAgent>();
-        _agent.enabled = false;
-        _agent.updateRotation = false;
-        _agent.updateUpAxis = false;
     }
 
     private void Start()
@@ -49,19 +59,24 @@ public class SlimeBall : MonoBehaviour, ICollectable
 
     private void CheckForPlayer()
     {
-        Vector2 directionToPlayer = _playerTransform.position - transform.position;
-        float distanceToPlayer = directionToPlayer.magnitude;
+        Vector2 directionToPlayer = (_playerTransform.position - transform.position).normalized;
+        float distanceToPlayer = (_playerTransform.position - transform.position).magnitude;
 
-        if(distanceToPlayer <= _attractionRange)
+        if (distanceToPlayer <= _attractionRange)
         {
             bool isPlayerInSight = UtilityFunctions.IsPlayerInSight(transform.position, _playerTransform);
 
             if (isPlayerInSight)
             {
-                _agent.enabled = true;
-                _agent.SetDestination(_playerTransform.position);
+                Debug.Log("Move to player");
+                transform.position += (Vector3)directionToPlayer * _attractionSpeed * Time.deltaTime;
             }
         }
+    }
+
+    private void OnSuction()
+    {
+        _lobEffect.StartMoving(_playerTransform.position);
     }
 
     private void OnDrawGizmos()

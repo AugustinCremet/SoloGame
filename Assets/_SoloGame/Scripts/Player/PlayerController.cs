@@ -23,13 +23,12 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField] GameObject _crosshair;
-    private const float CROSSHAIR_NORMAL_SPEED = 0.5f;
-    private const float CROSSHAIR_AIMING_SPEED = 0.05f;
 
     private BulletEmitter _bullet = null;
     private bool _isShooting;
 
     public static event Action OnInteract;
+    public static event Action OnSuction;
     private Animator _animator;
 
 
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F9))
         {
-            AdjustPlayerColor(1);
+            OnSuction.Invoke();
         }
 
         AdjustCrosshair();
@@ -84,7 +83,7 @@ public class PlayerController : MonoBehaviour
     private void AdjustCrosshair()
     {
         Vector2 crosshairMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        _crosshair.transform.position += new Vector3(crosshairMovement.x, crosshairMovement.y, 0f) * CROSSHAIR_NORMAL_SPEED;
+        _crosshair.transform.position += new Vector3(crosshairMovement.x, crosshairMovement.y, 0f);
 
         Vector3 crosshairScreenPos = _cam.WorldToScreenPoint(_crosshair.transform.position);
         crosshairScreenPos.x = Mathf.Clamp(crosshairScreenPos.x, 0f, Screen.width);
