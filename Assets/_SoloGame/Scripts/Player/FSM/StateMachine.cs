@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SkillStateMachine : BaseStateMachine
+public class StateMachine : BaseStateMachine
 {
-    public SkillStateMachine()
+    public StateMachine()
     {
         _transitionMap.Add(typeof(IdleSkillState), new List<Type> { typeof(MovingState), typeof(GooState), typeof(ShootingState), typeof(DeadState), typeof(HitState) } );
         _transitionMap.Add(typeof(MovingState),    new List<Type> { typeof(IdleSkillState), typeof(GooState), typeof(ShootingState), typeof(DeadState), typeof(HitState) });

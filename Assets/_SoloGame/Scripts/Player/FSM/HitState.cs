@@ -35,7 +35,7 @@ public class HitState : BaseState
         if (_hitDuration <= 0f)
         {
             _player.StartInvincibility();
-            _playerController.ReevaluateState();
+            _player.ReevaluateState();
         }
     }
 }
