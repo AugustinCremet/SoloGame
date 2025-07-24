@@ -195,18 +195,13 @@ public class PlayerController : MonoBehaviour
         _lastShootFrame = currentFrame;
 
         
+        _canShoot = false;
+        _crosshair.StartCooldown(_shootingCD);
+        StartCoroutine(ShootingCDCR());
+        _bullet.Play();
         if (_player.CurrentHealth > 1)
         {
-            _canShoot = false;
-            _crosshair.StartCooldown(_shootingCD);
-            StartCoroutine(ShootingCDCR());
-            _bullet.Play();
             _player.LoseSlimeBall(1);
-        }
-        else if(_player.CurrentHealth == 1)
-        {
-            // AC_TODO Emergency shot
-            //_bullet.Play();
         }
     }
 

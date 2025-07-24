@@ -33,7 +33,9 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] GameObject _eyeAnimator;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] EmitterProfile _normalProfile;
+    [SerializeField] const float _NORMAL_PROFILE_SPEED = 1.5f;
     [SerializeField] EmitterProfile _emergencyShot;
+    [SerializeField] const float _EMERGENCY_SHOT_SPEED = 1f;
     [SerializeField] EmitterProfile _bouncingProfile;
     public PlayerAbilities Abilities { get; private set; }
     private IDataService _dataService = new JsonDataService();
@@ -143,7 +145,7 @@ public class Player : MonoBehaviour, IDamageable
         if (_currentHealth == 1)
         {
             StartCoroutine(SwitchProfileNextFrame(_emergencyShot));
-            _animator.SetFloat("ShootingSpeed", 0.5f);
+            _animator.SetFloat("ShootingSpeed", _EMERGENCY_SHOT_SPEED);
         }
         UIManager.Instance.ChangeCurrentHealth(_currentHealth);
     }
@@ -167,7 +169,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             Debug.Log("Back to normal profile");
             StartCoroutine(SwitchProfileNextFrame(_normalProfile));
-            _animator.SetFloat("ShootingSpeed", 1f);
+            _animator.SetFloat("ShootingSpeed", _NORMAL_PROFILE_SPEED);
         }
     }
 
