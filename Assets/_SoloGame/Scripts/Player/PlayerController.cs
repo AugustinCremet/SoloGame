@@ -22,10 +22,15 @@ public class PlayerController : MonoBehaviour
     private Material _material;
     private SpriteRenderer _spriteRenderer;
 
-    [SerializeField] GameObject _crosshair;
+    [SerializeField] GameObject _crosshairGO;
+    private Crosshair _crosshair;
 
     private BulletEmitter _bullet = null;
+    private bool _canShoot = true;
     private bool _isShooting;
+    private bool _willShootAgain;
+    private float _shootingCD = 1f;
+    private float _shootingTimer = 0f;
 
     public static event Action OnInteract;
     public static event Action OnSuction;
@@ -40,7 +45,7 @@ public class PlayerController : MonoBehaviour
         _bullet = GetComponent<BulletEmitter>();
         _player = GetComponent<Player>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();    
+        _animator = GetComponent<Animator>();
         _material = _spriteRenderer.material;
     }
 
@@ -48,6 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+        _crosshair = _crosshairGO.GetComponent<Crosshair>();
 
         // Make sure the emitter will be active **Weird fix but okay**
         _bullet.Play();
@@ -57,6 +63,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(_canShoot && _willShootAgain)
+        {
+            _player.SkillStateMachine.TryChangeState(_player.ShootingState);
+        }
+
         if (Input.GetKeyDown(KeyCode.F9))
         {
             OnSuction.Invoke();
@@ -83,16 +94,16 @@ public class PlayerController : MonoBehaviour
     private void AdjustCrosshair()
     {
         Vector2 crosshairMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        _crosshair.transform.position += new Vector3(crosshairMovement.x, crosshairMovement.y, 0f);
+        _crosshairGO.transform.position += new Vector3(crosshairMovement.x, crosshairMovement.y, 0f);
 
-        Vector3 crosshairScreenPos = _cam.WorldToScreenPoint(_crosshair.transform.position);
+        Vector3 crosshairScreenPos = _cam.WorldToScreenPoint(_crosshairGO.transform.position);
         crosshairScreenPos.x = Mathf.Clamp(crosshairScreenPos.x, 0f, Screen.width);
         crosshairScreenPos.y = Mathf.Clamp(crosshairScreenPos.y, 0f, Screen.height);
 
         Vector3 clampedWorldPos = _cam.ScreenToWorldPoint(crosshairScreenPos);
         clampedWorldPos.z = 0f;
 
-        _crosshair.transform.position = clampedWorldPos;
+        _crosshairGO.transform.position = clampedWorldPos;
     }
 
     void FixedUpdate()
@@ -159,23 +170,16 @@ public class PlayerController : MonoBehaviour
 
     public void FireInput(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        _willShootAgain = true;
+
+        if (context.performed && _canShoot)
         {
             _player.SkillStateMachine.TryChangeState(_player.ShootingState);
             _isShooting = true;
         }
         else if (context.canceled)
         {
-            StopShooting();
-            _isShooting = false;
-            if (MovementVector.magnitude <= 0f)
-            {
-                _player.SkillStateMachine.TryChangeState(_player.IdleState);
-            }
-            else
-            {
-                _player.SkillStateMachine.TryChangeState(_player.MovingState);
-            }
+            _willShootAgain = false;
         }
     }
 
@@ -190,35 +194,47 @@ public class PlayerController : MonoBehaviour
         }
         _lastShootFrame = currentFrame;
 
+        
         if (_player.CurrentHealth > 1)
         {
+            _canShoot = false;
+            _crosshair.StartCooldown(_shootingCD);
+            StartCoroutine(ShootingCDCR());
             _bullet.Play();
-            Debug.Log("Player shoot");
             _player.LoseSlimeBall(1);
         }
         else if(_player.CurrentHealth == 1)
         {
+            // AC_TODO Emergency shot
             //_bullet.Play();
         }
     }
 
+    public void ShootingCD()
+    {
+        StartCoroutine(ShootingCDCR());
+    }
+
+    private IEnumerator ShootingCDCR()
+    {
+        while(_shootingTimer < _shootingCD)
+        {
+            _shootingTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        _shootingTimer = 0f;
+        _canShoot = true;
+    }
+
     public void StopShooting()
     {
+        _isShooting = false;
         _bullet.Stop();
-        //StartCoroutine(StopShootingCR());
-    }
-
-    public IEnumerator StopShootingCR()
-    {
-        yield return new WaitForSeconds(1);
-        Debug.Log("Player STOP shoot");
-        _bullet.Stop();
-    }
-
-    public IEnumerator ShootCR()
-    {
-        yield return new WaitForSeconds(1);
-        _bullet.Play();
+        if(!_willShootAgain || !_canShoot)
+        {
+            ReevaluateState();
+        }
     }
 
     public void DashInput(InputAction.CallbackContext context)

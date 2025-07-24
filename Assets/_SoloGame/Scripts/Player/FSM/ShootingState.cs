@@ -45,6 +45,7 @@ public class ShootingState : BaseState
     {
         Vector2 newAimDirection = AimDirection();
 
+
         if (newAimDirection != _aimSightDirection)
         {
             _aimSightDirection = newAimDirection;

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//TODO Probably need to put real names eventually
+// AC_TODO Probably need to put real names eventually
 public enum DestinationIdentifier { A, B, C, D, E }
 public class Portal : MonoBehaviour
 {

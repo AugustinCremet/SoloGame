@@ -72,7 +72,7 @@ public class Player : MonoBehaviour, IDamageable
         UIManager.Instance.ChangeMaxGoo(_maxGoo);
         UIManager.Instance.ChangeCurrentGoo(_currentGoo);
 
-        // TODO remove
+        // AC_TODO remove
         _bulletEmitter = GetComponent<BulletEmitter>();
         //_bulletEmitter.SwitchProfile(_normalProfile);
         //GrantAbility(PlayerAbilities.BouncingBullet);
