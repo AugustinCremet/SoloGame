@@ -12,19 +12,17 @@ public class AudioManager : MonoBehaviour
 
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
             Destroy(this);
         }
         else
         {
             Instance = this;
         }
-
-        DontDestroyOnLoad(this);
     }
 
     public void PlaySound(SOSoundPack soundPack, ESoundType soundType, GameObject source)
     {
+        Debug.Log($"SoundPack {soundPack} SoundType {soundType} GameObject {source}");
         soundPack?.Play(soundType, source);
     }
 
