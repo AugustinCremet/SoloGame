@@ -30,7 +30,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float _invinsibilityDuration = 10f;
     [SerializeField] float _shootingCDDuration = 1f;
     [SerializeField] float _suctionCDDuration = 10f;
-    [SerializeField] float _suctionDuration = 3f;
+    [SerializeField] float _suctionSkillDuration = 3f;
 
     public int MaxHealth => _maxHealth;
     private int _currentHealth = 0;
@@ -47,6 +47,7 @@ public class Player : MonoBehaviour, IDamageable
     //CD
     private Cooldown _shootingCD;
     private Cooldown _suctionCD;
+    private Cooldown _suctionSkillDurationCD;
 
     [Space(10)]
     [Header("Bullet Emitter")]
@@ -79,6 +80,9 @@ public class Player : MonoBehaviour, IDamageable
     public HitState HitState;
     public SuctionState SuctionState;
 
+    // Event
+    public static event Action<float> OnSuction;
+
 
     private void Awake()
     {
@@ -94,6 +98,7 @@ public class Player : MonoBehaviour, IDamageable
         // CD
         _shootingCD = new Cooldown(_shootingCDDuration);
         _suctionCD = new Cooldown(_suctionCDDuration);
+        _suctionSkillDurationCD = new Cooldown(_suctionSkillDuration);
 
         //State machine with states
         StateMachine = new StateMachine();
@@ -202,6 +207,11 @@ public class Player : MonoBehaviour, IDamageable
     public void StopMovement()
     {
         _rb.linearVelocity = Vector2.zero;
+        StateMachine.TryChangeState(IdleState);
+    }
+    public void ResetMovementVector()
+    {
+        _rb.linearVelocity = Vector2.zero;
     }
     public Vector2 OnMovementUnblocked(Vector2 cachedVector)
     {
@@ -241,12 +251,26 @@ public class Player : MonoBehaviour, IDamageable
     {
         if(_suctionCD.IsReady)
         {
+            _suctionCD.Use();
+            _suctionSkillDurationCD.Use();
             StateMachine.TryChangeState(SuctionState);
         }
     }
     public void HandleSuction()
     {
-
+        if(_suctionSkillDurationCD.IsReady)
+        {
+            _animator.SetBool("IsSuctionOver", true);
+        }
+    }
+    public void StopSuction()
+    {
+        Debug.Log("StopSuction");
+        ReevaluateState();
+    }
+    public void SuctionEvent()
+    {
+        OnSuction?.Invoke(_suctionSkillDuration);
     }
     public void StartShooting()
     {
@@ -282,7 +306,6 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void StopShootingEvent()
     {
-        Debug.Log("!Shooting");
         _isShooting = false;
         _bulletEmitter.Stop();
         if (!_willShootAgain || !_shootingCD.IsReady)

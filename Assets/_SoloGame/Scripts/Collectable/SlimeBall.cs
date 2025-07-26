@@ -17,12 +17,12 @@ public class SlimeBall : MonoBehaviour, ICollectable
 
     private void OnEnable()
     {
-        PlayerController.OnSuction += OnSuction;
+        Player.OnSuction += OnSuction;
     }
 
     private void OnDisable()
     {
-        PlayerController.OnSuction -= OnSuction;
+        Player.OnSuction -= OnSuction;
     }
     private void Awake()
     {
@@ -68,15 +68,14 @@ public class SlimeBall : MonoBehaviour, ICollectable
 
             if (isPlayerInSight)
             {
-                Debug.Log("Move to player");
                 transform.position += (Vector3)directionToPlayer * _attractionSpeed * Time.deltaTime;
             }
         }
     }
 
-    private void OnSuction()
+    private void OnSuction(float duration)
     {
-        _lobEffect.StartMoving(_playerTransform.position);
+        _lobEffect.StartMoving(_playerTransform.position, duration);
     }
 
     private void OnDrawGizmos()

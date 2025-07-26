@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class BaseStateMachine
@@ -9,7 +10,7 @@ public class BaseStateMachine
 
     protected BaseStateMachine()
     {
-
+        
     }
     public virtual void SetInitialState(BaseState state)
     {

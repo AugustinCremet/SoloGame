@@ -1,3 +1,4 @@
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class MovingState : BaseState
@@ -8,13 +9,15 @@ public class MovingState : BaseState
 
     public override void EnterState(BaseStateMachine stateMachine)
     {
+        Debug.Log("Enter move");
         _animator.Play("Movement");
         _animator.SetBool("IsMoving", true);
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
     {
-        _player.StopMovement();
+        Debug.Log("exit move");
+        _player.ResetMovementVector();
         _animator.SetBool("IsMoving", false);
     }
 

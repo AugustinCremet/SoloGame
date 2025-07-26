@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     private Player _player;
 
     public static event Action OnInteract;
-    public static event Action OnSuction;
 
 
     // Start is called before the first frame update
@@ -32,7 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F9))
         {
-            OnSuction?.Invoke();
+            
         }
 
         if (_movementWasBlockedLastFrame && !_player.StateMachine.CurrentState.BlockMovement)
@@ -76,7 +75,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (context.canceled)
         {
-            Debug.Log("Cancelled");
             _player.StopShooting();
         }
     }

@@ -76,13 +76,13 @@ public class LobEffect : MonoBehaviour
 
     }
 
-    public void StartMoving(Vector3 endPos)
+    public void StartMoving(Vector3 endPos, float duration)
     {
         Initialize();
         _collider.enabled = false;
         _travelDistance = (endPos - transform.position).magnitude;
         _direction = (endPos - transform.position).normalized;
-        _travelSpeed = _travelDistance;
+        _travelSpeed = _travelDistance / duration;
         _isMoving = true;
     }
 }
