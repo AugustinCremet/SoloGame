@@ -23,10 +23,12 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     public bool IsAIActive { get; private set; } = false;
 
     public static event Action<Enemy> OnEnemyDeath;
+    private SoundHandler _soundHandler;
 
     private void Awake()
     {
         _bulletEmitter = GetComponent<BulletEmitter>();
+        _soundHandler = GetComponent<SoundHandler>();
         Instantiate(_laserSight, transform);
     }
 
@@ -103,9 +105,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     public void Damage(int dmgAmount)
     {
         _hp -= dmgAmount;
+        _soundHandler.Play(ESoundType.OnHit);
 
         if(_hp <= 0)
         {
+            _soundHandler.Play(ESoundType.OnDeath);
             GameManager.Instance.MarkEnemyTempDead(_uniqueID, false);
             Destroy(gameObject);
         }

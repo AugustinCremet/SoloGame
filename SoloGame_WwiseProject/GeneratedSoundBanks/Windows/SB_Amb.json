@@ -1,0 +1,55 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "925885567",
+    "Type": "User",
+    "GUID": "{22B4EB37-A7B9-4672-B88C-DECC75CB631E}",
+    "Language": "SFX",
+    "Hash": "{3DBDE489-5DCD-4EBB-2698-0655D3B4BCC2}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\SB_Amb",
+    "ShortName": "SB_Amb",
+    "Path": "SB_Amb.bnk",
+    "Media": [
+     {
+      "Id": "292823464",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ATMO EERIE Cave, Water Drips, Emptyness, Howling Interior Wind, Oppressive, LOOP - Legal.wav",
+      "CachePath": "01/{01E14DD2-1CAB-A5D7-CEFC-2DDBD2BFA979}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "4286429649",
+      "Name": "Play_Amb_Dungeon_01",
+      "ObjectPath": "\\Events\\Default Work Unit\\Amb\\Play_Amb_Dungeon_01",
+      "GUID": "{89A2BFFE-B8A2-45A6-8321-EFE173032FAF}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "292823464"
+       }
+      ]
+     },
+     {
+      "Id": "3378248715",
+      "Name": "Stop_Amb_Dungeon_01",
+      "ObjectPath": "\\Events\\Default Work Unit\\Amb\\Stop_Amb_Dungeon_01",
+      "GUID": "{52460BC6-7C42-4A02-A434-57E73F1A0BAF}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{52891E21-8A3E-EFA7-D43E-84045C4A73FB}"
+ }
+}
