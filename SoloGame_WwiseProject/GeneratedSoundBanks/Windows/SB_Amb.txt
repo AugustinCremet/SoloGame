@@ -1,0 +1,7 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3378248715	Stop_Amb_Dungeon_01			\Default Work Unit\Amb\Stop_Amb_Dungeon_01	
+	4286429649	Play_Amb_Dungeon_01			\Default Work Unit\Amb\Play_Amb_Dungeon_01	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	292823464	ATMO EERIE Cave, Water Drips, Emptyness, Howling Interior Wind, Oppressive, LOOP - Legal	F:\Ashen Tree Projects\Slime\SoloGame\SoloGame_WwiseProject\.cache\01\{01E14DD2-1CAB-A5D7-CEFC-2DDBD2BFA979}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Amb\AM_Amb_Dungeon_01\ATMO EERIE Cave, Water Drips, Emptyness, Howling Interior Wind, Oppressive, LOOP - Legal		16295392
+

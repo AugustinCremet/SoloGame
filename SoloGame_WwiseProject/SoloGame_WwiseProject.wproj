@@ -31,6 +31,7 @@
 						<Value Platform="switch2">GeneratedSoundBanks\switch2\</Value>
 					</ValueList>
 				</Property>
+				<Property Name="LicenseKey" Type="string" Value="PHByb2plY3QgaWQ9IjIwNTk2IiBtYXNrPSJMUVNOOTY3MiIgZW5jPSIwIj48bGljZW5zZSBpZD0iMSIgbmFtZT0iV3dpc2UiIHR5cGU9IjEiIHBsYXRmb3Jtcz0iMTAiIGV4cGlyZXM9IjIwMjYtMDMtMDEiICAvPjxsaWNlbnNlIGlkPSIyMSIgbmFtZT0iTWFpbnRlbmFuY2UiIHR5cGU9IjEiIHBsYXRmb3Jtcz0iMTAiIGV4cGlyZXM9IjIwMjYtMDMtMDEiICAvPjxsaWNlbnNlIGlkPSI3MCIgbmFtZT0iSW5kaWUgTGljZW5zZSIgdHlwZT0iMSIgcGxhdGZvcm1zPSIxMCIgZXhwaXJlcz0iMjAyNi0wMy0wMSIgIC8+PC9wcm9qZWN0Pg==|iHsaVyIWrgmitkjSryYVve2kKh2S79mQP9bx/f/xoc2j3ppF4cmLoO3pZnL7RYzcKE95m1guMvEnDFFs2xwvBw8a3gmsNG2Q8qS11Xccauxpj1WC1x3wcXrDiu0fApVLNx0k8imq3E3lkBCl1UHeshjDpl/SoRbuUo5CjH9+WQJ3AW1Qv2fmUwLuzfunpnGnWk/kzYVlyJiE9nmNzBD27u7pksZ+5VX3ZCvVo0EaRZbc7Cx/KL6eoPQsbxKk92p459caHkPX7wg3m5sMUTYZ6ZnWvOe3lALyCW3sNUcFvnrbxz670iYAxFAKnslA3HQqnCX4MkP78GDmRvW+Lt962Q==" />
 				<Property Name="SoundBankGenerateHeaderFile" Type="bool" Value="True" />
 				<Property Name="SoundBankGenerateEstimatedDuration" Type="bool" Value="True" /><Property Name="SoundBankHeaderFilePath" Type="string" Value="../../SoloGame/Assets/StreamingAssets/Audio/GeneratedSoundBanks" />
 				<Property Name="SoundBankPaths" Type="string">

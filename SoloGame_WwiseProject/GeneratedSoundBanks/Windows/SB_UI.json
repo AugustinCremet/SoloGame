@@ -1,0 +1,185 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "289583631",
+    "Type": "User",
+    "GUID": "{6FD0A7F5-EB7C-4EA8-A872-D5F41DCDC105}",
+    "Language": "SFX",
+    "Hash": "{B47EC071-23AE-BAC2-2660-F82178DB5EC4}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\SB_UI",
+    "ShortName": "SB_UI",
+    "Path": "SB_UI.bnk",
+    "Media": [
+     {
+      "Id": "108976330",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Soundly Voice Designer, Davis 4.wav",
+      "CachePath": "F7/{F71A4AD5-AED8-2A31-6114-73322CDE7DBA}.wem"
+     },
+     {
+      "Id": "394081595",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Soundly Voice Designer, Davis 2.wav",
+      "CachePath": "76/{764C2291-5391-7020-F3AD-D4ECBFB4A9D5}.wem"
+     },
+     {
+      "Id": "646854168",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Soundly Voice Designer, Davis 3.wav",
+      "CachePath": "27/{2778A9DD-BFB7-585A-4EBE-C26F988C0EC3}.wem"
+     },
+     {
+      "Id": "679268290",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Soundly Voice Designer, Davis 5.wav",
+      "CachePath": "90/{90FD4AC6-5B9A-3D54-505B-4DA15C7EB30D}.wem"
+     },
+     {
+      "Id": "978499779",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Soundly Voice Designer, Davis 6.wav",
+      "CachePath": "4A/{4A7C6D8B-C397-1824-AF04-13FCBD727A71}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "2263938435",
+      "Name": "Play_PH_UI_Back",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_PH_UI_Back",
+      "GUID": "{DDF4342E-ED05-4C01-AD62-0A223BBBD458}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6830417",
+      "DurationMax": "0.6830417",
+      "MediaRefs": [
+       {
+        "Id": "679268290"
+       }
+      ]
+     },
+     {
+      "Id": "1317891950",
+      "Name": "Play_PH_UI_Click",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_PH_UI_Click",
+      "GUID": "{F56C45CF-67EE-4A2E-9DEE-2F7BF50D3455}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6936042",
+      "DurationMax": "0.6936042",
+      "MediaRefs": [
+       {
+        "Id": "394081595"
+       }
+      ]
+     },
+     {
+      "Id": "1187805633",
+      "Name": "Play_PH_UI_HoverIn",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_PH_UI_HoverIn",
+      "GUID": "{53131546-C7C8-4DD7-869C-78AC6C96A3E4}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.69625",
+      "DurationMax": "0.69625",
+      "MediaRefs": [
+       {
+        "Id": "646854168"
+       }
+      ]
+     },
+     {
+      "Id": "1239371456",
+      "Name": "Play_PH_UI_HoverOut",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_PH_UI_HoverOut",
+      "GUID": "{09948101-3F1E-4C28-8CD7-88B783E00ABC}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.731625",
+      "DurationMax": "0.731625",
+      "MediaRefs": [
+       {
+        "Id": "108976330"
+       }
+      ]
+     },
+     {
+      "Id": "1631034694",
+      "Name": "Play_PH_UI_Start",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Play_PH_UI_Start",
+      "GUID": "{57C46D37-B5D6-4192-92C4-7295898CBCB2}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.1948541",
+      "DurationMax": "1.1948541",
+      "MediaRefs": [
+       {
+        "Id": "978499779"
+       }
+      ]
+     },
+     {
+      "Id": "852397557",
+      "Name": "Stop_PH_UI_Back",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Stop_PH_UI_Back",
+      "GUID": "{0DCEE8D1-E62C-4D3B-9EBB-6E067A2333DA}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "2413932340",
+      "Name": "Stop_PH_UI_Click",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Stop_PH_UI_Click",
+      "GUID": "{F9C74B59-D050-4BB6-ACB5-D7CF13159BDA}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "930884163",
+      "Name": "Stop_PH_UI_HoverIn",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Stop_PH_UI_HoverIn",
+      "GUID": "{9FEED615-75CB-490C-AE4E-EB4F9EEB6AD4}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "3026691134",
+      "Name": "Stop_PH_UI_HoverOut",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Stop_PH_UI_HoverOut",
+      "GUID": "{DA7B9BF7-3F47-4288-8728-67240A66734E}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "3105894424",
+      "Name": "Stop_PH_UI_Start",
+      "ObjectPath": "\\Events\\Default Work Unit\\UI\\Stop_PH_UI_Start",
+      "GUID": "{E3C875EF-ADEF-4AB5-8FC4-9D363BF7FB99}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{C1B801A7-5A81-EA99-DEC1-187D1D156BF6}"
+ }
+}

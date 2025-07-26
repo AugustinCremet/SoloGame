@@ -9,6 +9,60 @@
 							<ObjectRef Name="System" ID="{45EF5B3F-51F4-43FA-B1CF-6E0A69A74B3E}" WorkUnitID="{E4E26E77-1798-4847-841C-F34E179BDF68}"/>
 						</Reference>
 					</ReferenceList>
+					<ChildrenList>
+						<AuxBus Name="Verb" ID="{51C40A0A-E314-48E6-8FE0-C7DCC7551AC4}">
+							<ObjectLists>
+								<ObjectList Name="Effects">
+									<Reference>
+										<Local>
+											<EffectSlot Name="" ID="{35078A5B-C220-4E46-9531-E2000830AE58}" ShortID="524468116">
+												<ReferenceList>
+													<Reference Name="Effect" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+														<ObjectRef Name="Hall_Large_Dark" ID="{0F6A7D6D-131C-4650-9561-FC05F5C7A37B}" WorkUnitID="{E8613F7D-BAD3-45CD-A3ED-505576F31277}"/>
+													</Reference>
+												</ReferenceList>
+											</EffectSlot>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</AuxBus>
+						<Bus Name="Bus_2D" ID="{EB0E5F3B-9BAD-48AE-92BC-186C8CB90E4F}">
+							<ChildrenList>
+								<Bus Name="Bus_Music" ID="{D01815B0-DAB4-4071-A11B-1C12D4DE3C59}"/>
+								<Bus Name="Bus_UI" ID="{A10CC4D3-7F8E-424B-9365-E86DF511F3BC}"/>
+							</ChildrenList>
+						</Bus>
+						<Bus Name="Bus_3D" ID="{8A814B95-8396-4F7E-8993-2BF31D75AF8B}">
+							<ReferenceList>
+								<Reference Name="UserAuxSend0">
+									<ObjectRef Name="Verb" ID="{51C40A0A-E314-48E6-8FE0-C7DCC7551AC4}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Bus Name="Bus_Enemy" ID="{6362918A-FCED-44EB-8A44-C5E71392933F}">
+									<ReferenceList/>
+									<ChildrenList>
+										<Bus Name="Bus_Enemy_FS" ID="{D0C8BEDD-DAD4-45E5-BF40-99269E9E4BD2}">
+											<PropertyList>
+												<Property Name="BusVolume" Type="Real64">
+													<ValueList>
+														<Value>-11</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+										</Bus>
+									</ChildrenList>
+								</Bus>
+								<Bus Name="Bus_Player" ID="{12337A94-0F5D-4F86-9707-D2E760A456CE}">
+									<ReferenceList/>
+								</Bus>
+								<Bus Name="Bus_Amb" ID="{3BDA4D1F-A32E-46F8-A3CA-15B16269A75A}">
+									<ReferenceList/>
+								</Bus>
+							</ChildrenList>
+						</Bus>
+					</ChildrenList>
 				</Bus>
 			</ChildrenList>
 		</WorkUnit>

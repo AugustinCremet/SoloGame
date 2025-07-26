@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 5389532597068610231}
   - component: {fileID: 7874559967890676910}
   m_Layer: 0
-  m_Name: cursor
+  m_Name: Cursor
   m_TagString: AimSight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -630,6 +630,7 @@ Transform:
   - {fileID: 4074012101882957907}
   - {fileID: 3819165536718601405}
   - {fileID: 8182582844104752728}
+  - {fileID: 3835504418238679609}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7723032359193687532
