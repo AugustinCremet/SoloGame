@@ -6,7 +6,7 @@ public class SoundHandler : MonoBehaviour
 
     public void Play(ESoundType soundType)
     {
-        SoundManager.Instance.PlaySound(_soundPack, soundType, gameObject);
+        AudioManager.Instance.PlaySound(_soundPack, soundType, gameObject);
     }
 
     // For stopping sound

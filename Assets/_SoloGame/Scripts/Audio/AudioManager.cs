@@ -1,11 +1,15 @@
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    public static SoundManager Instance { get; private set; }
+    public static AudioManager Instance { get; private set; }
+    [SerializeField] AK.Wwise.Bank _bank;
 
     private void Awake()
     {
+        // AC_TODO temp for 1 bank
+        _bank.Load();
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
