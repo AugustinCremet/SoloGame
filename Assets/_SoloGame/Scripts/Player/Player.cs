@@ -29,6 +29,8 @@ public class Player : MonoBehaviour, IDamageable
     [Header("Cooldowns")]
     [SerializeField] float _invinsibilityDuration = 10f;
     [SerializeField] float _shootingCDDuration = 1f;
+    [SerializeField] float _suctionCDDuration = 10f;
+    [SerializeField] float _suctionDuration = 3f;
 
     public int MaxHealth => _maxHealth;
     private int _currentHealth = 0;
@@ -44,6 +46,7 @@ public class Player : MonoBehaviour, IDamageable
 
     //CD
     private Cooldown _shootingCD;
+    private Cooldown _suctionCD;
 
     [Space(10)]
     [Header("Bullet Emitter")]
@@ -74,6 +77,7 @@ public class Player : MonoBehaviour, IDamageable
     public MovingState MovingState;
     public DeadState DeadState;
     public HitState HitState;
+    public SuctionState SuctionState;
 
 
     private void Awake()
@@ -89,6 +93,7 @@ public class Player : MonoBehaviour, IDamageable
 
         // CD
         _shootingCD = new Cooldown(_shootingCDDuration);
+        _suctionCD = new Cooldown(_suctionCDDuration);
 
         //State machine with states
         StateMachine = new StateMachine();
@@ -98,6 +103,7 @@ public class Player : MonoBehaviour, IDamageable
         MovingState = new MovingState(_playerController, this, _animator);
         DeadState = new DeadState(_playerController, this, _animator);
         HitState = new HitState(_playerController, this, _animator);
+        SuctionState = new SuctionState(_playerController, this, _animator);
     }
     private void Start()
     {
@@ -230,6 +236,17 @@ public class Player : MonoBehaviour, IDamageable
     {
         _isUsingGoo = false;
         ReevaluateState();
+    }
+    public void StartSuction()
+    {
+        if(_suctionCD.IsReady)
+        {
+            StateMachine.TryChangeState(SuctionState);
+        }
+    }
+    public void HandleSuction()
+    {
+
     }
     public void StartShooting()
     {

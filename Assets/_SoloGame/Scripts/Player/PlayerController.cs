@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
             _player.StopShooting();
         }
     }
-    public void DashInput(InputAction.CallbackContext context)
+    public void GooInput(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -89,6 +89,13 @@ public class PlayerController : MonoBehaviour
         else if(context.canceled)
         {
             _player.StopGoo();
+        }
+    }
+    public void SuctionInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _player.StartSuction();
         }
     }
 
