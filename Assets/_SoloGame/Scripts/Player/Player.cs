@@ -140,6 +140,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             StateMachine.TryChangeState(ShootingState);
         }
+        Debug.Log(_suctionCD.RemainingTime);
     }
 
     private void FixedUpdate()
@@ -252,7 +253,6 @@ public class Player : MonoBehaviour, IDamageable
     {
         if(_suctionCD.IsReady)
         {
-            _suctionCD.Use();
             _suctionSkillDurationCD.Use();
             StateMachine.TryChangeState(SuctionState);
         }
@@ -269,6 +269,8 @@ public class Player : MonoBehaviour, IDamageable
         switch(skill)
         {
             case EPlayerSkill.Suction:
+                _suctionCD.Use();
+                UIManager.Instance.StartSkillCooldown(skill, _suctionCD);
                 ReevaluateState();
                 break;
             default:

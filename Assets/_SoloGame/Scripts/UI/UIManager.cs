@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] HealthBar _healthBar;
     [SerializeField] GooBar _gooBar;
+    [SerializeField] LiquidCooldown _suctionCD;
 
     private void Awake()
     {
@@ -39,5 +40,17 @@ public class UIManager : MonoBehaviour
     public void ChangeMaxGoo(float maxGoo)
     {
         _gooBar.ChangeMaxGoo(maxGoo);
+    }
+
+    public void StartSkillCooldown(EPlayerSkill skill, Cooldown cooldown)
+    {
+        switch(skill)
+        {
+            case EPlayerSkill.Suction:
+                _suctionCD.StartCooldown(cooldown);
+                break;
+            default:
+                break;
+        }
     }
 }
