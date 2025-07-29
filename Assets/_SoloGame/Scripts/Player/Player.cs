@@ -7,13 +7,14 @@ using System.Collections;
 using Unity.VisualScripting;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public enum PlayerAbilities
+public enum EPlayerSkill
 {
     None           = 0,
-    Dash           = 1 << 0,
+    Suction        = 1 << 0,
     ColorSwitch    = 1 << 1,
     BulletTime     = 1 << 2,
     BouncingBullet = 1 << 3,
+
 }
 public class Player : MonoBehaviour, IDamageable
 {
@@ -68,7 +69,7 @@ public class Player : MonoBehaviour, IDamageable
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private Material _material;
-    public PlayerAbilities Abilities { get; private set; }
+    public EPlayerSkill Abilities { get; private set; }
 
     // FSM
     public StateMachine StateMachine;
@@ -159,22 +160,22 @@ public class Player : MonoBehaviour, IDamageable
         GameManager.OnLoad -= LoadPlayerData;
     }
 
-    public void GrantAbility(PlayerAbilities ability)
+    public void GrantAbility(EPlayerSkill ability)
     {
         Abilities |= ability;
 
-        if(ability == PlayerAbilities.BouncingBullet)
+        if(ability == EPlayerSkill.BouncingBullet)
         {
             _bulletEmitter.SwitchProfile(_bouncingProfile);
         }
     }
 
-    public void RemoveAbility(PlayerAbilities ability)
+    public void RemoveAbility(EPlayerSkill ability)
     {
         Abilities &= ~ability;
     }
 
-    public bool HasAbility(PlayerAbilities ability)
+    public bool HasAbility(EPlayerSkill ability)
     {
         return (Abilities & ability) == ability;
     }
@@ -263,14 +264,27 @@ public class Player : MonoBehaviour, IDamageable
             _animator.SetBool("IsSuctionOver", true);
         }
     }
-    public void StopSuction()
+    public void EndSkill(EPlayerSkill skill)
     {
-        Debug.Log("StopSuction");
-        ReevaluateState();
+        switch(skill)
+        {
+            case EPlayerSkill.Suction:
+                ReevaluateState();
+                break;
+            default:
+                break;
+        }
     }
-    public void SuctionEvent()
+    public void StartSkill(EPlayerSkill skill)
     {
-        OnSuction?.Invoke(_suctionSkillDuration);
+        switch (skill)
+        {
+            case EPlayerSkill.Suction:
+                OnSuction?.Invoke(_suctionSkillDuration);
+                break;
+            default:
+                break;
+        }
     }
     public void StartShooting()
     {
@@ -302,6 +316,7 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void StopShooting()
     {
+        Debug.Log("Stop shooting");
         _willShootAgain = false;
     }
     public void StopShootingEvent()
