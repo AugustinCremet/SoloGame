@@ -42,24 +42,34 @@ public class EnemyAI : TreeOfNodes
         //});
         BehaviorTreeContext context = new BehaviorTreeContext(_enemy, transform, _target.transform, _agent);
 
-        Node root = new Selector(new List<Node>
+        //Node root = new Selector(new List<Node>
+        //{
+        //    new Sequence(new List<Node>
+        //    {
+        //        new TaskIsPlayerInRange(),
+        //        new TaskStopMovement(),
+        //        new TaskAttack(),
+        //        new TaskIsAttackOver(),
+        //    }),
+        //    new Sequence(new List<Node>
+        //    {
+        //        new TaskHasTimerExceeded(5f),
+        //        new TaskStopMovement(),
+        //        new TaskAttack(),
+        //        new TaskIsAttackOver(),
+        //    }),
+        //    new Sequence(new List<Node>
+        //    {
+        //        //new TaskStopAttack(),
+        //        new TaskStartAttackTimer(),
+        //        new TaskGoToTarget(),
+        //    }),
+        //});
+
+        Node root = new Sequence(new List<Node>
         {
-            new Sequence(new List<Node>
-            {
-                new TaskIsPlayerInRange(),
-                new TaskAttack(),
-            }),
-            new Sequence(new List<Node>
-            {
-                new TaskHasTimerExceeded(5f),
-                new TaskAttack(),
-            }),
-            new Sequence(new List<Node>
-            {
-                new TaskStopAttack(),
-                new TaskStartAttackTimer(),
-                new TaskGoToTarget(),
-            }),
+            new TaskAttack(),
+            new TaskIsAttackOver(),
         });
 
         // Basic enemy

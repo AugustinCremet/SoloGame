@@ -120,6 +120,12 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
         OnEnemyDeath?.Invoke(this);
     }
 
+    public bool IsEmitterPlaying()
+    {
+        Debug.Log(_bulletEmitter.isPlaying);
+        return _bulletEmitter.isPlaying;
+    }
+
     public bool Attack()
     {
         return true;
@@ -130,23 +136,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
         _bulletEmitter?.Stop(PlayOptions.RootOnly);
     }
 
-    IEnumerator AttackRoutine()
-    {
-        IsAttacking = true;
-        //AudioSource.PlayClipAtPoint(_soundClip, transform.position);
-
-        //yield return new WaitForSeconds(_soundClip.length);
-        yield return null;
-        _bulletEmitter.Play();
-        IsAttacking = false;
-    }
-
     public void StartAttack()
     {
+        Debug.Log("Start attack");
         _bulletEmitter.Play();
-        //if(!IsAttacking)
-        //{
-        //    StartCoroutine(AttackRoutine());
-        //}
     }
 }

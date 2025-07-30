@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5538856402708332433}
   - component: {fileID: 5588907326532589408}
   - component: {fileID: 844173609279603452}
+  - component: {fileID: 4581228537658319286}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -179,10 +180,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8960c4721b0555d478c6bbfc8e854f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
+  _hp: 200
   _laserSight: {fileID: 4610367313683202467, guid: f088bca84eefb0f4da8fe2e8db4fd061, type: 3}
   _soundClip: {fileID: 8300000, guid: f8c664540ab6f4e839dc1f638d51f391, type: 3}
-  _uniqueID: 
+  _uniqueID: 70b31620-1ec1-4a62-bb30-e3f4e01d3cea
 --- !u!114 &207963093360244971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a676b285f069c3c4884c27e78d0fc696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emitterProfile: {fileID: 11400000, guid: df02b2f84f50c5249a491b503a5be816, type: 2}
+  emitterProfile: {fileID: 11400000, guid: f6a792d85a3981e4c85c6b32c59a4826, type: 2}
   patternOrigin: {fileID: 0}
   playAtStart: 0
   useDefaultGizmoColor: 1
@@ -269,7 +270,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -292,3 +293,16 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 768
+--- !u!114 &4581228537658319286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344836012903804291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c8d5178b8728240bd70709ebb967c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundPack: {fileID: 11400000, guid: 003d875b702c12e45b1b9ba3f222d01c, type: 2}

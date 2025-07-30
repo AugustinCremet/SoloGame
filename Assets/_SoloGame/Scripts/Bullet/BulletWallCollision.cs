@@ -78,4 +78,9 @@ public class BulletWallCollision : BaseBulletBehaviour {
     {
 		bullet.Die();
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        bullet.Die();
+    }
 }

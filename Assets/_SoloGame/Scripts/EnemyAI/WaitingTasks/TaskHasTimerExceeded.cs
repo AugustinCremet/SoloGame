@@ -12,7 +12,6 @@ public class TaskHasTimerExceeded : Node
     public override NodeState Evaluate()
     {
         _state = _context.Enemy.IsShootingTimeDone(_threshold) ? NodeState.SUCCESS : NodeState.FAILURE;
-        Debug.Log(_state);
         return _state;
     }
 }

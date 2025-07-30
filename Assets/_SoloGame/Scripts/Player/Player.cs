@@ -140,7 +140,6 @@ public class Player : MonoBehaviour, IDamageable
         {
             StateMachine.TryChangeState(ShootingState);
         }
-        Debug.Log(_suctionCD.RemainingTime);
     }
 
     private void FixedUpdate()
@@ -318,7 +317,6 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void StopShooting()
     {
-        Debug.Log("Stop shooting");
         _willShootAgain = false;
     }
     public void StopShootingEvent()

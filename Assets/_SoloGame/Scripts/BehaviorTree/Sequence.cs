@@ -19,6 +19,7 @@ namespace BehaviorTree
                     case NodeState.FAILURE:
                         _currentChildIndex = 0; // Reset the sequence on failure
                         _state = NodeState.FAILURE;
+                        Reset();
                         return _state;
 
                     case NodeState.RUNNING:
@@ -34,6 +35,7 @@ namespace BehaviorTree
             // All children succeeded, reset for the next evaluation
             _currentChildIndex = 0;
             _state = NodeState.SUCCESS;
+            Reset();
             return _state;
         }
 
