@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5588907326532589408}
   - component: {fileID: 844173609279603452}
   - component: {fileID: 4581228537658319286}
+  - component: {fileID: 855524102216355811}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -285,7 +286,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3344836012903804291}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 469c953ee4e2b084099adcad2065a7f0, type: 3}
   m_Name: 
@@ -306,3 +307,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundPack: {fileID: 11400000, guid: 003d875b702c12e45b1b9ba3f222d01c, type: 2}
+--- !u!114 &855524102216355811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344836012903804291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: 2630626348744897883, guid: 328e9c3b2ac70124984779b5c47f214b, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 1820326268262154567
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1820326268262154567
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 3344836012903804291}

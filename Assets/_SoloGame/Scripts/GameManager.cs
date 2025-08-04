@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private string _currentSceneParentName;
     public SceneDetails PreviousScene { get; private set; }
     [SerializeField] GameObject _essentialPrefab;
+    [SerializeField] bool _isUniqueScene;
     private GameObject _essential;
 
     private string _savePath = "/Game1.json";
@@ -45,6 +46,12 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this);
             //transform.SetParent(essential.transform);
         }
+    }
+
+    private void Start()
+    {
+        if(_isUniqueScene)
+            _essential.SetActive(true);
     }
 
     private void Update()

@@ -30,5 +30,6 @@ EditorBuildSettings:
     path: Assets/_SoloGame/Scenes/HamiltonianPuzzles/TestPuzzle.unity
     guid: b2accb3e9413bb0408b2266577493835
   m_configObjects:
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 99f9c9493070a9d4c979a8fec7c5a8d3, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: b6d2a7b8e7864ba46b93f13e5729fed3, type: 2}
   m_UseUCBPForAssetBundles: 0

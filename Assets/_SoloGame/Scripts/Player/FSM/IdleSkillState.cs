@@ -8,7 +8,7 @@ public class IdleSkillState : BaseState
 
     public override void EnterState(BaseStateMachine stateMachine)
     {
-        _animator.Play("IdleFront");
+        
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
