@@ -7,7 +7,6 @@ public class TaskIsAttackOver : Node
     {
         if(_context.Enemy.IsEmitterPlaying())
         {
-            Debug.Log("Attack is not over");
             _state = NodeState.RUNNING;
         }
         else

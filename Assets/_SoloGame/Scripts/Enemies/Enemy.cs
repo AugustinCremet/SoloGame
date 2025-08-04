@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     [SerializeField] string _uniqueID;
     private float _shootingCurrentTime;
     private bool _isShootingTimerActive;
+    private bool _isOnAttackCooldown = false;
     protected virtual bool _canBePermaDead => false;
 
     public bool IsAttacking { get; private set; } = false;
@@ -69,7 +70,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
         }
     }
 
-    public void StartShootingTimerActive()
+    public void StartShootingTimer()
     {
         _isShootingTimerActive = true;
     }
@@ -98,9 +99,33 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
         return isShootingTimeDone;
     }
 
+    public void StartAttackCooldown()
+    {
+        StartCoroutine(AttackCooddownCR());
+    }
+
+    public IEnumerator AttackCooddownCR()
+    {
+        float cooldown = 2f;
+        _isOnAttackCooldown = true;
+        while(cooldown >= 0f)
+        {
+            cooldown -= Time.deltaTime;
+            yield return null;
+        }
+        _isOnAttackCooldown = false;
+    }
+
+    public bool IsAttackCooldown()
+    {
+        return _isOnAttackCooldown;
+    }
+
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
     {
+        Debug.Log("Check hit");
         Damage(bullet.moduleParameters.GetInt("Damage"));
+        Debug.Log("Check 2");
     }
     public void Damage(int dmgAmount)
     {
@@ -122,7 +147,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
     public bool IsEmitterPlaying()
     {
-        Debug.Log(_bulletEmitter.isPlaying);
         return _bulletEmitter.isPlaying;
     }
 
@@ -138,7 +162,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
     public void StartAttack()
     {
-        Debug.Log("Start attack");
+        StartAttackCooldown();
         _bulletEmitter.Play();
     }
 }

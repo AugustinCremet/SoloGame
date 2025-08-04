@@ -18,13 +18,11 @@ public class TaskAttack : Node
 
         if (_context.Enemy.IsEmitterPlaying())
         {
-            Debug.Log("Attack is happening");
             _hasAttacked = true;
-            _state = NodeState.SUCCESS; // or RUNNING if you want to wait here
+            _state = NodeState.SUCCESS;
         }
         else
         {
-            Debug.Log("Waiting for emitter to start...");
             _state = NodeState.RUNNING;
         }
         return _state;
@@ -33,7 +31,6 @@ public class TaskAttack : Node
     public override void Reset()
     {
         base.Reset();
-        Debug.Log("reset");
         _hasAttacked = false;
     }
 }

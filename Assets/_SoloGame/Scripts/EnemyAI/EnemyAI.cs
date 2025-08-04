@@ -23,63 +23,34 @@ public class EnemyAI : TreeOfNodes
     protected override Node SetupTree()
     {
         _target = GameObject.FindGameObjectWithTag("Player");
-        //Node root = new Sequence(new List<Node>
-        //{
-        //    new TaskCheckIfPlayerOnTheNav(),
-        //    new Selector(new List<Node>
-        //    {
-        //        new Sequence(new List<Node>
-        //        {
-        //            new TaskCheckPlayerInRange(),
-        //            new TaskAttack(),
-        //        }),
-        //        new Sequence(new List<Node>
-        //        {
-        //            new TaskStopAttack(),
-        //            new TaskGoToTarget(),
-        //        }),
-        //    }),
-        //});
+
         BehaviorTreeContext context = new BehaviorTreeContext(_enemy, transform, _target.transform, _agent);
 
-        //Node root = new Selector(new List<Node>
-        //{
-        //    new Sequence(new List<Node>
-        //    {
-        //        new TaskIsPlayerInRange(),
-        //        new TaskStopMovement(),
-        //        new TaskAttack(),
-        //        new TaskIsAttackOver(),
-        //    }),
-        //    new Sequence(new List<Node>
-        //    {
-        //        new TaskHasTimerExceeded(5f),
-        //        new TaskStopMovement(),
-        //        new TaskAttack(),
-        //        new TaskIsAttackOver(),
-        //    }),
-        //    new Sequence(new List<Node>
-        //    {
-        //        //new TaskStopAttack(),
-        //        new TaskStartAttackTimer(),
-        //        new TaskGoToTarget(),
-        //    }),
-        //});
-
-        Node root = new Sequence(new List<Node>
+        Node root = new Selector(new List<Node>
         {
-            new TaskAttack(),
-            new TaskIsAttackOver(),
+            new Sequence(new List<Node>
+            {
+                new TaskIsPlayerInRange(),
+                new TaskStopMovement(),
+                new TaskCanAttack(),
+                new TaskAttack(),
+                new TaskIsAttackOver(),
+            }),
+            new Sequence(new List<Node>
+            {
+                new TaskHasTimerExceeded(5f),
+                new TaskStopMovement(),
+                new TaskCanAttack(),
+                new TaskAttack(),
+                new TaskIsAttackOver(),
+            }),
+            new Sequence(new List<Node>
+            {
+                new TaskStartAttackTimer(),
+                new TaskGoToTarget(),
+            }),
         });
 
-        // Basic enemy
-        //Node root = new Sequence(new List<Node>
-        //{
-        //    new TaskMoveBetween(0.15f, 0.25f, 5f),
-        //    new TaskAttack(),
-        //    new TaskWait(1f),
-        //    new TaskStopAttack(),
-        //});
         root.SetContext(context);
 
         return root;
