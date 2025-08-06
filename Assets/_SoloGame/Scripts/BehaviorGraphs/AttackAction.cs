@@ -15,7 +15,7 @@ public partial class AttackAction : Action
     protected override Status OnStart()
     {
         _enemy = Agent.Value.GetComponent<Enemy>();
-        _enemy.Attack();
+        _enemy.StartAttack();
         return Status.Running;
     }
 
