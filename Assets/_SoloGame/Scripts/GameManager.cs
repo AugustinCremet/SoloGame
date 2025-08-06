@@ -46,12 +46,11 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this);
             //transform.SetParent(essential.transform);
         }
-    }
 
-    private void Start()
-    {
         if(_isUniqueScene)
+        {
             _essential.SetActive(true);
+        }
     }
 
     private void Update()
