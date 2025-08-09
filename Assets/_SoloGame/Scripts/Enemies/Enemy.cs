@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
     public IEnumerator AttackCooddownCR()
     {
-        float cooldown = 2f;
+        float cooldown = 5f;
         _isOnAttackCooldown = true;
         while(cooldown >= 0f)
         {
@@ -123,9 +123,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
     {
-        Debug.Log("Check hit");
         Damage(bullet.moduleParameters.GetInt("Damage"));
-        Debug.Log("Check 2");
     }
     public void Damage(int dmgAmount)
     {
@@ -158,11 +156,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     public void StopAttack()
     {
         _bulletEmitter?.Stop(PlayOptions.RootOnly);
+        StartAttackCooldown();
     }
 
     public void StartAttack()
     {
-        StartAttackCooldown();
         _bulletEmitter.Play();
     }
 }

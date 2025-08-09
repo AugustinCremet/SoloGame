@@ -9,10 +9,12 @@ using Unity.Properties;
 public partial class InitializeContextAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Self;
+    private bool _isInitDone = false;
     protected override Status OnStart()
     {
-        if(Self != null)
+        if(Self != null && !_isInitDone)
         {
+            _isInitDone = true;
             var agent = Self.Value.GetComponent<BehaviorGraphAgent>();
             var player = GameObject.FindGameObjectWithTag("Player");
             agent.SetVariableValue("Target", player);

@@ -1,34 +1,55 @@
 using System;
+using BehaviorTree;
 using Unity.Behavior;
-using UnityEngine;
-using Action = Unity.Behavior.Action;
 using Unity.Properties;
+using UnityEngine;
 using UnityEngine.AI;
+using Action = Unity.Behavior.Action;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Go to Target", story: "[Agent] go to [Target]", category: "Action/Custom", id: "3300cd977498750242c209721443612f")]
+[NodeDescription(name: "Go to Target", story: "[Self] go to [Target]", category: "Action/Custom", id: "3300cd977498750242c209721443612f")]
 public partial class GoToTargetAction : Action
 {
-    [SerializeReference] public BlackboardVariable<GameObject> Agent;
+    [SerializeReference] public BlackboardVariable<NavMeshAgent> Self;
     [SerializeReference] public BlackboardVariable<GameObject> Target;
-
-    private NavMeshAgent _agent;
     private Transform _targetTrans;
+    private Vector3 _currentDestination;
     protected override Status OnStart()
     {
         if(Target == null)
         {
             return Status.Failure;
         }
-        _agent = Agent.Value.GetComponent<NavMeshAgent>();
         _targetTrans = Target.Value.transform;
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
-        Agent.Value.GetComponent<NavMeshAgent>().SetDestination(Target.Value.transform.position);
-        return Status.Success;
+        // Prevent movement during a bullet pattern
+        if (Self.Value.gameObject.GetComponent<Enemy>().IsEmitterPlaying())
+        {
+            Self.Value.isStopped = true;
+        }
+
+        if (Self.Value.remainingDistance > Self.Value.stoppingDistance || _currentDestination == Vector3.zero)
+        {
+            // Make sure the bullet pattern is done before moving
+            if(!Self.Value.gameObject.GetComponent<Enemy>().IsEmitterPlaying())
+            {
+                Self.Value.isStopped = false;
+                _currentDestination = _targetTrans.position;
+                Self.Value.SetDestination(_targetTrans.position);
+            }
+        }
+
+        if (!Self.Value.pathPending && Self.Value.remainingDistance <= Self.Value.stoppingDistance)
+        {
+            _currentDestination = Vector3.zero;
+            return Status.Success;
+        }
+
+        return Status.Running;
     }
 
     protected override void OnEnd()

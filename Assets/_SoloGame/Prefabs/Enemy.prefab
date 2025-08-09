@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Graph: {fileID: 2630626348744897883, guid: 328e9c3b2ac70124984779b5c47f214b, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 1820326268262154567
+  - rid: 1820326381816905860
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -335,3 +336,11 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 3344836012903804291}
+    - rid: 1820326381816905860
+      type: {class: 'BlackboardVariable`1[[Enemy, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6715798185636896479
+          m_Value1: 5671686404853303004
+        Name: EnemyScript
+        m_Value: {fileID: 6642156143661211813}
