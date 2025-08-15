@@ -10,6 +10,7 @@ using Action = Unity.Behavior.Action;
 public partial class StopAttackAction : Action
 {
     [SerializeReference] public BlackboardVariable<Enemy> Self;
+    [SerializeReference] public BlackboardVariable<float> cooldownBeforeNextAttack;
     protected override Status OnStart()
     {
         return Status.Running;
@@ -23,7 +24,7 @@ public partial class StopAttackAction : Action
         }
         else
         {
-            Self.Value.StopAttack();
+            Self.Value.StopAttack(cooldownBeforeNextAttack);
             return Status.Success;
         }
     }

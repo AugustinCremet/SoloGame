@@ -1,9 +1,6 @@
-using BehaviorTree;
-using BulletPro;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
+using BulletPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,17 +9,15 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 {
     [SerializeField] int _hp = 100;
     [SerializeField] GameObject _laserSight;
-    [SerializeField] AudioClip _soundClip;
     private BulletEmitter _bulletEmitter;
     [SerializeField] string _uniqueID;
     private float _shootingCurrentTime;
     private bool _isShootingTimerActive;
     private bool _isOnAttackCooldown = false;
     protected virtual bool _canBePermaDead => false;
-
-    public bool IsAttacking { get; private set; } = false;
     public bool IsAIActive { get; private set; } = false;
 
+    private NavMeshAgent _agent;
     public static event Action<Enemy> OnEnemyDeath;
     private SoundHandler _soundHandler;
 
@@ -30,7 +25,14 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     {
         _bulletEmitter = GetComponent<BulletEmitter>();
         _soundHandler = GetComponent<SoundHandler>();
-        Instantiate(_laserSight, transform);
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
+        _agent.radius = 0.5f;
+        if(_laserSight != null)
+        {
+            Instantiate(_laserSight, transform);
+        }
     }
 
     private void Start()
@@ -99,14 +101,13 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
         return isShootingTimeDone;
     }
 
-    public void StartAttackCooldown()
+    public void StartAttackCooldown(float cooldown)
     {
-        StartCoroutine(AttackCooddownCR());
+        StartCoroutine(AttackCooddownCR(cooldown));
     }
 
-    public IEnumerator AttackCooddownCR()
+    public IEnumerator AttackCooddownCR(float cooldown)
     {
-        float cooldown = 5f;
         _isOnAttackCooldown = true;
         while(cooldown >= 0f)
         {
@@ -153,10 +154,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
         return true;
     }
 
-    public void StopAttack()
+    public void StopAttack(float cooldown)
     {
         _bulletEmitter?.Stop(PlayOptions.RootOnly);
-        StartAttackCooldown();
+        StartAttackCooldown(cooldown);
     }
 
     public void StartAttack()

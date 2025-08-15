@@ -11,7 +11,7 @@ public class TaskIsAttackOver : Node
         }
         else
         {
-            _context.Enemy.StopAttack();
+            _context.Enemy.StopAttack(3f);
             _state = NodeState.SUCCESS;
         }
 

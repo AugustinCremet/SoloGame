@@ -21,7 +21,7 @@ public class TaskStopAttack : Node
         {
             _currentWaitTime = 0f; // Reset for next use
             _state = NodeState.SUCCESS;
-            _context.Enemy.StopAttack();
+            _context.Enemy.StopAttack(3f);
         }
         else
         {
