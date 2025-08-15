@@ -74,7 +74,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flierAmount: 3
-  _flierPrefab: {fileID: 0}
-  _distanceToCenter: 1
-  _radiusOfFlier: 2
-  _speedOfFlier: 1
+  _flierPrefab: {fileID: 2082970579562129983, guid: e5412240ff7f46143bcb627cf409e56a, type: 3}
+  _distanceToCenter: 1.25

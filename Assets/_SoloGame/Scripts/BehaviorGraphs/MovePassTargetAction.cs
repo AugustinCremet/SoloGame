@@ -48,15 +48,6 @@ public partial class MovePassTargetAction : Action
             _desiredPos = target + currentDirection * 4f;
             _lastDesiredPos = _desiredPos;
         }
-            //float dot = Vector2.Dot(currentDirection, _initialDirection);
-            //if (dot < 0f)
-            //{
-            //    currentDirection = _initialDirection;
-            //}
-            //else
-            //{
-            //    //_initialDirection = currentDirection;
-            //}
 
 
         Self.Value.transform.position = Vector3.MoveTowards(Self.Value.transform.position, _desiredPos, 12f * Time.deltaTime);

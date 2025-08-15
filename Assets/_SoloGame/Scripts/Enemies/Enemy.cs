@@ -1,23 +1,23 @@
 using System;
 using System.Collections;
 using BulletPro;
+using Unity.Behavior;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(SoundHandler))]
 public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
 {
     [SerializeField] int _hp = 100;
-    [SerializeField] GameObject _laserSight;
     private BulletEmitter _bulletEmitter;
     [SerializeField] string _uniqueID;
-    private float _shootingCurrentTime;
-    private bool _isShootingTimerActive;
     private bool _isOnAttackCooldown = false;
+    [SerializeField] int _damageOnTouch = 1;
     protected virtual bool _canBePermaDead => false;
     public bool IsAIActive { get; private set; } = false;
 
-    private NavMeshAgent _agent;
+
     public static event Action<Enemy> OnEnemyDeath;
     private SoundHandler _soundHandler;
 
@@ -25,13 +25,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     {
         _bulletEmitter = GetComponent<BulletEmitter>();
         _soundHandler = GetComponent<SoundHandler>();
-        _agent = GetComponent<NavMeshAgent>();
-        _agent.updateRotation = false;
-        _agent.updateUpAxis = false;
-        _agent.radius = 0.5f;
-        if(_laserSight != null)
+        if(TryGetComponent<NavMeshAgent>(out var agent))
         {
-            Instantiate(_laserSight, transform);
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+            agent.radius = 0.5f;
         }
     }
 
@@ -62,43 +60,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     public void SetAI(bool isActive)
     {
         IsAIActive = isActive;
-    }
-
-    private void Update()
-    {
-        if (_isShootingTimerActive)
-        {
-            ShootingTimer();
-        }
-    }
-
-    public void StartShootingTimer()
-    {
-        _isShootingTimerActive = true;
-    }
-
-    private void ShootingTimer()
-    {
-        _shootingCurrentTime += Time.deltaTime;
-    }
-
-    public bool IsShootingTimeDone(float shootingThreshold)
-    {
-        bool isShootingTimeDone = false;
-
-        if(_shootingCurrentTime >= shootingThreshold)
-        {
-            isShootingTimeDone = true;
-            _isShootingTimerActive = false;
-            _shootingCurrentTime = 0f;
-        }
-        else
-        {
-            isShootingTimeDone = false;
-        }
-        
-
-        return isShootingTimeDone;
     }
 
     public void StartAttackCooldown(float cooldown)
@@ -163,5 +124,13 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     public void StartAttack()
     {
         _bulletEmitter.Play();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.TryGetComponent<IDamageable>(out var damageable) && collision.CompareTag("Player"))
+        {
+            damageable.Damage(_damageOnTouch);
+        }
     }
 }

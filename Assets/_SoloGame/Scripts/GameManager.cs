@@ -53,6 +53,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if(_isUniqueScene)
+        {
+            var enemies = Resources.FindObjectsOfTypeAll(typeof(Enemy));
+            foreach(Enemy enemy in enemies)
+            {
+                enemy.SetAI(true);
+            }
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))

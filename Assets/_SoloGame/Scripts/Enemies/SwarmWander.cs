@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SwarmWander : MonoBehaviour
 {
-    private float _radius = 1f;
-    private float _speed = 1f;
+    [SerializeField] float _radius = 1f;
+    [SerializeField] float _speed = 1f;
     private Vector3 _initialPosition;
     private float _offsetX;
     private float _offsetY;
@@ -12,7 +12,6 @@ public class SwarmWander : MonoBehaviour
     {
         _offsetX = Random.value * 100f;
         _offsetY = Random.value * 100f;
-        _initialPosition = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -25,9 +24,15 @@ public class SwarmWander : MonoBehaviour
         transform.localPosition = _initialPosition + offset;
     }
 
-    public void Init(float radius, float speed)
+    public void Init(Vector3 initialPosition)
     {
-        _radius = radius;
-        _speed = speed;
+        transform.localPosition = initialPosition;
+        _initialPosition = initialPosition;
+    }
+
+    // Put the logic in the parent so enemy/AI stay with the behavior graph agent
+    public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
+    {
+        GetComponentInParent<Enemy>().CheckIfHitIsAvailable(bullet, position);
     }
 }

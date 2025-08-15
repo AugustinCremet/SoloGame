@@ -18,6 +18,11 @@ public partial class InitializeContextAction : Action
             var agent = Self.Value.GetComponent<BehaviorGraphAgent>();
             var player = GameObject.FindGameObjectWithTag("Player");
             agent.SetVariableValue("Target", player);
+
+            if (Self.Value.TryGetComponent<Enemy>(out var enemy))
+            {
+                agent.SetVariableValue("Enemy", enemy);
+            }
         }
 
         return Status.Success;
