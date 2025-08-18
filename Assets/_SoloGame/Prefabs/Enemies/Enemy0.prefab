@@ -181,8 +181,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 200
-  _laserSight: {fileID: 0}
   _uniqueID: 70b31620-1ec1-4a62-bb30-e3f4e01d3cea
+  _damageOnTouch: 1
+  _pushAmount: 5
 --- !u!114 &207963093360244971
 MonoBehaviour:
   m_ObjectHideFlags: 0

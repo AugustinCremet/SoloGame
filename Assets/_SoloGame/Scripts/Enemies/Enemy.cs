@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     [SerializeField] string _uniqueID;
     private bool _isOnAttackCooldown = false;
     [SerializeField] int _damageOnTouch = 1;
+    [SerializeField] float _pushAmount = 0f;
     protected virtual bool _canBePermaDead => false;
     public bool IsAIActive { get; private set; } = false;
 
@@ -87,7 +88,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     {
         Damage(bullet.moduleParameters.GetInt("Damage"));
     }
-    public void Damage(int dmgAmount)
+    public void Damage(int dmgAmount, Vector2? hitLocation = null, float force = 0f)
     {
         _hp -= dmgAmount;
         _soundHandler.Play(ESoundType.OnHit);
@@ -130,7 +131,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack
     {
         if(collision.TryGetComponent<IDamageable>(out var damageable) && collision.CompareTag("Player"))
         {
-            damageable.Damage(_damageOnTouch);
+            damageable.Damage(_damageOnTouch, transform.position, _pushAmount);
         }
     }
 }

@@ -37,6 +37,7 @@ public class Player : MonoBehaviour, IDamageable
     private int _currentHealth = 0;
     public int CurrentHealth => _currentHealth;
     private bool _isInvinsible = false;
+    private bool _isKnocked = false;
     public float MaxGoo => _maxGoo;
     private float _currentGoo;
     private bool _isUsingGoo;
@@ -328,7 +329,21 @@ public class Player : MonoBehaviour, IDamageable
             ReevaluateState();
         }
     }
-    public void Damage(int dmgAmount)
+
+    public void ApplyKnockback(Vector2? hitLocation, float force)
+    {
+        Vector2 dir = (transform.position - (Vector3)hitLocation).normalized;
+        _rb.AddForce(dir *  force, ForceMode2D.Impulse);
+        _isKnocked = true;
+        StartCoroutine(KnockbackCR());
+    }
+    private IEnumerator KnockbackCR()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _isKnocked = false;
+        _rb.linearVelocity = Vector3.zero;
+    }
+    public void Damage(int dmgAmount, Vector2? hitLocation = null, float force = 0f)
     {
         if (StateMachine.CurrentState == HitState || _isInvinsible)
             return;
@@ -340,6 +355,11 @@ public class Player : MonoBehaviour, IDamageable
         }
 
         StateMachine.TryChangeState(HitState);
+        if(hitLocation != null && force != 0f)
+        {
+            Debug.Log("Knockback");
+            ApplyKnockback(hitLocation, force);
+        }
     }
 
     public void LoseSlimeBall(int amount)
@@ -465,8 +485,9 @@ public class Player : MonoBehaviour, IDamageable
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
     {
         int damageAmount = bullet.moduleParameters.GetInt("Damage");
+        float knockForce = bullet.moduleParameters.GetFloat("KnockForce");
         AdjustPlayerColor(damageAmount);
-        Damage(damageAmount);
+        Damage(damageAmount, (Vector2?)position, knockForce);
 
         bullet.Die();
     }
@@ -483,7 +504,6 @@ public class Player : MonoBehaviour, IDamageable
         int greenAmount = variationAmount <= 255 ? 255 : Mathf.Max(255 + (255 - variationAmount), 0);
 
         _material.SetColor("_Color", new Color32((byte)redAmount, (byte)greenAmount, 0, 255));
-        Damage(1);
     }
 
     public void ResetPlayerColor()

@@ -33,7 +33,7 @@ public class SlimeBall : MonoBehaviour, ICollectable
     private void Start()
     {
         Vector2 dir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-        float magnitude = Random.Range(1f, 2f);
+        float magnitude = Random.Range(2f, 3f);
         Vector2 force = dir * magnitude;
         _rb.AddForce(force, ForceMode2D.Impulse);
 
@@ -78,9 +78,9 @@ public class SlimeBall : MonoBehaviour, ICollectable
         _lobEffect.StartMoving(_playerTransform.position, duration);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position, _attractionRange);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawSphere(transform.position, _attractionRange);
+    //}
 }
