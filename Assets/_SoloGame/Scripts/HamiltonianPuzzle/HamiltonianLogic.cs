@@ -15,11 +15,13 @@ public struct TileHistory
 {
     public Vector3Int TilePos;
     public CardinalPoint CardinalPoint;
+    public Tile[] TilesUsed;
 
-    public TileHistory(Vector3Int tilePos, CardinalPoint cardinalPoint)
+    public TileHistory(Vector3Int tilePos, CardinalPoint cardinalPoint, Tile[] tilesUsed)
     {
         TilePos = tilePos;
         CardinalPoint = cardinalPoint;
+        TilesUsed = tilesUsed;
     }
 }
 public class HamiltonianLogic : MonoBehaviour
@@ -31,23 +33,25 @@ public class HamiltonianLogic : MonoBehaviour
 
     [SerializeField] TileBase _pathTile;
 
-    [SerializeField] TileBase _nDeadend;
-    [SerializeField] TileBase _sDeadend;
-    [SerializeField] TileBase _wDeadend;
-    [SerializeField] TileBase _eDeadend;
-    [SerializeField] TileBase _fromSToW;
-    [SerializeField] TileBase _fromSToN;
-    [SerializeField] TileBase _fromSToE;
-    [SerializeField] TileBase _fromNToW;
-    [SerializeField] TileBase _fromNToE;
-    [SerializeField] TileBase _fromWToE;
+    [SerializeField] Tile[] _nDeadEnd;
+    [SerializeField] Tile[] _sDeadEnd;
+    [SerializeField] Tile[] _wDeadEnd;
+    [SerializeField] Tile[] _eDeadEnd;
+    [SerializeField] Tile[] _fromSToW;
+    [SerializeField] Tile[] _fromSToN;
+    [SerializeField] Tile[] _fromSToE;
+    [SerializeField] Tile[] _fromNToW;
+    [SerializeField] Tile[] _fromNToE;
+    [SerializeField] Tile[] _fromWToE;
 
     private CardinalPoint _lastCardinalPoint;
-    private Dictionary<(CardinalPoint from, CardinalPoint to), TileBase> _pathLookup;
+    private Dictionary<(CardinalPoint from, CardinalPoint to), Tile[]> _pathLookup;
     private HashSet<Vector3Int> _visitedTiles = new HashSet<Vector3Int>();
-    private Stack<TileHistory> _movementHistory = new Stack<TileHistory>();
+    private Stack<TileHistory> _tilesHistory = new Stack<TileHistory>();
     private int _totalTileCount;
     private float _undoDelay = 0.1f;
+    private int _currentFrame = 0;
+
 
     private void Awake()
     {
@@ -60,7 +64,7 @@ public class HamiltonianLogic : MonoBehaviour
             Instance = this;
         }
 
-        _pathLookup = new Dictionary<(CardinalPoint from, CardinalPoint to), TileBase>
+        _pathLookup = new Dictionary<(CardinalPoint from, CardinalPoint to), Tile[]>
         {
             {(CardinalPoint.North, CardinalPoint.North), _fromSToN },
             {(CardinalPoint.North, CardinalPoint.East), _fromSToE },
@@ -108,26 +112,34 @@ public class HamiltonianLogic : MonoBehaviour
 
     public void SetCurrentTile(Vector3Int gridPosition, CardinalPoint cardinalPoint)
     {
-        _movementHistory.Push(new TileHistory(gridPosition, cardinalPoint));
-        _visitedTiles.Add(gridPosition);
         _lastCardinalPoint = cardinalPoint;
-        TileBase tileBase = DirectionToDeadendTileBase(cardinalPoint);
-        _pathTilemap.SetTile(gridPosition, tileBase);
+
+        Tile[] tiles = DirectionToDeadendTileBase(cardinalPoint);
+        Tile tile = tiles[_currentFrame];
+        _pathTilemap.SetTile(gridPosition, tile);
         _pathTilemap.RefreshTile(gridPosition);
+
+        _tilesHistory.Push(new TileHistory(gridPosition, cardinalPoint, tiles));
+        _visitedTiles.Add(gridPosition);
     }
     private void SetOldTile(Vector3Int gridPosition, CardinalPoint cardinalPoint)
     {
-        if(_pathLookup.TryGetValue((_lastCardinalPoint, cardinalPoint), out TileBase tileBase))
+        if(_pathLookup.TryGetValue((_lastCardinalPoint, cardinalPoint), out Tile[] tiles))
         {
-            _pathTilemap.SetTile(gridPosition, tileBase);
+            _tilesHistory.Pop();
+            _tilesHistory.Push(new TileHistory(gridPosition, _lastCardinalPoint, tiles));
+            Tile tile = tiles[_currentFrame];
+            _pathTilemap.SetTile(gridPosition, tile);
             _pathTilemap.RefreshTile(gridPosition);
         }
     }
     public void HandleMovementChanges(Vector3Int oldGridPosition, Vector3Int newGridPosition, Vector3 direction)
     {
+        AdjustCurrentFrame();
         CardinalPoint cardinalPoint = Vector3ToCardinalPoint(direction);
         SetOldTile(oldGridPosition, cardinalPoint);
         SetCurrentTile(newGridPosition, cardinalPoint);
+        AdjustCurrentTiles();
 
         if(_endTilemap.HasTile(newGridPosition))
         {
@@ -155,18 +167,19 @@ public class HamiltonianLogic : MonoBehaviour
 
     private IEnumerator UndoPathCR()
     {
-        while (_movementHistory.Count > 1)
+        while (_tilesHistory.Count > 1)
         {
-            var currentPos = _movementHistory.Peek();
+            var currentPos = _tilesHistory.Peek();
             _pathTilemap.SetTile(currentPos.TilePos, _pathTile);
-            _movementHistory.Pop();
+            _tilesHistory.Pop();
 
-            var lastPos = _movementHistory.Peek();
-            TileBase deadendTile = DirectionToDeadendTileBase(lastPos.CardinalPoint);
-            _pathTilemap.SetTile(lastPos.TilePos, deadendTile);
+            var lastPos = _tilesHistory.Peek();
+            Tile[] tiles = DirectionToDeadendTileBase(lastPos.CardinalPoint);
+            Tile tile = tiles[_currentFrame];
+            _pathTilemap.SetTile(lastPos.TilePos, tile);
             _lastCardinalPoint = lastPos.CardinalPoint;
 
-            if(_movementHistory.Count == 1)
+            if(_tilesHistory.Count == 1)
             {
                 _visitedTiles.Add(lastPos.TilePos);
             }
@@ -175,18 +188,42 @@ public class HamiltonianLogic : MonoBehaviour
         }
     }
 
-    private TileBase DirectionToDeadendTileBase(CardinalPoint direction)
+    private void AdjustCurrentFrame()
+    {
+        if(_currentFrame == 3)
+        {
+            _currentFrame = 0;
+        }
+        else
+        {
+            _currentFrame++;
+        }
+    }
+
+    private void AdjustCurrentTiles()
+    {
+        foreach(var tileHistory in _tilesHistory)
+        {
+            var pos = tileHistory.TilePos;
+            var tile = tileHistory.TilesUsed[_currentFrame];
+
+            _pathTilemap.SetTile(pos, tile);
+            _pathTilemap.RefreshTile(pos);
+        }
+        
+    }
+    private Tile[] DirectionToDeadendTileBase(CardinalPoint direction)
     {
         switch (direction)
         {
             case CardinalPoint.North:
-                return _nDeadend;
+                return _nDeadEnd;
             case CardinalPoint.South:
-                return _sDeadend;
+                return _sDeadEnd;
             case CardinalPoint.East:
-                return _eDeadend;
+                return _eDeadEnd;
             case CardinalPoint.West:
-                return _wDeadend;
+                return _wDeadEnd;
             default:
                 return null;
         }
