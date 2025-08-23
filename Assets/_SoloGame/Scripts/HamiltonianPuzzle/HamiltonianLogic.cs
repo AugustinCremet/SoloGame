@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public enum CardinalPoint
 {
+    None,
     North,
     South,
     East,
@@ -14,14 +15,16 @@ public enum CardinalPoint
 public struct TileHistory
 {
     public Vector3Int TilePos;
-    public CardinalPoint CardinalPoint;
-    public Tile[] TilesUsed;
+    public CardinalPoint EnterTileToward;
+    public CardinalPoint ExitTileToward;
+    public Tile TileUsed;
 
-    public TileHistory(Vector3Int tilePos, CardinalPoint cardinalPoint, Tile[] tilesUsed)
+    public TileHistory(Vector3Int tilePos, CardinalPoint enterTileToward, CardinalPoint exitTileToward, Tile tilesUsed)
     {
         TilePos = tilePos;
-        CardinalPoint = cardinalPoint;
-        TilesUsed = tilesUsed;
+        EnterTileToward = enterTileToward;
+        ExitTileToward = exitTileToward;
+        TileUsed = tilesUsed;
     }
 }
 public class HamiltonianLogic : MonoBehaviour
@@ -30,27 +33,41 @@ public class HamiltonianLogic : MonoBehaviour
 
     [SerializeField] Tilemap _pathTilemap;
     [SerializeField] Tilemap _endTilemap;
+    [SerializeField] Tilemap _gooTilemap;
 
     [SerializeField] TileBase _pathTile;
 
-    [SerializeField] Tile[] _nDeadEnd;
-    [SerializeField] Tile[] _sDeadEnd;
-    [SerializeField] Tile[] _wDeadEnd;
-    [SerializeField] Tile[] _eDeadEnd;
-    [SerializeField] Tile[] _fromSToW;
-    [SerializeField] Tile[] _fromSToN;
-    [SerializeField] Tile[] _fromSToE;
-    [SerializeField] Tile[] _fromNToW;
-    [SerializeField] Tile[] _fromNToE;
-    [SerializeField] Tile[] _fromWToE;
+    [SerializeField] Tile _nDeadEnd;
+    [SerializeField] Tile _sDeadEnd;
+    [SerializeField] Tile _wDeadEnd;
+    [SerializeField] Tile _eDeadEnd;
+    [SerializeField] Tile _enterSExitWBig;
+    [SerializeField] Tile _enterSExitSBig;
+    [SerializeField] Tile _enterSExitEBig;
+    [SerializeField] Tile _enterNExitEBig;
+    [SerializeField] Tile _enterNExitNBig;
+    [SerializeField] Tile _enterNExitWBig;
+    [SerializeField] Tile _enterWExitNBig;
+    [SerializeField] Tile _enterWExitWBig;
+    [SerializeField] Tile _enterWExitSBig;
+    [SerializeField] Tile _enterEExitSBig;
+    [SerializeField] Tile _enterEExitEBig;
+    [SerializeField] Tile _enterEExitNBig;
+    [SerializeField] Tile _fromSToWSmall;
+    [SerializeField] Tile _fromSToNSmall;
+    [SerializeField] Tile _fromSToESmall;
+    [SerializeField] Tile _fromNToWSmall;
+    [SerializeField] Tile _fromNToESmall;
+    [SerializeField] Tile _fromWToESmall;
 
     private CardinalPoint _lastCardinalPoint;
-    private Dictionary<(CardinalPoint from, CardinalPoint to), Tile[]> _pathLookup;
+    private Dictionary<(CardinalPoint enterToward, CardinalPoint exitToward), Tile> _pathLookupBig;
+    private Dictionary<(CardinalPoint from, CardinalPoint to), Tile> _pathLookupSmall;
     private HashSet<Vector3Int> _visitedTiles = new HashSet<Vector3Int>();
-    private Stack<TileHistory> _tilesHistory = new Stack<TileHistory>();
+    private List<TileHistory> _tilesHistory = new List<TileHistory>();
     private int _totalTileCount;
     private float _undoDelay = 0.1f;
-    private int _currentFrame = 0;
+    private int _currentTile = 0;
 
 
     private void Awake()
@@ -64,20 +81,36 @@ public class HamiltonianLogic : MonoBehaviour
             Instance = this;
         }
 
-        _pathLookup = new Dictionary<(CardinalPoint from, CardinalPoint to), Tile[]>
+        _pathLookupBig = new Dictionary<(CardinalPoint enterToward, CardinalPoint exitToward), Tile>
         {
-            {(CardinalPoint.North, CardinalPoint.North), _fromSToN },
-            {(CardinalPoint.North, CardinalPoint.East), _fromSToE },
-            {(CardinalPoint.North, CardinalPoint.West), _fromSToW },
-            {(CardinalPoint.East, CardinalPoint.East), _fromWToE },
-            {(CardinalPoint.East, CardinalPoint.South), _fromSToW },
-            {(CardinalPoint.East, CardinalPoint.North), _fromNToW },
-            {(CardinalPoint.South, CardinalPoint.South), _fromSToN },
-            {(CardinalPoint.South, CardinalPoint.West), _fromNToW},
-            {(CardinalPoint.South, CardinalPoint.East), _fromNToE},
-            {(CardinalPoint.West, CardinalPoint.West), _fromWToE},
-            {(CardinalPoint.West, CardinalPoint.North), _fromNToE },
-            {(CardinalPoint.West, CardinalPoint.South), _fromSToE },
+            {(CardinalPoint.North, CardinalPoint.North), _enterNExitNBig },
+            {(CardinalPoint.North, CardinalPoint.East),  _enterNExitEBig },
+            {(CardinalPoint.North, CardinalPoint.West),  _enterNExitWBig },
+            {(CardinalPoint.East,  CardinalPoint.East),  _enterEExitEBig },
+            {(CardinalPoint.East,  CardinalPoint.South), _enterEExitSBig },
+            {(CardinalPoint.East,  CardinalPoint.North), _enterEExitNBig },
+            {(CardinalPoint.South, CardinalPoint.South), _enterSExitSBig },
+            {(CardinalPoint.South, CardinalPoint.West),  _enterSExitWBig },
+            {(CardinalPoint.South, CardinalPoint.East),  _enterSExitEBig },
+            {(CardinalPoint.West,  CardinalPoint.West),  _enterWExitWBig },
+            {(CardinalPoint.West,  CardinalPoint.North), _enterWExitNBig },
+            {(CardinalPoint.West,  CardinalPoint.South), _enterWExitSBig },
+        };
+
+        _pathLookupSmall = new Dictionary<(CardinalPoint enterToward, CardinalPoint exitToward), Tile>
+        {
+            {(CardinalPoint.North, CardinalPoint.North), _fromSToNSmall },
+            {(CardinalPoint.North, CardinalPoint.East),  _fromSToESmall },
+            {(CardinalPoint.North, CardinalPoint.West),  _fromSToWSmall },
+            {(CardinalPoint.East,  CardinalPoint.East),  _fromWToESmall },
+            {(CardinalPoint.East,  CardinalPoint.South), _fromSToWSmall },
+            {(CardinalPoint.East,  CardinalPoint.North), _fromNToWSmall },
+            {(CardinalPoint.South, CardinalPoint.South), _fromSToNSmall },
+            {(CardinalPoint.South, CardinalPoint.West),  _fromNToWSmall },
+            {(CardinalPoint.South, CardinalPoint.East),  _fromNToESmall },
+            {(CardinalPoint.West,  CardinalPoint.West),  _fromWToESmall },
+            {(CardinalPoint.West,  CardinalPoint.North), _fromNToESmall },
+            {(CardinalPoint.West,  CardinalPoint.South), _fromSToESmall },
         };
     }
 
@@ -110,38 +143,60 @@ public class HamiltonianLogic : MonoBehaviour
         return _visitedTiles.Contains(gridPosition);
     }
 
-    public void SetCurrentTile(Vector3Int gridPosition, CardinalPoint cardinalPoint)
+    public void SetCurrentTile(Vector3Int gridPosition, CardinalPoint enterTileToward)
     {
-        _lastCardinalPoint = cardinalPoint;
+        _lastCardinalPoint = enterTileToward;
 
-        Tile[] tiles = DirectionToDeadendTileBase(cardinalPoint);
-        Tile tile = tiles[_currentFrame];
-        _pathTilemap.SetTile(gridPosition, tile);
-        _pathTilemap.RefreshTile(gridPosition);
+        Tile tile = DirectionToDeadendTileBase(enterTileToward);
+        _gooTilemap.SetTile(gridPosition, tile);
+        _gooTilemap.RefreshTile(gridPosition);
 
-        _tilesHistory.Push(new TileHistory(gridPosition, cardinalPoint, tiles));
+        _tilesHistory.Add(new TileHistory(gridPosition, enterTileToward, CardinalPoint.None, tile));
         _visitedTiles.Add(gridPosition);
-    }
-    private void SetOldTile(Vector3Int gridPosition, CardinalPoint cardinalPoint)
-    {
-        if(_pathLookup.TryGetValue((_lastCardinalPoint, cardinalPoint), out Tile[] tiles))
+
+        if(_tilesHistory.Count > 1)
         {
-            _tilesHistory.Pop();
-            _tilesHistory.Push(new TileHistory(gridPosition, _lastCardinalPoint, tiles));
-            Tile tile = tiles[_currentFrame];
-            _pathTilemap.SetTile(gridPosition, tile);
-            _pathTilemap.RefreshTile(gridPosition);
+            TileHistory tileHistory = _tilesHistory[_tilesHistory.Count - 2];
+            tileHistory.ExitTileToward = enterTileToward;
+            _tilesHistory[_tilesHistory.Count - 2] = tileHistory;
         }
+    }
+    private void SetOldTiles(CardinalPoint cardinalPoint)
+    {
+        int index = _tilesHistory.Count - 1;
+
+        CardinalPoint enterTo = _tilesHistory[index - 1].EnterTileToward;
+        CardinalPoint exitTo = _tilesHistory[index - 1].ExitTileToward;
+
+        if (_pathLookupBig.TryGetValue((enterTo, exitTo), out Tile bigTile))
+        {
+            TileHistory tileHistory = _tilesHistory[index - 1];
+            tileHistory.TileUsed = bigTile;
+            _gooTilemap.SetTile(tileHistory.TilePos, bigTile);
+            _gooTilemap.RefreshTile(tileHistory.TilePos);
+        }
+
+        if (index >= 2)
+        {
+            enterTo =_tilesHistory[index - 2].EnterTileToward;
+            exitTo =_tilesHistory[index - 2].ExitTileToward;
+            if (_pathLookupSmall.TryGetValue((enterTo, exitTo), out Tile smallTile))
+            {
+                TileHistory tileHistory = _tilesHistory[index - 2];
+                tileHistory.TileUsed = smallTile;
+                _gooTilemap.SetTile(tileHistory.TilePos, smallTile);
+                _gooTilemap.RefreshTile(tileHistory.TilePos);
+            }
+        }
+
     }
     public void HandleMovementChanges(Vector3Int oldGridPosition, Vector3Int newGridPosition, Vector3 direction)
     {
-        AdjustCurrentFrame();
         CardinalPoint cardinalPoint = Vector3ToCardinalPoint(direction);
-        SetOldTile(oldGridPosition, cardinalPoint);
         SetCurrentTile(newGridPosition, cardinalPoint);
-        AdjustCurrentTiles();
+        SetOldTiles(cardinalPoint);
 
-        if(_endTilemap.HasTile(newGridPosition))
+        if (_endTilemap.HasTile(newGridPosition))
         {
             HandleEnd();
         }
@@ -162,57 +217,32 @@ public class HamiltonianLogic : MonoBehaviour
     public void Restart()
     {
         _visitedTiles.Clear();
-        StartCoroutine(UndoPathCR());
+        //StartCoroutine(UndoPathCR());
     }
 
-    private IEnumerator UndoPathCR()
-    {
-        while (_tilesHistory.Count > 1)
-        {
-            var currentPos = _tilesHistory.Peek();
-            _pathTilemap.SetTile(currentPos.TilePos, _pathTile);
-            _tilesHistory.Pop();
+    //private IEnumerator UndoPathCR()
+    //{
+    //    while (_tilesHistory.Count > 1)
+    //    {
+    //        var currentPos = _tilesHistory.Peek();
+    //        _pathTilemap.SetTile(currentPos.TilePos, _pathTile);
+    //        _tilesHistory.Pop();
 
-            var lastPos = _tilesHistory.Peek();
-            Tile[] tiles = DirectionToDeadendTileBase(lastPos.CardinalPoint);
-            Tile tile = tiles[_currentFrame];
-            _pathTilemap.SetTile(lastPos.TilePos, tile);
-            _lastCardinalPoint = lastPos.CardinalPoint;
+    //        var lastPos = _tilesHistory.Peek();
+    //        Tile tile = DirectionToDeadendTileBase(lastPos.CardinalPoint);
+    //        _pathTilemap.SetTile(lastPos.TilePos, tile);
+    //        _lastCardinalPoint = lastPos.CardinalPoint;
 
-            if(_tilesHistory.Count == 1)
-            {
-                _visitedTiles.Add(lastPos.TilePos);
-            }
+    //        if(_tilesHistory.Count == 1)
+    //        {
+    //            _visitedTiles.Add(lastPos.TilePos);
+    //        }
 
-            yield return new WaitForSeconds(_undoDelay);
-        }
-    }
+    //        yield return new WaitForSeconds(_undoDelay);
+    //    }
+    //}
 
-    private void AdjustCurrentFrame()
-    {
-        if(_currentFrame == 3)
-        {
-            _currentFrame = 0;
-        }
-        else
-        {
-            _currentFrame++;
-        }
-    }
-
-    private void AdjustCurrentTiles()
-    {
-        foreach(var tileHistory in _tilesHistory)
-        {
-            var pos = tileHistory.TilePos;
-            var tile = tileHistory.TilesUsed[_currentFrame];
-
-            _pathTilemap.SetTile(pos, tile);
-            _pathTilemap.RefreshTile(pos);
-        }
-        
-    }
-    private Tile[] DirectionToDeadendTileBase(CardinalPoint direction)
+    private Tile DirectionToDeadendTileBase(CardinalPoint direction)
     {
         switch (direction)
         {
