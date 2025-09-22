@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private SceneDetails _currentScene;
+    private ProximitySceneLoader _currentScene;
     private string _currentSceneParentName;
-    public SceneDetails PreviousScene { get; private set; }
+    public ProximitySceneLoader PreviousScene { get; private set; }
     [SerializeField] GameObject _essentialPrefab;
     [SerializeField] bool _isUniqueScene;
     private GameObject _essential;
@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
         }
 
         GameObject areaGameObject = GameObject.Find(_dataService.LoadData<SaveData>(_savePath, false).LocationData.AreaName);
-        areaGameObject.GetComponent<SceneDetails>().FirstLoad(_essential);
+        areaGameObject.GetComponent<ProximitySceneLoader>().FirstLoad(_essential);
     }
 
     public static bool IsSceneLoaded(string sceneName)
@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().enabled = true;
     }
 
-    public void SetCurrentScene(SceneDetails scene)
+    public void SetCurrentScene(ProximitySceneLoader scene)
     {
         PreviousScene = _currentScene;
         _currentScene = scene;
@@ -238,7 +238,7 @@ public class GameManager : MonoBehaviour
         _savePath = $"/Game{slot}.json";
     }
 
-    public SceneDetails GetPreviousScene()
+    public ProximitySceneLoader GetPreviousScene()
     {
         return PreviousScene;
     }
