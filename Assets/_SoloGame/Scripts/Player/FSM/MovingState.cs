@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class MovingState : BaseState
 {
+    private float _lastPositionX;
+    private float _lastPositionY;
+    private Vector2 _lastDirection;
+    private float _pushTimer;
+
+    private const float _PUSH_DELAY = 0.2f;
     public MovingState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
     }
@@ -11,6 +17,9 @@ public class MovingState : BaseState
     {
         _animator.Play("Movement");
         _animator.SetBool("IsMoving", true);
+
+        _lastPositionX = _player.transform.position.x;
+        _lastPositionY = _player.transform.position.y;
     }
 
     public override void ExitState(BaseStateMachine stateMachine)
@@ -22,6 +31,28 @@ public class MovingState : BaseState
     public override void FixedUpdateState(BaseStateMachine stateMachine)
     {
         _player.HandleMovement();
+
+        if(_lastPositionX != _player.transform.position.x ||
+           _lastPositionY != _player.transform.position.y)
+        {
+            _lastPositionX = _player.transform.position.x;
+            _lastPositionY = _player.transform.position.y;
+            _pushTimer = 0;
+        }
+        else
+        {
+            _pushTimer += Time.fixedDeltaTime;
+
+            if(_pushTimer > _PUSH_DELAY)
+            {
+                Vector3 checkPos = _player.transform.position + (Vector3)_playerController.MovementVector;
+                Collider2D hit = Physics2D.OverlapPoint(checkPos);
+                if(hit != null && hit.TryGetComponent(out PushBlock pushBlock))
+                {
+                    _player.StateMachine.TryChangeState(_player.PushingState);
+                }
+            }
+        }
     }
 
     public override void UpdateState(BaseStateMachine stateMachine)

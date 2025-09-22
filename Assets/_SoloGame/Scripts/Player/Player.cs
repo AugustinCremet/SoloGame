@@ -37,7 +37,6 @@ public class Player : MonoBehaviour, IDamageable
     private int _currentHealth = 0;
     public int CurrentHealth => _currentHealth;
     private bool _isInvinsible = false;
-    private bool _isKnocked = false;
     public float MaxGoo => _maxGoo;
     private float _currentGoo;
     private bool _isUsingGoo;
@@ -81,6 +80,7 @@ public class Player : MonoBehaviour, IDamageable
     public DeadState DeadState;
     public HitState HitState;
     public SuctionState SuctionState;
+    public PushingState PushingState;
 
     // Event
     public static event Action<float> OnSuction;
@@ -111,6 +111,7 @@ public class Player : MonoBehaviour, IDamageable
         DeadState = new DeadState(_playerController, this, _animator);
         HitState = new HitState(_playerController, this, _animator);
         SuctionState = new SuctionState(_playerController, this, _animator);
+        PushingState = new PushingState(_playerController, this, _animator); 
     }
     private void Start()
     {
@@ -228,6 +229,7 @@ public class Player : MonoBehaviour, IDamageable
             return Vector2.zero;
         }
     }
+
     public void StartGoo()
     {
         if (_currentGoo < _gooPerSecForGooState)
@@ -334,13 +336,11 @@ public class Player : MonoBehaviour, IDamageable
     {
         Vector2 dir = (transform.position - (Vector3)hitLocation).normalized;
         _rb.AddForce(dir *  force, ForceMode2D.Impulse);
-        _isKnocked = true;
         StartCoroutine(KnockbackCR());
     }
     private IEnumerator KnockbackCR()
     {
         yield return new WaitForSeconds(0.2f);
-        _isKnocked = false;
         _rb.linearVelocity = Vector3.zero;
     }
     public void Damage(int dmgAmount, Vector2? hitLocation = null, float force = 0f)

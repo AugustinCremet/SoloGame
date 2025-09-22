@@ -6,13 +6,14 @@ public class StateMachine : BaseStateMachine
 {
     public StateMachine()
     {
-        _transitionMap.Add(typeof(IdleSkillState), new List<Type> { typeof(MovingState), typeof(GooState), typeof(ShootingState), typeof(DeadState), typeof(HitState), typeof(SuctionState) } );
-        _transitionMap.Add(typeof(MovingState),    new List<Type> { typeof(IdleSkillState), typeof(GooState), typeof(ShootingState), typeof(DeadState), typeof(HitState), typeof(SuctionState) });
+        _transitionMap.Add(typeof(IdleSkillState), new List<Type> { typeof(MovingState),    typeof(GooState),    typeof(ShootingState), typeof(DeadState), typeof(HitState), typeof(SuctionState) } );
+        _transitionMap.Add(typeof(MovingState),    new List<Type> { typeof(IdleSkillState), typeof(GooState),    typeof(ShootingState), typeof(DeadState), typeof(HitState), typeof(SuctionState), typeof(PushingState) });
         _transitionMap.Add(typeof(GooState),       new List<Type> { typeof(IdleSkillState), typeof(MovingState), typeof(DeadState) } );
         _transitionMap.Add(typeof(ShootingState),  new List<Type> { typeof(IdleSkillState), typeof(MovingState), typeof(GooState), typeof(DeadState), typeof(HitState) } );
         _transitionMap.Add(typeof(DeadState),      new List<Type> { });
         _transitionMap.Add(typeof(HitState),       new List<Type> { typeof(IdleSkillState), typeof(MovingState), typeof(GooState), typeof(ShootingState), typeof(DeadState), typeof(SuctionState) });
         _transitionMap.Add(typeof(SuctionState),   new List<Type> { typeof(IdleSkillState), typeof(MovingState), typeof(GooState), typeof(ShootingState), typeof(DeadState), typeof(HitState)});
+        _transitionMap.Add(typeof(PushingState), new List<Type> { typeof(IdleSkillState), typeof(MovingState), typeof(DeadState), typeof(HitState) });
     }
 
     public override bool TryChangeState(BaseState state)

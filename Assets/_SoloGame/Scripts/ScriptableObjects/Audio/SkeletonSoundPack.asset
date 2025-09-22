@@ -18,3 +18,8 @@ MonoBehaviour:
       idInternal: 0
       valueGuidInternal: 
       WwiseObjectReference: {fileID: 11400000, guid: 72162d2755be00947bfc0ce550224869, type: 2}
+  - SoundType: 1
+    WwiseEvent:
+      idInternal: 0
+      valueGuidInternal: 
+      WwiseObjectReference: {fileID: 11400000, guid: 434771ad92482c34ca3370376db128b7, type: 2}
