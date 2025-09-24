@@ -11,9 +11,6 @@ public class PlayerController : MonoBehaviour
     private bool _movementWasBlockedLastFrame = false;
     private Player _player;
 
-    public static event Action OnInteract;
-
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -101,7 +98,7 @@ public class PlayerController : MonoBehaviour
     {
         if(context.performed)
         {
-            OnInteract?.Invoke();
+            _player.StartInteraction();
         }
     }
 

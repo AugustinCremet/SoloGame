@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] HealthBar _healthBar;
     [SerializeField] GooBar _gooBar;
     [SerializeField] LiquidCooldown _suctionCD;
+    [SerializeField] TextMeshProUGUI _keyAmountText;
 
     private void Awake()
     {
@@ -52,5 +54,10 @@ public class UIManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void ChangeKeyAmount(int keyAmount)
+    {
+        _keyAmountText.text = keyAmount.ToString();
     }
 }

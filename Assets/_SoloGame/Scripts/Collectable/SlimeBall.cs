@@ -51,9 +51,9 @@ public class SlimeBall : MonoBehaviour, ICollectable
         }
     }
 
-    public void OnCollect(GameObject collector)
+    public void OnCollect(Player player)
     {
-        collector.GetComponent<Player>().Heal(1);
+        player.Heal(1);
         Destroy(gameObject);
     }
 

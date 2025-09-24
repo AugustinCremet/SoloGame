@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class ProximitySceneLoader : MonoBehaviour
 {
     [SerializeField] List<SceneField> _connectedScenes = new List<SceneField>();
+    private string _essentialScene = "MainGameplayScene";
     private string _sceneName;
     [SerializeField] float _cameraSize = 7f;
     public bool IsLoaded {  get; private set; }
@@ -19,28 +20,13 @@ public class ProximitySceneLoader : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("EnterLoading");
         if (collision.tag == "Player")
         {
-            Debug.Log("It is player");
-            //StartCoroutine(FirstTimeLoad());
             var newBoundary = gameObject.GetComponent<PolygonCollider2D>();
             FindFirstObjectByType<CameraConfinerSwitcher>().ChangeBoundary(newBoundary, _cameraSize);
             GameManager.Instance.SetCurrentScene(this);
             LoadScene();
             UnloadScene();
-
-            //if (GameManager.Instance.PreviousScene != null)
-            //{
-            //    var previouslyLoadedScenes = GameManager.Instance.PreviousScene._connectedScenes;
-            //    foreach (SceneDetails scene in previouslyLoadedScenes)
-            //    {
-            //        if (!_connectedScenes.Contains(scene) && scene != this)
-            //        {
-            //            scene.UnloadScene();
-            //        }
-            //    }
-            //}
             UpdateAI(SceneManager.GetSceneByName(gameObject.name));
         }
     }
@@ -101,7 +87,9 @@ public class ProximitySceneLoader : MonoBehaviour
 
             for (int j = 0; j < _connectedScenes.Count;  j++)
             {
-                if(loadedScene.name == _connectedScenes[j] || loadedScene.name == _sceneName)
+                if(loadedScene.name == _connectedScenes[j] || 
+                   loadedScene.name == _sceneName ||
+                   loadedScene.name == _essentialScene)
                 {
                     shouldSceneUnload = false;
                 }

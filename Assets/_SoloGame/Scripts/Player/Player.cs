@@ -49,6 +49,7 @@ public class Player : MonoBehaviour, IDamageable
     private Cooldown _shootingCD;
     private Cooldown _suctionCD;
     private Cooldown _suctionSkillDurationCD;
+    public Cooldown JustTeleportedCD;
 
     [Space(10)]
     [Header("Bullet Emitter")]
@@ -85,6 +86,11 @@ public class Player : MonoBehaviour, IDamageable
     // Event
     public static event Action<float> OnSuction;
 
+    // Other
+    private IInteractable _currentInteractable = null;
+    private int _keyAmount = 0;
+    public bool HasKey => _keyAmount > 0;
+
 
     private void Awake()
     {
@@ -101,6 +107,7 @@ public class Player : MonoBehaviour, IDamageable
         _shootingCD = new Cooldown(_shootingCDDuration);
         _suctionCD = new Cooldown(_suctionCDDuration);
         _suctionSkillDurationCD = new Cooldown(_suctionSkillDuration);
+        JustTeleportedCD = new Cooldown(2f);
 
         //State machine with states
         StateMachine = new StateMachine();
@@ -332,6 +339,27 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void StartInteraction()
+    {
+        if(_currentInteractable != null)
+        {
+            Debug.Log("Interaction");
+            _currentInteractable.Interact(this);
+        }
+    }
+
+    public void GiveKey()
+    {
+        _keyAmount++;
+        UIManager.Instance.ChangeKeyAmount(_keyAmount);
+    }
+
+    public void UseKey()
+    {
+        _keyAmount--;
+        UIManager.Instance.ChangeKeyAmount(_keyAmount);
+    }
+
     public void ApplyKnockback(Vector2? hitLocation, float force)
     {
         Vector2 dir = (transform.position - (Vector3)hitLocation).normalized;
@@ -533,9 +561,24 @@ public class Player : MonoBehaviour, IDamageable
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ICollectable collectable = collision.gameObject.GetComponent<ICollectable>();
+        IInteractable interactable = collision.gameObject.GetComponent<IInteractable>();
+
         if (collectable != null)
         {
-            collectable.OnCollect(gameObject);
+            collectable.OnCollect(this);
+        }
+        if(interactable != null)
+        {
+            _currentInteractable = interactable;
+            _currentInteractable?.GetPrompt();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.TryGetComponent<IInteractable>(out var interactable) && interactable == _currentInteractable)
+        {
+            _currentInteractable = null;
         }
     }
 }

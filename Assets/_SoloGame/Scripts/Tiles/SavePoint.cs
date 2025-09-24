@@ -6,7 +6,7 @@ public class SavePoint : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            PlayerController.OnInteract += Interact;
+            
         }
     }
 
@@ -14,7 +14,7 @@ public class SavePoint : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            PlayerController.OnInteract -= Interact;
+            
         }
     }
 

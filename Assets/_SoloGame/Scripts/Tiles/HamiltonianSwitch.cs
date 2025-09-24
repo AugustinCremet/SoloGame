@@ -8,7 +8,7 @@ public class HamiltonianSwitch : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerController.OnInteract += Interact;
+            
         }
     }
 
@@ -16,7 +16,7 @@ public class HamiltonianSwitch : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerController.OnInteract -= Interact;
+            
         }
     }
 
