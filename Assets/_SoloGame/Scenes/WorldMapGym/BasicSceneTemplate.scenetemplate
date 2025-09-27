@@ -63,8 +63,14 @@ MonoBehaviour:
   description: 
   preview: {fileID: -8297085655091558100}
   dependencies:
+  - dependency: {fileID: 11400000, guid: 039b14e3ae6c26142b68cb6e791653ff, type: 2}
+    instantiationMode: 1
+  - dependency: {fileID: 11400000, guid: 50cc3d8c8cdd1ce4380b833be484df25, type: 2}
+    instantiationMode: 1
   - dependency: {fileID: 11400000, guid: 7f33d2d955b7dd04392f3e917c79dc74, type: 2}
     instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: 5ce8c2f629eb3e44ba822840110ff572, type: 3}
+    instantiationMode: 0
   - dependency: {fileID: 11400000, guid: 5eb718cf0171c52458cbd86f3edd5f5f, type: 2}
     instantiationMode: 1
   - dependency: {fileID: 11400000, guid: acbdce3c0100a9047b7a8c19dac40607, type: 2}

@@ -1416,7 +1416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: orthographic size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_BackGroundColor.b
@@ -1436,7 +1436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.10260417
+      value: 0.14843751
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -1581,7 +1581,7 @@ MonoBehaviour:
   LateralAdjustment: 0
   FovRange: {x: 1, y: 100}
   DollyRange: {x: -100, y: 100}
-  OrthoSizeRange: {x: 7, y: 7}
+  OrthoSizeRange: {x: 8, y: 8}
 --- !u!114 &5464800475808246857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2197,8 +2197,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1194466681944497604}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Gameplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_ActionId
@@ -2213,6 +2217,10 @@ PrefabInstance:
       value: 6df122b6-8fff-4101-824d-49b43d0016d0
       objectReference: {fileID: 0}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: bd00dca5-f9fc-420e-b471-56d462681db6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_ActionName
       value: 'Player/Suction[/Keyboard/1]'
       objectReference: {fileID: 0}
@@ -2225,7 +2233,15 @@ PrefabInstance:
       value: 'Hamiltonian/Restart[/Keyboard/r]'
       objectReference: {fileID: 0}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: 'Dialogue/Continue[/Keyboard/e]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
@@ -2233,7 +2249,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5095488260075590319}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5095488260075590319}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
@@ -2241,15 +2265,31 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SuctionInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueInput
       objectReference: {fileID: 0}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3547648823097942777, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}

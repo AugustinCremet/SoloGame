@@ -22,6 +22,7 @@ public class ProximitySceneLoader : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            Debug.Log("TriggerCOllider");
             var newBoundary = gameObject.GetComponent<PolygonCollider2D>();
             FindFirstObjectByType<CameraConfinerSwitcher>().ChangeBoundary(newBoundary, _cameraSize);
             GameManager.Instance.SetCurrentScene(this);

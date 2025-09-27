@@ -33,38 +33,35 @@ EditorBuildSettings:
     path: Assets/_SoloGame/Scenes/FirstDungeon/MainGameplayScene.unity
     guid: beb748c2d16af224d9965fc932fb3110
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF.unity
-    guid: 8ff32f71d482e164695bbe7c210327c4
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF.unity
+    guid: 290f3a7ed134872478655af92042de74
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF 1.unity
-    guid: 15345be2782fd4c49b4be3dc2801d2ec
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF 1.unity
+    guid: bd4b6ac7596f466478b2a96ae5606844
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF 2.unity
-    guid: a3645fc25d4543849a6618cf5a5f6305
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF 2.unity
+    guid: 9bcd8f8f2982d964680f256c38ea343e
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF 3.unity
-    guid: 3399024c2994bac4bac66c3f1624f049
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF 3.unity
+    guid: 4c67bddec8ee16149a8756124d6930b7
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF 4.unity
-    guid: 07b614564db3fc54cbefab8d77a12447
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF 4.unity
+    guid: 14625c0bb6c75da4ca3ff301d5194114
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF 5.unity
-    guid: d8847359fb268d544b110ef2860b3c5f
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF 5.unity
+    guid: fbf9d470e1a96e54ca48a470c5022d06
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF 6.unity
-    guid: 5e74e2e4b9a27c14c9fc8823f96a94f8
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF 6.unity
+    guid: d87b72a1ccfcab54b8d072b21373cd11
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF 7.unity
-    guid: 8f29e492576aedf438618506e9da50f2
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF 7.unity
+    guid: dec6a8dc9c3bd524f8795b6179a27dcb
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF 8.unity
-    guid: 765e0e31f48192b45be7093566d96daf
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF 8.unity
+    guid: 90054b56a363b564bbf9064606d4f86d
   - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/FirstDungeonProto_GF 9.unity
-    guid: 7e69413ef5bd0ad4f9f7c5a9d273f135
-  - enabled: 1
-    path: Assets/_SoloGame/Scenes/FirstDungeon/F1/FirstDungeonProto_F.unity
-    guid: 7fcbd42e613bef244b3591be277850e2
+    path: Assets/_SoloGame/Scenes/FirstDungeon/GF/ProtoFirstDungeonGF 9.unity
+    guid: 868935f965802af4783a15045e9bc3f1
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 99f9c9493070a9d4c979a8fec7c5a8d3, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: b6d2a7b8e7864ba46b93f13e5729fed3, type: 2}

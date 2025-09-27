@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -6,17 +7,52 @@ public class ChatBubble : MonoBehaviour
     [SerializeField] GameObject _chatBubbleGO;
     [SerializeField] TextMeshProUGUI _textMeshPro;
 
+    private Queue<string> _lines = new Queue<string>();
+
     private void Awake()
     {
         _chatBubbleGO.SetActive(false);
         _textMeshPro.enabled = false;
     }
 
+    public void StartDialogue(IEnumerable<string> lines)
+    {
+        _lines.Clear();
+        foreach (string line in lines)
+        {
+            _lines.Enqueue(line);
+        }
+        ShowNextLine();
+    }
+
+    public void OnContinueDialogue()
+    {
+        if(_lines.Count > 0)
+        {
+            ShowNextLine();
+        }
+        else
+        {
+            EndDialogue();
+        }
+    }
+
+    private void ShowNextLine()
+    {
+        string nextLine = _lines.Dequeue();
+        SetText(nextLine);
+    }
+
+    private void EndDialogue()
+    {
+        GetComponentInParent<Player>().EndChat();
+        DeactivateText();
+    }
+
     public void SetFailPuzzle()
     {
         _chatBubbleGO.SetActive(true);
         _textMeshPro.enabled = true;
-        SetText("Oh no! I must retry.");
     }
 
     public void DeactivateText()

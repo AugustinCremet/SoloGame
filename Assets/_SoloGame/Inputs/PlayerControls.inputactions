@@ -2,7 +2,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "Player",
+            "name": "Gameplay",
             "id": "b601da8b-2b54-40c3-b6cb-a621ee60c61c",
             "actions": [
                 {
@@ -266,6 +266,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Dialogue",
+            "id": "11e8a124-0b74-4d9e-a73b-aa5b2fe88ac0",
+            "actions": [
+                {
+                    "name": "Continue",
+                    "type": "Button",
+                    "id": "bd00dca5-f9fc-420e-b471-56d462681db6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ef1555d2-8781-4664-970b-815651357535",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

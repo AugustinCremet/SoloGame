@@ -4,17 +4,25 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum InputMode
+{
+    None,
+    Gameplay,
+    Dialogue
+}
 public class PlayerController : MonoBehaviour
 {
     public Vector2 MovementVector { get; private set; }
     private Vector2 _cachedMovementVector;
     private bool _movementWasBlockedLastFrame = false;
     private Player _player;
+    private PlayerInput _playerInput;
 
     // Start is called before the first frame update
     void Awake()
     {
         _player = GetComponent<Player>();
+        _playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
@@ -36,6 +44,25 @@ public class PlayerController : MonoBehaviour
             _movementWasBlockedLastFrame = false;
             MovementVector = _player.OnMovementUnblocked(_cachedMovementVector);
         }
+    }
+
+    public void SwitchActionMap(InputMode mode)
+    {
+        string actionMap = null;
+        switch(mode)
+        {
+            case InputMode.Gameplay:
+                actionMap = "Gameplay";
+                break;
+            case InputMode.Dialogue:
+                actionMap = "Dialogue";
+                break;
+            default:
+                actionMap = "Gameplay";
+                break;
+        }
+
+        _playerInput.SwitchCurrentActionMap(actionMap);
     }
     public void MoveInput(InputAction.CallbackContext context)
     {
@@ -102,5 +129,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    public void ContinueInput(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            Debug.Log("Continue Input");
+            _player.ContinueChat();
+        }
+    }
 }

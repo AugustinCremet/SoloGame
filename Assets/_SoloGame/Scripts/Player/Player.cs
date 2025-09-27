@@ -339,11 +339,24 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void StartChat(string[] phrase)
+    {
+        GetComponentInChildren<ChatBubble>().StartDialogue(phrase);
+        _playerController.SwitchActionMap(InputMode.Dialogue);
+    }
+    public void ContinueChat()
+    {
+        GetComponentInChildren<ChatBubble>().OnContinueDialogue();
+    }
+
+    public void EndChat()
+    {
+        _playerController.SwitchActionMap(InputMode.Gameplay);
+    }
     public void StartInteraction()
     {
         if(_currentInteractable != null)
         {
-            Debug.Log("Interaction");
             _currentInteractable.Interact(this);
         }
     }
