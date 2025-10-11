@@ -7,8 +7,8 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] GameObject _HPOdd;
     [SerializeField] GameObject _HPEven;
-    float _maxHealth = 100f;
-    int _currentHealth;
+    private int _maxHealth;
+    private int _currentHealth;
 
     private void Awake()
     {
@@ -52,7 +52,7 @@ public class HealthBar : MonoBehaviour
         
     }
 
-    public void ChangeMaxHealth(float maxHealth)
+    public void ChangeMaxHealth(int maxHealth)
     {
         _maxHealth = maxHealth;
     }

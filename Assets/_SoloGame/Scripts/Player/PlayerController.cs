@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F9))
         {
-            
+            UIManager.Instance.ChangeLiquidAmount(50f);
         }
 
         if (_movementWasBlockedLastFrame && !_player.StateMachine.CurrentState.BlockMovement)

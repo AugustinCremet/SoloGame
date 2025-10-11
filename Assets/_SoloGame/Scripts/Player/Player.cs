@@ -11,10 +11,7 @@ public enum EPlayerSkill
 {
     None           = 0,
     Suction        = 1 << 0,
-    ColorSwitch    = 1 << 1,
-    BulletTime     = 1 << 2,
-    BouncingBullet = 1 << 3,
-
+    Goo            = 1 << 1,
 }
 public class Player : MonoBehaviour, IDamageable
 {
@@ -85,11 +82,14 @@ public class Player : MonoBehaviour, IDamageable
 
     // Event
     public static event Action<float> OnSuction;
+    private Action _onDialogueEnd;
 
     // Other
     private IInteractable _currentInteractable = null;
     private int _keyAmount = 0;
     public bool HasKey => _keyAmount > 0;
+    private ELiquidType _currentLiquid;
+    public ELiquidType CurrentLiquid => _currentLiquid;
 
 
     private void Awake()
@@ -102,6 +102,7 @@ public class Player : MonoBehaviour, IDamageable
         _material = _spriteRenderer.material;
         _currentHealth = _maxHealth;
         _currentGoo = _maxGoo;
+        GrantAbility(EPlayerSkill.Goo);
 
         // CD
         _shootingCD = new Cooldown(_shootingCDDuration);
@@ -173,10 +174,10 @@ public class Player : MonoBehaviour, IDamageable
     {
         Abilities |= ability;
 
-        if(ability == EPlayerSkill.BouncingBullet)
-        {
-            _bulletEmitter.SwitchProfile(_bouncingProfile);
-        }
+        //if(ability == EPlayerSkill.BouncingBullet)
+        //{
+        //    _bulletEmitter.SwitchProfile(_bouncingProfile);
+        //}
     }
 
     public void RemoveAbility(EPlayerSkill ability)
@@ -339,10 +340,11 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    public void StartChat(string[] phrase)
+    public void StartChat(string[] phrase, Action onEnd = null)
     {
         GetComponentInChildren<ChatBubble>().StartDialogue(phrase);
         _playerController.SwitchActionMap(InputMode.Dialogue);
+        _onDialogueEnd = onEnd;
     }
     public void ContinueChat()
     {
@@ -352,6 +354,8 @@ public class Player : MonoBehaviour, IDamageable
     public void EndChat()
     {
         _playerController.SwitchActionMap(InputMode.Gameplay);
+        _onDialogueEnd?.Invoke();
+        _onDialogueEnd = null;
     }
     public void StartInteraction()
     {
@@ -371,6 +375,16 @@ public class Player : MonoBehaviour, IDamageable
     {
         _keyAmount--;
         UIManager.Instance.ChangeKeyAmount(_keyAmount);
+    }
+
+    public void GiveLiquid(ELiquidType type)
+    {
+        _currentLiquid = type;
+    }
+
+    public void RemoveLiquid()
+    {
+        _currentLiquid = ELiquidType.None;
     }
 
     public void ApplyKnockback(Vector2? hitLocation, float force)

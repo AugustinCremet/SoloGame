@@ -128,7 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 39361884}
-  - component: {fileID: 39361883}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -136,31 +135,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &39361883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39361882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1ea5be5e31979247844f740831a58c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializationSettings: {fileID: 11400000, guid: 7f33d2d955b7dd04392f3e917c79dc74, type: 2}
-  basePath: 
-  language: 
-  defaultPoolSize: 0
-  lowerPoolSize: 0
-  streamingPoolSize: 0
-  memoryCutoffThreshold: 0
-  monitorPoolSize: 0
-  monitorQueuePoolSize: 0
-  callbackManagerBufferSize: 0
-  spatialAudioPoolSize: 0
-  maxSoundPropagationDepth: 0
-  engineLogging: 0
 --- !u!4 &39361884
 Transform:
   m_ObjectHideFlags: 0
@@ -249,6 +223,8 @@ TilemapRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -270,6 +246,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 267905431
   m_SortingLayer: 3
   m_SortingOrder: 0
@@ -1455,6 +1432,8 @@ TilemapRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1476,6 +1455,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 927242601
   m_SortingLayer: 1
   m_SortingOrder: 0
@@ -5841,6 +5821,8 @@ TilemapRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5862,6 +5844,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -5911,6 +5894,113 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &1399432268
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1746463013}
+    m_Modifications:
+    - target: {fileID: 1228316347315277128, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1592771540, guid: b23e7934b949ff0449879a7d1ca3e43f, type: 3}
+    - target: {fileID: 3802184949288341259, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_Name
+      value: Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: _phrase1
+      value: There is a lot of blue liquid there.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: _phrase2
+      value: I can now carry that liquid.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: _bucketType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: _fullPhrase
+      value: I can take some of that liquid now.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: _liquidType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: _emptyPhrase
+      value: This container is empty, but there is a little bit of blue liquid sitting
+        at the bottom.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: _phrase1.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: _phrase2.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: '_phrase1.Array.data[0]'
+      value: There is a lot of red liquid there.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910658647328771061, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: '_phrase2.Array.data[0]'
+      value: I can now carry that liquid.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+--- !u!4 &1399432269 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8092807353243737095, guid: a7c079641817a9245ba24f9a6c94551c, type: 3}
+  m_PrefabInstance: {fileID: 1399432268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1526401527
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,6 +6147,7 @@ Transform:
   - {fileID: 1108855301}
   - {fileID: 810159045}
   - {fileID: 1204005129}
+  - {fileID: 1399432269}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &1746463014

@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] HealthBar _healthBar;
     [SerializeField] GooBar _gooBar;
+    [SerializeField] LiquidBar _liquidBar;
     [SerializeField] LiquidCooldown _suctionCD;
     [SerializeField] TextMeshProUGUI _keyAmountText;
 
@@ -29,7 +30,7 @@ public class UIManager : MonoBehaviour
         _healthBar.ChangeCurrentHealth(currentHealth);
     }
 
-    public void ChangeMaxHealth(float maxHealth)
+    public void ChangeMaxHealth(int maxHealth)
     {
         _healthBar.ChangeMaxHealth(maxHealth);
     }
@@ -59,5 +60,20 @@ public class UIManager : MonoBehaviour
     public void ChangeKeyAmount(int keyAmount)
     {
         _keyAmountText.text = keyAmount.ToString();
+    }
+
+    public void ChangeLiquidAmount(float value)
+    {
+        _liquidBar.ChangeValue(value);
+    }
+
+    public void RemoveLiquidPeriodicly(Player player)
+    {
+        _liquidBar.StartRemovingLiquid(player);
+    }
+    
+    public void StopRemovingLiquid()
+    {
+        _liquidBar.StopRemovingLiquid();
     }
 }
