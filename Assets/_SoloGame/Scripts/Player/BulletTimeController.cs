@@ -16,8 +16,6 @@ public class BulletTimeController : MonoBehaviour
     private void Start()
     {
         _currentBulletTime = _maxBulletTime;
-        UIManager.Instance.ChangeCurrentBulletTime(_maxBulletTime);
-        UIManager.Instance.ChangeMaxBulletTime(_maxBulletTime);
     }
     void Update()
     {
@@ -41,8 +39,6 @@ public class BulletTimeController : MonoBehaviour
         {
             _bulletTimeAvalaible = true;
         }
-
-        UIManager.Instance.ChangeCurrentBulletTime(_currentBulletTime);
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && _bulletTimeAvalaible)
         {

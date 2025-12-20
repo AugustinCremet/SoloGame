@@ -9,28 +9,28 @@ public class SceneDetails : MonoBehaviour
     public bool IsLoaded {  get; private set; }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
-        {
-            LoadScene();
-            GameManager.Instance.SetCurrentScene(this);
+        //if(collision.tag == "Player")
+        //{
+        //    LoadScene();
+        //    GameManager.Instance.SetCurrentScene(this);
 
-            foreach (SceneDetails scene in connectedScenes)
-            {
-                scene.LoadScene();
-            }
+        //    foreach (SceneDetails scene in connectedScenes)
+        //    {
+        //        scene.LoadScene();
+        //    }
 
-            if(GameManager.Instance.PreviousScene != null)
-            {
-                var previouslyLoadedScenes = GameManager.Instance.PreviousScene.connectedScenes;
-                foreach (SceneDetails scene in previouslyLoadedScenes)
-                {
-                    if(!connectedScenes.Contains(scene) && scene != this)
-                    {
-                        scene.UnloadScene();
-                    }
-                }
-            }
-        }
+        //    if(GameManager.Instance.PreviousScene != null)
+        //    {
+        //        var previouslyLoadedScenes = GameManager.Instance.PreviousScene.connectedScenes;
+        //        foreach (SceneDetails scene in previouslyLoadedScenes)
+        //        {
+        //            if(!connectedScenes.Contains(scene) && scene != this)
+        //            {
+        //                scene.UnloadScene();
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     private void LoadScene()
