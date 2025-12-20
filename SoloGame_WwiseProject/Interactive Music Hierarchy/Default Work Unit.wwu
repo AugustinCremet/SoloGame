@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{5292A9D2-2AF2-466A-89AF-DB7A2E8D2C15}" SchemaVersion="123">
+	<InteractiveMusic>
+		<WorkUnit Name="Default Work Unit" ID="{5292A9D2-2AF2-466A-89AF-DB7A2E8D2C15}" PersistMode="Standalone">
+			<ChildrenList>
+				<MusicPlaylistContainer Name="PH_Music_Menu" ID="{3E1330F1-E8A9-4C1D-9C73-8314E8B24600}" ShortID="235527787">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-20</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+						</Reference>
+						<Reference Name="PlaylistRoot">
+							<Custom>
+								<MusicPlaylistItem Name="" ID="{E9A46163-DEA5-4060-B3B0-504EF9C717DD}" ShortID="21048745">
+									<PropertyList>
+										<Property Name="LoopCount" Type="int16">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{D30EFDC5-693C-4378-B165-F3C4794399E4}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ChildrenList>
+										<MusicPlaylistItem Name="" ID="{C81FE539-AF34-449D-8368-935155864954}" ShortID="653566304">
+											<PropertyList>
+												<Property Name="LoopCount" Type="int16" Value="20"/>
+												<Property Name="PlaylistItemType" Type="int16" Value="1"/>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Segment">
+													<ObjectRef Name="PH_MenuMusic" ID="{482E7C17-CEC1-4AE9-A7EF-406C9E7F753F}" WorkUnitID="{5292A9D2-2AF2-466A-89AF-DB7A2E8D2C15}"/>
+												</Reference>
+											</ReferenceList>
+										</MusicPlaylistItem>
+									</ChildrenList>
+								</MusicPlaylistItem>
+							</Custom>
+						</Reference>
+						<Reference Name="TransitionRoot">
+							<Custom>
+								<MusicTransition Name="Root" ID="{BF697464-90A4-4EB9-B91B-E40EE24B00DB}">
+									<PropertyList>
+										<Property Name="IsFolder" Type="bool" Value="True"/>
+									</PropertyList>
+									<ChildrenList>
+										<MusicTransition Name="Transition" ID="{810CE87D-0076-4120-9ACF-0E89A1E292CC}">
+											<TransitionInfo/>
+										</MusicTransition>
+									</ChildrenList>
+									<TransitionInfo/>
+								</MusicTransition>
+							</Custom>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<MusicSegment Name="PH_MenuMusic" ID="{482E7C17-CEC1-4AE9-A7EF-406C9E7F753F}" ShortID="595340573">
+							<PropertyList>
+								<Property Name="EndPosition" Type="Real64" Value="84000"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{2EFA7E81-89D7-4E25-8336-2A5E233396CD}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<MusicTrack Name="Quiet Theme #5_v2 (Looped) - Paid" ID="{DA89AE6A-2450-4888-86A1-E0FAE8B76027}" ShortID="704983490">
+									<ReferenceList>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DD501CB6-FD4C-4E74-B1D9-58E59B0E3C85}"/>
+										</Reference>
+										<Reference Name="TransitionRoot">
+											<Custom>
+												<MusicTransition Name="Root" ID="{37DD4147-482B-4D50-99EB-5D633372CAEE}">
+													<PropertyList>
+														<Property Name="IsFolder" Type="bool" Value="True"/>
+													</PropertyList>
+													<TransitionInfo/>
+												</MusicTransition>
+											</Custom>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Quiet Theme #5_v2 (Looped) - Paid" ID="{502FE72D-808D-447D-AA99-F9CFC491E0E8}">
+											<Language>SFX</Language>
+											<AudioFile>Quiet Theme #5_v2 (Looped) - Paid.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="597372973"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists>
+										<ObjectList Name="Sequences">
+											<Reference>
+												<Local>
+													<MusicTrackSequence Name="" ID="{8C750B37-2DC1-4F38-8B20-10D0FD324949}">
+														<ObjectLists>
+															<ObjectList Name="Clips">
+																<Reference>
+																	<Local>
+																		<MusicClip Name="Quiet Theme #5_v2 (Looped) - Paid" ID="{FF08EEFF-A2F0-4EF6-A5DC-B49872F27748}">
+																			<PropertyList>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="84000"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="Quiet Theme #5_v2 (Looped) - Paid" ID="{502FE72D-808D-447D-AA99-F9CFC491E0E8}"/>
+																		</MusicClip>
+																	</Local>
+																</Reference>
+															</ObjectList>
+														</ObjectLists>
+													</MusicTrackSequence>
+												</Local>
+											</Reference>
+										</ObjectList>
+									</ObjectLists>
+								</MusicTrack>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Cues">
+									<Reference>
+										<Local>
+											<MusicCue Name="Entry Cue" ID="{36DB4249-4BD4-404A-99AB-0438B0A410BC}"/>
+										</Local>
+									</Reference>
+									<Reference>
+										<Local>
+											<MusicCue Name="Exit Cue" ID="{5A8A185B-37AB-4EC4-A4D5-611D695F14CB}">
+												<PropertyList>
+													<Property Name="CueType" Type="int16" Value="1"/>
+													<Property Name="TimeMs" Type="Real64" Value="84000"/>
+												</PropertyList>
+											</MusicCue>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</MusicSegment>
+					</ChildrenList>
+				</MusicPlaylistContainer>
+			</ChildrenList>
+		</WorkUnit>
+	</InteractiveMusic>
+</WwiseDocument>

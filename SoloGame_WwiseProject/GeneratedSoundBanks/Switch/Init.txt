@@ -1,0 +1,17 @@
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	17439960	Bus_Amb			\Default Work Unit\Master Audio Bus\Bus_Amb	
+	1348798494	Bus_Enemy_FS			\Default Work Unit\Master Audio Bus\Bus_Enemy\Bus_Enemy_FS	
+	2597388375	Bus_Player			\Default Work Unit\Master Audio Bus\Bus_Player	
+	3284372884	Bus_Enemy			\Default Work Unit\Master Audio Bus\Bus_Enemy	
+	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	3657263530	Verb			\Default Work Unit\Master Audio Bus\Verb	
+
+Effect plug-ins	ID	Name	Type				Notes
+	3442768367	Hall_Large_Dark	Wwise RoomVerb			
+
+Audio Devices	ID	Name	Type				Notes
+	2317455096	No_Output	No Output			
+	3859886410	System	System			
+

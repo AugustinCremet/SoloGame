@@ -1,0 +1,7 @@
+Event	ID	Name			Wwise Object Path	Notes
+	444624938	Stop_PH_Music_Menu			\Default Work Unit\BGM\Stop_PH_Music_Menu	
+	3226858860	Play_PH_Music_Menu			\Default Work Unit\BGM\Play_PH_Music_Menu	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	597372973	Quiet Theme #5_v2 (Looped) - Paid	F:\Ashen Tree Projects\Slime\SoloGame\SoloGame_WwiseProject\.cache\6B\{6B5FBE0A-6046-91E0-F945-5FF7ED0AFB0B}.wem		\Interactive Music Hierarchy\Default Work Unit\PH_Music_Menu\PH_MenuMusic\Quiet Theme #5_v2 (Looped) - Paid		14817744
+

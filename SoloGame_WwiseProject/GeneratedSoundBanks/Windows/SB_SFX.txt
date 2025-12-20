@@ -1,0 +1,18 @@
+Event	ID	Name			Wwise Object Path	Notes
+	613938397	Stop_Enemy_Skeleton_Attack			\Default Work Unit\SFX\Stop_Enemy_Skeleton_Attack	
+	1908900687	Play_Enemy_Skeleton_Death			\Default Work Unit\SFX\Play_Enemy_Skeleton_Death	
+	1978646872	Stop_Enemy_Skeleton_FS			\Default Work Unit\SFX\Stop_Enemy_Skeleton_FS	
+	2044374753	Stop_Enemy_Skeleton_Death			\Default Work Unit\SFX\Stop_Enemy_Skeleton_Death	
+	2964135930	Play_Enemy_Skeleton_FS			\Default Work Unit\SFX\Play_Enemy_Skeleton_FS	
+	3170251762	Stop_Enemy_Skeleton_Hurt			\Default Work Unit\SFX\Stop_Enemy_Skeleton_Hurt	
+	3538955231	Play_Enemy_Skeleton_Attack			\Default Work Unit\SFX\Play_Enemy_Skeleton_Attack	
+	4058662392	Play_Enemy_Skeleton_Hurt			\Default Work Unit\SFX\Play_Enemy_Skeleton_Hurt	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	134097114	GOREBone_Bone Breaks Celery 01_JSE_GMP 1	F:\Ashen Tree Projects\Slime\SoloGame\SoloGame_WwiseProject\.cache\66\{6682A9D7-6B94-2386-548A-AB6FD3D6EA06}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\AM_Enemy\AM_Enemy_Skeleton\BD_Enemy_Skeleton_Death\GOREBone_Bone Breaks Celery 01_JSE_GMP 1		88516
+	247330740	GOREBone_Bone Breaks Celery 01_JSE_GMP	F:\Ashen Tree Projects\Slime\SoloGame\SoloGame_WwiseProject\.cache\39\{398D26A2-6A81-C677-D14D-2F4821700262}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\AM_Enemy\AM_Enemy_Skeleton\BD_Enemy_Skeleton_FS\RND_Enemy_Skeleton_FS_Bones\GOREBone_Bone Breaks Celery 01_JSE_GMP		81348
+	298001888	MACK Voice Whisper Male Exhale Gasp - Non Legal	F:\Ashen Tree Projects\Slime\SoloGame\SoloGame_WwiseProject\.cache\A1\{A1FE7B8B-4FDF-9151-13E0-28A9175E05A8}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\AM_Enemy\AM_Enemy_Skeleton\BD_Enemy_Skeleton_Death\MACK Voice Whisper Male Exhale Gasp - Non Legal		188000
+	386485098	Footsteps, Human, Asphalt, Male Sneakers, Running SND11520	F:\Ashen Tree Projects\Slime\SoloGame\SoloGame_WwiseProject\.cache\62\{6283B3B2-459A-D73F-1A83-340CC63AFB59}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\AM_Enemy\AM_Enemy_Skeleton\BD_Enemy_Skeleton_FS\RND_Enemy_Skeleton_FS_Foot\Footsteps, Human, Asphalt, Male Sneakers, Running SND11520		20440
+	476281503	attack! - Paid - Pitch 200	F:\Ashen Tree Projects\Slime\SoloGame\SoloGame_WwiseProject\.cache\86\{865C8342-C16A-E1C4-E5D9-A7EF803B953B}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\AM_Enemy\AM_Enemy_Skeleton\RND_Enemy_Skeleton_Attack\attack! - Paid - Pitch 200		84756
+	571853295	GOREBone_Bone Breaks Celery 01_JSE_GMP 2	F:\Ashen Tree Projects\Slime\SoloGame\SoloGame_WwiseProject\.cache\6E\{6E6CD6A0-C543-A0BA-78E7-C6AE67B77DC7}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\AM_Enemy\AM_Enemy_Skeleton\RND_Enemy_Skeleton_Hurt\GOREBone_Bone Breaks Celery 01_JSE_GMP 2		143056
+

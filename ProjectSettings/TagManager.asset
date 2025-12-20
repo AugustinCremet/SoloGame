@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Enemy
+  - PlayerGoo
+  - PuzzleCamera
+  - AimSight
+  - SavePoint
+  - Canvas
+  - RoomBound
+  - PlayerFeet
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Enemy
+  - Bullet
+  - Player
+  - Wall
+  - Holes
+  - PlayerFeet
+  - Goo
+  - PlayerGoo
+  - Collectable
+  - BottomFloor
+  - RoomBound
+  - Interactable
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 927242601
+    locked: 0
+  - name: Bullet
+    uniqueID: 1466357047
+    locked: 0
+  - name: Wall
+    uniqueID: 267905431
+    locked: 0
+  - name: ObjectOnWall
+    uniqueID: 3670755971
+    locked: 0
+  - name: Character
+    uniqueID: 1651602805
+    locked: 0
+  - name: FG
+    uniqueID: 588159891
+    locked: 0
+  m_RenderingLayers:
+  - Default

@@ -1,0 +1,173 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "1006919462",
+    "Type": "User",
+    "GUID": "{C48C646B-D6DB-48BB-A202-125D343FE255}",
+    "Language": "SFX",
+    "Hash": "{0BB3DF6E-1AFE-22C0-50B6-6935AA9D58F0}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\SB_SFX",
+    "ShortName": "SB_SFX",
+    "Path": "SB_SFX.bnk",
+    "Media": [
+     {
+      "Id": "134097114",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GOREBone_Bone Breaks Celery 01_JSE_GMP 1.wav",
+      "CachePath": "66/{6682A9D7-6B94-2386-548A-AB6FD3D6EA06}.wem"
+     },
+     {
+      "Id": "247330740",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GOREBone_Bone Breaks Celery 01_JSE_GMP.wav",
+      "CachePath": "39/{398D26A2-6A81-C677-D14D-2F4821700262}.wem"
+     },
+     {
+      "Id": "298001888",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "MACK Voice Whisper Male Exhale Gasp - Non Legal.wav",
+      "CachePath": "A1/{A1FE7B8B-4FDF-9151-13E0-28A9175E05A8}.wem"
+     },
+     {
+      "Id": "386485098",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Footsteps, Human, Asphalt, Male Sneakers, Running SND11520.wav",
+      "CachePath": "62/{6283B3B2-459A-D73F-1A83-340CC63AFB59}.wem"
+     },
+     {
+      "Id": "476281503",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "attack! - Paid - Pitch 200.wav",
+      "CachePath": "86/{865C8342-C16A-E1C4-E5D9-A7EF803B953B}.wem"
+     },
+     {
+      "Id": "571853295",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "GOREBone_Bone Breaks Celery 01_JSE_GMP 2.wav",
+      "CachePath": "6E/{6E6CD6A0-C543-A0BA-78E7-C6AE67B77DC7}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3538955231",
+      "Name": "Play_Enemy_Skeleton_Attack",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Play_Enemy_Skeleton_Attack",
+      "GUID": "{560CE7B1-3061-45F3-80EF-F62F3706801F}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6866127",
+      "DurationMax": "0.86507785",
+      "MediaRefs": [
+       {
+        "Id": "476281503"
+       }
+      ]
+     },
+     {
+      "Id": "1908900687",
+      "Name": "Play_Enemy_Skeleton_Death",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Play_Enemy_Skeleton_Death",
+      "GUID": "{37824F08-CAE6-4194-A67A-DCFE92CB5823}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.76342505",
+      "DurationMax": "0.9618553",
+      "MediaRefs": [
+       {
+        "Id": "134097114"
+       },
+       {
+        "Id": "298001888"
+       }
+      ]
+     },
+     {
+      "Id": "2964135930",
+      "Name": "Play_Enemy_Skeleton_FS",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Play_Enemy_Skeleton_FS",
+      "GUID": "{809D4871-745C-4DEB-A7A2-1FEDE3C5FA6B}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "247330740"
+       },
+       {
+        "Id": "386485098"
+       }
+      ]
+     },
+     {
+      "Id": "4058662392",
+      "Name": "Play_Enemy_Skeleton_Hurt",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Play_Enemy_Skeleton_Hurt",
+      "GUID": "{F43EBBCA-4836-4134-A3A1-FC502D315CA7}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.66305137",
+      "DurationMax": "0.83539236",
+      "MediaRefs": [
+       {
+        "Id": "571853295"
+       }
+      ]
+     },
+     {
+      "Id": "613938397",
+      "Name": "Stop_Enemy_Skeleton_Attack",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Stop_Enemy_Skeleton_Attack",
+      "GUID": "{23E4CC92-F9F0-4075-8730-2863A4D164C3}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "2044374753",
+      "Name": "Stop_Enemy_Skeleton_Death",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Stop_Enemy_Skeleton_Death",
+      "GUID": "{762E8A20-DABC-4193-84D4-D87E400CB5A1}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "1978646872",
+      "Name": "Stop_Enemy_Skeleton_FS",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Stop_Enemy_Skeleton_FS",
+      "GUID": "{569F49C6-5DB6-43DA-8829-A3AAA1553DE7}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     },
+     {
+      "Id": "3170251762",
+      "Name": "Stop_Enemy_Skeleton_Hurt",
+      "ObjectPath": "\\Events\\Default Work Unit\\SFX\\Stop_Enemy_Skeleton_Hurt",
+      "GUID": "{1B139FB2-1BDE-474D-8543-A7485402C8E7}",
+      "MaxAttenuation": "0",
+      "DurationType": "OneShot",
+      "DurationMin": "0",
+      "DurationMax": "0"
+     }
+    ]
+   }
+  ],
+  "FileHash": "{EC8E108B-CCEA-6FD0-62C7-7207A3372DDC}"
+ }
+}

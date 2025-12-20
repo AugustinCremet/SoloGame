@@ -1,0 +1,50 @@
+{
+ "ProjectInfo": {
+  "Project": {
+   "Name": "SoloGame_WwiseProject",
+   "GUID": "{ADACC693-BCEE-44FF-85C8-F36E5DBDB94B}",
+   "Generator": "2024.1.6.8842"
+  },
+  "CacheRoot": "../../../../SoloGame_WwiseProject/.cache",
+  "Platforms": [
+   {
+    "Name": "Mac",
+    "GUID": "{5C36D4F2-B9CF-4011-B521-FE774D9EC5B8}",
+    "BasePlatform": "Mac",
+    "BasePlatformGUID": "{9C6217D5-DD11-4795-87C1-6CE02853C540}",
+    "Path": "../../../../SoloGame_WwiseProject/GeneratedSoundBanks/Mac"
+   },
+   {
+    "Name": "Switch",
+    "GUID": "{2EAB2BB3-0B51-429E-998B-1D24757B94E4}",
+    "BasePlatform": "Switch",
+    "BasePlatformGUID": "{874F26D2-416D-4698-BFB6-3427CAFCFF9C}",
+    "Path": "../../../../SoloGame_WwiseProject/GeneratedSoundBanks/Switch"
+   },
+   {
+    "Name": "switch2",
+    "GUID": "{69CFB2C6-7B4A-4A87-97FF-494F01024C07}",
+    "BasePlatform": "Switch2",
+    "BasePlatformGUID": "{A3DCE7A2-53E3-4347-9363-584D63B85ADF}",
+    "Path": "../../../../SoloGame_WwiseProject/GeneratedSoundBanks/switch2"
+   },
+   {
+    "Name": "Windows",
+    "GUID": "{0FAD2490-8043-47E6-8DDC-8A35EA5E5539}",
+    "BasePlatform": "Windows",
+    "BasePlatformGUID": "{6E0CB257-C6C8-4C5C-8366-2740DFC441EB}",
+    "Path": "../../../../SoloGame_WwiseProject/GeneratedSoundBanks/Windows"
+   }
+  ],
+  "Languages": [
+   {
+    "Name": "English(US)",
+    "Id": "684519430",
+    "GUID": "{64AD1A41-DCD1-4FD7-9CEE-90896CB75AAC}",
+    "Default": "true",
+    "UseAsStandIn": "true"
+   }
+  ],
+  "FileHash": "{77D9BE50-279A-8FD7-5759-57C83075E9A7}"
+ }
+}
