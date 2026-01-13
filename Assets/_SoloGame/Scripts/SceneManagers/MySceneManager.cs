@@ -87,10 +87,22 @@ public class MySceneManager : MonoBehaviour
         _type = type;
 
 
-        StartCoroutine(StartFadeIn());
+        StartCoroutine(StartFadeOutThenMakeLevelChanges());
     }
 
-    private IEnumerator StartFadeIn()
+    public void StartFadeOutThenIn()
+    {
+        _playerController.SwitchActionMap(InputMode.Loading);
+        StartCoroutine(StartFadeOutThenInCD());
+    }
+
+    private IEnumerator StartFadeOutThenInCD()
+    {
+        yield return StartCoroutine(StartFadeOutCD());
+        StartCoroutine(StartFadeOut(InputMode.Gameplay));
+    }
+
+    private IEnumerator StartFadeOutCD()
     {
         float elapsedTime = 0f;
 
@@ -102,7 +114,11 @@ public class MySceneManager : MonoBehaviour
 
             yield return null;
         }
+    }
 
+    private IEnumerator StartFadeOutThenMakeLevelChanges()
+    {
+        yield return StartCoroutine(StartFadeOutCD());
         MakeLevelChanges();
     }
 

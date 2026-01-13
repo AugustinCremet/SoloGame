@@ -297,6 +297,11 @@ public class Player : MonoBehaviour, IDamageable
                 break;
         }
     }
+
+    public void Aim(Vector2 aimDir)
+    {
+        _crosshair.SetAimDirectionFromController(aimDir, this);
+    }
     public void StartShooting()
     {
         _willShootAgain = true;

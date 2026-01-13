@@ -8,6 +8,7 @@ public class Crosshair : MonoBehaviour
     private float _cooldownDuration = 1f;
     private float _cooldownTimer = 0f;
     private Camera _cam;
+    private Vector2 _lastStickDir = Vector2.right;
 
     private void Awake()
     {
@@ -33,6 +34,21 @@ public class Crosshair : MonoBehaviour
 
         transform.position = clampedWorldPos;
     }
+
+    public void SetAimDirectionFromController(Vector2 aimDir, Player player)
+    {
+        if(aimDir.magnitude < 0.1f)
+        {
+            aimDir = _lastStickDir;
+        }
+        else
+        {
+            _lastStickDir = aimDir;
+        }
+
+        transform.position = player.transform.position + (Vector3)_lastStickDir * 2f;
+    }
+
     public void StartCooldown(float cooldownDuration)
     {
         _cooldownDuration = cooldownDuration;

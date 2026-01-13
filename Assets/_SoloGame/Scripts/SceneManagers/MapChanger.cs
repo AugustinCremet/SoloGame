@@ -6,12 +6,7 @@ public class MapChanger : MonoBehaviour
 {
     [SerializeField] SceneField _connectedScene;
     [SerializeField] Transform _spawnLocation;
-    private BoxCollider2D _col;
 
-    private void Awake()
-    {
-        _col = GetComponent<BoxCollider2D>();
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")

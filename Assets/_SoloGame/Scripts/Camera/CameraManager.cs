@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] private CinemachineConfiner2D _confiner;
     [SerializeField] private CinemachineGroupFraming _groupFraming;
+    [SerializeField] private CinemachineCamera _camera;
 
     private void Awake()
     {
@@ -28,5 +29,19 @@ public class CameraManager : MonoBehaviour
     public void SetOrthoSize(float newSize)
     {
         _groupFraming.OrthoSizeRange = new Vector2(newSize, newSize);
+    }
+
+    public void SetFixedRoomBoundary(BoxCollider2D roomCollider)
+    {
+        Bounds bounds = roomCollider.bounds;
+
+        Vector3 center = bounds.center;
+        _camera.ForceCameraPosition(center, Quaternion.identity);
+
+        float roomHeight = bounds.size.y;
+        _camera.Lens.OrthographicSize = roomHeight / 2f;
+
+        _confiner.BoundingShape2D = roomCollider;
+        _confiner.InvalidateBoundingShapeCache();
     }
 }

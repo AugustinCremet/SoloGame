@@ -74,30 +74,53 @@ public class PlayerController : MonoBehaviour
     }
     public void MoveInput(InputAction.CallbackContext context)
     {
-        _cachedMovementVector = context.ReadValue<Vector2>();
+        //_cachedMovementVector = context.ReadValue<Vector2>();
+
+        //bool movementBlocked = _player.StateMachine.CurrentState.BlockMovement;
+        
+        //if (!movementBlocked)
+        //{
+        //    MovementVector = context.ReadValue<Vector2>();
+        //    if (_player.StateMachine.CurrentState == _player.GooState)
+        //        return;
+
+        //    if (MovementVector.sqrMagnitude > 0.01f)
+        //    {
+        //        _player.StartMovement();
+        //    }
+        //    else
+        //    {
+        //        _player.StopMovement();
+        //    }       
+        //}
+        //else
+        //{
+        //    _movementWasBlockedLastFrame = true;
+        //    MovementVector = Vector2.zero;
+        //}
+
+        Vector2 input = context.ReadValue<Vector2>();
+        _cachedMovementVector = input;
 
         bool movementBlocked = _player.StateMachine.CurrentState.BlockMovement;
-        
-        if (!movementBlocked)
-        {
-            MovementVector = context.ReadValue<Vector2>();
-            if (_player.StateMachine.CurrentState == _player.GooState)
-                return;
 
-            if (MovementVector.sqrMagnitude > 0.01f)
-            {
-                _player.StartMovement();
-            }
-            else
-            {
-                _player.StopMovement();
-            }       
-        }
-        else
+        if (movementBlocked)
         {
             _movementWasBlockedLastFrame = true;
             MovementVector = Vector2.zero;
+            return;
         }
+
+        MovementVector = input;
+        Debug.Log(MovementVector + " How far: " +MovementVector.magnitude);
+
+        if (_player.StateMachine.CurrentState == _player.GooState)
+            return;
+
+        if (input != Vector2.zero)
+            _player.StartMovement();
+        else
+            _player.StopMovement();
     }
     public void FireInput(InputAction.CallbackContext context)
     {
@@ -144,5 +167,12 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Continue Input");
             _player.ContinueChat();
         }
+    }
+
+    public void Aim(InputAction.CallbackContext context)
+    {
+        Vector2 aimDirection = context.ReadValue<Vector2>();
+        _player.Aim(aimDirection);
+
     }
 }
