@@ -23,8 +23,16 @@ public class Room : MonoBehaviour
         {
             foreach(Room room in AllRooms)
             {
-                room._ceiling.SetActive(room != this);
+                room._ceiling.SetActive(room == this);
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            _ceiling.SetActive(false);
         }
     }
 }

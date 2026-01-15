@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
         }
 
         MovementVector = input;
-        Debug.Log(MovementVector + " How far: " +MovementVector.magnitude);
 
         if (_player.StateMachine.CurrentState == _player.GooState)
             return;

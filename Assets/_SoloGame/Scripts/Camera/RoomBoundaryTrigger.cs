@@ -20,7 +20,6 @@ public class RoomBoundaryTrigger : MonoBehaviour
             }
 
             CameraManager.Instance.SetOrthoSize(_camSize);
-            //FloorStateManager.Instance.ResetUncompletedPuzzles();
         }
     }
 }
