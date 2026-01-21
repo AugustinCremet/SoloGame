@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PushBlock : MonoBehaviour, IUniqueIdentifier
+public class PushBlock : MonoBehaviour, IUniqueIdentifier, IDamageable
 {
     [SerializeField] Tilemap _pathTilemap;
     [SerializeField] Tilemap[] _obstacleTilemaps;
@@ -11,14 +12,15 @@ public class PushBlock : MonoBehaviour, IUniqueIdentifier
     public string UniqueID { get => _uniqueID; set => _uniqueID = value; }
 
     public static List<PushBlock> AllBoxes = new List<PushBlock>();
+    public static event Action<PushBlock> OnBoxPushed;
     private bool _isTileBlocked = false;
     private bool _isMoving = false;
-    private PushBlockPuzzle _puzzle;
+
+    [SerializeField] private int _hp = 200;
 
     private void Awake()
     {
         AllBoxes.Add(this);
-        _puzzle = GetComponentInParent<PushBlockPuzzle>();
     }
 
     private void OnDestroy()
@@ -86,7 +88,7 @@ public class PushBlock : MonoBehaviour, IUniqueIdentifier
         }
 
         transform.position = endPos;
-        _puzzle.OnPushBlockEndingMovement();
+        OnBoxPushed?.Invoke(this);
         _isMoving = false;
     }
 
@@ -98,5 +100,22 @@ public class PushBlock : MonoBehaviour, IUniqueIdentifier
     public void ResetPosition(Vector3 pos)
     {
         transform.position = pos;
+    }
+
+    public void Damage(int dmgAmount, Vector2? hitLocation = null, float force = 0)
+    {
+        _hp -= dmgAmount;
+
+        if(_hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void Hit(BulletPro.Bullet bullet, Vector3 position)
+    {
+        int damageAmount = bullet.moduleParameters.GetInt("Damage");
+        float knockForce = bullet.moduleParameters.GetFloat("KnockForce");
+        Damage(damageAmount, position, knockForce);
     }
 }

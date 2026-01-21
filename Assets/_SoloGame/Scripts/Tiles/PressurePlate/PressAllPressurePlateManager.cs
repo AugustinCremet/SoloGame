@@ -13,7 +13,8 @@ public class PressAllPressurePlateManager : PressurePlateManagerBase
 
         foreach(var go in _affectedGO)
         {
-            go.GetComponent<IOpenable>().TryOpen();
+            //go.GetComponent<IOpenable>().TryOpen();
+            go.GetComponent<IPuzzleSolved>()?.OnPuzzleSolved();
         }
     }
 }

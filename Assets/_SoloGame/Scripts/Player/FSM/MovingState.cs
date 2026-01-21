@@ -43,7 +43,11 @@ public class MovingState : BaseState
         {
             _pushTimer += Time.fixedDeltaTime;
 
-            if(_pushTimer > _PUSH_DELAY)
+            // Prevent diagonal pushing
+            if (_playerController.MovementVector.x != 0f && _playerController.MovementVector.y != 0f)
+                return;
+
+            if (_pushTimer > _PUSH_DELAY)
             {
                 int layerMask = LayerMask.GetMask("Interactable");
                 RaycastHit2D hit = Physics2D.Raycast(_player.transform.position, (Vector3)_playerController.MovementVector.normalized, 1f, layerMask);

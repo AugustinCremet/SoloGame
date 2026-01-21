@@ -34,4 +34,5 @@ public class EnemyData
 public class GameState
 {
     public Dictionary<string, List<Vector3>> BoxPuzzle = new();
+    public List<string> CompletedPuzzles = new();
 }

@@ -28,7 +28,6 @@ public class PlayerBulletDie : BaseBulletBehaviour
     {
         base.Update();
 
-        Debug.Log(_roomBound);
         bool insideRoom = _roomBound == null || _roomBound.OverlapPoint(transform.position);
         Collider2D hit = Physics2D.OverlapPoint(transform.position, LayerMask.GetMask("Wall"), 1f);
 

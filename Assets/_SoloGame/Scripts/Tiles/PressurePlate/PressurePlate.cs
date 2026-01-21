@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
-    [SerializeField] Sprite _unpressedPlate;
-    [SerializeField] Sprite _pressedPlate;
+    [SerializeField] private Sprite _unpressedPlate;
+    [SerializeField] private Sprite _pressedPlate;
+    [SerializeField] private bool _stayPressed = false;
+    [SerializeField] private bool _canPlayerPress = false;
     private SpriteRenderer _spriteRenderer;
     public bool IsPressed {  get; private set; }
-    public bool StayPressed { get; private set; } = true;
     public Action<PressurePlate, bool> OnPlateChanged;
 
     private void Awake()
@@ -18,22 +19,28 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if(collision.TryGetComponent(out Player player))
+        Debug.Log(collision.name);
+        if (!_canPlayerPress)
         {
-            IsPressed = true;
-            _spriteRenderer.sprite = _pressedPlate;
-            OnPlateChanged?.Invoke(this, IsPressed);
+            if(collision.CompareTag("PlayerFeet"))
+            {
+                return;
+            }
         }
+
+        IsPressed = true;
+        _spriteRenderer.sprite = _pressedPlate;
+        OnPlateChanged?.Invoke(this, IsPressed);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out Player player))
+        if(collision.TryGetComponent(out Player player) || collision.TryGetComponent(out PushBlock block))
         {
-            if(!StayPressed)
+            if(!_stayPressed)
             {
                 IsPressed = false;
+                _spriteRenderer.sprite = _unpressedPlate;
                 OnPlateChanged?.Invoke(this, IsPressed);
             }
             else

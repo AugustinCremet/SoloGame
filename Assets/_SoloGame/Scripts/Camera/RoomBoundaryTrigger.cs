@@ -10,16 +10,22 @@ public class RoomBoundaryTrigger : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            if(!_isFixedCam)
+            Player player = collision.GetComponent<Player>();
+
+            if (!_isFixedCam)
             {
                 CameraManager.Instance.SetBoundary(_confiner);
             }
             else
             {
-                CameraManager.Instance.SetFixedRoomBoundary(GetComponent<BoxCollider2D>());
+                CameraManager.Instance.DampToNewRoom(_confiner, player);
             }
 
-            CameraManager.Instance.SetOrthoSize(_camSize);
+            var puzzles = FindObjectsByType<PuzzleBase>(FindObjectsSortMode.None);
+            foreach (var puzzle in puzzles)
+            {
+                puzzle.ResetState();
+            }
         }
     }
 }

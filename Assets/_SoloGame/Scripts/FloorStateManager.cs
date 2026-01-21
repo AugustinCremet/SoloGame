@@ -49,7 +49,7 @@ public class FloorStateManager : MonoBehaviour
     {
         foreach(var obj in _stateObjects)
         {
-            if(obj is PushBlockPuzzle)
+            if(obj is PushBlockPuzzlePathChecker)
             {
                 Debug.Log("Reset puzzle");
                 obj.ResetState();
