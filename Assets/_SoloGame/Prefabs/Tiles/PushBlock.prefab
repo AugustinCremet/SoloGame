@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9101833199376667141}
   - component: {fileID: 2707018287749296871}
   - component: {fileID: 3336926984825880223}
-  - component: {fileID: 422524691084206934}
+  - component: {fileID: 1275199441103547573}
   m_Layer: 17
   m_Name: PushBlock
   m_TagString: Untagged
@@ -155,7 +155,7 @@ MonoBehaviour:
   _pathTilemap: {fileID: 0}
   _obstacleTilemaps:
   - {fileID: 0}
-  _uniqueID: f9c0251e-b9e8-4a21-b3c2-2c607d7ad35f
+  _uniqueID: 
   _hp: 200
 --- !u!50 &3336926984825880223
 Rigidbody2D:
@@ -184,7 +184,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &422524691084206934
+--- !u!114 &1275199441103547573
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

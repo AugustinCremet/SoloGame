@@ -49,9 +49,20 @@ public class MovingState : BaseState
 
             if (_pushTimer > _PUSH_DELAY)
             {
-                int layerMask = LayerMask.GetMask("Interactable");
-                RaycastHit2D hit = Physics2D.Raycast(_player.transform.position, (Vector3)_playerController.MovementVector.normalized, 1f, layerMask);
-                Debug.DrawRay(_player.transform.position, _playerController.MovementVector.normalized, Color.red, 0.5f);
+                Vector2 move = _playerController.MovementVector;
+
+                if (move.sqrMagnitude < 0.001f)
+                    return;
+
+                Vector2 dir = move.normalized;
+                Vector2 origin = (Vector2)_player.transform.position + dir * 0.1f;
+                float distance = 1.3f;
+
+                int layerMask = LayerMask.GetMask("Pushable");
+
+                RaycastHit2D hit = Physics2D.Raycast(origin, dir, distance, layerMask);
+                Debug.DrawRay(origin, dir * distance, Color.red);
+
                 if (hit.collider != null && hit.collider.TryGetComponent(out PushBlock pushBlock))
                 {
                     _player.StateMachine.TryChangeState(_player.PushingState);

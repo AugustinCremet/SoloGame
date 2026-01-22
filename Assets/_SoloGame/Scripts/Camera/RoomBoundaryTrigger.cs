@@ -8,9 +8,9 @@ public class RoomBoundaryTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("PlayerFeet"))
         {
-            Player player = collision.GetComponent<Player>();
+            Player player = collision.GetComponentInParent<Player>();
 
             if (!_isFixedCam)
             {

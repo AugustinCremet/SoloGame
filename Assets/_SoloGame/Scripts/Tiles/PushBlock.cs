@@ -99,6 +99,13 @@ public class PushBlock : MonoBehaviour, IUniqueIdentifier, IDamageable
 
     public void ResetPosition(Vector3 pos)
     {
+        if(!AllBoxes.Contains(this))
+        {
+            AllBoxes.Add(this);
+            gameObject.SetActive(true);
+        }
+
+
         transform.position = pos;
     }
 
@@ -108,7 +115,8 @@ public class PushBlock : MonoBehaviour, IUniqueIdentifier, IDamageable
 
         if(_hp <= 0)
         {
-            Destroy(gameObject);
+            AllBoxes.Remove(this);
+            gameObject.SetActive(false);
         }
     }
 

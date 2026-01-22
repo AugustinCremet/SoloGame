@@ -1273,7 +1273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04067850825ff34bb53ca1726742f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScreenRadialFade
-  _fadeDuration: 0.5
+  _fadeDuration: 1
 --- !u!1 &6223513851737989861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,11 +1990,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.15625001
+      value: -0.0375
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.043518517
+      value: 0.46574074
       objectReference: {fileID: 0}
     - target: {fileID: 761834207858782449, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
@@ -2014,7 +2014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5030752603120647901, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.1018536
+      value: 0.9365756
       objectReference: {fileID: 0}
     - target: {fileID: 5030752603120647901, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2026,7 +2026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7464067865052785932, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.1018535
+      value: 0.9365756
       objectReference: {fileID: 0}
     - target: {fileID: 7464067865052785932, guid: 0cd08201a6972964faac3d0dcc74c164, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2936,7 +2936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2341245544076084745, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_Size.y
-      value: 0.08
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3491937402923921480, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: m_DefaultActionMap

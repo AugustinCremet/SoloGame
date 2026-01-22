@@ -70,8 +70,10 @@ public class FloorStateManager : MonoBehaviour
     {
         _isTransitioning = true;
 
-        var sceneFade = FindAnyObjectByType<SceneFade>();
-        yield return sceneFade.FadeOut();
+        var player = FindAnyObjectByType<Player>();
+        player.transform.GetComponent<PlayerController>().SwitchActionMap(InputMode.Loading);
+        var sceneFade = FindAnyObjectByType<ScreenRadialFade>();
+        yield return sceneFade.FadeOut(player.transform.position);
 
         for(int i = 0; i < _floors.Length; i++)
         {
@@ -79,7 +81,8 @@ public class FloorStateManager : MonoBehaviour
         }
 
         yield return null;
-        yield return sceneFade.FadeIn();
+        yield return sceneFade.FadeIn(player.transform.position);
+        player.transform.GetComponent<PlayerController>().SwitchActionMap(InputMode.Gameplay);
 
         _isTransitioning = false;
     }

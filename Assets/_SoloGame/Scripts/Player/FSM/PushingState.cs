@@ -12,7 +12,7 @@ public class PushingState : BaseState
     public override void EnterState(BaseStateMachine stateMachine)
     {
         Vector3 checkPos = _player.transform.position + (Vector3)_playerController.MovementVector * 0.6f;
-        Collider2D hit = Physics2D.OverlapCircle(checkPos, 0.2f, 1 << 17); // small radius
+        Collider2D hit = Physics2D.OverlapCircle(checkPos, 0.2f, 1 << 19); // small radius
         if (hit != null && hit.TryGetComponent(out PushBlock pushBlock))
         {
             if(pushBlock.CanItBePushed(_playerController.MovementVector))
