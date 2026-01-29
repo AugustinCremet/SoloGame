@@ -2,16 +2,23 @@ using UnityEngine;
 
 public abstract class InteractableBase : MonoBehaviour, IInteractable
 {
-    [SerializeField] protected SpriteRenderer _popup;
+    protected SpriteRenderer _spriteRenderer;
 
+    private void Awake()
+    {
+        if (_spriteRenderer == null)
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+    }
     public void ShowPopup()
     {
-        _popup.enabled = true;
+        
     }
 
     public void HidePopup()
     {
-        _popup.enabled = false;
+        
     }
 
     public abstract void Interact(Player player, PlayerController controller);

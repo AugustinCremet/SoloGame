@@ -13,7 +13,7 @@ public class PlayerBulletDie : BaseBulletBehaviour
         base.OnBulletBirth();
         GameObject[] allObjWithTag = GameObject.FindGameObjectsWithTag("RoomBound");
         Scene currentScene = SceneManager.GetSceneByName(MySceneManager.Instance.CurrentScene);
-        Debug.Log(currentScene.name);
+        //Debug.Log(currentScene.name);
 
         foreach (GameObject obj in allObjWithTag)
         {
@@ -31,9 +31,10 @@ public class PlayerBulletDie : BaseBulletBehaviour
         bool insideRoom = _roomBound == null || _roomBound.OverlapPoint(transform.position);
         Collider2D hit = Physics2D.OverlapPoint(transform.position, LayerMask.GetMask("Wall"), 1f);
 
-        if(hit != null )
+        if (hit != null)
         {
             Debug.Log("Position set " + _lastSafePosition);
+            bullet.Die();
         }
         else
         {
@@ -46,14 +47,46 @@ public class PlayerBulletDie : BaseBulletBehaviour
             bullet.Die();
             return;
         }
-
-
     }
+
+    //public override void Update()
+    //{
+    //    _lastSafePosition = transform.position;
+
+    //    Vector2 movement = bullet.transform.up;
+
+    //    Debug.Log("Movement vector: " + movement);
+    //    Debug.DrawLine(transform.position, transform.position + (Vector3)(movement * 2f), Color.red, 0.05f);
+
+    //    RaycastHit2D hit = Physics2D.Raycast(
+    //        transform.position,
+    //        movement,
+    //        3f,
+    //        1 << 9
+    //    );
+
+    //    if (hit.collider != null)
+    //    {
+    //        _lastSafePosition = transform.position;
+    //        bullet.Die();
+    //        return;
+    //    }
+    //}
     public override void OnBulletDeath()
     {
         base.OnBulletDeath();
 
         Vector2 pos = bullet.transform.position;
         Instantiate(_slimeBall, _lastSafePosition, Quaternion.identity);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        bullet.Die();
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        bullet.Die();
     }
 }

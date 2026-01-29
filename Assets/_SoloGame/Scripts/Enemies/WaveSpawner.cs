@@ -12,8 +12,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] GameObject _spawnWarning;
     [SerializeField] NavMeshSurface _surface;
 
-    private TilemapRenderer _tilemapRenderer;
-    private TilemapCollider2D _tilemapCollider;
+    //private TilemapRenderer _tilemapRenderer;
+    //private TilemapCollider2D _tilemapCollider;
     [SerializeField] GameObject _closingPrefab;
     private List<GameObject> _closingPrefabChildren = new List<GameObject>();
     private List<Enemy> _aliveEnemies = new List<Enemy>();
@@ -21,11 +21,11 @@ public class WaveSpawner : MonoBehaviour
 
     private void Awake()
     {
-        _tilemapCollider = GetComponent<TilemapCollider2D>();
-        _tilemapRenderer = GetComponent<TilemapRenderer>();
+        //_tilemapCollider = GetComponent<TilemapCollider2D>();
+        //_tilemapRenderer = GetComponent<TilemapRenderer>();
 
-        _tilemapCollider.enabled = false;
-        _tilemapRenderer.enabled = false;
+        //_tilemapCollider.enabled = false;
+        //_tilemapRenderer.enabled = false;
 
         //foreach(Transform child in _closingPrefab.transform)
         //{
@@ -71,10 +71,10 @@ public class WaveSpawner : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision != null && collision.gameObject.CompareTag("Player") && !GameManager.Instance.IsWaveCleared(_uniqueID))
+        if (!GameManager.Instance.IsWaveCleared(_uniqueID))
         {
             GetComponent<BoxCollider2D>().enabled = false;
-            gameObject.layer = 9;
+            //gameObject.layer = 9;
 
             ChangeBlockerState(true);
             _surface.BuildNavMesh();
@@ -86,8 +86,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void ChangeBlockerState(bool isActive)
     {
-        _tilemapRenderer.enabled = isActive;
-        _tilemapCollider.enabled = isActive;
+        _closingPrefab.SetActive(isActive);
     }
     //IEnumerator ChangeDoorState(bool isActive)
     //{
