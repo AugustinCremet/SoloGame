@@ -551,7 +551,7 @@ public class Player : MonoBehaviour, IDamageable
         int damageAmount = bullet.moduleParameters.GetInt("Damage");
         float knockForce = bullet.moduleParameters.GetFloat("KnockForce");
         AdjustPlayerColor(damageAmount);
-        Damage(damageAmount, (Vector2?)position, knockForce);
+        //Damage(damageAmount, (Vector2?)position, knockForce);
 
         bullet.Die();
     }

@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack, IUniqueIdentifier
     private bool _isOnAttackCooldown = false;
     [SerializeField] int _damageOnTouch = 1;
     [SerializeField] float _pushAmount = 0f;
+    [SerializeField] GameObject _magnetGO;
     protected virtual bool _canBePermaDead => false;
     public bool IsAIActive { get; private set; } = false;
     [SerializeField] string _uniqueID;
@@ -90,7 +91,16 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack, IUniqueIdentifier
 
     public void CheckIfHitIsAvailable(BulletPro.Bullet bullet, Vector3 position)
     {
+        Debug.Log("Check if hit is available");
         Damage(bullet.moduleParameters.GetInt("Damage"));
+    }
+
+    public void EnableMagnet(BulletPro.Bullet bullet, Vector3 position)
+    {
+        bullet.moduleCollision.collisionTags["EnemyMagnet"] = false;
+        bullet.moduleHoming.homingTags["Enemy"] = true;
+        bullet.moduleHoming.Disable();
+        bullet.moduleHoming.Enable();
     }
     public void Damage(int dmgAmount, Vector2? hitLocation = null, float force = 0f)
     {

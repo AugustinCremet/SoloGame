@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: Shot
   m_EditorClassIdentifier: 
   parameterType: 1
-  uniqueIndex: 10857013
+  uniqueIndex: 13164255
   profile: {fileID: 11400000}
   parent: {fileID: 114184213563873034}
   children:
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Name: Pattern
   m_EditorClassIdentifier: 
   parameterType: 2
-  uniqueIndex: 13224116
+  uniqueIndex: 5436715
   profile: {fileID: 11400000}
   parent: {fileID: 114334976902514986}
   children:
@@ -25093,7 +25093,7 @@ MonoBehaviour:
   m_Name: Root Emitter
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 7378044
+  uniqueIndex: 9616506
   profile: {fileID: 11400000}
   parent: {fileID: 0}
   children:
@@ -32903,7 +32903,7 @@ MonoBehaviour:
   m_Name: Bullet
   m_EditorClassIdentifier: 
   parameterType: 0
-  uniqueIndex: 14152417
+  uniqueIndex: 4691241
   profile: {fileID: 11400000}
   parent: {fileID: 114043142638459942}
   children: []
@@ -36743,7 +36743,7 @@ MonoBehaviour:
   foldoutVFX: 1
   hideSpriteList: 0
   vfxOpened: 0
-  currentlyDisplayedModule: 3
+  currentlyDisplayedModule: 4
   canMove: 1
   canCollide: 1
   isVisible: 1
@@ -36921,7 +36921,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 7
+      defaultValue: 3.5
     - settings:
         valueType: 0
         interpolationValue:
@@ -36984,7 +36984,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 9
+      defaultValue: 4.5
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -37210,7 +37210,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 1
+      defaultValue: 1.5
     useSlider: 0
     sliderMin: 0
     sliderMax: 0
@@ -37340,7 +37340,7 @@ MonoBehaviour:
   deathTiming: 0
   maxSimultaneousCollisionsPerFrame: 1
   shapeFoldout: 0
-  collisionTagsFoldout: 0
+  collisionTagsFoldout: 1
   homing: 1
   homingTags:
     tagList: 1
@@ -38265,7 +38265,7 @@ MonoBehaviour:
         parameterType: 0
         relativeTo: 0
         parameterName: 
-      defaultValue: 5
+      defaultValue: 20
     useSlider: 0
     sliderMin: 0
     sliderMax: 0

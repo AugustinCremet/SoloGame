@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Crosshair : MonoBehaviour
 {
     [SerializeField] Image _crossHair;
+    [SerializeField] float _distanceToPlayerUsingController = 5f;
     private float _cooldownDuration = 1f;
     private float _cooldownTimer = 0f;
     private Camera _cam;
@@ -46,7 +47,7 @@ public class Crosshair : MonoBehaviour
             _lastStickDir = aimDir;
         }
 
-        transform.position = player.transform.position + (Vector3)_lastStickDir * 2f;
+        transform.position = player.transform.position + (Vector3)_lastStickDir * _distanceToPlayerUsingController;
     }
 
     public void StartCooldown(float cooldownDuration)

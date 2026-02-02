@@ -22,6 +22,12 @@ public class PlayerBulletDie : BaseBulletBehaviour
                 _roomBound = obj.GetComponent<PolygonCollider2D>();
             }
         }
+
+        bullet.moduleHoming.homingTags["Item"] = false;
+        //bullet.moduleHoming.homingTags["Enemy"] = true;
+        //bullet.moduleHoming.homingAngularSpeed = 10f;
+        bullet.moduleHoming.Disable();
+        bullet.moduleHoming.Enable();
     }
 
     public override void Update()

@@ -20,7 +20,7 @@ MonoBehaviour:
     - Item
     - Obstacle
     - Helpers
-    - Tag 6
+    - EnemyMagnet
     - Tag 7
     - Tag 8
     - Tag 9

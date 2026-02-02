@@ -37,7 +37,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5460673179173241478}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4114790492811457075
@@ -186,6 +187,7 @@ MonoBehaviour:
   _hp: 200
   _damageOnTouch: 1
   _pushAmount: 5
+  _magnetGO: {fileID: 4913995099971351621}
   _uniqueID: 
 --- !u!114 &207963093360244971
 MonoBehaviour:
@@ -226,10 +228,13 @@ MonoBehaviour:
   hitboxSize: 0.5
   hitboxOffset: {x: 0, y: 0}
   killBulletOnCollision: 1
-  maxSimultaneousCollisionsPerFrame: 1
+  maxSimultaneousCollisionsPerFrame: 100
   collisionTags:
     tagList: 2
   OnHitByBullet:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitByBulletEnter:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6642156143661211813}
@@ -244,9 +249,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnHitByBulletEnter:
-    m_PersistentCalls:
-      m_Calls: []
   OnHitByBulletStay:
     m_PersistentCalls:
       m_Calls: []
@@ -306,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Graph: {fileID: 2630626348744897883, guid: 328e9c3b2ac70124984779b5c47f214b, type: 2}
+  m_Graph: {fileID: 2630626348744897883, guid: aceb8e3dbd9cfd845990ffa162f29a94, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 1820326268262154567
   - rid: 1820326381816905860
@@ -340,3 +342,89 @@ MonoBehaviour:
           m_Value1: 369308344875987470
         Name: NavMeshAgent
         m_Value: {fileID: 5588907326532589408}
+--- !u!1 &4913995099971351621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5460673179173241478}
+  - component: {fileID: 4854250322867059073}
+  m_Layer: 6
+  m_Name: Magnet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5460673179173241478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913995099971351621}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2205128572215172463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4854250322867059073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913995099971351621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50e756f139e8884f93ef2eca2eef78d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletPro.BulletReceiver
+  self: {fileID: 2205128572215172463}
+  colliderType: 0
+  startingChildren: []
+  syncEnable: 1
+  syncDisable: 1
+  syncCollisionTags: 1
+  hitboxSize: 1
+  hitboxOffset: {x: 0, y: 0}
+  killBulletOnCollision: 0
+  maxSimultaneousCollisionsPerFrame: 1
+  collisionTags:
+    tagList: 64
+  OnHitByBullet:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitByBulletEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6642156143661211813}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: EnableMagnet
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHitByBulletStay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitByBulletExit:
+    m_PersistentCalls:
+      m_Calls: []
+  parentSyncFoldout: 0
+  collisionTagsFoldout: 1
+  advancedEventsFoldout: 1
+  useDefaultGizmoColor: 1
+  gizmoColor: {r: 0, g: 0, b: 0, a: 1}
+  gizmoZOffset: 0
