@@ -24,14 +24,12 @@ public class MovingState : BaseState
 
     public override void ExitState(BaseStateMachine stateMachine)
     {
-        _player.ResetMovementVector();
+        //_player.ResetMovementVector();
         _animator.SetBool("IsMoving", false);
     }
 
     public override void FixedUpdateState(BaseStateMachine stateMachine)
     {
-        _player.HandleMovement();
-
         if(_lastPositionX != _player.transform.position.x ||
            _lastPositionY != _player.transform.position.y)
         {

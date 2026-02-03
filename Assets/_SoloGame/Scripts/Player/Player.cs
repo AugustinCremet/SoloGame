@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using BulletPro;
 using System.Collections;
+using JetBrains.Annotations;
 
 public enum EPlayerSkill
 {
@@ -12,10 +13,15 @@ public enum EPlayerSkill
 public class Player : MonoBehaviour, IDamageable
 {
     [Header("Stats")]
-    [SerializeField] float _moveSpeed = 5f;
     [SerializeField] int _maxHealth = 100;
     [SerializeField] float _maxGoo = 10f;
     [SerializeField] float _gooRecoveryRate = 0.25f;
+    [Space (10)]
+    [Header("Movement")]
+    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _acceleration = 50f;
+    [SerializeField] private float _deceleration = 50f;
+    private Vector2 _velocity;
     [Space(10)]
     [Header("Ressource cost")]
     [SerializeField] float _gooPerSecForGooState = 1f;
@@ -154,6 +160,22 @@ public class Player : MonoBehaviour, IDamageable
     private void FixedUpdate()
     {
         StateMachine?.FixedUpdate();
+
+        Vector2 targetVelocity = _playerController.MovementVector.normalized * _moveSpeed;
+
+        if (_playerController.MovementVector.sqrMagnitude > 0.01f)
+        {
+            _velocity = Vector2.Dot(_velocity, targetVelocity) < 0 ?
+            Vector2.MoveTowards(_velocity, targetVelocity, _acceleration * 2f * Time.fixedDeltaTime) :
+            Vector2.MoveTowards(_velocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
+
+        }
+        else
+        {
+            _velocity = Vector2.MoveTowards(_velocity, Vector2.zero, _deceleration * Time.fixedDeltaTime);
+        }
+
+        _rb.linearVelocity = _velocity;
     }
 
     private void OnEnable()
@@ -210,17 +232,13 @@ public class Player : MonoBehaviour, IDamageable
         _bulletEmitter.Stop();
         StateMachine.TryChangeState(MovingState);
     }
-    public void HandleMovement()
-    {
-        _rb.linearVelocity = _playerController.MovementVector * _moveSpeed;
-    }
     public void StopMovement()
     {
-        _rb.linearVelocity = Vector2.zero;
         StateMachine.TryChangeState(IdleState);
     }
     public void ResetMovementVector()
     {
+        Debug.Log("Reset Movement Vector");
         _rb.linearVelocity = Vector2.zero;
     }
     public Vector2 OnMovementUnblocked(Vector2 cachedVector)

@@ -34,7 +34,6 @@ public class GooState : BaseState
         }
 
         BlockMovement = false;
-        _player.HandleMovement();
         _player.HandleGoo();
     }
 }
