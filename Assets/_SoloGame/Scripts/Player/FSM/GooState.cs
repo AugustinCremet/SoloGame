@@ -1,7 +1,7 @@
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class GooState : BaseState
+public class GooState : ActionBaseState
 {
     [SerializeField] float _timeBetweenSpawns;
     [SerializeField] float _startTimeBetweenSpawns;
@@ -11,22 +11,22 @@ public class GooState : BaseState
         BlockMovement = true;
     }
 
-    public override void EnterState(BaseStateMachine stateMachine)
+    public override void EnterState()
     {
         _animator.SetBool("IsGoo", true);
         _animator.Play("ChangeToGoo");
     }
 
-    public override void ExitState(BaseStateMachine stateMachine)
+    public override void ExitState()
     {
         _animator.SetBool("IsGoo", false);
     }
 
-    public override void UpdateState(BaseStateMachine stateMachine)
+    public override void UpdateState()
     {   
     }
 
-    public override void FixedUpdateState(BaseStateMachine stateMachine)
+    public override void FixedUpdateState()
     {
         if (_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "ChangeToGoo")
         {

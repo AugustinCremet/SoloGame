@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class DeadState : BaseState
+public class DeadState : ActionBaseState
 {
     public DeadState(PlayerController playerController, Player player, Animator animator) : base(playerController, player, animator)
     {
     }
 
-    public override void EnterState(BaseStateMachine stateMachine)
+    public override void EnterState()
     {
         _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         _animator.Play("Death");
@@ -20,17 +20,17 @@ public class DeadState : BaseState
         throw new NotImplementedException();
     }
 
-    public override void ExitState(BaseStateMachine stateMachine)
+    public override void ExitState()
     {
         
     }
 
-    public override void FixedUpdateState(BaseStateMachine stateMachine)
+    public override void FixedUpdateState()
     {
         
     }
 
-    public override void UpdateState(BaseStateMachine stateMachine)
+    public override void UpdateState()
     {
         
     }

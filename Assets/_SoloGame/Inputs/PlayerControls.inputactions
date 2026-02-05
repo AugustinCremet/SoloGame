@@ -205,6 +205,17 @@
                 },
                 {
                     "name": "",
+                    "id": "38ad3a27-80fe-4e6e-9231-bc50fc049959",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Suction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "83dcb560-6f70-464d-a386-2529b36c2279",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",

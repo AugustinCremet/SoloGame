@@ -30,7 +30,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float _invinsibilityDuration = 10f;
     [SerializeField] float _shootingCDDuration = 1f;
     [SerializeField] float _suctionCDDuration = 10f;
-    [SerializeField] float _suctionSkillDuration = 3f;
+    [SerializeField] float _suctionSkillDuration = 1f;
 
     public int MaxHealth => _maxHealth;
     private int _currentHealth = 0;
@@ -74,15 +74,22 @@ public class Player : MonoBehaviour, IDamageable
     public EPlayerSkill Abilities { get; private set; }
 
     // FSM
-    public StateMachine StateMachine;
-    public IdleSkillState IdleState;
+    // Action State Machine
+    public StateMachine<ActionBaseState> ActionSM;
+    public IdleActionState IdleActionState;
     public GooState GooState;
     public ShootingState ShootingState;
-    public MovingState MovingState;
     public DeadState DeadState;
     public HitState HitState;
     public SuctionState SuctionState;
     public PushingState PushingState;
+    // Movement State Machine
+    public StateMachine<MovementBaseState> MovementSM;
+    public IdleMovementState IdleMovementState;
+    public MovingState MovingState;
+
+    // Status
+    public PlayerStatus Status;
 
     // Event
     public static event Action<float> OnSuction;
@@ -115,16 +122,23 @@ public class Player : MonoBehaviour, IDamageable
         _suctionSkillDurationCD = new Cooldown(_suctionSkillDuration);
         JustTeleportedCD = new Cooldown(2f);
 
-        //State machine with states
-        StateMachine = new StateMachine();
-        IdleState = new IdleSkillState(_playerController, this, _animator);
+        // State machine with states
+        // Action
+        ActionSM = new StateMachine<ActionBaseState>();
+        IdleActionState = new IdleActionState(_playerController, this, _animator);
         GooState = new GooState(_playerController, this, _animator);
         ShootingState = new ShootingState(_playerController, this, _animator);
-        MovingState = new MovingState(_playerController, this, _animator);
         DeadState = new DeadState(_playerController, this, _animator);
         HitState = new HitState(_playerController, this, _animator);
         SuctionState = new SuctionState(_playerController, this, _animator);
-        PushingState = new PushingState(_playerController, this, _animator); 
+        PushingState = new PushingState(_playerController, this, _animator);
+        // Movement
+        MovementSM = new StateMachine<MovementBaseState>();
+        IdleMovementState = new IdleMovementState(_playerController, this, _animator);
+        MovingState = new MovingState(_playerController, this, _animator);
+
+        //Status
+        Status = new PlayerStatus();
     }
     private void Start()
     {
@@ -138,7 +152,8 @@ public class Player : MonoBehaviour, IDamageable
         // Make sure the emitter will be active **Weird fix but okay**
         _bulletEmitter.Play();
         _bulletEmitter.Stop();
-        StateMachine?.SetInitialState(IdleState);
+        ActionSM?.SetInitialState(IdleActionState);
+        MovementSM?.SetInitialState(IdleMovementState);
 
 
         // AC_TODO remove
@@ -148,18 +163,20 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        StateMachine?.Update();
+        ActionSM?.Update();
+        MovementSM?.Update();
         RecoverGooOverTime(_gooRecoveryRate);
 
         if (_shootingCD.IsReady && _willShootAgain)
         {
-            StateMachine.TryChangeState(ShootingState);
+            ActionSM.TryChangeState(ShootingState, Status);
         }
     }
 
     private void FixedUpdate()
     {
-        StateMachine?.FixedUpdate();
+        ActionSM?.FixedUpdate();
+        MovementSM?.FixedUpdate();
 
         Vector2 targetVelocity = _playerController.MovementVector.normalized * _moveSpeed;
 
@@ -214,27 +231,27 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (_playerController.MovementVector.magnitude <= 0f)
         {
-            StateMachine.TryChangeState(IdleState);
+            MovementSM.TryChangeState(IdleMovementState, Status);
         }
         else
         {
-            StateMachine.TryChangeState(MovingState);
+            MovementSM.TryChangeState(MovingState, Status);
         }
 
         if (_isShooting)
         {
-            StateMachine.TryChangeState(ShootingState);
+            ActionSM.TryChangeState(ShootingState, Status);
         }
     }
     public void StartMovement()
     {
         //Make sure to stop the bullet
         _bulletEmitter.Stop();
-        StateMachine.TryChangeState(MovingState);
+        MovementSM.TryChangeState(MovingState, Status);
     }
     public void StopMovement()
     {
-        StateMachine.TryChangeState(IdleState);
+        MovementSM.TryChangeState(IdleMovementState, Status);
     }
     public void ResetMovementVector()
     {
@@ -245,12 +262,12 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (cachedVector.sqrMagnitude > 0.01f)
         {
-            StateMachine.TryChangeState(MovingState);
+            MovementSM.TryChangeState(MovingState, Status);
             return cachedVector;
         }
         else
         {
-            StateMachine.TryChangeState(IdleState);
+            MovementSM.TryChangeState(IdleMovementState, Status);
             return Vector2.zero;
         }
     }
@@ -260,7 +277,7 @@ public class Player : MonoBehaviour, IDamageable
         if (_currentGoo < _gooPerSecForGooState)
             return;
 
-        StateMachine.TryChangeState(GooState);
+        ActionSM.TryChangeState(GooState, Status);
     }
     public void HandleGoo()
     {
@@ -281,7 +298,7 @@ public class Player : MonoBehaviour, IDamageable
         if(_suctionCD.IsReady)
         {
             _suctionSkillDurationCD.Use();
-            StateMachine.TryChangeState(SuctionState);
+            ActionSM.TryChangeState(SuctionState, Status);
         }
     }
     public void HandleSuction()
@@ -325,7 +342,7 @@ public class Player : MonoBehaviour, IDamageable
         _willShootAgain = true;
         if(_shootingCD.IsReady)
         {
-            StateMachine.TryChangeState(ShootingState);
+            ActionSM.TryChangeState(ShootingState, Status);
             _isShooting = true;
         }
     }
@@ -358,7 +375,7 @@ public class Player : MonoBehaviour, IDamageable
         _bulletEmitter.Stop();
         if (!_willShootAgain || !_shootingCD.IsReady)
         {
-            ReevaluateState();
+            ActionSM.TryChangeState(IdleActionState, Status);
         }
     }
 
@@ -422,16 +439,16 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void Damage(int dmgAmount, Vector2? hitLocation = null, float force = 0f)
     {
-        if (StateMachine.CurrentState == HitState || _isInvinsible)
+        if (ActionSM.CurrentState == HitState || _isInvinsible)
             return;
 
         LoseSlimeBall(dmgAmount);
         if (_currentHealth <= 0)
         {
-            StateMachine.TryChangeState(DeadState);
+            ActionSM.TryChangeState(DeadState, Status);
         }
 
-        StateMachine.TryChangeState(HitState);
+        ActionSM.TryChangeState(HitState, Status);
         if(hitLocation != null && force != 0f)
         {
             Debug.Log("Knockback");
@@ -556,7 +573,7 @@ public class Player : MonoBehaviour, IDamageable
         //UIManager.Instance.ChangeCurrentHealth(_currentHealth);
         _animator.Rebind();
         ResetPlayerColor();
-        StateMachine.ResetStates(IdleState);
+        //ActionSM.ResetStates(IdleState);
     }
 
     public void SetPosition(Transform newTransform)

@@ -3,61 +3,58 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-public class BaseStateMachine
+public class BaseStateMachine<TState> where TState : BaseState
 {
-    public BaseState CurrentState { get; private set; }
-    protected Dictionary<Type, List<Type>> _transitionMap = new Dictionary<Type, List<Type>>();
+    public TState CurrentState { get; private set; }
 
     protected BaseStateMachine()
     {
         
     }
-    public virtual void SetInitialState(BaseState state)
+    public virtual void SetInitialState(TState state)
     {
         CurrentState = state;
-        CurrentState?.EnterState(this);
+        CurrentState?.EnterState();
     }
 
     public void Update()
     {
-        CurrentState?.UpdateState(this);
+        CurrentState?.UpdateState();
     }
 
     public void FixedUpdate()
     {
-        CurrentState?.FixedUpdateState(this);
+        CurrentState?.FixedUpdateState();
     }
 
-    public void ResetStates(IdleSkillState state)
+    public void ResetStates(TState state)
     {
         SwitchState(state);
     }
 
-    public virtual bool TryChangeState(BaseState state)
+    public virtual bool TryChangeState(TState state, PlayerStatus status)
     {
         if (CurrentState != null && !CurrentState.CanExit)
             return false;
 
-        var currentType = CurrentState.GetType();
-        var nextType = state.GetType();
+        if(status.IsDead || status.IsStunned)
+            return false;
 
-        if (_transitionMap.TryGetValue(currentType, out var allowedStates) &&
-            allowedStates.Contains(nextType))
-        {
-            SwitchState(state);
-            return true;
-        }
-        return false;
+        if(CurrentState == state)
+            return false;
+
+        SwitchState(state);
+        return true;
     }
 
-    private void SwitchState(BaseState state)
+    private void SwitchState(TState state)
     {
-        CurrentState?.ExitState(this);
+        CurrentState?.ExitState();
         CurrentState = state;
-        state.EnterState(this);
+        state.EnterState();
     }
 
-    protected virtual BaseState GetInitialState()
+    protected virtual TState GetInitialState()
     {
         Debug.Log("Null");
         return null;

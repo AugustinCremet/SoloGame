@@ -3132,6 +3132,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5590945984184800997, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
+      propertyPath: _suctionSkillDuration
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590945984184800997, guid: bf5f1c579602ecf4d93570c04e57b87a, type: 3}
       propertyPath: _invinsibilityDuration
       value: 1
       objectReference: {fileID: 0}

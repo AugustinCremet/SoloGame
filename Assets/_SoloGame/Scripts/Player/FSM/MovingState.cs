@@ -1,7 +1,7 @@
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public class MovingState : BaseState
+public class MovingState : MovementBaseState
 {
     private float _lastPositionX;
     private float _lastPositionY;
@@ -13,7 +13,7 @@ public class MovingState : BaseState
     {
     }
 
-    public override void EnterState(BaseStateMachine stateMachine)
+    public override void EnterState()
     {
         _animator.Play("Movement");
         _animator.SetBool("IsMoving", true);
@@ -22,13 +22,13 @@ public class MovingState : BaseState
         _lastPositionY = _player.transform.position.y;
     }
 
-    public override void ExitState(BaseStateMachine stateMachine)
+    public override void ExitState()
     {
         //_player.ResetMovementVector();
         _animator.SetBool("IsMoving", false);
     }
 
-    public override void FixedUpdateState(BaseStateMachine stateMachine)
+    public override void FixedUpdateState()
     {
         if(_lastPositionX != _player.transform.position.x ||
            _lastPositionY != _player.transform.position.y)
@@ -63,13 +63,13 @@ public class MovingState : BaseState
 
                 if (hit.collider != null && hit.collider.TryGetComponent(out PushBlock pushBlock))
                 {
-                    _player.StateMachine.TryChangeState(_player.PushingState);
+                    _player.MovementSM.TryChangeState(_player.PushingState, _player.Status);
                 }
             }
         }
     }
 
-    public override void UpdateState(BaseStateMachine stateMachine)
+    public override void UpdateState()
     {
         _animator.SetFloat("Horizontal", _playerController.MovementVector.x);
         _animator.SetFloat("Vertical", _playerController.MovementVector.y);

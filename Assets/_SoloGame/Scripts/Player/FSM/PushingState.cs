@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PushingState : BaseState
+public class PushingState : MovementBaseState
 {
     private PushBlock _pushBlock;
     private Vector3 _dir;
@@ -9,7 +9,7 @@ public class PushingState : BaseState
         BlockMovement = true;
     }
 
-    public override void EnterState(BaseStateMachine stateMachine)
+    public override void EnterState()
     {
         Vector3 checkPos = _player.transform.position + (Vector3)_playerController.MovementVector * 0.6f;
         Collider2D hit = Physics2D.OverlapCircle(checkPos, 0.2f, 1 << 19); // small radius
@@ -23,22 +23,22 @@ public class PushingState : BaseState
             }
             else
             {
-                _player.StateMachine.TryChangeState(_player.MovingState);
+                _player.MovementSM.TryChangeState(_player.MovingState, _player.Status);
             }
         }
     }
 
-    public override void ExitState(BaseStateMachine stateMachine)
+    public override void ExitState()
     {
         
     }
 
-    public override void FixedUpdateState(BaseStateMachine stateMachine)
+    public override void FixedUpdateState()
     {
         
     }
 
-    public override void UpdateState(BaseStateMachine stateMachine)
+    public override void UpdateState()
     {
         if(_pushBlock != null)
         {
@@ -46,7 +46,7 @@ public class PushingState : BaseState
 
             if(!_pushBlock.IsMoving())
             {
-                _player.StateMachine.TryChangeState(_player.IdleState);
+                _player.MovementSM.TryChangeState(_player.IdleMovementState, _player.Status);
             }
         }
     }
