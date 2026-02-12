@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1585282083146883808}
   - component: {fileID: 8029739935866162319}
   - component: {fileID: 3668534427138486720}
+  - component: {fileID: 1270052714089153581}
   m_Layer: 14
   m_Name: Key
   m_TagString: Untagged
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 927242601
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1861803888, guid: 5ce8c2f629eb3e44ba822840110ff572, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -150,3 +151,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce85a8fa5b90714091dcd323ad7f2cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemData: {fileID: 11400000, guid: ca38132d313362243a34b7f214be0b77, type: 2}
+  _uniqueID: 
+--- !u!114 &1270052714089153581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628259362206204900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c8d5178b8728240bd70709ebb967c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundHandler
+  _soundPack: {fileID: 11400000, guid: 70b02129c996f214b9ecdfe5644420b9, type: 2}

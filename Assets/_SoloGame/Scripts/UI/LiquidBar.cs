@@ -19,6 +19,11 @@ public class LiquidBar : MonoBehaviour
     {
         _slider = GetComponent<Slider>();
     }
+
+    private void Start()
+    {
+        _player = FindFirstObjectByType<Player>();
+    }
     public void ChangeValue(float targetValue)
     {
         if(targetValue < _currentValue)
@@ -56,16 +61,28 @@ public class LiquidBar : MonoBehaviour
 
     private void RemoveLiquidPeriodicly()
     {
-        if(_slider.value <= 0f)
+        bool flowControl = IsLiquidTotallyGone();
+
+        if (!flowControl)
         {
-            _player.RemoveLiquid();
-            gameObject.SetActive(false);
             return;
         }
 
         float amountToRemove = _drainAmount * Time.deltaTime;
         _currentValue = _slider.value;
         _slider.value = _currentValue - amountToRemove;
+    }
+
+    private bool IsLiquidTotallyGone()
+    {
+        if (_slider.value <= 0f)
+        {
+            _player.RemoveLiquid();
+            gameObject.SetActive(false);
+            return false;
+        }
+
+        return true;
     }
 
     public void SetValueWithBounce(float target)
@@ -117,5 +134,6 @@ public class LiquidBar : MonoBehaviour
 
         _slider.value = target;
         _bounceCoroutine = null;
+        IsLiquidTotallyGone();
     }
 }

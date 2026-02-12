@@ -88,11 +88,17 @@ public class PlayerBulletDie : BaseBulletBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        bullet.Die();
+        if (bullet != null)
+        {
+            bullet.Die();
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        bullet.Die();
+        if (bullet != null)
+        {
+            bullet.Die();
+        }
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfe53ef7a9bc09489b00d9b3e9a83c0, type: 3}
+  m_Name: Key
+  m_EditorClassIdentifier: Assembly-CSharp::SOItem
+  _sprite: {fileID: 380824733, guid: 92f9fb58cf645914f96a712dba2172f6, type: 3}
+  _itemName: 
+  _description: 
+  _itemType: 0
+  _healAmount: 0
+  _abilityToGrant: 0

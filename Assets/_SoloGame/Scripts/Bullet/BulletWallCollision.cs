@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using BulletPro;
 using Unity.VisualScripting;
-using UnityEditor;
 
 // This script is supported by the BulletPro package for Unity.
 // Template author : Simon Albou <albou.simon@gmail.com>
@@ -76,11 +75,17 @@ public class BulletWallCollision : BaseBulletBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-		bullet.Die();
+		if (bullet != null)
+		{
+			bullet.Die();
+		}
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        bullet.Die();
+		if (bullet != null)
+		{
+			bullet.Die();
+		}
     }
 }

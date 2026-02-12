@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class Key : MonoBehaviour, ICollectable, IUniqueIdentifier
+public class Key : Item, ICollectable, IUniqueIdentifier
 {
-
-    [SerializeField] private string _uniqueID;
-    public string UniqueID { get => _uniqueID; set => _uniqueID = value; }
 
     private void Start()
     {
@@ -12,11 +9,5 @@ public class Key : MonoBehaviour, ICollectable, IUniqueIdentifier
         {
             Destroy(gameObject);
         }
-    }
-    public void OnCollect(Player player)
-    {
-        player.GiveKey();
-        GameManager.Instance.MarkCollectableColledted(UniqueID);
-        Destroy(gameObject);
     }
 }

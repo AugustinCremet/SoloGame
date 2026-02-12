@@ -8,7 +8,7 @@ public class IdleMovementState : MovementBaseState
 
     public override void EnterState()
     {
-        Debug.Log("Enter Idle Movement State");
+        
     }
 
     public override void ExitState()

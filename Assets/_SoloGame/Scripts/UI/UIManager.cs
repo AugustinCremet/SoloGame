@@ -68,7 +68,15 @@ public class UIManager : MonoBehaviour
 
     public void ChangeLiquidAmount(float value)
     {
-        _liquidBarGO.SetActive(true);
+        if(value <= 0f)
+        {
+            //_liquidBarGO.SetActive(false);
+        }
+        else
+        {
+            _liquidBarGO.SetActive(true);
+        }
+
         _liquidBar.ChangeValue(value);
     }
 

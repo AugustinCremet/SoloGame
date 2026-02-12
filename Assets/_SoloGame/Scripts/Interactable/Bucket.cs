@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public enum ELiquidType { None, Blue, Red }
@@ -10,19 +11,35 @@ public class Bucket : MonoBehaviour, IInteractable
     [SerializeField] ELiquidType _liquidType;
     [SerializeField] string[] _phrase1;
     [SerializeField] string[] _phrase2;
+    [SerializeField] bool _containsKey;
+    [SerializeField] Item _itemPrefab;
+    [SerializeField] string[] _phraseForKey;
+
+    private bool doOnce = true;
 
     private Player _player;
     private SpriteRenderer _spriteRenderer;
+    private GameObject _popup;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _popup = GetComponentInChildren<TextMeshProUGUI>().transform.gameObject;
+        _popup.SetActive(false);
     }
+
     public void Interact(Player player, PlayerController controller)
     {
         if (_player == null)
         {
             _player = player;
+        }
+        if(_containsKey && doOnce)
+        {
+            doOnce = false;
+            _player.StartChat(_phraseForKey, () => GiveReward());
+
+            return;
         }
         switch(_bucketType)
         {
@@ -33,6 +50,13 @@ public class Bucket : MonoBehaviour, IInteractable
                 ReceiverInteraction();
                 break;
         }
+    }
+
+    private void GiveReward()
+    {
+        Item item = Instantiate(_itemPrefab);
+        item.transform.position = _player.transform.position + Vector3.up * 1.5f;
+        item.PlayRewardAnimation(_player);
     }
 
     private void ReceiverInteraction()
@@ -73,11 +97,11 @@ public class Bucket : MonoBehaviour, IInteractable
 
     public void ShowPopup()
     {
-        throw new System.NotImplementedException();
+        _popup.SetActive(true);
     }
 
     public void HidePopup()
     {
-        throw new System.NotImplementedException();
+        _popup.SetActive(false);
     }
 }

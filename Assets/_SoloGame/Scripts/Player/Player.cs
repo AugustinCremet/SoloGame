@@ -404,6 +404,11 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void GiveItem()
+    {
+
+    }
+
     public void GiveKey()
     {
         _keyAmount++;
