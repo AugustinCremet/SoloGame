@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             UIManager.Instance.ChangeLiquidAmount(50f);
         }
 
-        if (_movementWasBlockedLastFrame && !_player.StateMachine.CurrentState.BlockMovement)
+        if (_movementWasBlockedLastFrame && !_player.ActionSM.CurrentState.BlockMovement)
         {
             _movementWasBlockedLastFrame = false;
             MovementVector = _player.OnMovementUnblocked(_cachedMovementVector);
@@ -74,35 +74,10 @@ public class PlayerController : MonoBehaviour
     }
     public void MoveInput(InputAction.CallbackContext context)
     {
-        //_cachedMovementVector = context.ReadValue<Vector2>();
-
-        //bool movementBlocked = _player.StateMachine.CurrentState.BlockMovement;
-        
-        //if (!movementBlocked)
-        //{
-        //    MovementVector = context.ReadValue<Vector2>();
-        //    if (_player.StateMachine.CurrentState == _player.GooState)
-        //        return;
-
-        //    if (MovementVector.sqrMagnitude > 0.01f)
-        //    {
-        //        _player.StartMovement();
-        //    }
-        //    else
-        //    {
-        //        _player.StopMovement();
-        //    }       
-        //}
-        //else
-        //{
-        //    _movementWasBlockedLastFrame = true;
-        //    MovementVector = Vector2.zero;
-        //}
-
         Vector2 input = context.ReadValue<Vector2>();
         _cachedMovementVector = input;
 
-        bool movementBlocked = _player.StateMachine.CurrentState.BlockMovement;
+        bool movementBlocked = _player.ActionSM.CurrentState.BlockMovement;
 
         if (movementBlocked)
         {
@@ -113,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
         MovementVector = input;
 
-        if (_player.StateMachine.CurrentState == _player.GooState)
+        if (_player.ActionSM.CurrentState == _player.GooState)
             return;
 
         if (input != Vector2.zero)

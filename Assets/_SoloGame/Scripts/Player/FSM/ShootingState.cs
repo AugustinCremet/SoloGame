@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShootingState : BaseState
+public class ShootingState : ActionBaseState
 {
     private GameObject _aimSight;
     private Vector2 _aimSightDirection;
@@ -9,7 +9,7 @@ public class ShootingState : BaseState
         BlockMovement = true;
     }
 
-    public override void EnterState(BaseStateMachine stateMachine)
+    public override void EnterState()
     {
         _aimSight = GameObject.FindWithTag("AimSight");
 
@@ -29,19 +29,19 @@ public class ShootingState : BaseState
         return new Vector2(horizontal, vertical);
     }
 
-    public override void ExitState(BaseStateMachine stateMachine)
+    public override void ExitState()
     {
         _animator.SetBool("IsShooting", false);
         _animator.SetFloat("HorizontalAim", 0f);
         _animator.SetFloat("VerticalAim", 0f);
     }
 
-    public override void FixedUpdateState(BaseStateMachine stateMachine)
+    public override void FixedUpdateState()
     {
         
     }
 
-    public override void UpdateState(BaseStateMachine stateMachine)
+    public override void UpdateState()
     {
         Vector2 newAimDirection = AimDirection();
 

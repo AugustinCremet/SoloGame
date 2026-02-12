@@ -6186,7 +6186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3344836012903804291, guid: b14c779cce2e8204fa0c9e03bd3f49e5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6251,7 +6251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3344836012903804291, guid: b14c779cce2e8204fa0c9e03bd3f49e5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6309,6 +6309,10 @@ PrefabInstance:
     - target: {fileID: 3344836012903804291, guid: b14c779cce2e8204fa0c9e03bd3f49e5, type: 3}
       propertyPath: m_Name
       value: Enemy0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344836012903804291, guid: b14c779cce2e8204fa0c9e03bd3f49e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6544,7 +6548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3344836012903804291, guid: b14c779cce2e8204fa0c9e03bd3f49e5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
