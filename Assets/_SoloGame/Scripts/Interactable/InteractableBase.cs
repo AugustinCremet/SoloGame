@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class InteractableBase : MonoBehaviour, IInteractable
 {
-    protected SpriteRenderer _spriteRenderer;
+    [SerializeField] protected SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {

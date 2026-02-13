@@ -70,7 +70,8 @@ public class Player : MonoBehaviour, IDamageable
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private Material _material;
-    private CircleCollider2D _col;
+    private CircleCollider2D _bodyCol;
+    private BoxCollider2D _feetCol;
     public EPlayerSkill Abilities { get; private set; }
 
     // FSM
@@ -110,7 +111,8 @@ public class Player : MonoBehaviour, IDamageable
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         _crosshair = _crosshairGO.GetComponent<Crosshair>();
-        _col = GetComponent<CircleCollider2D>();
+        _bodyCol = GetComponent<CircleCollider2D>();
+        _feetCol = GetComponentInChildren<BoxCollider2D>();
         _material = _spriteRenderer.material;
         _currentHealth = _maxHealth;
         _currentGoo = _maxGoo;
@@ -527,6 +529,18 @@ public class Player : MonoBehaviour, IDamageable
         {
             _currentGoo = _maxGoo;
         }
+    }
+
+    public void DisableCollision()
+    {
+        _bodyCol.enabled = false;
+        _feetCol.enabled = false;
+    }
+
+    public void EnableCollision()
+    {
+        _bodyCol.enabled = true;
+        _feetCol.enabled = true;
     }
 
     public void SetInvinsibility(bool isInvinsible)

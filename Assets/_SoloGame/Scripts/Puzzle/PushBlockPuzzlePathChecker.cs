@@ -22,7 +22,6 @@ public class PushBlockPuzzlePathChecker : PuzzleBase
         _pushBlocks = GetComponentsInChildren<PushBlock>();
         foreach(PushBlock block in  _pushBlocks)
         {
-            Debug.Log("Set og pos");
             _originalPositions.Add(block.transform.position);
         }
     }
@@ -92,7 +91,6 @@ public class PushBlockPuzzlePathChecker : PuzzleBase
         {
             for (int i = 0; i < _pushBlocks.Length; i++)
             {
-                Debug.Log(_originalPositions[i]);
                 _pushBlocks[i].ResetPosition(_originalPositions[i]);
             }
         }

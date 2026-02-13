@@ -34,6 +34,7 @@ public class FallInHole : MonoBehaviour
     {
         if(collision.CompareTag("PlayerFeet") && !_player.gameObject.GetComponent<Player>().IsInvinsible)
         {
+            Debug.Log("Player is near the hole!");
             _isPlayerNear = true;
         }
     }
@@ -42,8 +43,27 @@ public class FallInHole : MonoBehaviour
     {
         if(collision.CompareTag("PlayerFeet"))
         {
-            _isPlayerNear = false;
-            _currentPullStrength = _startingPullStrenght;
+            Vector3Int playerTilePos = _holeTilemap.WorldToCell(_player.position);
+            Vector3Int nearestHoleTilePos = FindNearestHoleTile(playerTilePos);
+            
+            if (nearestHoleTilePos != Vector3Int.zero)
+            {
+                Vector3 holeCenter = _holeTilemap.GetCellCenterWorld(nearestHoleTilePos);
+                float distanceToHole = Vector3.Distance(holeCenter, _player.position);
+                
+                if (distanceToHole > _pullRadius)
+                {
+                    Debug.Log("Player left the hole area!");
+                    _isPlayerNear = false;
+                    _currentPullStrength = _startingPullStrenght;
+                }
+            }
+            else
+            {
+                Debug.Log("Player left the hole area!");
+                _isPlayerNear = false;
+                _currentPullStrength = _startingPullStrenght;
+            }
         }
     }
 
@@ -58,7 +78,7 @@ public class FallInHole : MonoBehaviour
 
         Vector3 holeCenter = _holeTilemap.GetCellCenterWorld(nearestHoleTilePos);
         Vector3 pullDirection = (holeCenter - _player.position).normalized;
-
+        Debug.Log(holeCenter);
         if (Vector3.Distance(holeCenter, _player.position) <= 0.3f)
         {
             _isPlayerDoneFalling = true;
@@ -70,7 +90,10 @@ public class FallInHole : MonoBehaviour
                 return;
             }
 
+            Debug.Log("Player fell in the hole!");
             _player.position = MySceneManager.Instance.GetCheckpointPosition();
+            _isPlayerNear = false;
+            _currentPullStrength = _startingPullStrenght;
             _isPlayerDoneFalling = false;
             return;
         }

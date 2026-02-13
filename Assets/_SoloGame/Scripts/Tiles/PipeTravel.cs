@@ -22,13 +22,14 @@ public class PipeTravel : MonoBehaviour, IUniqueIdentifier
     }
     public void EnterPipe(Vector3 startingPos, PipeSide startingSide, Player player, PlayerController controller)
     {
-        Vector3Int startingCellPos = _pipe.WorldToCell(startingPos);
+        //Vector3Int startingCellPos = _pipe.WorldToCell(startingPos);
 
-        if(_pipe.HasTile(startingCellPos))
+        //if(_pipe.HasTile(startingCellPos))
         {
             controller.SwitchActionMap(InputMode.Loading);
             player.transform.position = startingPos;
             player.SetInvinsibility(true);
+            player.DisableCollision();
             if(startingSide == PipeSide.A)
             {
                 _endPoint = _entranceB.position;
@@ -56,6 +57,7 @@ public class PipeTravel : MonoBehaviour, IUniqueIdentifier
 
         MySceneManager.Instance.SetCheckpoint(player.transform.position);
         player.SetInvinsibility(false);
+        player.EnableCollision();
         controller.SwitchActionMap(InputMode.Gameplay);
     }
 
@@ -73,6 +75,7 @@ public class PipeTravel : MonoBehaviour, IUniqueIdentifier
 
         MySceneManager.Instance.SetCheckpoint(player.transform.position);
         player.SetInvinsibility(false);
+        player.EnableCollision();
         controller.SwitchActionMap(InputMode.Gameplay);
     }
 
